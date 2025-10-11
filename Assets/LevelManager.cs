@@ -6,44 +6,36 @@ using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
-    public GameObject levelSelector;
-    public GameObject worldSelector;
-    public GameObject startButton;
-
-    private int worldSelected = 0;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        worldSelector.SetActive(false);
-        levelSelector.SetActive(false);
-        
-        
-    }
-    
-    public void toggleLevelSelection(int worldNumber)
-    {
-        worldSelected = worldNumber;
-        worldSelector.SetActive(false);
-        levelSelector.SetActive(true);
-    }
-
-    
-   public void LoadLevel(int level)
-    {
-        //charger une scene : le monde séléctionné et le niveau choisi 
-        
-        SceneManager.LoadScene("Monde"+worldSelected);
-        
-        //puis indiquer les bonnes infos a la scene chargée
-    }
    
-   public void StartGameButtonClicked()
+    public static int worldSelected = 0;
+    public static int levelSelected = 0;
+    public static LevelManager Instance;
+
+    // Start is called before the first frame update
+    
+    void Awake()
     {
-        //activer le world selector
-        worldSelector.SetActive(true);
-        //levelSelector.SetActive(false);
-        startButton.SetActive(false);
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject); // reste entre les scènes
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public static void updateLevelDatas(int score)
+    {
+        ScoreManager.updateStarScore(worldSelected, levelSelected, score);
+    }
+
+    public static void goBackHome()
+    {
+        SceneManager.LoadScene("Home");
         
     }
+    
+   
 }
