@@ -1533,21 +1533,6 @@ PrefabInstance:
       propertyPath: levelItem
       value: 
       objectReference: {fileID: 955234849}
-    - target: {fileID: 2055733029665827249, guid: bf4708467d8b5594d975db89f6d4407c,
-        type: 3}
-      propertyPath: groundLayers.m_Bits
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 2055733029665827249, guid: bf4708467d8b5594d975db89f6d4407c,
-        type: 3}
-      propertyPath: settleConfirmationTime
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 2055733029665827249, guid: bf4708467d8b5594d975db89f6d4407c,
-        type: 3}
-      propertyPath: settleVelocityThreshold
-      value: 0.1
-      objectReference: {fileID: 0}
     - target: {fileID: 3467193591501948330, guid: bf4708467d8b5594d975db89f6d4407c,
         type: 3}
       propertyPath: m_Name
