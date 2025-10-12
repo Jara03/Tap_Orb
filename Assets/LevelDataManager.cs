@@ -145,7 +145,7 @@ public class LevelDataManager : MonoBehaviour
 
         if (playerRigidbody != null)
         {
-            playerRigidbody.velocity = Vector3.zero;
+            playerRigidbody.linearVelocity = Vector3.zero;
             playerRigidbody.angularVelocity = Vector3.zero;
         }
     }
