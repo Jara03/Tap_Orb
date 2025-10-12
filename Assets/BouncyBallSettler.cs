@@ -51,9 +51,9 @@ public class BouncyBallSettler : MonoBehaviour
 
             if (settledTimer >= settleConfirmationTime)
             {
-                Vector3 velocity = cachedRigidbody.velocity;
+                Vector3 velocity = cachedRigidbody.linearVelocity;
                 velocity.y = 0f;
-                cachedRigidbody.velocity = velocity;
+                cachedRigidbody.linearVelocity = velocity;
                 cachedRigidbody.angularVelocity = Vector3.zero;
                 cachedRigidbody.Sleep();
                 settledTimer = 0f;
@@ -67,7 +67,7 @@ public class BouncyBallSettler : MonoBehaviour
 
     private bool HasSettled()
     {
-        if (Mathf.Abs(cachedRigidbody.velocity.y) > settleVelocityThreshold)
+        if (Mathf.Abs(cachedRigidbody.linearVelocity.y) > settleVelocityThreshold)
         {
             return false;
         }
