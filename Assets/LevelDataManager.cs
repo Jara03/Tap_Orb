@@ -41,16 +41,16 @@ public class LevelDataManager : MonoBehaviour
         if (starwon >= stars.Length)
         {
             Debug.Log("🎉 All stars collected!");
-            endLevel();
+            EndLevel();
         }
     }
 
-    void endLevel()
+    public void EndLevel()
     {
-        //afficher l'UI de fin de partie 
+        //afficher l'UI de fin de partie
         FinishedLevelUI.SetActive(true);
         displayStarWon();
-        
+
         //mettre à jour les données de jeu
         LevelManager.updateLevelDatas(starwon);
 
