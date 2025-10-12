@@ -11,9 +11,16 @@ public class LevelDataManager : MonoBehaviour
     public GameObject FinishedLevelUI;
     public GameObject StarsCount;
 
+    private GameObject player;
+    private Vector3 playerStartPosition;
+    private Quaternion playerStartRotation;
+    private Rigidbody playerRigidbody;
+    private Renderer[] playerRenderers;
+    private bool playerWasVisible = true;
+
     void Start()
     {
-        
+
         // Ajoute un collider et un script de détection à chaque étoile si nécessaire
         foreach (GameObject star in stars)
         {
@@ -29,6 +36,34 @@ public class LevelDataManager : MonoBehaviour
                 trigger.onCollected = catchStar; // on abonne la méthode
             }
         }
+
+        // Récupère le joueur et mémorise sa position de départ pour pouvoir le replacer si nécessaire
+        player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            playerStartPosition = player.transform.position;
+            playerStartRotation = player.transform.rotation;
+            playerRigidbody = player.GetComponent<Rigidbody>();
+            playerRenderers = player.GetComponentsInChildren<Renderer>();
+            playerWasVisible = true;
+        }
+    }
+
+    void Update()
+    {
+        if (player == null)
+        {
+            return;
+        }
+
+        bool isVisible = IsPlayerVisible();
+
+        if (!isVisible && playerWasVisible)
+        {
+            ResetPlayerPosition();
+        }
+
+        playerWasVisible = isVisible;
     }
 
     void catchStar(GameObject star)
@@ -73,7 +108,7 @@ public class LevelDataManager : MonoBehaviour
 
     public void displayStarWon()
     {
-        
+
         //afficher le nombre d'enfants en fonction du score starwon
         for (int i = 0; i < StarsCount.transform.childCount; i++)
         {
@@ -82,8 +117,37 @@ public class LevelDataManager : MonoBehaviour
                 StarsCount.transform.GetChild(i).gameObject.SetActive(true);
             }
         }
-        
-    
+
+
+    }
+
+    private bool IsPlayerVisible()
+    {
+        if (playerRenderers == null || playerRenderers.Length == 0)
+        {
+            return false;
+        }
+
+        foreach (Renderer renderer in playerRenderers)
+        {
+            if (renderer != null && renderer.isVisible)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private void ResetPlayerPosition()
+    {
+        player.transform.SetPositionAndRotation(playerStartPosition, playerStartRotation);
+
+        if (playerRigidbody != null)
+        {
+            playerRigidbody.velocity = Vector3.zero;
+            playerRigidbody.angularVelocity = Vector3.zero;
+        }
     }
 }
 
