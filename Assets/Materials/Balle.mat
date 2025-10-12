@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: stars
+  m_Name: Balle
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -79,7 +79,7 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 0.8695733, b: 0.15566039, a: 1}
-    - _EmissionColor: {r: 5.216475, g: 4.003945, b: 0.5659381, a: 1}
+    - _Color: {r: 0.25490198, g: 0.48235294, b: 0.91764706, a: 1}
+    - _EmissionColor: {r: 0.38497138, g: 1.442492, b: 5.9921575, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
