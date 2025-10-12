@@ -1,8 +1,8 @@
 Using pre-set license
 Built from '6000.0/respin/6000.0.59f1-063c55f2fd0f' branch; Version is '6000.0.59f2 (ef281c76c3c1) revision 15673372'; Using compiler version '193933523'; Build Type 'Release'
-OS: 'Windows 11  (10.0.26100) 64bit Core' Language: 'fr' Physical Memory: 32678 MB
+OS: 'Windows 11  (10.0.26200) 64bit Professional' Language: 'fr' Physical Memory: 32613 MB
 BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1
-Date: 2025-10-12T11:18:06Z
+Date: 2025-10-12T13:14:52Z
 
 COMMAND LINE ARGUMENTS:
 C:\Program Files\Unity\Hub\Editor\6000.0.59f2\Editor\Unity.exe
@@ -12,21 +12,21 @@ C:\Program Files\Unity\Hub\Editor\6000.0.59f2\Editor\Unity.exe
 -name
 AssetImportWorker2
 -projectPath
-C:/Users/idris/OneDrive/Documents/GitHub/Unity Projects/BoubouleClick
+F:/Unity Projects/BoubouleClick
 -logFile
 Logs/AssetImportWorker2.log
 -srvPort
-28379
+53984
 -job-worker-count
-7
+5
 -background-job-worker-count
 8
 -gc-helper-count
 1
 -name
 AssetImport
-Successfully changed project path to: C:/Users/idris/OneDrive/Documents/GitHub/Unity Projects/BoubouleClick
-C:/Users/idris/OneDrive/Documents/GitHub/Unity Projects/BoubouleClick
+Successfully changed project path to: F:/Unity Projects/BoubouleClick
+F:/Unity Projects/BoubouleClick
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
     "memorysetup-bucket-allocator-granularity=16"
     "memorysetup-bucket-allocator-bucket-count=8"
@@ -62,15 +62,13 @@ C:/Users/idris/OneDrive/Documents/GitHub/Unity Projects/BoubouleClick
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [16524]  Target information:
+Player connection [2836]  Target information:
 
-Player connection [16524]  * "[IP] 169.254.123.195 [Port] 0 [Flags] 2 [Guid] 3185550950 [EditorId] 3185550950 [Version] 1048832 [Id] WindowsEditor(7,Thomas) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [2836]  * "[IP] 192.168.1.112 [Port] 0 [Flags] 2 [Guid] 790476482 [EditorId] 790476482 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-TUSNVDD) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [16524]  * "[IP] 192.168.1.9 [Port] 0 [Flags] 2 [Guid] 3185550950 [EditorId] 3185550950 [Version] 1048832 [Id] WindowsEditor(7,Thomas) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
-
-Player connection [16524] Host joined multi-casting on [225.0.0.222:54997]...
-Player connection [16524] Host joined alternative multi-casting on [225.0.0.222:34997]...
-JobSystem: Creating JobQueue using job-worker-count value 7
+Player connection [2836] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [2836] Host joined alternative multi-casting on [225.0.0.222:34997]...
+JobSystem: Creating JobQueue using job-worker-count value 5
 Input System module state changed to: Initialized.
 [Physics::Module] Initialized fallback backend.
 [Physics::Module] Id: 0xdecafbad
@@ -81,59 +79,59 @@ Library Redirect Path: Library/
 [Physics::Module] SDK Version: 4.1.2
 [Physics::Module] Integration Version: 1.0.0
 [Physics::Module] Threading Mode: Multi-Threaded
-Refreshing native plugins compatible for Editor in 6.60 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 3.37 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 6000.0.59f2 (ef281c76c3c1)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/6000.0.59f2/Editor/Data/Resources/UnitySubsystems
-[Subsystems] Discovering subsystems at path C:/Users/idris/OneDrive/Documents/GitHub/Unity Projects/BoubouleClick/Assets
+[Subsystems] Discovering subsystems at path F:/Unity Projects/BoubouleClick/Assets
 GfxDevice: creating device client; kGfxThreadingModeNonThreaded
 Direct3D:
     Version:  Direct3D 11.0 [level 11.1]
     Renderer: NVIDIA GeForce RTX 3070 (ID=0x2484)
     Vendor:   NVIDIA
     VRAM:     8018 MB
-    Driver:   32.0.15.7680
+    Driver:   32.0.15.7602
 Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/6000.0.59f2/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/6000.0.59f2/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/6000.0.59f2/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56820
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56924
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.0.59f2/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.003928 seconds.
-- Loaded All Assemblies, in  0.484 seconds
+Registered in 0.003851 seconds.
+- Loaded All Assemblies, in  0.406 seconds
 Native extension for WindowsStandalone target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.387 seconds
-Domain Reload Profiling: 868ms
-	BeginReloadAssembly (167ms)
+- Finished resetting the current domain, in  0.341 seconds
+Domain Reload Profiling: 744ms
+	BeginReloadAssembly (136ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (0ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
 		CreateAndSetChildDomain (1ms)
-	RebuildCommonClasses (44ms)
-	RebuildNativeTypeToScriptingClass (17ms)
-	initialDomainReloadingComplete (59ms)
-	LoadAllAssembliesAndSetupDomain (192ms)
-		LoadAssemblies (163ms)
+	RebuildCommonClasses (37ms)
+	RebuildNativeTypeToScriptingClass (12ms)
+	initialDomainReloadingComplete (56ms)
+	LoadAllAssembliesAndSetupDomain (161ms)
+		LoadAssemblies (133ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (188ms)
-			TypeCache.Refresh (187ms)
-				TypeCache.ScanAssembly (171ms)
+		AnalyzeDomain (157ms)
+			TypeCache.Refresh (156ms)
+				TypeCache.ScanAssembly (142ms)
 			BuildScriptInfoCaches (0ms)
 			ResolveRequiredComponents (1ms)
-	FinalizeReload (388ms)
+	FinalizeReload (341ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (333ms)
+		SetupLoadedEditorAssemblies (293ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (23ms)
-			SetLoadedEditorAssemblies (5ms)
-			BeforeProcessingInitializeOnLoad (74ms)
-			ProcessInitializeOnLoadAttributes (168ms)
-			ProcessInitializeOnLoadMethodAttributes (63ms)
+			InitializePlatformSupportModulesInManaged (25ms)
+			SetLoadedEditorAssemblies (4ms)
+			BeforeProcessingInitializeOnLoad (58ms)
+			ProcessInitializeOnLoadAttributes (152ms)
+			ProcessInitializeOnLoadMethodAttributes (53ms)
 			AfterProcessingInitializeOnLoad (0ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
@@ -142,8 +140,8 @@ Domain Reload Profiling: 868ms
 Worker process is ready to serve import requests
 Import Worker Mode flag is 0x00
 Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.904 seconds
-Refreshing native plugins compatible for Editor in 3.75 ms, found 3 plugins.
+- Loaded All Assemblies, in  0.762 seconds
+Refreshing native plugins compatible for Editor in 2.13 ms, found 3 plugins.
 Native extension for WindowsStandalone target not found
 Package Manager log level set to [2]
 [Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
@@ -159,836 +157,148 @@ Mono: successfully reloaded assembly
 [Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
 [Package Manager] Unable to send message (not connected to server process).
 [Package Manager] Cannot connect to Unity Package Manager local server
-- Finished resetting the current domain, in  0.816 seconds
-Domain Reload Profiling: 1712ms
-	BeginReloadAssembly (208ms)
+- Finished resetting the current domain, in  0.681 seconds
+Domain Reload Profiling: 1429ms
+	BeginReloadAssembly (187ms)
 		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (8ms)
+		DisableScriptedObjects (6ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (30ms)
-	RebuildCommonClasses (45ms)
-	RebuildNativeTypeToScriptingClass (15ms)
-	initialDomainReloadingComplete (47ms)
-	LoadAllAssembliesAndSetupDomain (581ms)
-		LoadAssemblies (419ms)
+		CreateAndSetChildDomain (38ms)
+	RebuildCommonClasses (37ms)
+	RebuildNativeTypeToScriptingClass (11ms)
+	initialDomainReloadingComplete (42ms)
+	LoadAllAssembliesAndSetupDomain (471ms)
+		LoadAssemblies (348ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (277ms)
-			TypeCache.Refresh (199ms)
-				TypeCache.ScanAssembly (183ms)
-			BuildScriptInfoCaches (67ms)
-			ResolveRequiredComponents (7ms)
-	FinalizeReload (816ms)
+		AnalyzeDomain (222ms)
+			TypeCache.Refresh (167ms)
+				TypeCache.ScanAssembly (153ms)
+			BuildScriptInfoCaches (47ms)
+			ResolveRequiredComponents (5ms)
+	FinalizeReload (681ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (668ms)
+		SetupLoadedEditorAssemblies (553ms)
 			LogAssemblyErrors (0ms)
 			InitializePlatformSupportModulesInManaged (3ms)
-			SetLoadedEditorAssemblies (5ms)
-			BeforeProcessingInitializeOnLoad (156ms)
-			ProcessInitializeOnLoadAttributes (391ms)
-			ProcessInitializeOnLoadMethodAttributes (105ms)
+			SetLoadedEditorAssemblies (4ms)
+			BeforeProcessingInitializeOnLoad (116ms)
+			ProcessInitializeOnLoadAttributes (334ms)
+			ProcessInitializeOnLoadMethodAttributes (89ms)
 			AfterProcessingInitializeOnLoad (8ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (7ms)
+		AwakeInstancesAfterBackupRestoration (6ms)
 Launched and connected shader compiler UnityShaderCompiler.exe after 0.01 seconds
-Refreshing native plugins compatible for Editor in 5.80 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 3.82 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 41 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 5875 unused Assets / (7.4 MB). Loaded Objects now: 6384.
-Memory consumption went from 122.7 MB to 115.3 MB.
-Total: 13.812300 ms (FindLiveObjects: 0.808000 ms CreateObjectMapping: 1.592700 ms MarkObjects: 6.944100 ms  DeleteObjects: 4.466200 ms)
+Unloading 5875 unused Assets / (7.6 MB). Loaded Objects now: 6384.
+Memory consumption went from 120.6 MB to 113.0 MB.
+Total: 18.460300 ms (FindLiveObjects: 1.244000 ms CreateObjectMapping: 1.162900 ms MarkObjects: 10.985400 ms  DeleteObjects: 5.066000 ms)
 
 ========================================================================
 Received Import Request.
-  Time since last request: 4082.323060 seconds.
-  path: Assets/Scenes/Monde 1
-  artifactKey: Guid(03259ed0d5aaed64dad00b905ab0fe55) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/Monde 1 using Guid(03259ed0d5aaed64dad00b905ab0fe55) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '2eee173dcb28b7cf507cd2f09135cf41') in 0.0054201 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.940090 seconds.
-  path: Assets/Scenes/Monde 1
-  artifactKey: Guid(03259ed0d5aaed64dad00b905ab0fe55) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Scenes/Monde 1 using Guid(03259ed0d5aaed64dad00b905ab0fe55) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '60ef6173a6273b02b1861edc856ddfcf') in 0.0672134 seconds
+  Time since last request: 9762.063665 seconds.
+  path: Assets/Materials/Physics/New Physics Material.physicMaterial
+  artifactKey: Guid(ee53d08153950444aa7ed833d516205c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/Physics/New Physics Material.physicMaterial using Guid(ee53d08153950444aa7ed833d516205c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '5bbfbefe201b62295db2249e59ec2076') in 0.0210661 seconds
 Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
 
 ========================================================================
 Received Import Request.
-  Time since last request: 7.495476 seconds.
-  path: Assets/Prefabs
-  artifactKey: Guid(2f9d5d793f220ab41a08ea7e0bd3427d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs using Guid(2f9d5d793f220ab41a08ea7e0bd3427d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'e9065543870c01b1251676ad27ff3f59') in 0.0005649 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.957236 seconds.
-  path: Assets/Prefabs
-  artifactKey: Guid(2f9d5d793f220ab41a08ea7e0bd3427d) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Prefabs using Guid(2f9d5d793f220ab41a08ea7e0bd3427d) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '3c7c23f738afd85c243b5c143b886157') in 0.0131422 seconds
+  Time since last request: 1.921048 seconds.
+  path: Assets/Materials/Physics/New Physics Material.physicMaterial
+  artifactKey: Guid(ee53d08153950444aa7ed833d516205c) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Materials/Physics/New Physics Material.physicMaterial using Guid(ee53d08153950444aa7ed833d516205c) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'ca41877166a9909b499eebf28338ebb0') in 0.0865045 seconds
 Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
 
 ========================================================================
 Received Import Request.
-  Time since last request: 31.645730 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '79f12e8418a2ffcc3df960116d1754f8') in 0.0832253 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 12
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.807126 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'c77ecd2b287dbfd9500d29d8ef45dd7b') in 0.0471398 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 12
-
-========================================================================
-Received Import Request.
-  Time since last request: 1292.748963 seconds.
-  path: Assets/Prefabs/Poutre.blend
-  artifactKey: Guid(9f0277809b70740418ac1d31f7bcbb10) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Prefabs/Poutre.blend using Guid(9f0277809b70740418ac1d31f7bcbb10) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'e7175740a30f57634b39577a852a9a90') in 0.0509823 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 15
-
-========================================================================
-Received Import Request.
-  Time since last request: 2.944924 seconds.
-  path: Assets/Prefabs/Poutre.blend
-  artifactKey: Guid(9f0277809b70740418ac1d31f7bcbb10) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Poutre.blend using Guid(9f0277809b70740418ac1d31f7bcbb10) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '1eabcea39ec1d57ce3a286039dfbe794') in 0.2296236 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 15
-
-========================================================================
-Received Import Request.
-  Time since last request: 30.863041 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'd47134cb06d2873916852d31e5d6967f') in 0.0172187 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 42
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.955024 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '8b1fb8d1a8adf74e127ac1889e17d901') in 0.016039 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 25
-
-========================================================================
-Received Import Request.
-  Time since last request: 2.248577 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'adf5624301e0ca9ccb53255f8338d807') in 0.00636 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 31
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.968326 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '2f600cd21b03139b8baafac75ae1e2a4') in 0.0146938 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 17
-
-========================================================================
-Received Import Request.
-  Time since last request: 8.874265 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '391f4d0db1a20f686c467737b64e96dd') in 0.0065063 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 31
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.969145 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '8998a31f2600bd288c306c776322ef2e') in 0.01503 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 17
-
-========================================================================
-Received Import Request.
-  Time since last request: 3.042794 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'bca342afbff97ee50829f6136912c872') in 0.0070797 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 31
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.963724 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '2b7db8aadeb689bc297b4d20fcc82e77') in 0.0168245 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 17
-
-========================================================================
-Received Import Request.
-  Time since last request: 2.028357 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '045e78b6adb873ae02b1a2eb65c9e4fe') in 0.0074014 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 31
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.977220 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '67f7789b8fc8b35e569a1b7af680fff5') in 0.0140813 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 17
-
-========================================================================
-Received Import Request.
-  Time since last request: 9.704857 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '08f0c9cb9fd8897c856c48c6529bbfa9') in 0.0285047 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 31
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.938759 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'b532a94c37b06687974c24a5a2116d1f') in 0.0144862 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 17
-
-========================================================================
-Received Import Request.
-  Time since last request: 6.673204 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'dacbec0a51247e524edda18aa7e25821') in 0.0068485 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 31
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.958295 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'cc6ba38a9b7aeefab324f34c21366c8d') in 0.0146215 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 17
-
-========================================================================
-Received Import Request.
-  Time since last request: 6.892569 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '3cb60a89cbd58844843ebf612cfa4e47') in 0.0068091 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 31
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.968091 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '73f44edfa4f2014ba8d26773f2f98bac') in 0.0155085 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 17
-
-========================================================================
-Received Import Request.
-  Time since last request: 7.834577 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '360cc7c9aeb51bca91c622903a071766') in 0.0253579 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 31
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.947427 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '90a159f54b8b57dd469c6dc63eb11c73') in 0.0146148 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 17
-
-========================================================================
-Received Import Request.
-  Time since last request: 28.257175 seconds.
-  path: Assets/Materials/stars 1.mat
-  artifactKey: Guid(6a22d022d61d59441a680c9709a6965d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/stars 1.mat using Guid(6a22d022d61d59441a680c9709a6965d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'a1d915fb783bad964906b04aa1bd8d5c') in 0.0283599 seconds
+  Time since last request: 40.783744 seconds.
+  path: Assets/Materials/Physics/boucy_ball.physicMaterial
+  artifactKey: Guid(ee53d08153950444aa7ed833d516205c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/Physics/boucy_ball.physicMaterial using Guid(ee53d08153950444aa7ed833d516205c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '2e138bdd23546a2d9ee9c2ad47e4716f') in 0.0010552 seconds
 Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.924830 seconds.
-  path: Assets/Materials/stars 1.mat
-  artifactKey: Guid(6a22d022d61d59441a680c9709a6965d) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Materials/stars 1.mat using Guid(6a22d022d61d59441a680c9709a6965d) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '57105de9d22575cc84fb53e9f8738c33') in 0.0197332 seconds
+  Time since last request: 0.968766 seconds.
+  path: Assets/Materials/Physics/boucy_ball.physicMaterial
+  artifactKey: Guid(ee53d08153950444aa7ed833d516205c) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Materials/Physics/boucy_ball.physicMaterial using Guid(ee53d08153950444aa7ed833d516205c) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'de907a8596676f143de26c075485d976') in 0.0153145 seconds
 Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
 
 ========================================================================
 Received Import Request.
-  Time since last request: 31.593419 seconds.
-  path: Assets/Materials/Poutre.mat
-  artifactKey: Guid(6a22d022d61d59441a680c9709a6965d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Poutre.mat using Guid(6a22d022d61d59441a680c9709a6965d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'b0636130e906cd70055672f8f05a5080') in 0.0071515 seconds
+  Time since last request: 5.548975 seconds.
+  path: Assets/Materials/Physics/bouncy_ball.physicMaterial
+  artifactKey: Guid(ee53d08153950444aa7ed833d516205c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/Physics/bouncy_ball.physicMaterial using Guid(ee53d08153950444aa7ed833d516205c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '9d7037fd44f96f46523ff8e1228401b3') in 0.0012702 seconds
 Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.964043 seconds.
-  path: Assets/Materials/Poutre.mat
-  artifactKey: Guid(6a22d022d61d59441a680c9709a6965d) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Materials/Poutre.mat using Guid(6a22d022d61d59441a680c9709a6965d) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'dc6dd7a226e37ed6de32d5d051594cbb') in 0.0149735 seconds
+  Time since last request: 0.973043 seconds.
+  path: Assets/Materials/Physics/bouncy_ball.physicMaterial
+  artifactKey: Guid(ee53d08153950444aa7ed833d516205c) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Materials/Physics/bouncy_ball.physicMaterial using Guid(ee53d08153950444aa7ed833d516205c) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '1dbad4364ce06d2003bae8c9e4285e43') in 0.0145654 seconds
 Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
 
 ========================================================================
 Received Import Request.
-  Time since last request: 34.851521 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '0e7419fa4e81ea4c1e454740d46a35f8') in 0.0148927 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 17
-
-========================================================================
-Received Import Request.
-  Time since last request: 18.970866 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '6757c44099d3f4e332190e42e3700420') in 0.0151893 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 14
-
-========================================================================
-Received Import Request.
-  Time since last request: 3.201621 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '7acb381e669577de9467bac7359f9c50') in 0.0145592 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 11
-
-========================================================================
-Received Import Request.
-  Time since last request: 60.889361 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '5fd622f9b0292964cd3cd2cf5f9dc27d') in 0.0214199 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 26
-
-========================================================================
-Received Import Request.
-  Time since last request: 9.046355 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'c0f0fe48865be6b42665072f1f89b709') in 0.0074714 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 28
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.967374 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '8c64bbee37ec0cfb6487f19eb49dc205') in 0.0142151 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 13
-
-========================================================================
-Received Import Request.
-  Time since last request: 11.526612 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'ef8891ce74a784dd18cc88bfb6e17878') in 0.0071744 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 28
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.970002 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '5a40a3c8c2c74de65ac6a45f4b5e3062') in 0.0148998 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 13
-
-========================================================================
-Received Import Request.
-  Time since last request: 5.268815 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '9dc9f6399e9d626611912ad892fb3ddd') in 0.007672 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 28
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.969166 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '1fc2f48d55c66933c42185367d720a69') in 0.0146758 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 13
-
-========================================================================
-Received Import Request.
-  Time since last request: 6.850365 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'ffb20b16f862311ae3d1e57b9122d42d') in 0.0398904 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 28
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.936912 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '81972c95ae90b6a39dcdb531fa5bd4e7') in 0.0152066 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 13
-
-========================================================================
-Received Import Request.
-  Time since last request: 1.224066 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '118eefc8e1fe43459151fed22b33cc67') in 0.0151024 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 28
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.962735 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '4cee3533d8ae65f4ec9bcc4eda023cef') in 0.0143234 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 13
-
-========================================================================
-Received Import Request.
-  Time since last request: 2.226676 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'cb7a32e99dc80898bc93263c099478dd') in 0.0072828 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 28
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.968655 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '4f925e909603af19a2f4116537bfc207') in 0.0189705 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 13
-
-========================================================================
-Received Import Request.
-  Time since last request: 5.063327 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'c3494426b811aae0daf6c32e734d16bd') in 0.0069484 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 28
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.968547 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '7a1757ccb5218415b0814d805fa62815') in 0.0144159 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 13
-
-========================================================================
-Received Import Request.
-  Time since last request: 15.139273 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'cda8f4f995df3bdc977ce6977fcf2e84') in 0.01967 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 28
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.953734 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '1719f008887eed8f34ca480f63f79a5b') in 0.0142501 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 13
-
-========================================================================
-Received Import Request.
-  Time since last request: 2.022040 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '08798eb3cb8aa2b7e3a7951fca5519b3') in 0.0067081 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 28
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.970908 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '2addc6501028750b053d408a73ad64fb') in 0.0153543 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 13
-
-========================================================================
-Received Import Request.
-  Time since last request: 51.510348 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '2575f7bc38d4f65f6f83a4c0fa10cb2e') in 0.0088966 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 28
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.965548 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'efd9cdccd6597d0d513f60f15a210c9d') in 0.0161354 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 13
-
-========================================================================
-Received Import Request.
-  Time since last request: 52.762844 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '9ac2d8938aa8f11aff208dff7d2453ce') in 0.0068863 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 29
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.934858 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '9295a0c10ab143c2d444a39ad59ad8e7') in 0.0197415 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 14
-
-========================================================================
-Received Import Request.
-  Time since last request: 1.083497 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '5ceb87bc1445040b8174d637a4053833') in 0.0070332 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 29
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.936719 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '501aeb7c173248c2dbc28379a4e22c8d') in 0.0159114 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 14
-
-========================================================================
-Received Import Request.
-  Time since last request: 24.666360 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '128dd725f14e17720945839f6753ffd0') in 0.011688 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 30
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.928126 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'fbc98d2ca5604120550d862d30b86d8d') in 0.0219658 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 15
-
-========================================================================
-Received Import Request.
-  Time since last request: 9.187559 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'a28ae0a9172a06560e25aaf55fb79ab9') in 0.0173229 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 30
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.929986 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '8e517ce89e8a0064dbc3432f519e2251') in 0.0165604 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 15
-
-========================================================================
-Received Import Request.
-  Time since last request: 50.727137 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'ef44ad66ea068a2dd37fc7158885ec02') in 0.0072647 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 29
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.955775 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'dccf3a8ef704d325163ccee8eaffe859') in 0.0145993 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 14
-
-========================================================================
-Received Import Request.
-  Time since last request: 3.866223 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'ff386e5175f6ca4fcfd7c2f45f7b91e6') in 0.0071624 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 29
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.969850 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'f656a9b388c73c021325432eac6dcfac') in 0.014848 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 14
-
-========================================================================
-Received Import Request.
-  Time since last request: 3.300988 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '318e55295e54c11127e4eacfcbaa559f') in 0.0119183 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 30
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.975596 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '692ee81a00af693a8fb37a94a3652eba') in 0.0067133 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 30
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.967346 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '69b2e30871479252ab8128d0587d30fa') in 0.0145686 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 15
-
-========================================================================
-Received Import Request.
-  Time since last request: 6.091655 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'a634deb4edd4ab41bc64c07d696b6034') in 0.00686 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 30
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.954964 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'd34a28e31082c108de318b7172ce345e') in 0.0144346 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 15
-
-========================================================================
-Received Import Request.
-  Time since last request: 3.830516 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '9524d4b00926133d5b237ae9c6c3b533') in 0.0083137 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 30
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.965546 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '915ff79dbc2ace48130179360315d0eb') in 0.0148024 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 15
-
-========================================================================
-Received Import Request.
-  Time since last request: 4.841516 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '07858be7e0d90ac74ad21dcae0a0ec73') in 0.007464 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 30
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.968649 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'efe2a85f1e204b9bd04088b16aafdb78') in 0.0312709 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 15
-
-========================================================================
-Received Import Request.
-  Time since last request: 7.461926 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '7181d9dea8b6629db4942eeae9187f99') in 0.0067775 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 30
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.967665 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '43f9fa9dd59bb4f894a73ed1564609a3') in 0.0143581 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 15
-
-========================================================================
-Received Import Request.
-  Time since last request: 9.083283 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'a0d73952314fb1297fc2c092c8b9ed1e') in 0.0269383 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 30
-
-========================================================================
-Received Import Request.
-  Time since last request: 54.872025 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '930b403eb56dc3ab11f89511cd032338') in 0.0195058 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 30
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.954346 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '9ebdb9a2a9b07b35784f7470d21de524') in 0.0168545 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 15
-
-========================================================================
-Received Import Request.
-  Time since last request: 20.913551 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'b81f07e1e2029e2a1a5c88ff342db6e1') in 0.0071957 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 30
-
-========================================================================
-Received Import Request.
-  Time since last request: 16.130319 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'cb7f4dbb62f43d5e46f17f423fa44e2d') in 0.0138682 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 30
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.960879 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '4625e34ffbe9cea5f685568dfcd5a3eb') in 0.0185468 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 15
-
-========================================================================
-Received Import Request.
-  Time since last request: 6.066929 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '82a2bfceb2ab1d415a160ba5bfc8a8ea') in 0.0377622 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 30
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.937551 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'baeb2e11d802979dfd204d232ae36dda') in 0.0155783 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 15
-
-========================================================================
-Received Import Request.
-  Time since last request: 3.648408 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'cdd85837b923f007a9b14d524c5a5987') in 0.0179722 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 30
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.957879 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'a7b8859feeba865ce6c18fda80da1b13') in 0.016284 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 15
-
-========================================================================
-Received Import Request.
-  Time since last request: 13.527802 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '6d241b2746abfc042befa7083601e93d') in 0.0076615 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 30
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.965115 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '55c02ff896d06a94a2a3557d19590f8e') in 0.0149034 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 15
-
-========================================================================
-Received Import Request.
-  Time since last request: 9.284465 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'e4b70c7e9423b52e94cf2c2120ba6bdc') in 0.0237344 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 30
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.952057 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '9e93c2878056a92ad5724b74becad499') in 0.0152485 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 15
-
-========================================================================
-Received Import Request.
-  Time since last request: 16.188195 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '9e9b58bac023fa620318f3bd1faed52c') in 0.0292517 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 30
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.945627 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '550c38f7d3126068811ac40590d2579f') in 0.0157026 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 15
-
-========================================================================
-Received Import Request.
-  Time since last request: 42.323332 seconds.
-  path: Assets/Scenes/Monde 1/Monde1.unity
-  artifactKey: Guid(e65ff0745967a7f4ca9df514173797bd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/Monde 1/Monde1.unity using Guid(e65ff0745967a7f4ca9df514173797bd) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '07ab4da716e6a00ef1bab0df5519380b') in 0.0006954 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.960440 seconds.
-  path: Assets/Materials/Poutre.mat
-  artifactKey: Guid(6a22d022d61d59441a680c9709a6965d) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Materials/Poutre.mat using Guid(6a22d022d61d59441a680c9709a6965d) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'e60df59614bcf59921d55b6283cee73d') in 0.015112 seconds
+  Time since last request: 50.892751 seconds.
+  path: Assets/Materials/Physics/bouncy_ball 1.physicMaterial
+  artifactKey: Guid(acee9029c9e6fad49aff4f0fe0841089) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/Physics/bouncy_ball 1.physicMaterial using Guid(acee9029c9e6fad49aff4f0fe0841089) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '2e5ad3aa807a0e863ff02fb3788a8366') in 0.0011595 seconds
 Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
 
 ========================================================================
 Received Import Request.
-  Time since last request: 8.033696 seconds.
-  path: Assets/Scenes/Monde1.unity
-  artifactKey: Guid(c850ee8c3b14cc8459e7e186857cf567) Importer(2089858483,192608db42251d675da83286b1cce702)
-Start importing Assets/Scenes/Monde1.unity using Guid(c850ee8c3b14cc8459e7e186857cf567) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: '62e5dcd65615f9cc184c34c36f698205') in 0.0149531 seconds
+  Time since last request: 0.970096 seconds.
+  path: Assets/Materials/Physics/bouncy_ball 1.physicMaterial
+  artifactKey: Guid(acee9029c9e6fad49aff4f0fe0841089) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Materials/Physics/bouncy_ball 1.physicMaterial using Guid(acee9029c9e6fad49aff4f0fe0841089) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'cb34d8035ca22e287f9a05da2d4ac9c3') in 0.0155751 seconds
 Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
 
 ========================================================================
 Received Import Request.
-  Time since last request: 8.130787 seconds.
-  path: Assets/Prefabs/poutre.prefab
-  artifactKey: Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/poutre.prefab using Guid(5d3102253d90a344b8944f73f3530488) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '3938c81e6d07ce0443321ec7cb2b40b9') in 0.0167576 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 30
+  Time since last request: 9.796564 seconds.
+  path: Assets/Materials/Physics/interactive_item.physicMaterial
+  artifactKey: Guid(acee9029c9e6fad49aff4f0fe0841089) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/Physics/interactive_item.physicMaterial using Guid(acee9029c9e6fad49aff4f0fe0841089) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '4b708a5d678da0b76390bf49866b953a') in 0.0011607 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
 
 ========================================================================
 Received Import Request.
-  Time since last request: 44.023547 seconds.
-  path: Assets/Materials/Poutre.mat
-  artifactKey: Guid(6a22d022d61d59441a680c9709a6965d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Poutre.mat using Guid(6a22d022d61d59441a680c9709a6965d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'c60fccdeb725a050e5fcaaaa5903ac14') in 0.0162678 seconds
+  Time since last request: 0.969901 seconds.
+  path: Assets/Materials/Physics/interactive_item.physicMaterial
+  artifactKey: Guid(acee9029c9e6fad49aff4f0fe0841089) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Materials/Physics/interactive_item.physicMaterial using Guid(acee9029c9e6fad49aff4f0fe0841089) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'f0687abc46357ced120b0e4adfb4e93b') in 0.017203 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 61.345761 seconds.
+  path: Assets/Materials/Physics/interactive_item.physicMaterial
+  artifactKey: Guid(acee9029c9e6fad49aff4f0fe0841089) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/Physics/interactive_item.physicMaterial using Guid(acee9029c9e6fad49aff4f0fe0841089) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'ebc5976fc448afb2b604f236ed5ee0de') in 0.0012051 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.946640 seconds.
+  path: Assets/Materials/Physics/interactive_item.physicMaterial
+  artifactKey: Guid(acee9029c9e6fad49aff4f0fe0841089) Importer(2089858483,192608db42251d675da83286b1cce702)
+Start importing Assets/Materials/Physics/interactive_item.physicMaterial using Guid(acee9029c9e6fad49aff4f0fe0841089) Importer(2089858483,192608db42251d675da83286b1cce702) (ScriptedImporter) -> (artifact id: 'eb9cdc6f7fb1f4244145890f30b54db1') in 0.0216863 seconds
 Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
 
 ========================================================================
 Received Prepare
 Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.924 seconds
-Refreshing native plugins compatible for Editor in 5.06 ms, found 3 plugins.
+- Loaded All Assemblies, in  0.765 seconds
+Refreshing native plugins compatible for Editor in 2.67 ms, found 3 plugins.
 Native extension for WindowsStandalone target not found
 [Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
 [Package Manager] Unable to send message (not connected to server process).
@@ -999,52 +309,52 @@ Mono: successfully reloaded assembly
 [Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
 [Package Manager] Unable to send message (not connected to server process).
 [Package Manager] Cannot connect to Unity Package Manager local server
-- Finished resetting the current domain, in  0.845 seconds
-Domain Reload Profiling: 1766ms
-	BeginReloadAssembly (278ms)
+- Finished resetting the current domain, in  0.829 seconds
+Domain Reload Profiling: 1595ms
+	BeginReloadAssembly (234ms)
 		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (7ms)
+		DisableScriptedObjects (6ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (60ms)
-	RebuildCommonClasses (45ms)
-	RebuildNativeTypeToScriptingClass (23ms)
-	initialDomainReloadingComplete (39ms)
-	LoadAllAssembliesAndSetupDomain (535ms)
-		LoadAssemblies (456ms)
+		CreateAndSetChildDomain (65ms)
+	RebuildCommonClasses (38ms)
+	RebuildNativeTypeToScriptingClass (12ms)
+	initialDomainReloadingComplete (33ms)
+	LoadAllAssembliesAndSetupDomain (447ms)
+		LoadAssemblies (376ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (223ms)
+		AnalyzeDomain (182ms)
 			TypeCache.Refresh (8ms)
 				TypeCache.ScanAssembly (0ms)
-			BuildScriptInfoCaches (201ms)
-			ResolveRequiredComponents (7ms)
-	FinalizeReload (845ms)
+			BuildScriptInfoCaches (164ms)
+			ResolveRequiredComponents (5ms)
+	FinalizeReload (830ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (686ms)
+		SetupLoadedEditorAssemblies (660ms)
 			LogAssemblyErrors (0ms)
 			InitializePlatformSupportModulesInManaged (3ms)
-			SetLoadedEditorAssemblies (5ms)
-			BeforeProcessingInitializeOnLoad (157ms)
-			ProcessInitializeOnLoadAttributes (399ms)
-			ProcessInitializeOnLoadMethodAttributes (112ms)
-			AfterProcessingInitializeOnLoad (9ms)
+			SetLoadedEditorAssemblies (3ms)
+			BeforeProcessingInitializeOnLoad (126ms)
+			ProcessInitializeOnLoadAttributes (396ms)
+			ProcessInitializeOnLoadMethodAttributes (120ms)
+			AfterProcessingInitializeOnLoad (11ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (8ms)
-Refreshing native plugins compatible for Editor in 7.22 ms, found 3 plugins.
+		AwakeInstancesAfterBackupRestoration (9ms)
+Refreshing native plugins compatible for Editor in 5.54 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 41 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 5873 unused Assets / (7.4 MB). Loaded Objects now: 6433.
-Memory consumption went from 127.7 MB to 120.4 MB.
-Total: 16.960100 ms (FindLiveObjects: 1.034600 ms CreateObjectMapping: 1.870300 ms MarkObjects: 8.630100 ms  DeleteObjects: 5.423700 ms)
+Unloading 5873 unused Assets / (9.5 MB). Loaded Objects now: 6389.
+Memory consumption went from 121.4 MB to 111.9 MB.
+Total: 24.254500 ms (FindLiveObjects: 1.318800 ms CreateObjectMapping: 1.680600 ms MarkObjects: 11.856600 ms  DeleteObjects: 9.396600 ms)
 
 Prepare: number of updated asset objects reloaded= 0
 ========================================================================
 Received Prepare
 Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.879 seconds
-Refreshing native plugins compatible for Editor in 3.62 ms, found 3 plugins.
+- Loaded All Assemblies, in  0.750 seconds
+Refreshing native plugins compatible for Editor in 3.08 ms, found 3 plugins.
 Native extension for WindowsStandalone target not found
 [Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
 [Package Manager] Unable to send message (not connected to server process).
@@ -1055,164 +365,52 @@ Mono: successfully reloaded assembly
 [Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
 [Package Manager] Unable to send message (not connected to server process).
 [Package Manager] Cannot connect to Unity Package Manager local server
-- Finished resetting the current domain, in  0.866 seconds
-Domain Reload Profiling: 1742ms
-	BeginReloadAssembly (235ms)
+- Finished resetting the current domain, in  0.827 seconds
+Domain Reload Profiling: 1578ms
+	BeginReloadAssembly (225ms)
 		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (9ms)
+		DisableScriptedObjects (6ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (51ms)
-	RebuildCommonClasses (43ms)
-	RebuildNativeTypeToScriptingClass (16ms)
-	initialDomainReloadingComplete (37ms)
-	LoadAllAssembliesAndSetupDomain (544ms)
-		LoadAssemblies (415ms)
+		CreateAndSetChildDomain (59ms)
+	RebuildCommonClasses (38ms)
+	RebuildNativeTypeToScriptingClass (13ms)
+	initialDomainReloadingComplete (34ms)
+	LoadAllAssembliesAndSetupDomain (441ms)
+		LoadAssemblies (369ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (241ms)
-			TypeCache.Refresh (9ms)
+		AnalyzeDomain (181ms)
+			TypeCache.Refresh (7ms)
 				TypeCache.ScanAssembly (0ms)
-			BuildScriptInfoCaches (215ms)
-			ResolveRequiredComponents (11ms)
-	FinalizeReload (867ms)
+			BuildScriptInfoCaches (163ms)
+			ResolveRequiredComponents (6ms)
+	FinalizeReload (828ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (697ms)
+		SetupLoadedEditorAssemblies (670ms)
 			LogAssemblyErrors (0ms)
 			InitializePlatformSupportModulesInManaged (3ms)
-			SetLoadedEditorAssemblies (6ms)
-			BeforeProcessingInitializeOnLoad (170ms)
-			ProcessInitializeOnLoadAttributes (394ms)
-			ProcessInitializeOnLoadMethodAttributes (115ms)
-			AfterProcessingInitializeOnLoad (10ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (7ms)
-Refreshing native plugins compatible for Editor in 7.65 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 41 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 5873 unused Assets / (7.2 MB). Loaded Objects now: 6435.
-Memory consumption went from 127.7 MB to 120.5 MB.
-Total: 16.716200 ms (FindLiveObjects: 1.139900 ms CreateObjectMapping: 1.715000 ms MarkObjects: 8.873800 ms  DeleteObjects: 4.985900 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.893 seconds
-Refreshing native plugins compatible for Editor in 3.91 ms, found 3 plugins.
-Native extension for WindowsStandalone target not found
-[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
-[Package Manager] Unable to send message (not connected to server process).
-[Package Manager] Cannot connect to Unity Package Manager local server
-[MODES] ModeService[none].Initialize
-[MODES] ModeService[none].LoadModes
-Mono: successfully reloaded assembly
-[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
-[Package Manager] Unable to send message (not connected to server process).
-[Package Manager] Cannot connect to Unity Package Manager local server
-- Finished resetting the current domain, in  0.857 seconds
-Domain Reload Profiling: 1749ms
-	BeginReloadAssembly (232ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (7ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (48ms)
-	RebuildCommonClasses (45ms)
-	RebuildNativeTypeToScriptingClass (17ms)
-	initialDomainReloadingComplete (37ms)
-	LoadAllAssembliesAndSetupDomain (561ms)
-		LoadAssemblies (422ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (252ms)
-			TypeCache.Refresh (8ms)
-				TypeCache.ScanAssembly (0ms)
-			BuildScriptInfoCaches (225ms)
-			ResolveRequiredComponents (12ms)
-	FinalizeReload (858ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (701ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (3ms)
-			SetLoadedEditorAssemblies (6ms)
-			BeforeProcessingInitializeOnLoad (166ms)
-			ProcessInitializeOnLoadAttributes (397ms)
-			ProcessInitializeOnLoadMethodAttributes (118ms)
-			AfterProcessingInitializeOnLoad (10ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (8ms)
-Refreshing native plugins compatible for Editor in 7.05 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 41 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 5873 unused Assets / (7.4 MB). Loaded Objects now: 6437.
-Memory consumption went from 127.8 MB to 120.3 MB.
-Total: 17.375600 ms (FindLiveObjects: 0.962000 ms CreateObjectMapping: 1.617900 ms MarkObjects: 9.252800 ms  DeleteObjects: 5.541400 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Prepare
-Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.868 seconds
-Refreshing native plugins compatible for Editor in 3.83 ms, found 3 plugins.
-Native extension for WindowsStandalone target not found
-[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
-[Package Manager] Unable to send message (not connected to server process).
-[Package Manager] Cannot connect to Unity Package Manager local server
-[MODES] ModeService[none].Initialize
-[MODES] ModeService[none].LoadModes
-Mono: successfully reloaded assembly
-[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
-[Package Manager] Unable to send message (not connected to server process).
-[Package Manager] Cannot connect to Unity Package Manager local server
-- Finished resetting the current domain, in  0.856 seconds
-Domain Reload Profiling: 1719ms
-	BeginReloadAssembly (237ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (7ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (47ms)
-	RebuildCommonClasses (44ms)
-	RebuildNativeTypeToScriptingClass (16ms)
-	initialDomainReloadingComplete (35ms)
-	LoadAllAssembliesAndSetupDomain (532ms)
-		LoadAssemblies (424ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (229ms)
-			TypeCache.Refresh (9ms)
-				TypeCache.ScanAssembly (0ms)
-			BuildScriptInfoCaches (206ms)
-			ResolveRequiredComponents (8ms)
-	FinalizeReload (856ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (693ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (3ms)
-			SetLoadedEditorAssemblies (6ms)
-			BeforeProcessingInitializeOnLoad (169ms)
+			SetLoadedEditorAssemblies (3ms)
+			BeforeProcessingInitializeOnLoad (135ms)
 			ProcessInitializeOnLoadAttributes (393ms)
-			ProcessInitializeOnLoadMethodAttributes (114ms)
-			AfterProcessingInitializeOnLoad (9ms)
+			ProcessInitializeOnLoadMethodAttributes (125ms)
+			AfterProcessingInitializeOnLoad (11ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (7ms)
-Refreshing native plugins compatible for Editor in 6.63 ms, found 3 plugins.
+		AwakeInstancesAfterBackupRestoration (9ms)
+Refreshing native plugins compatible for Editor in 4.28 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 41 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 5873 unused Assets / (7.4 MB). Loaded Objects now: 6439.
-Memory consumption went from 127.7 MB to 120.3 MB.
-Total: 17.088400 ms (FindLiveObjects: 1.345100 ms CreateObjectMapping: 1.652600 ms MarkObjects: 8.743200 ms  DeleteObjects: 5.346000 ms)
+Unloading 5873 unused Assets / (8.0 MB). Loaded Objects now: 6391.
+Memory consumption went from 121.4 MB to 113.5 MB.
+Total: 28.994800 ms (FindLiveObjects: 2.073400 ms CreateObjectMapping: 4.498900 ms MarkObjects: 15.301500 ms  DeleteObjects: 7.118800 ms)
 
 Prepare: number of updated asset objects reloaded= 0
 ========================================================================
 Received Prepare
 Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.849 seconds
-Refreshing native plugins compatible for Editor in 4.00 ms, found 3 plugins.
+- Loaded All Assemblies, in  0.758 seconds
+Refreshing native plugins compatible for Editor in 3.89 ms, found 3 plugins.
 Native extension for WindowsStandalone target not found
 [Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
 [Package Manager] Unable to send message (not connected to server process).
@@ -1223,52 +421,52 @@ Mono: successfully reloaded assembly
 [Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
 [Package Manager] Unable to send message (not connected to server process).
 [Package Manager] Cannot connect to Unity Package Manager local server
-- Finished resetting the current domain, in  0.874 seconds
-Domain Reload Profiling: 1720ms
-	BeginReloadAssembly (232ms)
+- Finished resetting the current domain, in  0.880 seconds
+Domain Reload Profiling: 1641ms
+	BeginReloadAssembly (231ms)
 		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (7ms)
+		DisableScriptedObjects (6ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (50ms)
-	RebuildCommonClasses (45ms)
-	RebuildNativeTypeToScriptingClass (16ms)
-	initialDomainReloadingComplete (38ms)
-	LoadAllAssembliesAndSetupDomain (514ms)
-		LoadAssemblies (409ms)
+		CreateAndSetChildDomain (56ms)
+	RebuildCommonClasses (39ms)
+	RebuildNativeTypeToScriptingClass (13ms)
+	initialDomainReloadingComplete (32ms)
+	LoadAllAssembliesAndSetupDomain (445ms)
+		LoadAssemblies (367ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (217ms)
-			TypeCache.Refresh (8ms)
+		AnalyzeDomain (183ms)
+			TypeCache.Refresh (6ms)
 				TypeCache.ScanAssembly (0ms)
-			BuildScriptInfoCaches (195ms)
+			BuildScriptInfoCaches (165ms)
 			ResolveRequiredComponents (7ms)
-	FinalizeReload (875ms)
+	FinalizeReload (881ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
 		SetupLoadedEditorAssemblies (717ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (3ms)
-			SetLoadedEditorAssemblies (6ms)
-			BeforeProcessingInitializeOnLoad (170ms)
-			ProcessInitializeOnLoadAttributes (403ms)
-			ProcessInitializeOnLoadMethodAttributes (125ms)
-			AfterProcessingInitializeOnLoad (10ms)
+			InitializePlatformSupportModulesInManaged (2ms)
+			SetLoadedEditorAssemblies (4ms)
+			BeforeProcessingInitializeOnLoad (139ms)
+			ProcessInitializeOnLoadAttributes (437ms)
+			ProcessInitializeOnLoadMethodAttributes (124ms)
+			AfterProcessingInitializeOnLoad (11ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (7ms)
-Refreshing native plugins compatible for Editor in 7.62 ms, found 3 plugins.
+		AwakeInstancesAfterBackupRestoration (10ms)
+Refreshing native plugins compatible for Editor in 9.78 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 41 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 5873 unused Assets / (7.8 MB). Loaded Objects now: 6441.
-Memory consumption went from 127.8 MB to 120.0 MB.
-Total: 18.781700 ms (FindLiveObjects: 1.543600 ms CreateObjectMapping: 1.844900 ms MarkObjects: 9.026300 ms  DeleteObjects: 6.365600 ms)
+Unloading 5873 unused Assets / (9.3 MB). Loaded Objects now: 6393.
+Memory consumption went from 121.4 MB to 112.2 MB.
+Total: 28.384600 ms (FindLiveObjects: 1.571500 ms CreateObjectMapping: 2.411600 ms MarkObjects: 12.975400 ms  DeleteObjects: 11.422800 ms)
 
 Prepare: number of updated asset objects reloaded= 0
 ========================================================================
 Received Prepare
 Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.860 seconds
-Refreshing native plugins compatible for Editor in 3.75 ms, found 3 plugins.
+- Loaded All Assemblies, in  0.767 seconds
+Refreshing native plugins compatible for Editor in 2.54 ms, found 3 plugins.
 Native extension for WindowsStandalone target not found
 [Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
 [Package Manager] Unable to send message (not connected to server process).
@@ -1279,35 +477,203 @@ Mono: successfully reloaded assembly
 [Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
 [Package Manager] Unable to send message (not connected to server process).
 [Package Manager] Cannot connect to Unity Package Manager local server
-- Finished resetting the current domain, in  0.854 seconds
-Domain Reload Profiling: 1710ms
-	BeginReloadAssembly (235ms)
+- Finished resetting the current domain, in  0.805 seconds
+Domain Reload Profiling: 1573ms
+	BeginReloadAssembly (227ms)
 		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (7ms)
+		DisableScriptedObjects (6ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (48ms)
-	RebuildCommonClasses (43ms)
-	RebuildNativeTypeToScriptingClass (16ms)
-	initialDomainReloadingComplete (36ms)
-	LoadAllAssembliesAndSetupDomain (525ms)
-		LoadAssemblies (421ms)
+		CreateAndSetChildDomain (61ms)
+	RebuildCommonClasses (39ms)
+	RebuildNativeTypeToScriptingClass (13ms)
+	initialDomainReloadingComplete (35ms)
+	LoadAllAssembliesAndSetupDomain (453ms)
+		LoadAssemblies (380ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (220ms)
+		AnalyzeDomain (180ms)
 			TypeCache.Refresh (8ms)
 				TypeCache.ScanAssembly (0ms)
-			BuildScriptInfoCaches (195ms)
-			ResolveRequiredComponents (10ms)
-	FinalizeReload (855ms)
+			BuildScriptInfoCaches (162ms)
+			ResolveRequiredComponents (6ms)
+	FinalizeReload (806ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (700ms)
+		SetupLoadedEditorAssemblies (651ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (2ms)
+			SetLoadedEditorAssemblies (4ms)
+			BeforeProcessingInitializeOnLoad (143ms)
+			ProcessInitializeOnLoadAttributes (370ms)
+			ProcessInitializeOnLoadMethodAttributes (121ms)
+			AfterProcessingInitializeOnLoad (9ms)
+			EditorAssembliesLoaded (1ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (10ms)
+Refreshing native plugins compatible for Editor in 4.03 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 41 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 5873 unused Assets / (8.3 MB). Loaded Objects now: 6395.
+Memory consumption went from 121.4 MB to 113.1 MB.
+Total: 26.382500 ms (FindLiveObjects: 2.566400 ms CreateObjectMapping: 2.857000 ms MarkObjects: 12.329700 ms  DeleteObjects: 8.627600 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Prepare
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.758 seconds
+Refreshing native plugins compatible for Editor in 2.50 ms, found 3 plugins.
+Native extension for WindowsStandalone target not found
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+Mono: successfully reloaded assembly
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+- Finished resetting the current domain, in  0.826 seconds
+Domain Reload Profiling: 1586ms
+	BeginReloadAssembly (219ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (5ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (59ms)
+	RebuildCommonClasses (37ms)
+	RebuildNativeTypeToScriptingClass (13ms)
+	initialDomainReloadingComplete (40ms)
+	LoadAllAssembliesAndSetupDomain (451ms)
+		LoadAssemblies (359ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (192ms)
+			TypeCache.Refresh (8ms)
+				TypeCache.ScanAssembly (0ms)
+			BuildScriptInfoCaches (170ms)
+			ResolveRequiredComponents (8ms)
+	FinalizeReload (827ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (666ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (2ms)
+			SetLoadedEditorAssemblies (3ms)
+			BeforeProcessingInitializeOnLoad (149ms)
+			ProcessInitializeOnLoadAttributes (378ms)
+			ProcessInitializeOnLoadMethodAttributes (123ms)
+			AfterProcessingInitializeOnLoad (9ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (8ms)
+Refreshing native plugins compatible for Editor in 6.00 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 41 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 5873 unused Assets / (9.9 MB). Loaded Objects now: 6397.
+Memory consumption went from 121.4 MB to 111.6 MB.
+Total: 32.489900 ms (FindLiveObjects: 2.141400 ms CreateObjectMapping: 2.484400 ms MarkObjects: 13.268100 ms  DeleteObjects: 14.594100 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Prepare
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.751 seconds
+Refreshing native plugins compatible for Editor in 2.45 ms, found 3 plugins.
+Native extension for WindowsStandalone target not found
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+Mono: successfully reloaded assembly
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+- Finished resetting the current domain, in  0.797 seconds
+Domain Reload Profiling: 1549ms
+	BeginReloadAssembly (229ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (6ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (56ms)
+	RebuildCommonClasses (39ms)
+	RebuildNativeTypeToScriptingClass (13ms)
+	initialDomainReloadingComplete (33ms)
+	LoadAllAssembliesAndSetupDomain (438ms)
+		LoadAssemblies (373ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (178ms)
+			TypeCache.Refresh (7ms)
+				TypeCache.ScanAssembly (0ms)
+			BuildScriptInfoCaches (161ms)
+			ResolveRequiredComponents (5ms)
+	FinalizeReload (798ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (642ms)
 			LogAssemblyErrors (0ms)
 			InitializePlatformSupportModulesInManaged (3ms)
-			SetLoadedEditorAssemblies (6ms)
-			BeforeProcessingInitializeOnLoad (175ms)
-			ProcessInitializeOnLoadAttributes (389ms)
-			ProcessInitializeOnLoadMethodAttributes (119ms)
+			SetLoadedEditorAssemblies (3ms)
+			BeforeProcessingInitializeOnLoad (139ms)
+			ProcessInitializeOnLoadAttributes (366ms)
+			ProcessInitializeOnLoadMethodAttributes (118ms)
+			AfterProcessingInitializeOnLoad (12ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (11ms)
+Refreshing native plugins compatible for Editor in 9.68 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 41 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 5873 unused Assets / (8.3 MB). Loaded Objects now: 6399.
+Memory consumption went from 121.4 MB to 113.1 MB.
+Total: 28.385900 ms (FindLiveObjects: 3.215900 ms CreateObjectMapping: 3.784900 ms MarkObjects: 12.166600 ms  DeleteObjects: 9.216300 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Prepare
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.823 seconds
+Refreshing native plugins compatible for Editor in 2.65 ms, found 3 plugins.
+Native extension for WindowsStandalone target not found
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+Mono: successfully reloaded assembly
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+- Finished resetting the current domain, in  0.831 seconds
+Domain Reload Profiling: 1653ms
+	BeginReloadAssembly (220ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (6ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (56ms)
+	RebuildCommonClasses (50ms)
+	RebuildNativeTypeToScriptingClass (14ms)
+	initialDomainReloadingComplete (42ms)
+	LoadAllAssembliesAndSetupDomain (495ms)
+		LoadAssemblies (406ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (195ms)
+			TypeCache.Refresh (8ms)
+				TypeCache.ScanAssembly (0ms)
+			BuildScriptInfoCaches (176ms)
+			ResolveRequiredComponents (6ms)
+	FinalizeReload (832ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (670ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (3ms)
+			SetLoadedEditorAssemblies (4ms)
+			BeforeProcessingInitializeOnLoad (148ms)
+			ProcessInitializeOnLoadAttributes (385ms)
+			ProcessInitializeOnLoadMethodAttributes (120ms)
 			AfterProcessingInitializeOnLoad (9ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
@@ -1315,16 +681,16 @@ Domain Reload Profiling: 1710ms
 Refreshing native plugins compatible for Editor in 5.51 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 41 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 5873 unused Assets / (7.4 MB). Loaded Objects now: 6443.
-Memory consumption went from 127.8 MB to 120.4 MB.
-Total: 17.819800 ms (FindLiveObjects: 1.412500 ms CreateObjectMapping: 1.611300 ms MarkObjects: 8.957600 ms  DeleteObjects: 5.836900 ms)
+Unloading 5873 unused Assets / (9.6 MB). Loaded Objects now: 6401.
+Memory consumption went from 121.4 MB to 111.8 MB.
+Total: 28.110400 ms (FindLiveObjects: 1.164900 ms CreateObjectMapping: 1.617000 ms MarkObjects: 13.468500 ms  DeleteObjects: 11.858500 ms)
 
 Prepare: number of updated asset objects reloaded= 0
 ========================================================================
 Received Prepare
 Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.862 seconds
-Refreshing native plugins compatible for Editor in 3.58 ms, found 3 plugins.
+- Loaded All Assemblies, in  0.777 seconds
+Refreshing native plugins compatible for Editor in 3.55 ms, found 3 plugins.
 Native extension for WindowsStandalone target not found
 [Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
 [Package Manager] Unable to send message (not connected to server process).
@@ -1335,44 +701,100 @@ Mono: successfully reloaded assembly
 [Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
 [Package Manager] Unable to send message (not connected to server process).
 [Package Manager] Cannot connect to Unity Package Manager local server
-- Finished resetting the current domain, in  0.868 seconds
-Domain Reload Profiling: 1728ms
-	BeginReloadAssembly (244ms)
+- Finished resetting the current domain, in  0.792 seconds
+Domain Reload Profiling: 1570ms
+	BeginReloadAssembly (246ms)
 		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (7ms)
+		DisableScriptedObjects (6ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (56ms)
+		CreateAndSetChildDomain (55ms)
 	RebuildCommonClasses (43ms)
-	RebuildNativeTypeToScriptingClass (16ms)
-	initialDomainReloadingComplete (39ms)
-	LoadAllAssembliesAndSetupDomain (518ms)
-		LoadAssemblies (411ms)
+	RebuildNativeTypeToScriptingClass (12ms)
+	initialDomainReloadingComplete (34ms)
+	LoadAllAssembliesAndSetupDomain (443ms)
+		LoadAssemblies (380ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (223ms)
-			TypeCache.Refresh (8ms)
+		AnalyzeDomain (189ms)
+			TypeCache.Refresh (6ms)
 				TypeCache.ScanAssembly (0ms)
-			BuildScriptInfoCaches (201ms)
+			BuildScriptInfoCaches (169ms)
 			ResolveRequiredComponents (8ms)
-	FinalizeReload (869ms)
+	FinalizeReload (793ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (703ms)
+		SetupLoadedEditorAssemblies (647ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (3ms)
-			SetLoadedEditorAssemblies (6ms)
-			BeforeProcessingInitializeOnLoad (169ms)
-			ProcessInitializeOnLoadAttributes (402ms)
-			ProcessInitializeOnLoadMethodAttributes (114ms)
-			AfterProcessingInitializeOnLoad (9ms)
+			InitializePlatformSupportModulesInManaged (2ms)
+			SetLoadedEditorAssemblies (4ms)
+			BeforeProcessingInitializeOnLoad (140ms)
+			ProcessInitializeOnLoadAttributes (373ms)
+			ProcessInitializeOnLoadMethodAttributes (117ms)
+			AfterProcessingInitializeOnLoad (11ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
 		AwakeInstancesAfterBackupRestoration (8ms)
-Refreshing native plugins compatible for Editor in 5.60 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 4.37 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 41 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 5873 unused Assets / (7.4 MB). Loaded Objects now: 6445.
-Memory consumption went from 127.8 MB to 120.4 MB.
-Total: 18.645400 ms (FindLiveObjects: 1.268200 ms CreateObjectMapping: 1.601100 ms MarkObjects: 9.701900 ms  DeleteObjects: 6.072900 ms)
+Unloading 5873 unused Assets / (7.7 MB). Loaded Objects now: 6403.
+Memory consumption went from 121.4 MB to 113.7 MB.
+Total: 31.841000 ms (FindLiveObjects: 2.739200 ms CreateObjectMapping: 1.655000 ms MarkObjects: 16.525800 ms  DeleteObjects: 10.918700 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Prepare
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.776 seconds
+Refreshing native plugins compatible for Editor in 2.50 ms, found 3 plugins.
+Native extension for WindowsStandalone target not found
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+Mono: successfully reloaded assembly
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+- Finished resetting the current domain, in  0.796 seconds
+Domain Reload Profiling: 1574ms
+	BeginReloadAssembly (227ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (6ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (59ms)
+	RebuildCommonClasses (40ms)
+	RebuildNativeTypeToScriptingClass (12ms)
+	initialDomainReloadingComplete (33ms)
+	LoadAllAssembliesAndSetupDomain (465ms)
+		LoadAssemblies (384ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (189ms)
+			TypeCache.Refresh (9ms)
+				TypeCache.ScanAssembly (0ms)
+			BuildScriptInfoCaches (171ms)
+			ResolveRequiredComponents (5ms)
+	FinalizeReload (797ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (639ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (3ms)
+			SetLoadedEditorAssemblies (3ms)
+			BeforeProcessingInitializeOnLoad (145ms)
+			ProcessInitializeOnLoadAttributes (355ms)
+			ProcessInitializeOnLoadMethodAttributes (122ms)
+			AfterProcessingInitializeOnLoad (10ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (8ms)
+Refreshing native plugins compatible for Editor in 7.17 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 41 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 5873 unused Assets / (9.5 MB). Loaded Objects now: 6405.
+Memory consumption went from 121.4 MB to 112.0 MB.
+Total: 31.921900 ms (FindLiveObjects: 5.073400 ms CreateObjectMapping: 4.768600 ms MarkObjects: 10.048100 ms  DeleteObjects: 12.030400 ms)
 
 Prepare: number of updated asset objects reloaded= 0

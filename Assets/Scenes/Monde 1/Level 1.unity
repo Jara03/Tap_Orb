@@ -147,7 +147,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 142058038}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: ee53d08153950444aa7ed833d516205c, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -237,7 +237,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 142058038}
   serializedVersion: 4
-  m_Mass: 0.5
+  m_Mass: 0.2
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -253,9 +253,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &142058044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1999,6 +1999,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7901030456209856227, guid: 5d3102253d90a344b8944f73f3530488,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: acee9029c9e6fad49aff4f0fe0841089,
+        type: 2}
     - target: {fileID: 8923467893241289903, guid: 5d3102253d90a344b8944f73f3530488,
         type: 3}
       propertyPath: m_LocalPosition.x
