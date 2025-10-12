@@ -54,6 +54,7 @@
     <Compile Include="Assets\UIHomeManager.cs" />
     <Compile Include="Assets\LevelManager.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
+    <Compile Include="Assets\BasketTrigger.cs" />
     <Compile Include="Assets\worldSelector.cs" />
     <Compile Include="Assets\AnimatedGameItem.cs" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
