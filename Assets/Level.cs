@@ -8,7 +8,8 @@ namespace DefaultNamespace
         public GameObject[] levelItems;
         public Transform[] stateOnTransforms;
         public Transform[] stateOffTransforms;
-
+        
+        public Transform[] itemToDestroy;
         [SerializeField]
         private float transitionDuration = 0.3f;
 
@@ -25,8 +26,21 @@ namespace DefaultNamespace
             }
 
             transitionCoroutine = StartCoroutine(AnimateTransition(state));
+            
+            if (state && itemToDestroy.Length > 0)
+            {
+                destroyOnStateOn();
+            }
         }
 
+        public void destroyOnStateOn()
+        {
+            for (int i = 0; i < itemToDestroy.Length; i++)
+            {
+                Destroy(itemToDestroy[i].gameObject);
+            }
+            
+        }
         private IEnumerator AnimateTransition(bool state)
         {
             if (transitionDuration <= 0f)
