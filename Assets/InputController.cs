@@ -17,12 +17,12 @@ public class InputController : MonoBehaviour
         if (Input.GetKey(KeyCode.Space) || Input.touchCount > 0)
         {
             isPressed = true;
-            Debug.Log("Pressed");
+           // Debug.Log("Pressed");
         }
         else
         {
             isPressed = false;
-            Debug.Log("Released");
+           // Debug.Log("Released");
         }
 
         updateState();

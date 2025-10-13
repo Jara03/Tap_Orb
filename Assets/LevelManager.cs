@@ -37,5 +37,36 @@ public class LevelManager : MonoBehaviour
         
     }
     
+    public static void goToNextLevel()
+    {
+        // Construire le nom de la scène à charger, par ex : "Monde1/Level 1"
+        //uniquement si la scene existe
+        int nextLevel = levelSelected + 1;
+        string scenePath = $"Scenes/Monde {worldSelected}/Level {nextLevel}";
+
+        if (SceneExists(scenePath))
+        {
+            levelSelected++;
+        }
+        
+
+        // Charger la scène de manière synchrone
+        SceneManager.LoadScene(scenePath);
+
+    }
+    private static bool SceneExists(string sceneName)
+    {
+        // Vérifie si la scène existe dans le Build Settings
+        for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
+        {
+            string path = SceneUtility.GetScenePathByBuildIndex(i);
+            string name = System.IO.Path.GetFileNameWithoutExtension(path);
+            if (name == sceneName || path.Contains(sceneName))
+                return true;
+        }
+        return false;
+    }
+
+    
    
 }
