@@ -29,11 +29,12 @@ public class UIHomeManager : MonoBehaviour
     }
     public void LoadLevel(int level)
     {
-        //charger une scene : le monde séléctionné et le niveau choisi 
-        
-        SceneManager.LoadScene("Monde"+LevelManager.worldSelected);
-        
-        //puis indiquer les bonnes infos a la scene chargée
+        LevelManager.levelSelected = level;
+        // Construire le nom de la scène à charger, par ex : "Monde1/Level 1"
+        string scenePath = $"Scenes/Monde {LevelManager.worldSelected}/Level {LevelManager.levelSelected}";
+
+        // Charger la scène de manière synchrone
+        SceneManager.LoadScene(scenePath);
 
     }
     

@@ -95,7 +95,7 @@ public class LevelDataManager : MonoBehaviour
     {
         Debug.Log("Next Level");
         //TODO afficher le prochain niveau
-        
+        LevelManager.goToNextLevel();
         // cacher L'UI de fin de partie 
         FinishedLevelUI.SetActive(false);
     }
