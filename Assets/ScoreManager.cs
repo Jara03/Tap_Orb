@@ -23,8 +23,12 @@ public class ScoreManager : MonoBehaviour
     void Start()
     {
         starscoreLevel = new int[10][];
-        starscoreLevel[0] = new int[2];
-        starscoreLevel[1] = new int[2];
+        starscoreLevel[0] = new int[3];
+        starscoreLevel[1] = new int[4];
+        starscoreLevel[2] = new int[2];
+        starscoreLevel[3] = new int[2];
+
+
 
     }
 

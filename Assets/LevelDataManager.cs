@@ -10,6 +10,7 @@ public class LevelDataManager : MonoBehaviour
 
     public GameObject FinishedLevelUI;
     public GameObject StarsCount;
+    public GameObject PlayerBall;
 
     private GameObject player;
     private Vector3 playerStartPosition;
@@ -51,19 +52,20 @@ public class LevelDataManager : MonoBehaviour
 
     void Update()
     {
-        if (player == null)
-        {
-            return;
-        }
-
-        bool isVisible = IsPlayerVisible();
-
-        if (!isVisible && playerWasVisible)
-        {
-            ResetPlayerPosition();
-        }
-
-        playerWasVisible = isVisible;
+            
+       if (player != null)
+       {
+           Debug.Log("Player is visible : " + IsPlayerVisible());
+           
+           bool isVisible = IsPlayerVisible();
+           
+           if (!isVisible)
+           {
+               ResetPlayerPosition();
+           }
+           
+       }
+       
     }
 
     void catchStar(GameObject star)
@@ -85,7 +87,7 @@ public class LevelDataManager : MonoBehaviour
         //afficher l'UI de fin de partie
         FinishedLevelUI.SetActive(true);
         displayStarWon();
-
+        Destroy(PlayerBall);
         //mettre à jour les données de jeu
         LevelManager.updateLevelDatas(starwon);
 
@@ -123,20 +125,13 @@ public class LevelDataManager : MonoBehaviour
 
     private bool IsPlayerVisible()
     {
-        if (playerRenderers == null || playerRenderers.Length == 0)
+        if (PlayerBall.transform.position.y < -50f)
         {
             return false;
         }
-
-        foreach (Renderer renderer in playerRenderers)
-        {
-            if (renderer != null && renderer.isVisible)
-            {
-                return true;
-            }
-        }
-
-        return false;
+       
+        return true;
+        
     }
 
     private void ResetPlayerPosition()

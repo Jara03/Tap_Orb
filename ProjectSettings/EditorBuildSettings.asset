@@ -27,6 +27,10 @@ EditorBuildSettings:
     path: Assets/Scenes/Monde 2/Level 1.unity
     guid: e6650ece67cb89a4695287893cb60ab2
   m_configObjects:
+    com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000,
+      guid: 948ea4efc7ca86949afae42b6f5c596f, type: 2}
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 197283bbcc0e21048936bffdd7cc389e,
+      type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000,
       guid: eb95c77f514ae0747b126b45f36c0761, type: 2}
   m_UseUCBPForAssetBundles: 0
