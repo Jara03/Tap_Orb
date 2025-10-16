@@ -37,7 +37,8 @@ namespace DefaultNamespace
         {
             for (int i = 0; i < itemToDestroy.Length; i++)
             {
-                Destroy(itemToDestroy[i].gameObject);
+                if(itemToDestroy[i] != null)
+                    Destroy(itemToDestroy[i].gameObject);
             }
             
         }

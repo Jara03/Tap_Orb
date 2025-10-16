@@ -857,6 +857,9 @@
     <Reference Include="Unity.Searcher.Editor">
       <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.Searcher.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.AdaptivePerformance.Google.Android.Editor">
+      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.AdaptivePerformance.Google.Android.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.AdaptivePerformance">
       <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.AdaptivePerformance.dll</HintPath>
     </Reference>
@@ -898,6 +901,9 @@
     </Reference>
     <Reference Include="Unity.Mathematics.Editor">
       <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.AdaptivePerformance.Simulator.Google.Extension.Editor">
+      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.AdaptivePerformance.Simulator.Google.Extension.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.GPUDriven.Runtime">
       <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.RenderPipelines.GPUDriven.Runtime.dll</HintPath>
@@ -977,6 +983,9 @@
     <Reference Include="Unity.Settings.Editor">
       <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.Settings.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.AdaptivePerformance.Google.Android">
+      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.AdaptivePerformance.Google.Android.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.ProBuilder">
       <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.ProBuilder.dll</HintPath>
     </Reference>
@@ -988,6 +997,9 @@
     </Reference>
     <Reference Include="Unity.Postprocessing.Runtime">
       <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.Postprocessing.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>

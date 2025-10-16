@@ -3483,7 +3483,7 @@ PrefabInstance:
     - target: {fileID: 6939485892972479064, guid: f6949dcba660ea64d8cce31dd9a024ea,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.0154877
+      value: 0.82
       objectReference: {fileID: 0}
     - target: {fileID: 6939485892972479064, guid: f6949dcba660ea64d8cce31dd9a024ea,
         type: 3}
@@ -6071,6 +6071,7 @@ MonoBehaviour:
   stars: []
   FinishedLevelUI: {fileID: 2111881527}
   StarsCount: {fileID: 1669205909}
+  PlayerBall: {fileID: 142058038}
 --- !u!4 &1314294744
 Transform:
   m_ObjectHideFlags: 0
