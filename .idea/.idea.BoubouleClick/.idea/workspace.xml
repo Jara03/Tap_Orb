@@ -6,26 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="f856c2c3-5d6c-43a8-b00d-43067849984f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BoubouleClick/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BoubouleClick/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assembly-CSharp-Editor.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Assembly-CSharp-Editor.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assembly-CSharp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Assembly-CSharp.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Level.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Level.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/LevelDataManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/LevelDataManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/Arriver.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Arriver.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Home.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Home.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Monde 1/Level 1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Monde 1/Level 1.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Monde 1/Level 2.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Monde 1/Level 2.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Monde 1/Level 3.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Monde 1/Level 3.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Monde1_Profiles/Main Camera Profile 1.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Monde1_Profiles/Main Camera Profile 1.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ScoreManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ScoreManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe-0.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe-0.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-6000.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-6000.dwlt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/Assembly-CSharp-Editor.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/Assembly-CSharp-Editor.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/Assembly-CSharp.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/Assembly-CSharp.csproj.AssemblyReference.cache" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,7 +142,8 @@
       <workItem from="1760379489974" duration="8199000" />
       <workItem from="1760472619129" duration="598000" />
       <workItem from="1760556507627" duration="2006000" />
-      <workItem from="1760641852735" duration="6103000" />
+      <workItem from="1760641852735" duration="8933000" />
+      <workItem from="1760720148735" duration="2511000" />
     </task>
     <task id="LOCAL-00001" summary="initial Commit">
       <option name="closed" value="true" />
@@ -274,7 +265,15 @@
       <option name="project" value="LOCAL" />
       <updated>1760394468421</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Debug session">
+      <option name="closed" value="true" />
+      <created>1760648927087</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1760648927087</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -328,7 +327,8 @@
     <MESSAGE value="Added NextLevel Button" />
     <MESSAGE value="Added NextLevel Button P2" />
     <MESSAGE value="updated project Settings" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated project Settings" />
+    <MESSAGE value="Debug session" />
+    <option name="LAST_COMMIT_MESSAGE" value="Debug session" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

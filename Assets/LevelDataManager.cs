@@ -13,11 +13,18 @@ public class LevelDataManager : MonoBehaviour
     public GameObject PlayerBall;
 
     private GameObject player;
+    
     private Vector3 playerStartPosition;
     private Quaternion playerStartRotation;
     private Rigidbody playerRigidbody;
-    private Renderer[] playerRenderers;
-    private bool playerWasVisible = true;
+    
+    public Collider endGameCollider;
+    
+    
+    public float resetDelay = 0.5f; // délai avant de reset après disparition
+    public float minResetCooldown = 1.0f; // délai minimum entre deux resets
+    
+    public float lastSeenTime = 0f;
 
     void Start()
     {
@@ -45,28 +52,54 @@ public class LevelDataManager : MonoBehaviour
             playerStartPosition = player.transform.position;
             playerStartRotation = player.transform.rotation;
             playerRigidbody = player.GetComponent<Rigidbody>();
-            playerRenderers = player.GetComponentsInChildren<Renderer>();
-            playerWasVisible = true;
         }
     }
-
-    void Update()
+    void FixedUpdate()
     {
+        
+        if (player != null)
+        {
+            bool isVisible = IsPlayerVisible();
             
-       if (player != null)
-       {
-           Debug.Log("Player is visible : " + IsPlayerVisible());
-           
-           bool isVisible = IsPlayerVisible();
-           
-           if (!isVisible)
-           {
-               ResetPlayerPosition();
-           }
-           
-       }
-       
+            if (!isVisible)
+            {
+                    ResetPlayerPosition();
+            }
+
+        }
+        
     }
+    
+    private bool IsPlayerVisible()
+    {
+      
+        //si le joueur est dans la zone de vision
+        if (endGameCollider.bounds.Contains(player.transform.position))
+        {
+            return true;
+        }
+            
+        return false;
+        
+    }
+
+    private void ResetPlayerPosition()
+    {
+        //supprimer et refaire spawn le prefab de la boule 
+        
+        
+        player.transform.SetPositionAndRotation(playerStartPosition, playerStartRotation);
+
+        if (playerRigidbody != null)
+        {
+            playerRigidbody.linearVelocity = Vector3.zero;
+            playerRigidbody.angularVelocity = Vector3.zero;
+        }
+
+        Debug.LogWarning("Player reset triggered.");
+    }
+
+
 
     void catchStar(GameObject star)
     {
@@ -123,28 +156,6 @@ public class LevelDataManager : MonoBehaviour
 
     }
 
-    private bool IsPlayerVisible()
-    {
-        if (PlayerBall.transform.position.y < -50f)
-        {
-            return false;
-        }
-       
-        return true;
-        
-    }
-
-    private void ResetPlayerPosition()
-    {
-        player.transform.SetPositionAndRotation(playerStartPosition, playerStartRotation);
-
-        if (playerRigidbody != null)
-        {
-            playerRigidbody.linearVelocity = Vector3.zero;
-            playerRigidbody.angularVelocity = Vector3.zero;
-        }
-    }
-}
 
 
 
@@ -168,5 +179,6 @@ public class StarPickup : MonoBehaviour
             onCollected?.Invoke(gameObject);
             
         }
+    }
     }
 }
