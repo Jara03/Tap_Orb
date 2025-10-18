@@ -51,10 +51,12 @@
     <Compile Include="Assets\Scripts\InputController.cs" />
     <Compile Include="Assets\Scripts\Level.cs" />
     <Compile Include="Assets\Scripts\BouncyBallSettler.cs" />
+    <Compile Include="Assets\VacuumAttractor.cs" />
     <Compile Include="Assets\Scripts\LevelDataManager.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\AnimatedGameItem.cs" />
     <Compile Include="Assets\Scripts\worldSelector.cs" />
+    <Compile Include="Assets\resetBallPosition.cs" />
     <Compile Include="Assets\Scripts\LevelManager.cs" />
     <Compile Include="Assets\Scripts\LevelSelectorDisplay.cs" />
     <Compile Include="Assets\Scripts\UIHomeManager.cs" />
