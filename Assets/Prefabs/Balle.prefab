@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 6236639118341367287}
   - component: {fileID: 1119799010177127599}
   - component: {fileID: 2055733029665827249}
-  - component: {fileID: -1614684217440853059}
   m_Layer: 0
   m_Name: Balle
   m_TagString: Player
@@ -170,21 +169,3 @@ MonoBehaviour:
   groundLayers:
     serializedVersion: 2
     m_Bits: 115
---- !u!114 &-1614684217440853059
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3467193591501948330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86af0329b748bab4d9c53feea8c2d0af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attractionForce: 20
-  suctionRadius: 5
-  suctionStopDistance: 0.1
-  cageCollider: {fileID: 0}
-  cageShrinkSpeed: 10
-  targetCageRadius: 0.75

@@ -5,87 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f856c2c3-5d6c-43a8-b00d-43067849984f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Blender_Old/Poutre-old.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Blender_Old/Poutre-old.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Blender_Old/Poutre.blend" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Blender_Old/Poutre.blend.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Blender_Old/Poutre.blend1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Blender_Old/Poutre.blend1.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Blender_Old/Poutre.fbx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Blender_Old/Poutre.fbx.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Blender_Old/panier.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Blender_Old/panier.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Blender_Old/poutre.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Blender_Old/poutre.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/panier Variant.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/AnimatedGameItem.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/AnimatedGameItem.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/BasketTrigger.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/BasketTrigger.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/BouncyBallSettler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/BouncyBallSettler.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/InputController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/InputController.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Level.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Level.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/LevelDataManager.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/LevelDataManager.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/LevelManager.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/LevelManager.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/LevelSelectorDisplay.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/LevelSelectorDisplay.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ScoreManager.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ScoreManager.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/UIHomeManager.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/UIHomeManager.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/worldSelector.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/worldSelector.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.BoubouleClick/.idea/shelf/Uncommitted_changes_before_Update_at_11_10_2025_23_08_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.BoubouleClick/.idea/shelf/Uncommitted_changes_before_Update_at_11_10_2025_23_08__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BoubouleClick/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BoubouleClick/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assembly-CSharp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Assembly-CSharp.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/HomeScreen.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/HomeScreen/IMG_2651.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/HomeScreen/IMG_2651.PNG.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/HomeScreen/Monde.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/HomeScreen/Monde/Ellipse 1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/HomeScreen/Monde/Ellipse 1.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/HomeScreen/Monde/LV1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/HomeScreen/Monde/LV1.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/HomeScreen/Monde/LV2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/HomeScreen/Monde/LV2.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/HomeScreen/Monde/LV3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/HomeScreen/Monde/LV3.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/HomeScreen/Monde/LV4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/HomeScreen/Monde/LV4.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/HomeScreen/Monde/LV5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/HomeScreen/Monde/LV5.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/HomeScreen/Monde/LV6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/HomeScreen/Monde/LV6.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/HomeScreen/Monde/image (10).png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/HomeScreen/Monde/image (10).png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/HomeScreen/Monde/image (11).png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/HomeScreen/Monde/image (11).png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/HomeScreen/Monde/image (6).png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/HomeScreen/Monde/image (6).png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/HomeScreen/Monde/image (7).png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/HomeScreen/Monde/image (7).png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/HomeScreen/Monde/image (8).png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/HomeScreen/Monde/image (8).png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/HomeScreen/Monde/image (9).png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/HomeScreen/Monde/image (9).png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/HomeScreen/image (2).png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/HomeScreen/image (2).png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/HomeScreen/image (3).png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/HomeScreen/image (3).png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/HomeScreen/image (4).png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/HomeScreen/image (4).png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/HomeScreen/image.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/HomeScreen/image.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/HomeScreen/start_button.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/HomeScreen/start_button.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/objet statiq.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/objet statiq.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Balle.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Balle.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Home.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Home.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Monde 1/Level 1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Monde 1/Level 1.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Monde 1/Level 5.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Monde 1/Level 5.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Monde 1/Level 2.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Monde 1/Level 2.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Monde 1/Level 3.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Monde 1/Level 3.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Monde 1/Level 4.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Monde 1/Level 4.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/LevelDataManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/LevelDataManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe-0.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe-0.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-6000.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-6000.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -207,7 +141,8 @@
       <workItem from="1760556507627" duration="2006000" />
       <workItem from="1760641852735" duration="8933000" />
       <workItem from="1760720148735" duration="4161000" />
-      <workItem from="1760786759104" duration="20958000" />
+      <workItem from="1760786759104" duration="22236000" />
+      <workItem from="1760890614016" duration="815000" />
     </task>
     <task id="LOCAL-00001" summary="initial Commit">
       <option name="closed" value="true" />
@@ -361,7 +296,15 @@
       <option name="project" value="LOCAL" />
       <updated>1760801394361</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="vacuum end target added">
+      <option name="closed" value="true" />
+      <created>1760823842877</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1760823842877</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -419,7 +362,8 @@
     <MESSAGE value="updated UI" />
     <MESSAGE value="rehab level 4" />
     <MESSAGE value="minor bug correction" />
-    <option name="LAST_COMMIT_MESSAGE" value="minor bug correction" />
+    <MESSAGE value="vacuum end target added" />
+    <option name="LAST_COMMIT_MESSAGE" value="vacuum end target added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

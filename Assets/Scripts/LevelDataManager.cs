@@ -3,6 +3,7 @@ using DefaultNamespace;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LevelDataManager : MonoBehaviour
 {
@@ -167,7 +168,18 @@ public class LevelDataManager : MonoBehaviour
         {
             if (i < starwon)
             {
+                StarsCount.transform.GetChild(i).gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI/LevelScreen/Star 1");
                 StarsCount.transform.GetChild(i).gameObject.SetActive(true);
+                
+            }
+            else
+            {
+                //charger le prefab "Star 3"
+                StarsCount.transform.GetChild(i).gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI/LevelScreen/Star 3");
+                StarsCount.transform.GetChild(i).gameObject.GetComponent<Image>().color = new Color(1, 1, 1, 0.5f);
+                StarsCount.transform.GetChild(i).gameObject.SetActive(true);
+
+
             }
         }
 
