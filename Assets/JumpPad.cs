@@ -40,17 +40,24 @@ public class JumpPad : MonoBehaviour
     {
         if (collider == null)
         {
+            Debug.LogWarning("Jump pad collider is null.");
             return;
         }
 
         if (!string.IsNullOrEmpty(playerTag) && !collider.CompareTag(playerTag))
         {
+            Debug.LogWarning("Jump pad collider does not match player tag.");
             return;
+        }
+        else
+        {
+            Debug.Log("Jump pad collider match player tag.");
         }
 
         Rigidbody attachedRigidbody = collider.attachedRigidbody;
         if (attachedRigidbody == null)
         {
+            Debug.LogWarning("Jump pad collider does not have a rigidbody attached.");
             return;
         }
 
@@ -59,28 +66,40 @@ public class JumpPad : MonoBehaviour
 
     private void Launch(Rigidbody targetRigidbody)
     {
+        // Détermine la direction de lancement
         Vector3 launchDirection = GetLaunchDirection();
 
         if (launchDirection.sqrMagnitude <= Mathf.Epsilon)
         {
+            Debug.LogWarning("[JumpPad] Launch direction is invalid — probably zero vector.");
             return;
         }
 
         launchDirection.Normalize();
 
-        Vector3 velocity = targetRigidbody.linearVelocity;
+        // Récupère la vélocité actuelle du rigidbody
+        Vector3 velocity = targetRigidbody.velocity;
 
         if (overrideVelocity)
         {
+            // Supprime la composante déjà existante dans la direction du lancement
             float currentAlongDirection = Vector3.Dot(velocity, launchDirection);
             velocity -= launchDirection * currentAlongDirection;
         }
 
+        // Ajoute la force de lancement
         velocity += launchDirection * launchSpeed;
 
-        targetRigidbody.linearVelocity = velocity;
+        // Met à jour la vélocité du rigidbody
         targetRigidbody.velocity = velocity;
+
+        // Log de debug
+        Debug.Log(
+            $"[JumpPad] 🚀 Launching {targetRigidbody.name} | " +
+            $"Velocity: {velocity:F2} | Direction: {launchDirection:F2} | Speed: {launchSpeed:F2}"
+        );
     }
+
 
     private Vector3 GetLaunchDirection()
     {
@@ -97,6 +116,7 @@ public class JumpPad : MonoBehaviour
         Collider collider = GetComponent<Collider>();
         if (collider == null)
         {
+            Debug.LogWarning("Jump pad collider is missing.");
             return;
         }
 
