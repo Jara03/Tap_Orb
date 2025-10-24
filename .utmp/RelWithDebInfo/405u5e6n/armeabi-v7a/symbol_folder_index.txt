@@ -1,0 +1,1 @@
+F:\Unity Projects\BoubouleClick\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\build\intermediates\cxx\RelWithDebInfo\405u5e6n\obj\armeabi-v7a
