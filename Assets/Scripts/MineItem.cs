@@ -8,6 +8,7 @@ public class MineItem : MonoBehaviour
     [SerializeField]
     private float triggerRadius = 2f;
 
+
     [Header("Déflagration")]
     [Tooltip("Force appliquée au joueur lors de l’explosion.")]
     [SerializeField]

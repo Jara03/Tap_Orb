@@ -78,7 +78,7 @@ public class JumpPad : MonoBehaviour
         launchDirection.Normalize();
 
         // Récupère la vélocité actuelle du rigidbody
-        Vector3 velocity = targetRigidbody.velocity;
+        Vector3 velocity = targetRigidbody.linearVelocity;
 
         if (overrideVelocity)
         {
@@ -91,7 +91,7 @@ public class JumpPad : MonoBehaviour
         velocity += launchDirection * launchSpeed;
 
         // Met à jour la vélocité du rigidbody
-        targetRigidbody.velocity = velocity;
+        targetRigidbody.linearVelocity = velocity;
 
         // Log de debug
         Debug.Log(
