@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f856c2c3-5d6c-43a8-b00d-43067849984f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BoubouleClick/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BoubouleClick/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assembly-CSharp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Assembly-CSharp.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JumpPad.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MineItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MineItem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-6000.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-6000.dwlt" afterDir="false" />
-    </list>
+    <list default="true" id="f856c2c3-5d6c-43a8-b00d-43067849984f" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,8 +27,8 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock://F:/Unity Projects/BoubouleClick/Assets/Prefabs/UI/HomeScreen.meta" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://F:/Unity Projects/BoubouleClick/Assets/Prefabs/UI/HomeScreen.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://F:/Unity Projects/BoubouleClick/Assets/Scripts/MineItem.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://F:/Unity Projects/BoubouleClick/UserSettings/EditorUserSettings.asset" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
@@ -136,6 +130,7 @@
       <workItem from="1760989727402" duration="596000" />
       <workItem from="1761061915578" duration="7801000" />
       <workItem from="1761233236329" duration="1945000" />
+      <workItem from="1761339566542" duration="302000" />
     </task>
     <task id="LOCAL-00001" summary="initial Commit">
       <option name="closed" value="true" />
@@ -321,7 +316,15 @@
       <option name="project" value="LOCAL" />
       <updated>1761084082830</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="global update of project">
+      <option name="closed" value="true" />
+      <created>1761339858395</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1761339858395</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -383,7 +386,8 @@
     <MESSAGE value="Integrated End Level UI + bug correction" />
     <MESSAGE value="added Jump Pad script" />
     <MESSAGE value="created new game item trampoline" />
-    <option name="LAST_COMMIT_MESSAGE" value="created new game item trampoline" />
+    <MESSAGE value="global update of project" />
+    <option name="LAST_COMMIT_MESSAGE" value="global update of project" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
