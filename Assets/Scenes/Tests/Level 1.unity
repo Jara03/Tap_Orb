@@ -1810,6 +1810,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 142058042}
+  - {fileID: 1331543612}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &955234849
@@ -2561,11 +2562,11 @@ Transform:
   m_GameObject: {fileID: 1331543606}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.11, z: 0}
+  m_LocalPosition: {x: 1.67, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 955234848}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1331543613
 MonoBehaviour:
@@ -2580,8 +2581,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggerRadius: 2
-  explosionForce: 15
-  explosionRadius: 5
+  explosionForce: 50
+  explosionRadius: 20
   upwardsModifier: 0.5
   explosionEffectPrefab: {fileID: 0}
   effectSpawnPoint: {fileID: 0}
@@ -3065,7 +3066,7 @@ PrefabInstance:
     - target: {fileID: 6575197487758590700, guid: bf4708467d8b5594d975db89f6d4407c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.35
+      value: 12.2
       objectReference: {fileID: 0}
     - target: {fileID: 6575197487758590700, guid: bf4708467d8b5594d975db89f6d4407c,
         type: 3}
@@ -3306,17 +3307,17 @@ PrefabInstance:
     - target: {fileID: 1119330494232218174, guid: e0ae6bc8d243fc1439043960c2faae65,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.79
+      value: -16.56
       objectReference: {fileID: 0}
     - target: {fileID: 1119330494232218174, guid: e0ae6bc8d243fc1439043960c2faae65,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1119330494232218174, guid: e0ae6bc8d243fc1439043960c2faae65,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10.46
+      value: -6.41
       objectReference: {fileID: 0}
     - target: {fileID: 1119330494232218174, guid: e0ae6bc8d243fc1439043960c2faae65,
         type: 3}
@@ -3374,4 +3375,3 @@ SceneRoots:
   - {fileID: 5194467569094600285}
   - {fileID: 8636187604987915707}
   - {fileID: 611249592}
-  - {fileID: 1331543612}

@@ -28,6 +28,11 @@ public class InputController : MonoBehaviour
         updateState();
 
     }
+
+    public bool IsPressed()
+    {
+        return isPressed;
+    }
     
     void updateState()
     {
