@@ -8,13 +8,12 @@ public class MineItem : MonoBehaviour
     [SerializeField]
     private float triggerRadius = 2f;
 
-
     [Header("Déflagration")]
-    [Tooltip("Force appliquée au joueur lors de l’explosion.")]
+    [Tooltip("Force appliquée lors de l’explosion.")]
     [SerializeField]
     private float explosionForce = 15f;
 
-    [Tooltip("Rayon de la déflagration utilisé pour appliquer la force.")]
+    [Tooltip("Rayon de la déflagration.")]
     [SerializeField]
     private float explosionRadius = 3f;
 
@@ -44,82 +43,58 @@ public class MineItem : MonoBehaviour
         detectionCollider.radius = triggerRadius;
     }
 
-    private void OnValidate()
-    {
-        if (triggerRadius < 0f)
-        {
-            triggerRadius = 0f;
-        }
-
-        if (explosionRadius < 0f)
-        {
-            explosionRadius = 0f;
-        }
-
-        if (detectionCollider == null)
-        {
-            detectionCollider = GetComponent<SphereCollider>();
-        }
-
-        if (detectionCollider != null)
-        {
-            detectionCollider.isTrigger = true;
-            detectionCollider.radius = triggerRadius;
-        }
-    }
-
     private void OnTriggerEnter(Collider other)
     {
-        if (hasExploded)
-        {
-            return;
-        }
+        if (hasExploded) return;
 
-        if (!other.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
-            return;
+            Debug.Log("Mine exploded");
+            Explode();
         }
-
-        Rigidbody playerRigidbody = other.attachedRigidbody;
-        if (playerRigidbody == null)
-        {
-            return;
-        }
-
-        Explode(playerRigidbody);
     }
 
-    private void Explode(Rigidbody playerRigidbody)
+    private void Explode()
     {
         hasExploded = true;
 
-        Vector3 explosionPosition = transform.position;
-        if (effectSpawnPoint != null)
-        {
-            explosionPosition = effectSpawnPoint.position;
-        }
+        Vector3 explosionPosition = effectSpawnPoint ? effectSpawnPoint.position : transform.position;
 
         SpawnEffect(explosionPosition);
-        ApplyExplosionForce(playerRigidbody, explosionPosition);
 
+        // Appliquer la force à tous les rigidbodies proches
+        Collider[] colliders = Physics.OverlapSphere(explosionPosition, explosionRadius);
+        foreach (Collider nearby in colliders)
+        {
+            Rigidbody rb = nearby.attachedRigidbody;
+            if (rb != null)
+            {
+                Debug.Log("Applying force to " + nearby.name);
+                rb.AddExplosionForce(
+                    explosionForce,
+                    explosionPosition,
+                    explosionRadius,
+                    upwardsModifier,
+                    ForceMode.Impulse
+                );
+            }
+        }
+
+        // Désactiver la détection après explosion
         if (detectionCollider != null)
-        {
             detectionCollider.enabled = false;
-        }
 
-        // On désactive le visuel de la mine après l’explosion.
+        // Désactiver les rendus visuels
         foreach (var renderer in GetComponentsInChildren<Renderer>())
-        {
             renderer.enabled = false;
-        }
+
+        // (Optionnel) détruire la mine après un délai
+        Destroy(gameObject, 1f);
     }
 
     private void SpawnEffect(Vector3 explosionPosition)
     {
-        if (explosionEffectPrefab == null)
-        {
-            return;
-        }
+        if (explosionEffectPrefab == null) return;
 
         GameObject effectInstance = Instantiate(
             explosionEffectPrefab,
@@ -128,19 +103,16 @@ public class MineItem : MonoBehaviour
         );
 
         if (effectLifetime > 0f)
-        {
             Destroy(effectInstance, effectLifetime);
-        }
     }
 
-    private void ApplyExplosionForce(Rigidbody playerRigidbody, Vector3 explosionPosition)
+#if UNITY_EDITOR
+    private void OnDrawGizmosSelected()
     {
-        playerRigidbody.AddExplosionForce(
-            explosionForce,
-            explosionPosition,
-            explosionRadius > 0f ? explosionRadius : triggerRadius,
-            upwardsModifier,
-            ForceMode.Impulse
-        );
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, triggerRadius);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, explosionRadius);
     }
+#endif
 }

@@ -50,6 +50,7 @@
     <Compile Include="Assets\Scripts\ScoreManager.cs" />
     <Compile Include="Assets\Scripts\InputController.cs" />
     <Compile Include="Assets\Scripts\Level.cs" />
+    <Compile Include="Assets\bumper.cs" />
     <Compile Include="Assets\Scripts\BouncyBallSettler.cs" />
     <Compile Include="Assets\Scripts\JumpPad.cs" />
     <Compile Include="Assets\Scripts\LevelDataManager.cs" />
