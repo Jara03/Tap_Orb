@@ -32,11 +32,11 @@ public class LevelSelectorDisplay : MonoBehaviour
         foreach (var stars in starsCounts)
         {
             
-            Debug.Log("World " + LevelManager.worldSelected + " Level " + index + "score : " + ScoreManager.starscoreLevel[LevelManager.worldSelected][index]);
+            Debug.Log("World " + LevelManager.worldSelected + " Level " + index + "score : " + ScoreManager.starscoreLevel[index]);
 
             for (int i = 0; i < stars.transform.childCount; i++)
             {
-                if (i < ScoreManager.starscoreLevel[LevelManager.worldSelected][index])
+                if (i < ScoreManager.starscoreLevel[index])
                 {
                     stars.transform.GetChild(i).gameObject.SetActive(true);
                 }
