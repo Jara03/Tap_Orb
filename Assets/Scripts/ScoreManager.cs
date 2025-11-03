@@ -4,7 +4,7 @@ public class ScoreManager : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
-    public static int[][] starscoreLevel;
+    public static int[] starscoreLevel;
     
     public static ScoreManager Instance;
     
@@ -22,19 +22,15 @@ public class ScoreManager : MonoBehaviour
     }
     void Start()
     {
-        starscoreLevel = new int[10][];
-        starscoreLevel[0] = new int[3];
-        starscoreLevel[1] = new int[4];
-        starscoreLevel[2] = new int[2];
-        starscoreLevel[3] = new int[2];
+        starscoreLevel = new int[25];
 
 
 
     }
 
-   public static void updateStarScore(int world,int level, int score)
+   public static void updateStarScore(int level, int score)
     {
-        starscoreLevel[world][level] = score;
+        starscoreLevel[level] = score;
         
     }
 }

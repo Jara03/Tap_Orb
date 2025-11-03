@@ -28,7 +28,7 @@ public class LevelManager : MonoBehaviour
 
     public static void updateLevelDatas(int score)
     {
-        ScoreManager.updateStarScore(worldSelected, levelSelected, score);
+        ScoreManager.updateStarScore(levelSelected, score);
     }
 
     public static void goBackHome()
@@ -42,7 +42,7 @@ public class LevelManager : MonoBehaviour
         // Construire le nom de la scène à charger, par ex : "Monde1/Level 1"
         //uniquement si la scene existe
         int nextLevel = levelSelected + 1;
-        string scenePath = $"Scenes/Monde {worldSelected}/Level {nextLevel}";
+        string scenePath = $"Scenes/Levels/Level {nextLevel}";
 
         if (SceneExists(scenePath))
         {
