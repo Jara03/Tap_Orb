@@ -75,7 +75,7 @@ public class JumpPad : MonoBehaviour
             bool inputActive = inputController.IsPressed() || (Time.time - lastPressedTime <= inputBufferTime);
             if (!inputActive)
             {
-                Debug.Log("[JumpPad] Input required but not pressed — launch cancelled.");
+               // Debug.Log("[JumpPad] Input required but not pressed — launch cancelled.");
                 return;
             }
         }

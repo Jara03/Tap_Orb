@@ -7,26 +7,26 @@ public class InputController : MonoBehaviour
 {
     // Start is called before the first frame update
     bool isPressed = false;
+    private bool previousPressed = false;
+
     
     public Level levelItem;
 
     // Update is called once per frame
     void Update()
     {
+        // Détecte si une touche ou un touch est actif
+        bool currentPressed = Input.GetKey(KeyCode.Space) || Input.touchCount > 0;
 
-        if (Input.GetKey(KeyCode.Space) || Input.touchCount > 0)
+        // Vérifie si l’état a changé depuis la dernière frame
+        if (currentPressed != previousPressed)
         {
-            isPressed = true;
-           // Debug.Log("Pressed");
-        }
-        else
-        {
-            isPressed = false;
-           // Debug.Log("Released");
+            isPressed = currentPressed;
+            updateState();
         }
 
-        updateState();
-
+        // Sauvegarde l’état pour la prochaine frame
+        previousPressed = currentPressed;
     }
 
     public bool IsPressed()
@@ -41,11 +41,11 @@ public class InputController : MonoBehaviour
         
         if (isPressed)
         {
-            levelItem.SetTransformState(true);
+                levelItem.SetTransformState(true);
         }
         else
         {
-            levelItem.SetTransformState(false);
+                levelItem.SetTransformState(false);
         }
     }
 }
