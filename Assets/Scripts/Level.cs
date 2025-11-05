@@ -26,24 +26,20 @@ namespace DefaultNamespace
         public void SetTransformState(bool state)
         {
             if (transitionCoroutine != null)
-            {
                 StopCoroutine(transitionCoroutine);
-            }
 
             transitionCoroutine = StartCoroutine(AnimateTransition(state));
-            
+
             if (state && itemToDestroy.Length > 0)
-            {
                 destroyOnStateOn();
-            }
         }
+
 
         public void destroyOnStateOn()
         {
             for (int i = 0; i < itemToDestroy.Length; i++)
             {
                 if(itemToDestroy[i] != null && itemToDestroy[i].gameObject.activeSelf)
-                    //Destroy(itemToDestroy[i].gameObject);
                     itemToDestroy[i].gameObject.SetActive(false);
 
             }
@@ -64,11 +60,6 @@ namespace DefaultNamespace
         }
         private IEnumerator AnimateTransition(bool state)
         {
-            if (transitionDuration <= 0f)
-            {
-                ApplyImmediateState(state);
-                yield break;
-            }
 
             Vector3[] startPositions = new Vector3[levelItems.Length];
             Quaternion[] startRotations = new Quaternion[levelItems.Length];
@@ -85,20 +76,29 @@ namespace DefaultNamespace
 
             float elapsedTime = 0f;
 
-            while (elapsedTime < transitionDuration)
+            while (elapsedTime <= transitionDuration)
             {
                 elapsedTime += Time.deltaTime;
-                float normalizedTime = Mathf.Clamp01(elapsedTime / transitionDuration);
-                float curveValue = transitionCurve.Evaluate(normalizedTime);
-
+                float normalizedTime = elapsedTime / transitionDuration; //Mathf.Clamp01(elapsedTime / transitionDuration);
+                float curveValue = transitionCurve.Evaluate(normalizedTime); //Mathf.Clamp01(transitionCurve.Evaluate(normalizedTime));
                 for (int i = 0; i < levelItems.Length; i++)
                 {
-                    levelItems[i].transform.localPosition = Vector3.Lerp(startPositions[i], targetPositions[i], curveValue);
-                    levelItems[i].transform.localRotation = Quaternion.Lerp(startRotations[i], targetRotations[i], curveValue);
+                    if (levelItems[i] == null) continue;
+                    levelItems[i].transform.SetPositionAndRotation(Vector3.LerpUnclamped(startPositions[i], targetPositions[i],curveValue), Quaternion.SlerpUnclamped(startRotations[i], targetRotations[i],curveValue));
+                    // Remet les rotations internes des enfants à zéro
+                    for (int c = 0; c < levelItems[i].transform.childCount; c++)
+                    {
+                        Transform child = levelItems[i].transform.GetChild(c);
+                        child.localRotation = Quaternion.identity;
+                        child.localPosition = new Vector3(0,-3,0);
+                    }
                 }
+
                 yield return null;
             }
+            
 
+            // 🔒 Forcer la position finale à la fin
             ApplyImmediateState(state);
         }
 
