@@ -30,6 +30,7 @@ public class LevelDataManager : MonoBehaviour
     
     public float lastSeenTime = 0f;
 
+    public InterstitialAds interstitialAds;
     void Start()
     {
         //trouver l'objet qui contient le script Level
@@ -67,6 +68,9 @@ public class LevelDataManager : MonoBehaviour
             playerStartRotation = player.transform.rotation;
             playerRigidbody = player.GetComponent<Rigidbody>();
         }
+        
+        interstitialAds = gameObject.AddComponent<InterstitialAds>();
+
     }
     void FixedUpdate()
     {
@@ -138,10 +142,12 @@ public class LevelDataManager : MonoBehaviour
     {
         //afficher l'UI de fin de partie
         FinishedLevelUI.SetActive(true);
-        displayStarWon();
         Destroy(PlayerBall);
-        //mettre à jour les données de jeu
-        LevelManager.updateLevelDatas(starwon);
+        
+        //afficher une pub 
+        interstitialAds.LoadInterstitialAd();
+        interstitialAds.ShowInterstitialAd();
+        
 
     }
 

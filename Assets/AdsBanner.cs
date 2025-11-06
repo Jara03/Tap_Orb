@@ -8,7 +8,7 @@ public class AdsBanner : MonoBehaviour
 
    private void Start()
    {
-       BannerView bannerView = new BannerView("ca-app-pub-3940256099942544/6300978111", AdSize.Banner, AdPosition.Bottom);
+       BannerView bannerView = new BannerView("ca-app-pub-1810486296187934/1500572514", AdSize.Banner, AdPosition.Bottom);
 
        // Send a request to load an ad into the banner view.
        bannerView.LoadAd(new AdRequest());

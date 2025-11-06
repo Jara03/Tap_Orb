@@ -2530,6 +2530,7 @@ MonoBehaviour:
   resetDelay: 0.5
   minResetCooldown: 1
   lastSeenTime: 0
+  interstitialAds: {fileID: 0}
 --- !u!4 &1314294744
 Transform:
   m_ObjectHideFlags: 0
