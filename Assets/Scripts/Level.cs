@@ -94,7 +94,7 @@ namespace DefaultNamespace
                     }
                 }
 
-                yield return null;
+                yield return new WaitForFixedUpdate();
             }
             
 

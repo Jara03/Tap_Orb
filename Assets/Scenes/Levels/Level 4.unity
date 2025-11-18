@@ -1321,7 +1321,7 @@ MonoBehaviour:
   - {fileID: 72317027}
   - {fileID: 2125737496}
   itemToDestroy: []
-  transitionDuration: 0.1
+  transitionDuration: 0.15
   transitionCurve:
     serializedVersion: 2
     m_Curve:

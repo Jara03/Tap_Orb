@@ -61,6 +61,7 @@
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\AnimatedGameItem.cs" />
     <Compile Include="Assets\Scripts\worldSelector.cs" />
+    <Compile Include="Assets\Scripts\BeamCollisionSweeper.cs" />
     <Compile Include="Assets\Scripts\LevelTransitionController.cs" />
     <Compile Include="Assets\Scripts\resetBallPosition.cs" />
     <Compile Include="Assets\Scripts\LevelManager.cs" />
