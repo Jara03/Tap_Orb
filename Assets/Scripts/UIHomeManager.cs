@@ -1,4 +1,7 @@
+using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 public class UIHomeManager : MonoBehaviour
@@ -9,9 +12,19 @@ public class UIHomeManager : MonoBehaviour
     public GameObject startButton;
     
     public LevelSelectorDisplay levelSelectorDisplay;
+    
+    public static bool HasController { get; private set; }
+    public static Action OnSplashScreenFinished;
 
     void Start()
     {
+        
+        if (HasController) return;
+        HasController = true;
+
+        OnSplashScreenFinished += () => { Debug.Log("Splash finished! " + DateTime.Now.ToLongTimeString()); };
+        StartCoroutine("SplashCoroutine");
+        
         levelSelector.SetActive(false);
         
         displayPreviousPage();
@@ -55,6 +68,13 @@ public class UIHomeManager : MonoBehaviour
         //levelSelector.SetActive(false);
         startButton.SetActive(false);
         
+    }
+    
+    IEnumerator SplashCoroutine()
+    {
+        if (SplashScreen.isFinished)
+            yield return new WaitForEndOfFrame();
+        OnSplashScreenFinished();
     }
 
 }
