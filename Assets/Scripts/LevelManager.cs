@@ -43,11 +43,6 @@ public class LevelManager : MonoBehaviour
         
     }
 
-    public static void updateLevelDatas(int score)
-    {
-        ScoreManager.updateStarScore(levelSelected, score);
-    }
-
     public static void goBackHome()
     {
         SceneManager.LoadScene("Home");
@@ -65,9 +60,14 @@ public class LevelManager : MonoBehaviour
         {
             levelSelected++;
         }
+        else
+        {
+            scenePath = "Home";
+        }
         
 
         // Charger la scène de manière synchrone
+        Debug.Log("Loading scene : " + scenePath);
         SceneManager.LoadScene(scenePath);
 
     }

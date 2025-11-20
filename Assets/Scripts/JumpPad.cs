@@ -51,7 +51,10 @@ public class JumpPad : MonoBehaviour
 
         // Met à jour le moment du dernier input pressé
         if (inputController.IsPressed())
+        {
             lastPressedTime = Time.time;
+        }
+            
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -64,8 +67,20 @@ public class JumpPad : MonoBehaviour
         TryLaunch(other);
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        TryLaunch(other);
+    }
+    
+    private void OnCollisionStay(Collision collision)
+    {
+        TryLaunch(collision.collider);
+    }
+
     private void TryLaunch(Collider collider)
     {
+        Debug.Log("trying to launch");
+
         if (collider == null) return;
         if (!string.IsNullOrEmpty(playerTag) && !collider.CompareTag(playerTag)) return;
 

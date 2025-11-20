@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7855405724966908756}
+  - component: {fileID: 2284018689525270883}
+  - component: {fileID: 645788587992312109}
   m_Layer: 0
   m_Name: poutre
   m_TagString: Untagged
@@ -32,6 +34,54 @@ Transform:
   - {fileID: 8923467893241289903}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &2284018689525270883
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904924674781065284}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &645788587992312109
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904924674781065284}
+  m_Material: {fileID: 13400000, guid: acee9029c9e6fad49aff4f0fe0841089, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 1
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.0000002, y: 9, z: 2}
+  m_Center: {x: 0, y: -3, z: 0}
 --- !u!1 &6064528555882949997
 GameObject:
   m_ObjectHideFlags: 0
@@ -187,45 +237,8 @@ PrefabInstance:
     - {fileID: 65702495048144492, guid: 9f0277809b70740418ac1d31f7bcbb10, type: 3}
     - {fileID: -8700617353114198275, guid: 9f0277809b70740418ac1d31f7bcbb10, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9f0277809b70740418ac1d31f7bcbb10,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6305081424631860224}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f0277809b70740418ac1d31f7bcbb10, type: 3}
---- !u!1 &550569057860624472 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9f0277809b70740418ac1d31f7bcbb10,
-    type: 3}
-  m_PrefabInstance: {fileID: 821179562004552969}
-  m_PrefabAsset: {fileID: 0}
---- !u!54 &6305081424631860224
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 550569057860624472}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!4 &932195681427978978 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9f0277809b70740418ac1d31f7bcbb10,
