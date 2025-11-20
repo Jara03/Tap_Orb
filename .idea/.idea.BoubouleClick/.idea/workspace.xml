@@ -4,7 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f856c2c3-5d6c-43a8-b00d-43067849984f" name="Changes" comment="">
+    <list default="true" id="f856c2c3-5d6c-43a8-b00d-43067849984f" name="Changes" comment="major physics bug fix + added levels">
+      <change afterPath="$PROJECT_DIR$/.utmp/Debug/542d3d38/arm64-v8a/metadata_generation_command.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.utmp/Debug/542d3d38/armeabi-v7a/metadata_generation_command.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/UI Prefab/Options.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/UI Prefab/Options.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/UI/low-volume.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/UI/low-volume.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/UI/settings.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/UI/settings.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 7.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 7.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 8.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 8.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 9.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 9.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/AdsBanner.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/AdsBanner.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/BeamCollisionSweeper.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/BeamCollisionSweeper.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/InterstitialAds.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/InterstitialAds.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/bumper.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/bumper.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BoubouleClick/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BoubouleClick/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.utmp/RelWithDebInfo/405u5e6n/arm64-v8a/.cmake/api/v1/reply/cache-v2-e62b208e29162bc342ec.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.utmp/RelWithDebInfo/405u5e6n/arm64-v8a/.cmake/api/v1/reply/cmakeFiles-v1-bced06595b65f148f854.json" beforeDir="false" />
@@ -33,6 +55,7 @@
       <change beforePath="$PROJECT_DIR$/Assets/Plugins/Android/GoogleMobileAdsPlugin.androidlib/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Plugins/Android/GoogleMobileAdsPlugin.androidlib/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Blender_Old/poutre.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Blender_Old/poutre.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI Prefab/UI.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI Prefab/UI.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/poutre.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/poutre.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 1.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 2.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 2.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 3.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 3.unity" afterDir="false" />
@@ -203,7 +226,7 @@
       <workItem from="1762434185159" duration="2321000" />
       <workItem from="1762884928789" duration="2093000" />
       <workItem from="1763466552774" duration="7216000" />
-      <workItem from="1763487135400" duration="22563000" />
+      <workItem from="1763487135400" duration="23491000" />
     </task>
     <task id="LOCAL-00001" summary="initial Commit">
       <option name="closed" value="true" />
@@ -484,7 +507,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="animation added" />
     <MESSAGE value="moved gitignore" />
     <MESSAGE value="updated gitignore" />
     <MESSAGE value="added bouciness physics" />
@@ -509,7 +531,8 @@
     <MESSAGE value="fix transitions state on/off" />
     <MESSAGE value="added AdMob plugin" />
     <MESSAGE value="fixed 6 firsts levels for closed tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed 6 firsts levels for closed tests" />
+    <MESSAGE value="major physics bug fix + added levels" />
+    <option name="LAST_COMMIT_MESSAGE" value="major physics bug fix + added levels" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
