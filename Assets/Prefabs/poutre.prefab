@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2100964586198556348}
+  - component: {fileID: 7853521934163816064}
+  - component: {fileID: 5162091942400331255}
   m_Layer: 0
   m_Name: Poutre
   m_TagString: Untagged
@@ -32,6 +34,54 @@ Transform:
   - {fileID: 8627344148425618114}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &7853521934163816064
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5597342062874754602}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 8
+  m_CollisionDetection: 1
+--- !u!65 &5162091942400331255
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5597342062874754602}
+  m_Material: {fileID: 13400000, guid: acee9029c9e6fad49aff4f0fe0841089, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 9, z: 2}
+  m_Center: {x: 0, y: -3, z: 0}
 --- !u!1001 &8084175419802735913
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -118,15 +168,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5594e85280ee784479fa8bdb8d8fdb5a,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4164653487782373667}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5594e85280ee784479fa8bdb8d8fdb5a,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3644644724466176466}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5594e85280ee784479fa8bdb8d8fdb5a, type: 3}
 --- !u!4 &8627344148425618114 stripped
 Transform:
@@ -134,58 +176,3 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8084175419802735913}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &9003165591162611832 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 5594e85280ee784479fa8bdb8d8fdb5a,
-    type: 3}
-  m_PrefabInstance: {fileID: 8084175419802735913}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &4164653487782373667
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9003165591162611832}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 1
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -5495902117074765545, guid: 5594e85280ee784479fa8bdb8d8fdb5a, type: 3}
---- !u!54 &3644644724466176466
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9003165591162611832}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 1
-  m_Constraints: 0
-  m_CollisionDetection: 2
