@@ -1,12 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
           package="com.AlliumStudio.BoubouleClick">
 
-    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
+    <!-- Permissions Unity + Ads -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID" tools:node="replace"/>
 
-    <application>
-        <!-- Tes réglages ici -->
+    <application
+            android:theme="@style/UnityThemeSelector"
+            android:icon="@mipmap/app_icon"
+            android:label="@string/app_name">
+
+        <!-- APP ID ADMOB -->
+        <meta-data
+                android:name="com.google.android.gms.ads.APPLICATION_ID"
+                android:value="ca-app-pub-1810486296187934~5577093487"/> <!-- Ton App ID ici -->
+
+        <!-- L'activité Unity -->
+        <activity android:name="com.unity3d.player.UnityPlayerActivity"
+                  android:launchMode="singleTask"
+                  android:clearTaskOnLaunch="true"
+                  android:exported="true"
+                  android:screenOrientation="portrait"
+                  android:label="@string/app_name">
+
+            <!-- INTENT FILTER OBLIGATOIRE → SINON L’APP N’APPARAIT PAS -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+
     </application>
-
 </manifest>

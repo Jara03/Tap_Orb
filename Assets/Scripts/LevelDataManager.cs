@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using DefaultNamespace;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -11,7 +12,7 @@ public class LevelDataManager : MonoBehaviour
     private int starwon = 0;
 
     public GameObject FinishedLevelUI;
-    public GameObject StarsCount;
+    public GameObject OptionsScreen;
     public GameObject PlayerBall;
 
     private GameObject player;
@@ -19,7 +20,7 @@ public class LevelDataManager : MonoBehaviour
     private Vector3 playerStartPosition;
     private Quaternion playerStartRotation;
     private Rigidbody playerRigidbody;
-
+    
     private Level level;
     
     public Collider endGameCollider;
@@ -55,8 +56,6 @@ public class LevelDataManager : MonoBehaviour
                 col.isTrigger = true;
 
                 // Ajoute un composant pour gérer la détection de collision
-                StarPickup trigger = star.AddComponent<StarPickup>();
-                trigger.onCollected = catchStar; // on abonne la méthode
             }
         }
 
@@ -123,19 +122,27 @@ public class LevelDataManager : MonoBehaviour
     }
 
 
-
-    void catchStar(GameObject star)
+    public void ToggleOptionsScreen()
     {
-        starwon++;
-        Debug.Log("⭐ Star won : " + starwon);
-
-        // Désactive ou détruit l'étoile ramassée
-
-        if (starwon >= stars.Length)
+        if (OptionsScreen.activeSelf == false)
         {
-            Debug.Log("🎉 All stars collected!");
-            EndLevel();
+            level.isPaused = !OptionsScreen.activeSelf;
         }
+        else
+        {
+            StartCoroutine(UnlockInputAfterDelay());
+        }
+        Debug.Log("level paused : " + level.isPaused);
+        OptionsScreen.SetActive(!OptionsScreen.activeSelf);
+        Time.timeScale = OptionsScreen.activeSelf ? 0f : 1f;
+        
+        IEnumerator UnlockInputAfterDelay()
+        {
+            yield return null; // bloque 1 frame → suffisant la plupart du temps
+            yield return new WaitForSeconds(1f); // sécurité mobile
+            level.isPaused = OptionsScreen.activeSelf;
+        }
+        
     }
 
     public void EndLevel()
@@ -166,55 +173,4 @@ public class LevelDataManager : MonoBehaviour
         LevelManager.goBackHome();        
     }
 
-    public void displayStarWon()
-    {
-
-        //afficher le nombre d'enfants en fonction du score starwon
-        for (int i = 0; i < StarsCount.transform.childCount; i++)
-        {
-            if (i < starwon)
-            {
-                StarsCount.transform.GetChild(i).gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI/LevelScreen/Star 1");
-                StarsCount.transform.GetChild(i).gameObject.SetActive(true);
-                
-            }
-            else
-            {
-                //charger le prefab "Star 3"
-                StarsCount.transform.GetChild(i).gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI/LevelScreen/Star 3");
-                StarsCount.transform.GetChild(i).gameObject.GetComponent<Image>().color = new Color(1, 1, 1, 0.5f);
-                StarsCount.transform.GetChild(i).gameObject.SetActive(true);
-
-
-            }
-        }
-
-
-    }
-
-
-
-
-// Classe interne pour gérer la détection sur chaque étoile
-public class StarPickup : MonoBehaviour
-{
-    public System.Action<GameObject> onCollected;
-    private GameObject starObject;
-
-    private void Awake()
-    {
-        //le gameObject parent de ce gameObject
-        starObject = gameObject.transform.parent.gameObject;
-    }
-    void OnTriggerEnter(Collider other)
-    {
-        // Suppose que le joueur a le tag "Player"
-        if (other.CompareTag("Player"))
-        {
-            starObject.SetActive(false);
-            onCollected?.Invoke(gameObject);
-            
-        }
-    }
-    }
 }

@@ -22,6 +22,7 @@ namespace DefaultNamespace
         public Action onRestore = null ;
 
         private Coroutine transitionCoroutine;
+        public bool isPaused = false;
         
         public void SetTransformState(bool state)
         {
@@ -84,19 +85,14 @@ namespace DefaultNamespace
                 for (int i = 0; i < levelItems.Length; i++)
                 {
                     if (levelItems[i] == null) continue;
-                    levelItems[i].transform.SetPositionAndRotation(Vector3.LerpUnclamped(startPositions[i], targetPositions[i],curveValue), Quaternion.SlerpUnclamped(startRotations[i], targetRotations[i],curveValue));
-                    // Remet les rotations internes des enfants à zéro
-                    for (int c = 0; c < levelItems[i].transform.childCount; c++)
-                    {
-                        Transform child = levelItems[i].transform.GetChild(c);
-                        child.localRotation = Quaternion.identity;
-                        child.localPosition = new Vector3(0,-3,0);
-                    }
+                    //levelItems[i].transform.SetPositionAndRotation(Vector3.LerpUnclamped(startPositions[i], targetPositions[i],curveValue), Quaternion.SlerpUnclamped(startRotations[i], targetRotations[i],curveValue));
+                    levelItems[i].transform.GetComponent<Rigidbody>().MovePosition(Vector3.LerpUnclamped(startPositions[i], targetPositions[i],curveValue));
+                    levelItems[i].transform.GetComponent<Rigidbody>().MoveRotation(Quaternion.SlerpUnclamped(startRotations[i], targetRotations[i],curveValue));
+                    
                 }
 
                 yield return new WaitForFixedUpdate();
             }
-            
 
             // 🔒 Forcer la position finale à la fin
             ApplyImmediateState(state);

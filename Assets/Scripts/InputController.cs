@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class InputController : MonoBehaviour
 {
@@ -15,11 +16,12 @@ public class InputController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(levelItem.isPaused) return;
         // Détecte si une touche ou un touch est actif
         bool currentPressed = Input.GetKey(KeyCode.Space) || Input.touchCount > 0;
-
+   
         // Vérifie si l’état a changé depuis la dernière frame
-        if (currentPressed != previousPressed)
+        if (currentPressed != previousPressed )
         {
             isPressed = currentPressed;
             updateState();
