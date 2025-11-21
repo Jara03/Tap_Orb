@@ -47,7 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\BasketTrigger.cs" />
-    <Compile Include="Assets\Scripts\ScoreManager.cs" />
     <Compile Include="Assets\Scripts\InputController.cs" />
     <Compile Include="Assets\Scripts\Level.cs" />
     <Compile Include="Assets\Scripts\AdsBanner.cs" />
@@ -57,14 +56,14 @@
     <Compile Include="Assets\Scripts\LevelDataManager.cs" />
     <Compile Include="Assets\Scripts\VacuumAttractor.cs" />
     <Compile Include="Assets\Scripts\MineItem.cs" />
+    <Compile Include="Assets\Scripts\LevelButton.cs" />
+    <Compile Include="Assets\Scripts\LevelMenuGenerator.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\AnimatedGameItem.cs" />
-    <Compile Include="Assets\Scripts\worldSelector.cs" />
     <Compile Include="Assets\Scripts\BeamCollisionSweeper.cs" />
     <Compile Include="Assets\Scripts\LevelTransitionController.cs" />
     <Compile Include="Assets\Scripts\resetBallPosition.cs" />
     <Compile Include="Assets\Scripts\LevelManager.cs" />
-    <Compile Include="Assets\Scripts\LevelSelectorDisplay.cs" />
     <Compile Include="Assets\Scripts\UIHomeManager.cs" />
     <Compile Include="Assets\Scripts\InterstitialAds.cs" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -78,6 +77,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\SDFFunctions.hlsl" />
     <None Include="Assets\GoogleMobileAds\link.xml" />
+    <None Include="Packages\com.singularitygroup.hotreload\package.json" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
@@ -441,34 +441,31 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.59f2\Editor\Data\Managed\UnityEngine\UnityEditor.XRModule.dll</HintPath>
     </Reference>
     <Reference Include="GoogleMobileAds.Common">
-      <HintPath>F:\Unity Projects\BoubouleClick\Assets\GoogleMobileAds\GoogleMobileAds.Common.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Assets\GoogleMobileAds\GoogleMobileAds.Common.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Collections.LowLevel.ILSupport">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\PackageCache\com.unity.collections@56bff8827a7e\Unity.Collections.LowLevel.ILSupport\Unity.Collections.LowLevel.ILSupport.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\PackageCache\com.unity.collections@56bff8827a7e\Unity.Collections.LowLevel.ILSupport\Unity.Collections.LowLevel.ILSupport.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\PackageCache\com.unity.ext.nunit@031a54704bff\net40\unity-custom\nunit.framework.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\PackageCache\com.unity.ext.nunit@031a54704bff\net40\unity-custom\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="GoogleMobileAds">
-      <HintPath>F:\Unity Projects\BoubouleClick\Assets\GoogleMobileAds\GoogleMobileAds.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Assets\GoogleMobileAds\GoogleMobileAds.dll</HintPath>
     </Reference>
     <Reference Include="GoogleMobileAds.Core">
-      <HintPath>F:\Unity Projects\BoubouleClick\Assets\GoogleMobileAds\GoogleMobileAds.Core.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Assets\GoogleMobileAds\GoogleMobileAds.Core.dll</HintPath>
     </Reference>
     <Reference Include="GoogleMobileAds.Ump.Unity">
-      <HintPath>F:\Unity Projects\BoubouleClick\Assets\GoogleMobileAds\GoogleMobileAds.Ump.Unity.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Assets\GoogleMobileAds\GoogleMobileAds.Ump.Unity.dll</HintPath>
     </Reference>
     <Reference Include="GoogleMobileAds.Ump">
-      <HintPath>F:\Unity Projects\BoubouleClick\Assets\GoogleMobileAds\GoogleMobileAds.Ump.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\PackageCache\com.unity.visualscripting@6279e2b7c485\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Assets\GoogleMobileAds\GoogleMobileAds.Ump.dll</HintPath>
     </Reference>
     <Reference Include="GoogleMobileAds.Unity">
-      <HintPath>F:\Unity Projects\BoubouleClick\Assets\GoogleMobileAds\GoogleMobileAds.Unity.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Assets\GoogleMobileAds\GoogleMobileAds.Unity.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\PackageCache\com.unity.nuget.mono-cecil@d6f9955a5d5f\Mono.Cecil.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\PackageCache\com.unity.nuget.mono-cecil@d6f9955a5d5f\Mono.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.59f2\Editor\Data\PlaybackEngines\iOSSupport\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
@@ -852,184 +849,164 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.59f2\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Xml.Serialization.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Searcher.Editor">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.Searcher.Editor.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.Searcher.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.AdaptivePerformance.Google.Android.Editor">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.AdaptivePerformance.Google.Android.Editor.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.AdaptivePerformance.Google.Android.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.AdaptivePerformance">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.AdaptivePerformance.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.AdaptivePerformance.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Notifications.Unified">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.Notifications.Unified.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.Notifications.Unified.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Core.Runtime.Shared">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.Shared.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.Shared.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Core.Editor.Shared">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.Shared.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.Shared.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Notifications.Android">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.Notifications.Android.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.Notifications.Android.dll</HintPath>
     </Reference>
     <Reference Include="Unity.ShaderGraph.Editor">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PlasticSCM.Editor">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Multiplayer.Center.Editor">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.Multiplayer.Center.Editor.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.Multiplayer.Center.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.AdaptivePerformance.Simulator.Extension">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.AdaptivePerformance.Simulator.Extension.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.AdaptivePerformance.Simulator.Extension.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Mathematics.Editor">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.AdaptivePerformance.Simulator.Google.Extension.Editor">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.AdaptivePerformance.Simulator.Google.Extension.Editor.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.AdaptivePerformance.Simulator.Google.Extension.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.GPUDriven.Runtime">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.RenderPipelines.GPUDriven.Runtime.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.RenderPipelines.GPUDriven.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.AdaptivePerformance.Profiler.Editor">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.AdaptivePerformance.Profiler.Editor.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.AdaptivePerformance.Profiler.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Mobile.AndroidLogcat.Editor">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.Mobile.AndroidLogcat.Editor.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.Mobile.AndroidLogcat.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.AdaptivePerformance.Editor">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.AdaptivePerformance.Editor.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.AdaptivePerformance.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Collections">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.Collections.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.Collections.dll</HintPath>
     </Reference>
     <Reference Include="Unity.ProBuilder.Editor">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.ProBuilder.Editor.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.ProBuilder.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.ProBuilder.AddOns.Editor">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.ProBuilder.AddOns.Editor.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.ProBuilder.AddOns.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rendering.LightTransport.Editor">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.Rendering.LightTransport.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Core">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.Rendering.LightTransport.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.ProBuilder.AssetIdRemapUtility">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.ProBuilder.AssetIdRemapUtility.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.ProBuilder.AssetIdRemapUtility.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Collections.Editor">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.Collections.Editor.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.Collections.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Profiling.Core">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.Profiling.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Shared.Editor">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.VisualScripting.Shared.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Core.Editor">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.VisualScripting.Core.Editor.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.Profiling.Core.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Multiplayer.Center.Common">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.Multiplayer.Center.Common.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.Multiplayer.Center.Common.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Notifications">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.Notifications.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Flow.Editor">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.Notifications.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Postprocessing.Editor">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.Postprocessing.Editor.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.Postprocessing.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.AdaptivePerformance.Simulator.Editor">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.AdaptivePerformance.Simulator.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.State.Editor">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.VisualScripting.State.Editor.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.AdaptivePerformance.Simulator.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Mathematics">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Core.Editor">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Settings.Editor">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.Settings.Editor.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.Settings.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.AdaptivePerformance.Google.Android">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.AdaptivePerformance.Google.Android.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.AdaptivePerformance.Google.Android.dll</HintPath>
     </Reference>
     <Reference Include="Unity.ProBuilder">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.ProBuilder.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.ProBuilder.dll</HintPath>
     </Reference>
     <Reference Include="Unity.AdaptivePerformance.UI.Editor">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.AdaptivePerformance.UI.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.State">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.AdaptivePerformance.UI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Postprocessing.Runtime">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.Postprocessing.Runtime.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.Postprocessing.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Burst.Editor">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.Burst.Editor.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.Burst.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Burst">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualStudio.Editor">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Core.Runtime">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Flow">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rendering.LightTransport.Runtime">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.Rendering.LightTransport.Runtime.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.Rendering.LightTransport.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Notifications.iOS">
-      <HintPath>F:\Unity Projects\BoubouleClick\Library\ScriptAssemblies\Unity.Notifications.iOS.dll</HintPath>
+      <HintPath>C:\UnityProjects\BoubouleClick\Library\ScriptAssemblies\Unity.Notifications.iOS.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="SingularityGroup.HotReload.Runtime.Public.csproj">
+      <Project>{613d1d9c-5819-1e4a-d23e-782879ecac6e}</Project>
+      <Name>SingularityGroup.HotReload.Runtime.Public</Name>
+    </ProjectReference>
     <ProjectReference Include="GoogleMobileAds.Editor.csproj">
       <Project>{e6ef770a-7bce-0eeb-d197-337c9c2a147f}</Project>
       <Name>GoogleMobileAds.Editor</Name>

@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using DefaultNamespace;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -14,6 +13,9 @@ public class LevelDataManager : MonoBehaviour
     public GameObject FinishedLevelUI;
     public GameObject OptionsScreen;
     public GameObject PlayerBall;
+    
+    public GameObject NextLevelButton;
+    public GameObject HomeButton;
 
     private GameObject player;
     
@@ -149,13 +151,21 @@ public class LevelDataManager : MonoBehaviour
     {
         //afficher l'UI de fin de partie
         FinishedLevelUI.SetActive(true);
+        if (LevelManager.isLastLevel())
+        {
+            NextLevelButton.SetActive(false);
+            CenterHomeButton();
+        }
         Destroy(PlayerBall);
         
         //afficher une pub 
         interstitialAds.LoadInterstitialAd();
         interstitialAds.ShowInterstitialAd();
         
-
+        void CenterHomeButton()
+        {
+            HomeButton.transform.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(-350, -25, 0);
+        }
     }
 
     public void LoadNextLevel()

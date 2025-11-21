@@ -439,6 +439,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ebb185791a7aad545ad334a8c5c1740b, type: 3}
+--- !u!1 &620366082 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4391408178794737573, guid: ebb185791a7aad545ad334a8c5c1740b,
+    type: 3}
+  m_PrefabInstance: {fileID: 620366081}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1487,6 +1493,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4665710423809410113, guid: 8efee8297a197dd49874d3bcb6c8e558,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6509915270204128238, guid: 8efee8297a197dd49874d3bcb6c8e558,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1514,13 +1525,19 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 8efee8297a197dd49874d3bcb6c8e558, type: 3}
 --- !u!1 &1198794484 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 8749279639557207699, guid: 8efee8297a197dd49874d3bcb6c8e558,
+  m_CorrespondingSourceObject: {fileID: 4979120400533050114, guid: 8efee8297a197dd49874d3bcb6c8e558,
     type: 3}
   m_PrefabInstance: {fileID: 1198794483}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1198794485 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4665710423809410113, guid: 8efee8297a197dd49874d3bcb6c8e558,
+    type: 3}
+  m_PrefabInstance: {fileID: 1198794483}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1198794486 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1034372854129948935, guid: 8efee8297a197dd49874d3bcb6c8e558,
     type: 3}
   m_PrefabInstance: {fileID: 1198794483}
   m_PrefabAsset: {fileID: 0}
@@ -1680,9 +1697,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stars: []
   FinishedLevelUI: {fileID: 1198794485}
-  OptionsScreen: {fileID: 0}
-  StarsCount: {fileID: 1198794484}
+  OptionsScreen: {fileID: 620366082}
   PlayerBall: {fileID: 1118654501}
+  NextLevelButton: {fileID: 1198794486}
+  HomeButton: {fileID: 1198794484}
   endGameCollider: {fileID: 1314294745}
   resetDelay: 0.5
   minResetCooldown: 1

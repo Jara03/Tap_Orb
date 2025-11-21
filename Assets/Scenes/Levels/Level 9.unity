@@ -150,6 +150,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &256715966 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1034372854129948935, guid: 8efee8297a197dd49874d3bcb6c8e558,
+    type: 3}
+  m_PrefabInstance: {fileID: 270923104}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &260519271
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,6 +282,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1034372854129948935, guid: 8efee8297a197dd49874d3bcb6c8e558,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4665710423809410113, guid: 8efee8297a197dd49874d3bcb6c8e558,
         type: 3}
       propertyPath: m_Name
@@ -285,6 +296,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4979120400533050114, guid: 8efee8297a197dd49874d3bcb6c8e558,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6509915270204128238, guid: 8efee8297a197dd49874d3bcb6c8e558,
         type: 3}
@@ -348,12 +364,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &334472403 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7468023250812118630, guid: ebb185791a7aad545ad334a8c5c1740b,
-    type: 3}
-  m_PrefabInstance: {fileID: 1173350663}
-  m_PrefabAsset: {fileID: 0}
 --- !u!43 &398791958
 Mesh:
   m_ObjectHideFlags: 0
@@ -1265,6 +1275,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ebb185791a7aad545ad334a8c5c1740b, type: 3}
+--- !u!1 &1173350664 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4391408178794737573, guid: ebb185791a7aad545ad334a8c5c1740b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1173350663}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1295348509
 GameObject:
   m_ObjectHideFlags: 0
@@ -1327,8 +1343,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stars: []
   FinishedLevelUI: {fileID: 270923105}
-  OptionsScreen: {fileID: 334472403}
+  OptionsScreen: {fileID: 1173350664}
   PlayerBall: {fileID: 1636165121}
+  NextLevelButton: {fileID: 256715966}
+  HomeButton: {fileID: 1476712220}
   endGameCollider: {fileID: 2049648038}
   resetDelay: 0.5
   minResetCooldown: 1
@@ -1411,6 +1429,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 115}
+--- !u!1 &1476712220 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4979120400533050114, guid: 8efee8297a197dd49874d3bcb6c8e558,
+    type: 3}
+  m_PrefabInstance: {fileID: 270923104}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1636165120
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1025,6 +1025,8 @@ MonoBehaviour:
   FinishedLevelUI: {fileID: 2019288838}
   OptionsScreen: {fileID: 1678333084}
   PlayerBall: {fileID: 1636165121}
+  NextLevelButton: {fileID: 2019288840}
+  HomeButton: {fileID: 2019288839}
   endGameCollider: {fileID: 1896536066}
   resetDelay: 0.5
   minResetCooldown: 1
@@ -1219,7 +1221,7 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: ebb185791a7aad545ad334a8c5c1740b, type: 3}
 --- !u!1 &1678333084 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 7468023250812118630, guid: ebb185791a7aad545ad334a8c5c1740b,
+  m_CorrespondingSourceObject: {fileID: 4391408178794737573, guid: ebb185791a7aad545ad334a8c5c1740b,
     type: 3}
   m_PrefabInstance: {fileID: 1678333083}
   m_PrefabAsset: {fileID: 0}
@@ -1622,6 +1624,18 @@ PrefabInstance:
 --- !u!1 &2019288838 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4665710423809410113, guid: 8efee8297a197dd49874d3bcb6c8e558,
+    type: 3}
+  m_PrefabInstance: {fileID: 2019288837}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2019288839 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4979120400533050114, guid: 8efee8297a197dd49874d3bcb6c8e558,
+    type: 3}
+  m_PrefabInstance: {fileID: 2019288837}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2019288840 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1034372854129948935, guid: 8efee8297a197dd49874d3bcb6c8e558,
     type: 3}
   m_PrefabInstance: {fileID: 2019288837}
   m_PrefabAsset: {fileID: 0}

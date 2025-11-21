@@ -8,9 +8,9 @@ using UnityEngine.UI;
 public class LevelManager : MonoBehaviour
 {
    
-    public static int worldSelected = 0;
     public static int levelSelected = 0;
     public static LevelManager Instance;
+    public static int lvlCount = 9;
 
     // Start is called before the first frame update
     
@@ -47,6 +47,11 @@ public class LevelManager : MonoBehaviour
     {
         SceneManager.LoadScene("Home");
         
+    }
+
+    public static bool isLastLevel()
+    {
+        return levelSelected == lvlCount;
     }
     
     public static void goToNextLevel()

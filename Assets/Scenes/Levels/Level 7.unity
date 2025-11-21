@@ -2315,8 +2315,9 @@ MonoBehaviour:
   stars: []
   FinishedLevelUI: {fileID: 2111881527}
   OptionsScreen: {fileID: 983245494}
-  StarsCount: {fileID: 1669205909}
   PlayerBall: {fileID: 1636165121}
+  NextLevelButton: {fileID: 1495604353}
+  HomeButton: {fileID: 918687959}
   endGameCollider: {fileID: 1974150126}
   resetDelay: 0.5
   minResetCooldown: 1
