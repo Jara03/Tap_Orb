@@ -584,6 +584,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ebb185791a7aad545ad334a8c5c1740b, type: 3}
+--- !u!1 &439225380 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4391408178794737573, guid: ebb185791a7aad545ad334a8c5c1740b,
+    type: 3}
+  m_PrefabInstance: {fileID: 439225379}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &651445323
 Mesh:
   m_ObjectHideFlags: 0
@@ -2411,13 +2417,19 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 8efee8297a197dd49874d3bcb6c8e558, type: 3}
 --- !u!1 &1189815057 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 8749279639557207699, guid: 8efee8297a197dd49874d3bcb6c8e558,
+  m_CorrespondingSourceObject: {fileID: 4979120400533050114, guid: 8efee8297a197dd49874d3bcb6c8e558,
     type: 3}
   m_PrefabInstance: {fileID: 1189815056}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1189815058 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4665710423809410113, guid: 8efee8297a197dd49874d3bcb6c8e558,
+    type: 3}
+  m_PrefabInstance: {fileID: 1189815056}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1189815059 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1034372854129948935, guid: 8efee8297a197dd49874d3bcb6c8e558,
     type: 3}
   m_PrefabInstance: {fileID: 1189815056}
   m_PrefabAsset: {fileID: 0}
@@ -2618,9 +2630,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stars: []
   FinishedLevelUI: {fileID: 1189815058}
-  OptionsScreen: {fileID: 0}
-  StarsCount: {fileID: 1189815057}
+  OptionsScreen: {fileID: 439225380}
   PlayerBall: {fileID: 1118654501}
+  NextLevelButton: {fileID: 1189815059}
+  HomeButton: {fileID: 1189815057}
   endGameCollider: {fileID: 1314294745}
   resetDelay: 0.5
   minResetCooldown: 1
