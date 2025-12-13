@@ -77,7 +77,7 @@ public static class SkinManager
     public static Sprite LoadBackgroundSprite(string spriteName)
     {
         if (string.IsNullOrEmpty(spriteName)) return null;
-        foreach (var sprite in Resources.LoadAll<Sprite>("UI/HomeScreen"))
+        foreach (var sprite in Resources.LoadAll<Sprite>("Backgrounds"))
         {
             if (sprite.name.Equals(spriteName, StringComparison.OrdinalIgnoreCase))
             {

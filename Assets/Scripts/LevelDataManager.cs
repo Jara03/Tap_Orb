@@ -74,7 +74,37 @@ public class LevelDataManager : MonoBehaviour
         }
         
         interstitialAds = gameObject.AddComponent<InterstitialAds>();
+        
+        //charge le skin de jeu 
+        LoadSkin(SkinManager.CurrentSkin);
 
+    }
+
+    public void LoadSkin(SkinData sk)
+    {
+        //Modif de la balle
+        PlayerBall.gameObject.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor",sk.BallColor*1f);
+        PlayerBall.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(sk.BallColor.r, sk.BallColor.g, sk.BallColor.b, 0.03f);
+        PlayerBall.transform.GetChild(1).GetComponent<SpriteRenderer>().color = new Color(sk.BallColor.r, sk.BallColor.g, sk.BallColor.b, 0.15f);
+
+
+        PlayerBall.transform.localScale *= 1+sk.BallSize;
+        
+        //Modif du bg
+        GameObject bg = GameObject.FindGameObjectWithTag("Background");
+        if (!sk.UseBackgroundImage)
+        {
+            bg.GetComponent<Image>().color = new Color(sk.BackgroundColor.r, sk.BackgroundColor.g, sk.BackgroundColor.b, 0.05f);
+
+        }
+        else
+        {
+            bg.GetComponent<Image>().sprite =
+                Resources.Load<Sprite>("Backgrounds/" + sk.BackgroundSpriteName);
+        }
+        
+        
+        
     }
     void FixedUpdate()
     {

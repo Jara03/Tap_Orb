@@ -34,12 +34,6 @@ public class UIHomeManager : MonoBehaviour
             homeCanvas = GetComponentInChildren<Canvas>(true);
         }
 
-        if (homeCanvas != null)
-        {
-            var builder = new SkinEditorUIBuilder(homeCanvas);
-            builder.Build();
-        }
-
     }
     
     public void toggleLevelSelection(int worldNumber)
