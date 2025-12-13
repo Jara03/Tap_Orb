@@ -34,6 +34,9 @@ public class LevelDataManager : MonoBehaviour
     public float lastSeenTime = 0f;
 
     public InterstitialAds interstitialAds;
+    private int gameOverCounter = 0;
+    private float lastCallTime = -999f;
+
     void Start()
     {
         //trouver l'objet qui contient le script Level
@@ -105,6 +108,21 @@ public class LevelDataManager : MonoBehaviour
 
     private void ResetPlayerPosition()
     {
+        
+        
+        //afficher une pub 
+        gameOverCounter++;
+        float now = Time.time; // temps depuis le lancement du jeu
+
+        float deltaTimeAd = now - lastCallTime;
+
+        if (gameOverCounter >= 3 && deltaTimeAd > 15f)
+        {
+            interstitialAds.ShowInterstitialAd();
+            gameOverCounter = 0;
+            lastCallTime = now;
+        }
+        
         //supprimer et refaire spawn le prefab de la boule 
         
         
@@ -157,10 +175,6 @@ public class LevelDataManager : MonoBehaviour
             CenterHomeButton();
         }
         Destroy(PlayerBall);
-        
-        //afficher une pub 
-        interstitialAds.LoadInterstitialAd();
-        interstitialAds.ShowInterstitialAd();
         
         void CenterHomeButton()
         {

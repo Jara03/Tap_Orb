@@ -18,6 +18,9 @@ public class LevelManager : MonoBehaviour
     {
         if (Instance == null)
         {
+            Application.targetFrameRate = 60;
+            QualitySettings.vSyncCount = 0;
+            
             Instance = this;
             DontDestroyOnLoad(gameObject); // reste entre les scènes
             MobileAds.Initialize((InitializationStatus initstatus) =>
@@ -46,7 +49,9 @@ public class LevelManager : MonoBehaviour
     public static void goBackHome()
     {
         SceneManager.LoadScene("Home");
+        Time.timeScale = 1f;
         
+
     }
 
     public static bool isLastLevel()
