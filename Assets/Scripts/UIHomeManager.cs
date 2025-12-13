@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UIHomeManager : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class UIHomeManager : MonoBehaviour
     public static bool HasController { get; private set; }
     public static Action OnSplashScreenFinished;
 
+    [Header("Skin Editor")]
+    [SerializeField] private Canvas homeCanvas;
+
     void Start()
     {
         
@@ -22,9 +26,20 @@ public class UIHomeManager : MonoBehaviour
 
         OnSplashScreenFinished += () => { Debug.Log("Splash finished! " + DateTime.Now.ToLongTimeString()); };
         StartCoroutine("SplashCoroutine");
-        
+
         levelSelector.SetActive(false);
-        
+
+        if (homeCanvas == null)
+        {
+            homeCanvas = GetComponentInChildren<Canvas>(true);
+        }
+
+        if (homeCanvas != null)
+        {
+            var builder = new SkinEditorUIBuilder(homeCanvas);
+            builder.Build();
+        }
+
     }
     
     public void toggleLevelSelection(int worldNumber)
