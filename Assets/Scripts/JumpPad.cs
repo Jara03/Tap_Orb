@@ -1,60 +1,29 @@
 using UnityEngine;
 
-/// <summary>
-/// Launches the player upward when they touch the pad.
-/// Optionally requires an input press to trigger.
-/// </summary>
 [RequireComponent(typeof(Collider))]
 public class JumpPad : MonoBehaviour
 {
     [Header("Launch Settings")]
-    [Tooltip("Speed applied to the player when they hit the jump pad.")]
     [SerializeField] private float launchSpeed = 15f;
-
-    [Tooltip("Tag used to identify the player object.")]
     [SerializeField] private string playerTag = "Player";
-
-    [Tooltip("Replace the player's current velocity along the launch direction instead of adding to it.")]
     [SerializeField] private bool overrideVelocity = true;
-
-    [Tooltip("Use the pad's up direction as the launch direction.")]
     [SerializeField] private bool alignWithPadUp = true;
-
-    [Tooltip("Custom launch direction when not aligning with the pad's up vector.")]
     [SerializeField] private Vector3 customLaunchDirection = Vector3.up;
 
-    [Header("Input Control (optional)")]
-    [Tooltip("If enabled, the pad only launches when the input is pressed.")]
+    [Header("Input Control")]
     [SerializeField] private bool requireInput = false;
-
-    [Tooltip("Reference to the InputController (if required).")]
     [SerializeField] private InputController inputController;
-
-    [Tooltip("Allow small timing window after input press (seconds).")]
     [SerializeField] private float inputBufferTime = 0.15f;
 
     private float lastPressedTime;
-
-    private void Awake()
-    {
-        if (requireInput && inputController == null)
-        {
-            inputController = FindObjectOfType<InputController>();
-            if (inputController == null)
-                Debug.LogWarning("[JumpPad] No InputController found in scene.");
-        }
-    }
+    private bool hasLaunchedThisContact;
 
     private void Update()
     {
         if (!requireInput || inputController == null) return;
 
-        // Met à jour le moment du dernier input pressé
         if (inputController.IsPressed())
-        {
             lastPressedTime = Time.time;
-        }
-            
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -67,69 +36,53 @@ public class JumpPad : MonoBehaviour
         TryLaunch(other);
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnCollisionExit(Collision collision)
     {
-        TryLaunch(other);
+        hasLaunchedThisContact = false;
     }
-    
-    private void OnCollisionStay(Collision collision)
+
+    private void OnTriggerExit(Collider other)
     {
-        TryLaunch(collision.collider);
+        hasLaunchedThisContact = false;
     }
 
     private void TryLaunch(Collider collider)
     {
-        Debug.Log("trying to launch");
+        if (hasLaunchedThisContact) return;
+        if (!collider.CompareTag(playerTag)) return;
 
-        if (collider == null) return;
-        if (!string.IsNullOrEmpty(playerTag) && !collider.CompareTag(playerTag)) return;
-
-        // Vérifie si une entrée est requise
-        if (requireInput && inputController != null)
+        if (requireInput)
         {
-            bool inputActive = inputController.IsPressed() || (Time.time - lastPressedTime <= inputBufferTime);
-            if (!inputActive)
-            {
-               // Debug.Log("[JumpPad] Input required but not pressed — launch cancelled.");
-                return;
-            }
+            bool inputValid = Time.time - lastPressedTime <= inputBufferTime;
+            if (!inputValid) return;
+
+            // Consomme l’input
+            lastPressedTime = -999f;
         }
 
         Rigidbody rb = collider.attachedRigidbody;
         if (rb == null) return;
 
         Launch(rb);
+        hasLaunchedThisContact = true;
     }
 
-    private void Launch(Rigidbody targetRigidbody)
+    private void Launch(Rigidbody rb)
     {
-        Vector3 launchDirection = alignWithPadUp ? transform.up : customLaunchDirection;
+        Vector3 direction = alignWithPadUp ? transform.up : customLaunchDirection;
+        direction.Normalize();
 
-        if (launchDirection.sqrMagnitude <= Mathf.Epsilon)
-        {
-            Debug.LogWarning("[JumpPad] Launch direction is invalid.");
-            return;
-        }
+        Vector3 velocity = rb.velocity;
 
-        launchDirection.Normalize();
-
-        Vector3 velocity = targetRigidbody.linearVelocity;
         if (overrideVelocity)
         {
-            float currentAlongDirection = Vector3.Dot(velocity, launchDirection);
-            velocity -= launchDirection * currentAlongDirection;
+            float dot = Vector3.Dot(velocity, direction);
+            velocity -= direction * dot;
         }
 
-        velocity += launchDirection * launchSpeed;
-        targetRigidbody.linearVelocity = velocity;
+        velocity += direction * launchSpeed;
+        rb.velocity = velocity;
 
-        Debug.Log($"[JumpPad] 🚀 Launching {targetRigidbody.name} | Velocity: {velocity:F2}");
-    }
-
-    private void Reset()
-    {
-        Collider collider = GetComponent<Collider>();
-        if (collider is BoxCollider || collider is CapsuleCollider || collider is SphereCollider)
-            collider.isTrigger = false;
+        Debug.Log($"[JumpPad] Launch OK | Velocity: {rb.velocity}");
     }
 }
