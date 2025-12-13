@@ -38,11 +38,19 @@ public class LevelManager : MonoBehaviour
                 // use MobileAdsEventExecutor.ExecuteInUpdate(). For more information, see:
                 // https://developers.google.com/admob/unity/global-settings#raise_ad_events_on_the_unity_main_thread
             });
+            
+            //abonner la fct loadSkin a l'event de SkinManager OnChangedSkin
+           // SkinManager.OnSkinChanged += LoadSkin;
         }
         else
         {
             Destroy(gameObject);
         }
+        
+    }
+
+    public void LoadSkin(SkinData sk)
+    {
         
     }
 

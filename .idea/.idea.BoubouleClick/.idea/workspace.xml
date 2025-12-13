@@ -8,7 +8,14 @@
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BoubouleClick/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BoubouleClick/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assembly-CSharp-Editor.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Assembly-CSharp-Editor.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assembly-CSharp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Assembly-CSharp.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/PlaceholderAds/Banners/BANNER.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/PlaceholderAds/Banners/BANNER.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Resources/GoogleMobileAdsSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GoogleMobileAds/Resources/GoogleMobileAdsSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/Balle.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Balle.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Balle.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Balle.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI Prefab/L1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI Prefab/L1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/PerformanceTestRunInfo.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/PerformanceTestRunInfo.json.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/PerformanceTestRunSettings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/PerformanceTestRunSettings.json.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Home.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Home.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 1.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 2.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 2.unity" afterDir="false" />
@@ -21,27 +28,33 @@
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 9.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 9.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/LevelDataManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/LevelDataManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/LevelManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/LevelManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/LevelSelectorDisplay.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/LevelSelectorDisplay.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ScoreManager.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ScoreManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SkinEditorUIBuilder.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SkinEditorUIBuilder.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SkinManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SkinManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/UIHomeManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UIHomeManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/worldSelector.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/worldSelector.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BoubouleClick.sln" beforeDir="false" afterPath="$PROJECT_DIR$/BoubouleClick.sln" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GoogleMobileAds.Editor.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/GoogleMobileAds.Editor.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe-0.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe-0.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/AudioManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/AudioManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/GvhProjectSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/GvhProjectSettings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SingularityGroup.HotReload.Editor.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/SingularityGroup.HotReload.Editor.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SingularityGroup.HotReload.Runtime.Public.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/SingularityGroup.HotReload.Runtime.Public.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SingularityGroup.HotReload.Runtime.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/SingularityGroup.HotReload.Runtime.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/AndroidLogcatSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/AndroidLogcatSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-6000.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-6000.dwlt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Search.settings" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Search.settings" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/Assembly-CSharp-Editor.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/Assembly-CSharp-Editor.csproj.AssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/Assembly-CSharp.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/Assembly-CSharp.csproj.AssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/GoogleMobileAds.Editor.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/GoogleMobileAds.Editor.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/SingularityGroup.HotReload.Editor.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/SingularityGroup.HotReload.Editor.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/SingularityGroup.HotReload.Runtime.Public.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/SingularityGroup.HotReload.Runtime.Public.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/SingularityGroup.HotReload.Runtime.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/SingularityGroup.HotReload.Runtime.csproj.AssemblyReference.cache" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,13 +85,40 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock://C:/UnityProjects/BoubouleClick/Assets/GoogleMobileAds/Editor/Resources/PlaceholderAds/Interstitials/768x1024.prefab" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/UnityProjects/BoubouleClick/Assets/Prefabs/Balle.prefab" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/UnityProjects/BoubouleClick/Assets/Prefabs/Blender_Old/panier.prefab" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/UnityProjects/BoubouleClick/Assets/Prefabs/UI Prefab/UI.prefab" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/UnityProjects/BoubouleClick/Assets/Prefabs/panier.prefab" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/UnityProjects/BoubouleClick/Assets/Prefabs/poutre.prefab" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/UnityProjects/BoubouleClick/Assets/Scenes/Home.unity" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/UnityProjects/BoubouleClick/Assets/Scenes/Levels/Level 1.unity" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/UnityProjects/BoubouleClick/Assets/Scenes/Levels/Level 2.unity" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/UnityProjects/BoubouleClick/Assets/Scenes/Levels/Level 3.unity" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/UnityProjects/BoubouleClick/Assets/Scenes/Levels/Level 4.unity" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/UnityProjects/BoubouleClick/Assets/Scenes/Levels/Level 5.unity" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/UnityProjects/BoubouleClick/Assets/Scenes/Levels/Level 6.unity" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/UnityProjects/BoubouleClick/Assets/Scenes/Levels/Level 7.unity" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/UnityProjects/BoubouleClick/Assets/Scenes/Levels/Level 8.unity" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/UnityProjects/BoubouleClick/Assets/Scenes/Levels/Level 9.unity" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/BallFakeTrailer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/BallImpactSFX.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/BeamCollisionSweeper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/JumpPad.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/UnityProjects/BoubouleClick/Assets/Scripts/JumpPad.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/UnityProjects/BoubouleClick/Assets/Scripts/LevelDataManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/LevelDataManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/UnityProjects/BoubouleClick/Assets/Scripts/LevelManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/LevelMenuGenerator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/LevelTransitionController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/MineItem.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/VacuumAttractor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/UnityProjects/BoubouleClick/Assets/Scripts/VacuumAttractor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@23b1a4ff749d/Editor/UGUI/UI/GraphicEditor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/UnityProjects/BoubouleClick/ProjectSettings/DynamicsManager.asset" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/UnityProjects/BoubouleClick/ProjectSettings/TimeManager.asset" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/UnityProjects/BoubouleClick/UserSettings/AndroidLogcatSettings.asset" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/UnityProjects/BoubouleClick/UserSettings/EditorUserSettings.asset" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
@@ -89,21 +129,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.0.59f2\Editor\Unity.exe" />
@@ -191,6 +231,8 @@
       <workItem from="1763466552774" duration="7216000" />
       <workItem from="1763487135400" duration="23641000" />
       <workItem from="1763710509981" duration="9286000" />
+      <workItem from="1765608940351" duration="27269000" />
+      <workItem from="1765664119911" duration="376000" />
     </task>
     <task id="LOCAL-00001" summary="initial Commit">
       <option name="closed" value="true" />
@@ -448,7 +490,15 @@
       <option name="project" value="LOCAL" />
       <updated>1763663869432</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="update commit">
+      <option name="closed" value="true" />
+      <created>1765609266967</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1765609266967</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -487,7 +537,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="updated gitignore" />
     <MESSAGE value="added bouciness physics" />
     <MESSAGE value="imporved physics" />
     <MESSAGE value="added physics settings" />
@@ -512,7 +561,8 @@
     <MESSAGE value="fixed 6 firsts levels for closed tests" />
     <MESSAGE value="major physics bug fix + added levels" />
     <MESSAGE value="fixed poutre prefab" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed poutre prefab" />
+    <MESSAGE value="update commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="update commit" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
