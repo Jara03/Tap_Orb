@@ -1,0 +1,52 @@
+
+name: Unity iOS CI/CD (Hybrid)
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  unity-build:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Unity batchmode build (iOS)
+        run: |
+          "C:\Program Files\Unity\Editor\Unity.exe" ^
+          -batchmode -quit -projectPath . ^
+          -executeMethod BuildScript.BuildiOS ^
+          -logFile unity_build.log
+        shell: cmd
+
+      - name: Upload Xcode Project as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: xcode-project
+          path: Build/iOS
+          if-no-files-found: error
+
+  ios-compile-deploy:
+    runs-on: macos-latest
+    needs: unity-build
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: xcode-project
+          path: Build/iOS
+
+      - name: Install Ruby & Fastlane
+        run: |
+          gem install bundler
+          gem install fastlane
+
+      - name: Build & Upload to TestFlight
+        working-directory: Build/iOS
+        env:
+          APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+          APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+          APP_STORE_CONNECT_PRIVATE_KEY: ${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY }}
+        run: |
+          fastlane beta
