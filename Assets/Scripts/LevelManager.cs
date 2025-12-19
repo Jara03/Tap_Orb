@@ -11,6 +11,7 @@ public class LevelManager : MonoBehaviour
     public static int levelSelected = 0;
     public static LevelManager Instance;
     public static int lvlCount = 9;
+    private const string LevelCountKey = "LevelCount";
 
     // Start is called before the first frame update
     
@@ -20,7 +21,11 @@ public class LevelManager : MonoBehaviour
         {
             Application.targetFrameRate = 60;
             QualitySettings.vSyncCount = 0;
-            
+            if (PlayerPrefs.HasKey(LevelCountKey))
+            {
+                lvlCount = PlayerPrefs.GetInt(LevelCountKey, lvlCount);
+            }
+
             Instance = this;
             DontDestroyOnLoad(gameObject); // reste entre les scènes
             MobileAds.Initialize((InitializationStatus initstatus) =>
@@ -47,6 +52,13 @@ public class LevelManager : MonoBehaviour
             Destroy(gameObject);
         }
         
+    }
+
+    public static void SetLevelCount(int count)
+    {
+        lvlCount = count;
+        PlayerPrefs.SetInt(LevelCountKey, count);
+        PlayerPrefs.Save();
     }
 
     public void LoadSkin(SkinData sk)
