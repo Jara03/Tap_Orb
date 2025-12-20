@@ -25,11 +25,15 @@ jobs:
           echo "Listing Build directory"
           dir Build
         shell: cmd
-        
+      
+
       - name: Copy fastlane config into Xcode build
+        shell: pwsh
         run: |
+          Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force
           mkdir -p Build/iOS/fastlane
           cp -R Build/fastlane/* Build/iOS/fastlane/
+
 
       - name: Upload Xcode Project as artifact
         uses: actions/upload-artifact@v4
