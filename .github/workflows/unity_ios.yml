@@ -28,10 +28,9 @@ jobs:
       
 
       - name: Copy fastlane config into Xcode build
-        shell: pwsh
+        shell: cmd
         run: |
-          Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force
-          mkdir -p Build/iOS/fastlane
+          mkdir Build\iOS\fastlane
           cp -R Build/fastlane/* Build/iOS/fastlane/
 
 
