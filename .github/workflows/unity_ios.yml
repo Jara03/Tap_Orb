@@ -49,6 +49,13 @@ jobs:
           gem install bundler
           gem install fastlane
 
+      - name: Debug fastlane presence
+        working-directory: Build/iOS
+        run: |
+          ls
+          ls fastlane
+
+
       - name: Build & Upload to TestFlight
         working-directory: Build/iOS
         env:
