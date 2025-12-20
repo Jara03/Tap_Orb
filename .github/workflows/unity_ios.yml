@@ -20,11 +20,18 @@ jobs:
           -logFile unity_build.log
         shell: cmd
 
+      - name: Debug build folder
+        run: |
+          echo "Listing Build directory"
+          dir Build
+        shell: cmd
+
+
       - name: Upload Xcode Project as artifact
         uses: actions/upload-artifact@v4
         with:
           name: xcode-project
-          path: C:/UnityProjects/BoubouleClick/Build/iOS-0.6
+          path: Build/iOS
           if-no-files-found: error
 
   ios-compile-deploy:
