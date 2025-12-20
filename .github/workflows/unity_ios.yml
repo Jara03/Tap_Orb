@@ -24,7 +24,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: xcode-project
-          path: Build/iOS-0.6
+          path: C:/UnityProjects/BoubouleClick/Build/iOS-0.6
           if-no-files-found: error
 
   ios-compile-deploy:
