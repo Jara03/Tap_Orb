@@ -20,6 +20,13 @@ jobs:
           -logFile unity_build.log
         shell: cmd
 
+      - name: Debug build folder
+        run: |
+          echo "Listing Build directory"
+          dir Build
+        shell: cmd
+
+
       - name: Upload Xcode Project as artifact
         uses: actions/upload-artifact@v4
         with:
