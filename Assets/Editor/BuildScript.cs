@@ -30,7 +30,7 @@ public static class BuildScript
                 .Where(s => s.enabled)
                 .Select(s => s.path)
                 .ToArray(),
-            locationPathName = "Build/iOS-0.6",
+            locationPathName = "C:\\UnityProjects\\BoubouleClick\\Build\\iOS-0.6",
             target = BuildTarget.iOS,
             options = BuildOptions.None
         };
