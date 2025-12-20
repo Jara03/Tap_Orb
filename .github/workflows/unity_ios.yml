@@ -31,7 +31,7 @@ jobs:
         shell: cmd
         run: |
           mkdir Build\iOS\fastlane
-          cp -R Build/fastlane/* Build/iOS/fastlane/
+          xcopy Build\fastlane Build\iOS\fastlane /E /I /Y
 
 
       - name: Upload Xcode Project as artifact
