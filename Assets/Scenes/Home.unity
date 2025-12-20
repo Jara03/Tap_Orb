@@ -1131,7 +1131,6 @@ GameObject:
   - component: {fileID: 249772257}
   - component: {fileID: 249772259}
   - component: {fileID: 249772258}
-  - component: {fileID: 249772260}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -1199,36 +1198,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 249772256}
   m_CullTransparentMesh: 1
---- !u!114 &249772260
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 249772256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Content: {fileID: 1935633134}
-  m_Horizontal: 1
-  m_Vertical: 1
-  m_MovementType: 1
-  m_Elasticity: 0.1
-  m_Inertia: 1
-  m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
-  m_Viewport: {fileID: 0}
-  m_HorizontalScrollbar: {fileID: 0}
-  m_VerticalScrollbar: {fileID: 0}
-  m_HorizontalScrollbarVisibility: 0
-  m_VerticalScrollbarVisibility: 0
-  m_HorizontalScrollbarSpacing: 0
-  m_VerticalScrollbarSpacing: 0
-  m_OnValueChanged:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &291558661
 GameObject:
   m_ObjectHideFlags: 0
@@ -8536,7 +8505,7 @@ MonoBehaviour:
   contentParent: {fileID: 2016872665}
   levelButtonPrefab: {fileID: 4366068177188921576, guid: de54d93bd36882247bd4c41da39c37b7,
     type: 3}
-  levelsCount: 9
+  levelsCount: 10
 --- !u!114 &1644550000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9249,7 +9218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelSelector: {fileID: 1644549996}
   startButton: {fileID: 13134432}
-  homeCanvas: {fileID: 0}
+  homeCanvas: {fileID: 676807500}
 --- !u!114 &1793769277
 MonoBehaviour:
   m_ObjectHideFlags: 0

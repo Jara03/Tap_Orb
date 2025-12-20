@@ -16,7 +16,7 @@ public class LevelEditorManager : MonoBehaviour
     private const string StateRootName = "LevelEditorStates";
 
     private Level level;
-    private Camera editorCamera;
+    public Camera editorCamera;
     private LevelEditorItem selectedItem;
     private LevelEditorGizmo gizmo;
 
@@ -38,6 +38,8 @@ public class LevelEditorManager : MonoBehaviour
 
     private void Start()
     {
+        LevelEditorSession.StartNewLevel();
+        
         if (!LevelEditorSession.IsEditorActive)
         {
             Destroy(gameObject);
@@ -242,7 +244,7 @@ public class LevelEditorManager : MonoBehaviour
     {
         availablePrefabs.Clear();
 #if UNITY_EDITOR
-        string[] guids = AssetDatabase.FindAssets("t:Prefab", new[] { "Assets/Prefabs" });
+        string[] guids = AssetDatabase.FindAssets("t:Prefab", new[] { "Assets/Prefabs/editable_prefab" });
         foreach (string guid in guids)
         {
             string path = AssetDatabase.GUIDToAssetPath(guid);
@@ -403,11 +405,16 @@ public class LevelEditorManager : MonoBehaviour
 
     private void PlacePendingPrefab()
     {
+       // Debug.Log("placing prefab");
         Plane plane = new Plane(Vector3.up, Vector3.zero);
         Ray ray = editorCamera.ScreenPointToRay(Input.mousePosition);
-        if (!plane.Raycast(ray, out float enter)) return;
+        Debug.Log("placing prefab : " + pendingPrefab);
+        Debug.Log("mouse position : " + Input.mousePosition);
+
+        if (plane.Raycast(ray, out float enter)) return;
 
         Vector3 spawnPosition = ray.GetPoint(enter);
+        spawnPosition.z = 0;
         GameObject instance = Instantiate(pendingPrefab, spawnPosition, Quaternion.identity);
         LevelEditorItem item = instance.GetComponent<LevelEditorItem>();
         if (item == null)
