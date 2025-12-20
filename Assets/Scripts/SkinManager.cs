@@ -1,6 +1,9 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public static class SkinManager
 {
@@ -18,6 +21,54 @@ public static class SkinManager
     {
         LoadFromPrefs();
     }
+     
+    public static void ImportBackgroundFromGallery(string sourcePath)
+    {
+        string targetDir = Path.Combine(Application.persistentDataPath, "Backgrounds");
+
+        if (!Directory.Exists(targetDir))
+            Directory.CreateDirectory(targetDir);
+
+        string fileName = "bg_" + DateTime.Now.Ticks + ".png";
+        string destPath = Path.Combine(targetDir, fileName);
+       // Debug.LogError("Persistent path: " + destPath);
+
+
+        File.Copy(sourcePath, destPath, true);
+    }
+    
+    public static IEnumerator ImportImageiOS(string sourcePath)
+    {
+        string url = "file://" + sourcePath;
+
+        using (UnityWebRequest uwr = UnityWebRequest.Get(url))
+        {
+            yield return uwr.SendWebRequest();
+
+            if (uwr.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError("UWR failed: " + uwr.error);
+                yield break;
+            }
+
+            byte[] data = uwr.downloadHandler.data;
+
+            string dir = Path.Combine(Application.persistentDataPath, "Backgrounds");
+            Directory.CreateDirectory(dir);
+
+            string fileName = "bg_" + DateTime.Now.Ticks + ".png";
+            string destPath = Path.Combine(dir, fileName);
+
+            File.WriteAllBytes(destPath, data);
+
+            Debug.Log("Image imported via UWR: " + destPath);
+
+            // maintenant tu peux charger normalement depuis destPath
+        }
+    }
+
+
+
 
     private static SkinData EnsureDefault()
     {
@@ -74,19 +125,30 @@ public static class SkinManager
         OnSkinChanged?.Invoke(currentSkin);
     }
 
-    public static Sprite LoadBackgroundSprite(string spriteName)
+    public static Sprite LoadBackgroundSprite(string fileName)
     {
-        if (string.IsNullOrEmpty(spriteName)) return null;
-        foreach (var sprite in Resources.LoadAll<Sprite>("Backgrounds"))
-        {
-            if (sprite.name.Equals(spriteName, StringComparison.OrdinalIgnoreCase))
-            {
-                return sprite;
-            }
-        }
+        if (string.IsNullOrEmpty(fileName))
+            return null;
 
-        return null;
+        string dir = Path.Combine(Application.persistentDataPath, "Backgrounds");
+        string fullPath = Path.Combine(dir, fileName);
+
+        if (!File.Exists(fullPath))
+            return null;
+
+        byte[] bytes = File.ReadAllBytes(fullPath);
+
+        Texture2D tex = new Texture2D(2, 2, TextureFormat.RGBA32, false);
+        if (!tex.LoadImage(bytes))
+            return null;
+
+        return Sprite.Create(
+            tex,
+            new Rect(0, 0, tex.width, tex.height),
+            new Vector2(0.5f, 0.5f)
+        );
     }
+
 
     private static void LoadFromPrefs()
     {

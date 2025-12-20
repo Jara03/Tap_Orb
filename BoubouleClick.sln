@@ -7,9 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SingularityGroup.HotReload.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NativeGallery.Editor", "NativeGallery.Editor.csproj", "{a832fc73-c886-cc31-d8d3-1b86479a208f}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleMobileAds.Editor", "GoogleMobileAds.Editor.csproj", "{e6ef770a-7bce-0eeb-d197-337c9c2a147f}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{e97de768-2fcb-8d9a-24a4-558e8f1ebf63}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleMobileAds.Editor", "GoogleMobileAds.Editor.csproj", "{e6ef770a-7bce-0eeb-d197-337c9c2a147f}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NativeGallery.Runtime", "NativeGallery.Runtime.csproj", "{fa789b36-06be-8fcb-2a3f-cbeb881d25a5}"
 EndProject
@@ -30,10 +30,10 @@ Global
 		{81a6f81f-d377-33a3-9c2d-721eb89c27a4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{a832fc73-c886-cc31-d8d3-1b86479a208f}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{a832fc73-c886-cc31-d8d3-1b86479a208f}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{e6ef770a-7bce-0eeb-d197-337c9c2a147f}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{e6ef770a-7bce-0eeb-d197-337c9c2a147f}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{e97de768-2fcb-8d9a-24a4-558e8f1ebf63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{e97de768-2fcb-8d9a-24a4-558e8f1ebf63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{e6ef770a-7bce-0eeb-d197-337c9c2a147f}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{e6ef770a-7bce-0eeb-d197-337c9c2a147f}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{fa789b36-06be-8fcb-2a3f-cbeb881d25a5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{fa789b36-06be-8fcb-2a3f-cbeb881d25a5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{613d1d9c-5819-1e4a-d23e-782879ecac6e}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

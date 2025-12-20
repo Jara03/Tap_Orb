@@ -10,7 +10,7 @@ public class LevelManager : MonoBehaviour
    
     public static int levelSelected = 0;
     public static LevelManager Instance;
-    public static int lvlCount = 9;
+    public static int lvlCount = 10;
     private const string LevelCountKey = "LevelCount";
 
     // Start is called before the first frame update

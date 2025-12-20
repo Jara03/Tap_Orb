@@ -46,6 +46,7 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.59f2\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\level-edition\LevelEditorItem.cs" />
     <Compile Include="Assets\Scripts\BasketTrigger.cs" />
     <Compile Include="Assets\Scripts\LevelButton.cs" />
     <Compile Include="Assets\Scripts\LevelMenuGenerator.cs" />
@@ -53,11 +54,14 @@
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\Level.cs" />
     <Compile Include="Assets\Scripts\AdsBanner.cs" />
+    <Compile Include="Assets\level-edition\LevelEditorManager.cs" />
     <Compile Include="Assets\Scripts\BouncyBallSettler.cs" />
     <Compile Include="Assets\Scripts\AnimatedGameItem.cs" />
     <Compile Include="Assets\Scripts\SkinManager.cs" />
     <Compile Include="Assets\Scripts\BeamCollisionSweeper.cs" />
+    <Compile Include="Assets\level-edition\LevelEditorBootstrap.cs" />
     <Compile Include="Assets\Scripts\SkinData.cs" />
+    <Compile Include="Assets\level-edition\LevelEditorSession.cs" />
     <Compile Include="Assets\Scripts\JumpPad.cs" />
     <Compile Include="Assets\Scripts\BallFakeTrailer.cs" />
     <Compile Include="Assets\Scripts\bumper.cs" />
@@ -72,6 +76,7 @@
     <Compile Include="Assets\Scripts\LevelDataManager.cs" />
     <Compile Include="Assets\Scripts\VacuumAttractor.cs" />
     <Compile Include="Assets\Scripts\InterstitialAds.cs" />
+    <Compile Include="Assets\level-edition\LevelEditorGizmo.cs" />
     <Compile Include="Assets\Scripts\MineItem.cs" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />

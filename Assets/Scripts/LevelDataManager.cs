@@ -94,13 +94,14 @@ public class LevelDataManager : MonoBehaviour
         GameObject bg = GameObject.FindGameObjectWithTag("Background");
         if (!sk.UseBackgroundImage)
         {
-            bg.GetComponent<Image>().color = new Color(sk.BackgroundColor.r, sk.BackgroundColor.g, sk.BackgroundColor.b, 0.05f);
+            bg.GetComponent<Image>().color = new Color(sk.BackgroundColor.r, sk.BackgroundColor.g, sk.BackgroundColor.b, 1f);
 
         }
         else
         {
-            bg.GetComponent<Image>().sprite =
-                Resources.Load<Sprite>("Backgrounds/" + sk.BackgroundSpriteName);
+            bg.GetComponent<Image>().sprite = SkinManager.LoadBackgroundSprite(sk.BackgroundSpriteName);
+            bg.GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
+                //Resources.Load<Sprite>("Backgrounds/" + sk.BackgroundSpriteName);
         }
         
         

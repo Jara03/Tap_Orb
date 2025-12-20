@@ -22,6 +22,7 @@ public class LevelEditorGizmo : MonoBehaviour
     public Camera sceneCamera;
     public GizmoMode mode = GizmoMode.Translate;
     public Action onTargetModified;
+    public Vector3 offset = new Vector3(0f, 0f, -3f);
 
     public Transform Target { get; private set; }
     public bool IsDragging => isDragging;
@@ -42,7 +43,7 @@ public class LevelEditorGizmo : MonoBehaviour
     {
         if (Target == null || sceneCamera == null) return;
 
-        transform.position = Target.position;
+        transform.position = Target.position + offset;
         transform.rotation = Quaternion.identity;
 
         if (Input.GetMouseButtonDown(0))
