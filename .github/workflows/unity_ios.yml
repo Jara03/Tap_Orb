@@ -43,6 +43,12 @@ jobs:
         with:
           name: xcode-project
           path: Build/iOS
+          
+      - name: Copy fastlane config into Xcode build
+        run: |
+          mkdir -p Build/iOS/fastlane
+          cp -R Build/fastlane/* Build/iOS/fastlane/
+
 
       - name: Install Ruby & Fastlane
         run: |
