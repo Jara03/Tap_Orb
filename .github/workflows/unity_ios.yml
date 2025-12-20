@@ -34,6 +34,11 @@ jobs:
           path: Build/iOS
           if-no-files-found: error
 
+      - name: Copy fastlane config into Xcode build
+        run: |
+          mkdir -p Build/iOS/fastlane
+          cp -R Build/fastlane/* Build/iOS/fastlane/
+
   ios-compile-deploy:
     runs-on: macos-latest
     needs: unity-build
@@ -44,10 +49,6 @@ jobs:
           name: xcode-project
           path: Build/iOS
           
-      - name: Copy fastlane config into Xcode build
-        run: |
-          mkdir -p Build/iOS/fastlane
-          cp -R Build/fastlane/* Build/iOS/fastlane/
 
 
       - name: Install Ruby & Fastlane
