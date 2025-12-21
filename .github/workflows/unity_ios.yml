@@ -5,9 +5,14 @@ on:
   push:
     branches: ["main"]
   workflow_dispatch:
-
+      inputs:
+        skip_unity_build:
+          description: "Skip Unity build (use last iOS artifact)"
+          required: false
+          default: "false"
 jobs:
   unity-build:
+    if: github.event.inputs.skip_unity_build != 'true'
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
