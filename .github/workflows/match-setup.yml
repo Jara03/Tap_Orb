@@ -12,6 +12,11 @@ jobs:
       - name: Install fastlane
         run: gem install fastlane
 
+      - name: Debug repo structure
+        run: |
+          pwd
+          ls
+
       - name: Run fastlane match (one-time setup)
         env:
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
@@ -20,5 +25,5 @@ jobs:
           APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
           APP_STORE_CONNECT_PRIVATE_KEY: ${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY }}
         run: |
-          cd ios
+          cd Build
           fastlane match appstore
