@@ -18,7 +18,7 @@ jobs:
           ls
       - name: Test git auth for cert repo
         run: |
-          git ls-remote https://github.com/TON_USER/ios-certificates.git
+          git ls-remote https://github.com/Jara03/ios-certificates.git
 
 
       - name: Run fastlane match (one-time setup)
