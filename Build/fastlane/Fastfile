@@ -8,7 +8,9 @@ platform :ios do
       export_method: "app-store",
       clean: true,
       xcargs: "-allowProvisioningUpdates",
-      signing_style: "automatic"
+      export_options: {
+        signingStyle: "automatic"
+      }
     )
 
     upload_to_testflight(
