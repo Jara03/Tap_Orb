@@ -10,6 +10,7 @@ public class SkinData
     public Color BackgroundColor = Color.black;
     public string BackgroundSpriteName = string.Empty;
     public bool UseBackgroundImage = false;
+    public bool BackgroundIsAnimated = false;
 
     public SkinData Clone()
     {
@@ -20,7 +21,8 @@ public class SkinData
             BallSize = BallSize,
             BackgroundColor = BackgroundColor,
             BackgroundSpriteName = BackgroundSpriteName,
-            UseBackgroundImage = UseBackgroundImage
+            UseBackgroundImage = UseBackgroundImage,
+            BackgroundIsAnimated = BackgroundIsAnimated
         };
     }
 }

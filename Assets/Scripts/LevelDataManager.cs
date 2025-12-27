@@ -4,6 +4,7 @@ using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TapOrb.Backgrounds;
 
 public class LevelDataManager : MonoBehaviour
 {
@@ -92,14 +93,28 @@ public class LevelDataManager : MonoBehaviour
         
         //Modif du bg
         GameObject bg = GameObject.FindGameObjectWithTag("Background");
+        var animatedBg = bg.GetComponent<AnimatedBackgroundController>();
+        if (animatedBg == null)
+        {
+            animatedBg = bg.AddComponent<AnimatedBackgroundController>();
+        }
         if (!sk.UseBackgroundImage)
         {
             bg.GetComponent<Image>().color = new Color(sk.BackgroundColor.r, sk.BackgroundColor.g, sk.BackgroundColor.b, 1f);
+            animatedBg.StopAnimation();
 
         }
         else
         {
-            bg.GetComponent<Image>().sprite = SkinManager.LoadBackgroundSprite(sk.BackgroundSpriteName);
+            BackgroundAsset asset = SkinManager.LoadBackgroundAsset(sk.BackgroundSpriteName);
+            if (asset != null && asset.IsAnimated)
+            {
+                animatedBg.ApplyGif(asset.GifFrames);
+            }
+            else
+            {
+                animatedBg.ApplySprite(asset?.StaticSprite);
+            }
             bg.GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
                 //Resources.Load<Sprite>("Backgrounds/" + sk.BackgroundSpriteName);
         }

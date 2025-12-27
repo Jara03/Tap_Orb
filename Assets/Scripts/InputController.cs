@@ -10,8 +10,10 @@ public class InputController : MonoBehaviour
     bool isPressed = false;
     private bool previousPressed = false;
 
-    
+
     public Level levelItem;
+
+    public static event System.Action<bool> OnPressStateChanged;
 
     // Update is called once per frame
     void Update()
@@ -49,5 +51,7 @@ public class InputController : MonoBehaviour
         {
                 levelItem.SetTransformState(false);
         }
+
+        OnPressStateChanged?.Invoke(isPressed);
     }
 }

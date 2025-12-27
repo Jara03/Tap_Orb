@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Networking;
+using TapOrb.Backgrounds;
 
 public static class SkinManager
 {
@@ -29,7 +30,11 @@ public static class SkinManager
         if (!Directory.Exists(targetDir))
             Directory.CreateDirectory(targetDir);
 
-        string fileName = "bg_" + DateTime.Now.Ticks + ".png";
+        string extension = Path.GetExtension(sourcePath);
+        if (string.IsNullOrEmpty(extension))
+            extension = ".png";
+
+        string fileName = "bg_" + DateTime.Now.Ticks + extension;
         string destPath = Path.Combine(targetDir, fileName);
        // Debug.LogError("Persistent path: " + destPath);
 
@@ -56,7 +61,11 @@ public static class SkinManager
             string dir = Path.Combine(Application.persistentDataPath, "Backgrounds");
             Directory.CreateDirectory(dir);
 
-            string fileName = "bg_" + DateTime.Now.Ticks + ".png";
+            string extension = Path.GetExtension(sourcePath);
+            if (string.IsNullOrEmpty(extension))
+                extension = ".png";
+
+            string fileName = "bg_" + DateTime.Now.Ticks + extension;
             string destPath = Path.Combine(dir, fileName);
 
             File.WriteAllBytes(destPath, data);
@@ -125,7 +134,7 @@ public static class SkinManager
         OnSkinChanged?.Invoke(currentSkin);
     }
 
-    public static Sprite LoadBackgroundSprite(string fileName)
+    public static BackgroundAsset LoadBackgroundAsset(string fileName)
     {
         if (string.IsNullOrEmpty(fileName))
             return null;
@@ -136,17 +145,36 @@ public static class SkinManager
         if (!File.Exists(fullPath))
             return null;
 
+        var asset = new BackgroundAsset();
         byte[] bytes = File.ReadAllBytes(fullPath);
+        string extension = Path.GetExtension(fileName).ToLowerInvariant();
 
-        Texture2D tex = new Texture2D(2, 2, TextureFormat.RGBA32, false);
-        if (!tex.LoadImage(bytes))
-            return null;
+        if (extension == ".gif")
+        {
+            try
+            {
+                asset.GifFrames = GifDecoder.Decode(bytes);
+            }
+            catch (Exception ex)
+            {
+                Debug.LogWarning($"Failed to decode GIF: {ex.Message}");
+            }
+        }
 
-        return Sprite.Create(
-            tex,
-            new Rect(0, 0, tex.width, tex.height),
-            new Vector2(0.5f, 0.5f)
-        );
+        if (!asset.IsAnimated)
+        {
+            Texture2D tex = new Texture2D(2, 2, TextureFormat.RGBA32, false);
+            if (tex.LoadImage(bytes))
+            {
+                asset.StaticSprite = Sprite.Create(
+                    tex,
+                    new Rect(0, 0, tex.width, tex.height),
+                    new Vector2(0.5f, 0.5f)
+                );
+            }
+        }
+
+        return asset;
     }
 
 
