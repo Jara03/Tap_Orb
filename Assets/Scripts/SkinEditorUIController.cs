@@ -4,6 +4,9 @@ using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class SkinEditorUIController : MonoBehaviour
 {
@@ -19,6 +22,11 @@ public class SkinEditorUIController : MonoBehaviour
     public TMP_InputField SkinNameInput;
     public Button SaveButton;
     public Transform SkinsListParent;
+
+    [Header("Ball Mesh")]
+    public Button ImportBallMeshButton;
+    public Button ResetBallMeshButton;
+    public TMP_Text BallMeshNameLabel;
 
     public Button toggleButton;
     private Image sharedBackground;
@@ -50,11 +58,18 @@ public class SkinEditorUIController : MonoBehaviour
         BackgroundDropdown.onValueChanged.AddListener(OnBackgroundDropdownChanged);
         MobilePickerButton.onClick.AddListener(OnMobilePickRequested);
 
+        if (ImportBallMeshButton != null)
+            ImportBallMeshButton.onClick.AddListener(OnBallMeshImportRequested);
+
+        if (ResetBallMeshButton != null)
+            ResetBallMeshButton.onClick.AddListener(OnBallMeshResetRequested);
+
         SkinNameInput.text = workingCopy.Name;
         SaveButton.onClick.AddListener(SaveSkin);
 
         RefreshSavedSkins();
         UpdatePreviews();
+        UpdateBallMeshLabel();
     }
 
     public void TogglePanel()
@@ -172,6 +187,61 @@ public class SkinEditorUIController : MonoBehaviour
         );
     }
 
+    private void OnBallMeshImportRequested()
+    {
+#if UNITY_EDITOR
+        var path = EditorUtility.OpenFilePanel("Choisir un mesh de balle", string.Empty, "obj,fbx,assetbundle,unity3d");
+        if (!string.IsNullOrEmpty(path))
+        {
+            ApplyImportedBallMesh(path);
+        }
+        return;
+#endif
+
+        if (NativeGallery.IsMediaPickerBusy())
+            return;
+
+        NativeGallery.GetMixedMediaFromGallery(
+            (path) =>
+            {
+                if (string.IsNullOrEmpty(path))
+                    return;
+
+                ApplyImportedBallMesh(path);
+            },
+            NativeGallery.MediaType.Image | NativeGallery.MediaType.Video,
+            "Sélectionne un fichier 3D (OBJ ou AssetBundle)"
+        );
+    }
+
+    private void ApplyImportedBallMesh(string path)
+    {
+        var importedName = SkinManager.ImportBallMeshFromGallery(path);
+        if (string.IsNullOrEmpty(importedName))
+            return;
+
+        workingCopy.BallMeshName = importedName;
+        UpdateBallMeshLabel();
+        UpdatePreviews();
+    }
+
+    private void OnBallMeshResetRequested()
+    {
+        workingCopy.BallMeshName = string.Empty;
+        UpdateBallMeshLabel();
+        UpdatePreviews();
+    }
+
+    private void UpdateBallMeshLabel()
+    {
+        if (BallMeshNameLabel == null)
+            return;
+
+        BallMeshNameLabel.text = string.IsNullOrEmpty(workingCopy.BallMeshName)
+            ? "Mesh par défaut"
+            : workingCopy.BallMeshName;
+    }
+
     private static bool IsVideoPath(string path)
     {
         var ext = Path.GetExtension(path)?.ToLowerInvariant();
@@ -229,6 +299,8 @@ public class SkinEditorUIController : MonoBehaviour
         BackgroundColorSliders[2].SetValueWithoutNotify(workingCopy.BackgroundColor.b);
         BallSizeSlider.SetValueWithoutNotify(workingCopy.BallSize);
         UseImageToggle.SetIsOnWithoutNotify(workingCopy.UseBackgroundImage);
+
+        UpdateBallMeshLabel();
 
         var index = BackgroundDropdown.options.FindIndex(o => o.text == workingCopy.BackgroundSpriteName);
         if (index < 0) index = 0;

@@ -14,7 +14,11 @@ public class LevelDataManager : MonoBehaviour
     public GameObject FinishedLevelUI;
     public GameObject OptionsScreen;
     public GameObject PlayerBall;
-    
+
+    private Mesh defaultBallMesh;
+    private Vector3 defaultBallScale = Vector3.one;
+    private MeshCollider playerBallCollider;
+
     public GameObject NextLevelButton;
     public GameObject HomeButton;
 
@@ -74,6 +78,18 @@ public class LevelDataManager : MonoBehaviour
             playerStartPosition = player.transform.position;
             playerStartRotation = player.transform.rotation;
             playerRigidbody = player.GetComponent<Rigidbody>();
+        }
+
+        if (PlayerBall != null)
+        {
+            playerBallCollider = PlayerBall.GetComponent<MeshCollider>();
+            var filter = PlayerBall.GetComponent<MeshFilter>();
+            if (filter != null)
+            {
+                defaultBallMesh = filter.sharedMesh;
+            }
+
+            defaultBallScale = PlayerBall.transform.localScale;
         }
         
         interstitialAds = gameObject.AddComponent<InterstitialAds>();
@@ -213,18 +229,69 @@ public class LevelDataManager : MonoBehaviour
         return tex;
     }
 
+    private void ApplyBallSkin(SkinData sk)
+    {
+        if (PlayerBall == null)
+            return;
+
+        var meshFilter = PlayerBall.GetComponent<MeshFilter>();
+        if (meshFilter == null)
+            return;
+
+        if (SkinManager.TryGetBallMesh(sk.BallMeshName, out var mesh, out var bounds))
+        {
+            meshFilter.sharedMesh = mesh;
+
+            if (playerBallCollider != null)
+            {
+                playerBallCollider.sharedMesh = null;
+                playerBallCollider.sharedMesh = mesh;
+                playerBallCollider.convex = true;
+            }
+
+            PlayerBall.transform.localScale = ComputeScaleFromBounds(bounds) * (1 + sk.BallSize);
+            return;
+        }
+
+        meshFilter.sharedMesh = defaultBallMesh ?? meshFilter.sharedMesh;
+
+        if (playerBallCollider != null)
+        {
+            var colliderMesh = defaultBallMesh ?? meshFilter.sharedMesh;
+            playerBallCollider.sharedMesh = null;
+            playerBallCollider.sharedMesh = colliderMesh;
+            playerBallCollider.convex = true;
+        }
+
+        PlayerBall.transform.localScale = defaultBallScale * (1 + sk.BallSize);
+    }
+
+    private Vector3 ComputeScaleFromBounds(Bounds bounds)
+    {
+        if (defaultBallMesh == null)
+            return defaultBallScale;
+
+        var defaultBounds = defaultBallMesh.bounds;
+        var defaultSize = Mathf.Max(defaultBounds.size.x, defaultBounds.size.y, defaultBounds.size.z);
+        var newSize = Mathf.Max(bounds.size.x, bounds.size.y, bounds.size.z);
+
+        if (newSize <= 0.0001f || defaultSize <= 0.0001f)
+            return defaultBallScale;
+
+        float normalizedScale = defaultSize / newSize;
+        return defaultBallScale * normalizedScale;
+    }
+
 
 
     public void LoadSkin(SkinData sk)
     {
         //Modif de la balle
+        ApplyBallSkin(sk);
         PlayerBall.gameObject.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor",sk.BallColor*1f);
         PlayerBall.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(sk.BallColor.r, sk.BallColor.g, sk.BallColor.b, 0.03f);
         PlayerBall.transform.GetChild(1).GetComponent<SpriteRenderer>().color = new Color(sk.BallColor.r, sk.BallColor.g, sk.BallColor.b, 0.15f);
 
-
-        PlayerBall.transform.localScale *= 1+sk.BallSize;
-        
         //Modif du bg
         // Modif du bg (toujours d'abord récupérer refs)
                 if (!EnsureBackgroundRefs())
