@@ -4,6 +4,7 @@ using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class LevelDataManager : MonoBehaviour
 {
@@ -18,10 +19,12 @@ public class LevelDataManager : MonoBehaviour
     public GameObject HomeButton;
 
     private GameObject player;
-    
+
     private Vector3 playerStartPosition;
     private Quaternion playerStartRotation;
     private Rigidbody playerRigidbody;
+    private VideoPlayer backgroundVideoPlayer;
+    private RawImage backgroundRawImage;
     
     private Level level;
     
@@ -92,20 +95,103 @@ public class LevelDataManager : MonoBehaviour
         
         //Modif du bg
         GameObject bg = GameObject.FindGameObjectWithTag("Background");
-        if (!sk.UseBackgroundImage)
+        if (bg != null)
         {
-            bg.GetComponent<Image>().color = new Color(sk.BackgroundColor.r, sk.BackgroundColor.g, sk.BackgroundColor.b, 1f);
+            if (backgroundRawImage == null)
+                backgroundRawImage = bg.GetComponent<RawImage>();
 
+            if (backgroundVideoPlayer == null)
+                backgroundVideoPlayer = bg.GetComponent<VideoPlayer>();
+
+            Image backgroundImage = bg.GetComponent<Image>();
+
+            if (sk.UseBackgroundVideo)
+            {
+                string videoPath = SkinManager.GetBackgroundVideoPath(sk.BackgroundVideoName);
+                if (!string.IsNullOrEmpty(videoPath))
+                {
+                    if (backgroundRawImage == null)
+                        backgroundRawImage = bg.AddComponent<RawImage>();
+
+                    if (backgroundVideoPlayer == null)
+                        backgroundVideoPlayer = bg.AddComponent<VideoPlayer>();
+
+                    backgroundVideoPlayer.playOnAwake = false;
+                    backgroundVideoPlayer.isLooping = true;
+                    backgroundVideoPlayer.renderMode = VideoRenderMode.APIOnly;
+                    backgroundVideoPlayer.source = VideoSource.Url;
+                    backgroundVideoPlayer.url = videoPath;
+
+                    StartCoroutine(PlayBackgroundVideo());
+
+                    if (backgroundImage != null)
+                        backgroundImage.enabled = false;
+
+                    backgroundRawImage.color = Color.white;
+                    backgroundRawImage.enabled = true;
+                }
+                else if (backgroundImage != null)
+                {
+                    StopBackgroundVideo();
+                    backgroundImage.enabled = true;
+                    backgroundImage.color = new Color(sk.BackgroundColor.r, sk.BackgroundColor.g, sk.BackgroundColor.b, 1f);
+                }
+            }
+            else if (sk.UseBackgroundImage)
+            {
+                Sprite bgSprite = SkinManager.LoadBackgroundSprite(sk.BackgroundSpriteName);
+                if (backgroundImage != null)
+                {
+                    backgroundImage.enabled = true;
+                    backgroundImage.sprite = bgSprite;
+                    backgroundImage.color = new Color(1f, 1f, 1f, 1f);
+                }
+
+                StopBackgroundVideo();
+            }
+            else
+            {
+                if (backgroundImage != null)
+                {
+                    backgroundImage.enabled = true;
+                    backgroundImage.color = new Color(sk.BackgroundColor.r, sk.BackgroundColor.g, sk.BackgroundColor.b, 1f);
+                }
+
+                StopBackgroundVideo();
+            }
         }
-        else
+
+
+
+    }
+
+    private IEnumerator PlayBackgroundVideo()
+    {
+        if (backgroundVideoPlayer == null || backgroundRawImage == null)
+            yield break;
+
+        backgroundVideoPlayer.Prepare();
+        while (!backgroundVideoPlayer.isPrepared)
         {
-            bg.GetComponent<Image>().sprite = SkinManager.LoadBackgroundSprite(sk.BackgroundSpriteName);
-            bg.GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
-                //Resources.Load<Sprite>("Backgrounds/" + sk.BackgroundSpriteName);
+            yield return null;
         }
-        
-        
-        
+
+        backgroundRawImage.texture = backgroundVideoPlayer.texture;
+        backgroundVideoPlayer.Play();
+    }
+
+    private void StopBackgroundVideo()
+    {
+        if (backgroundVideoPlayer != null)
+        {
+            backgroundVideoPlayer.Stop();
+        }
+
+        if (backgroundRawImage != null)
+        {
+            backgroundRawImage.enabled = false;
+            backgroundRawImage.texture = null;
+        }
     }
     void FixedUpdate()
     {
