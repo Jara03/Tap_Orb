@@ -448,6 +448,7 @@ public class LevelDataManager : MonoBehaviour
             NextLevelButton.SetActive(false);
             CenterHomeButton();
         }
+        ObjectiveManager.Instance?.RegisterLevelCompleted(LevelManager.levelSelected);
         Destroy(PlayerBall);
         
         void CenterHomeButton()
