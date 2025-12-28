@@ -5372,7 +5372,7 @@ MonoBehaviour:
   lastSeenTime: 0
   interstitialAds: {fileID: 0}
   bgRT: {fileID: 0}
-  forceEditorTestVideo: 1
+  forceEditorTestVideo: 0
   editorTestVideoFileName: test_bg.mp4
 --- !u!4 &1314294744
 Transform:
