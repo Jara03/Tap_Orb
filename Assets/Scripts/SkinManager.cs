@@ -36,6 +36,69 @@ public static class SkinManager
 
         File.Copy(sourcePath, destPath, true);
     }
+        
+        private static bool IsVideoFile(string nameOrPath)
+    {
+        if (string.IsNullOrEmpty(nameOrPath)) return false;
+        string ext = Path.GetExtension(nameOrPath).ToLowerInvariant();
+        return ext == ".mp4" || ext == ".mov" || ext == ".m4v" || ext == ".avi" || ext == ".webm";
+    }
+
+    private static bool IsImageFile(string nameOrPath)
+    {
+        if (string.IsNullOrEmpty(nameOrPath)) return false;
+        string ext = Path.GetExtension(nameOrPath).ToLowerInvariant();
+        return ext == ".png" || ext == ".jpg" || ext == ".jpeg";
+    }
+
+    /// <summary>
+    /// Rend l'état du background cohérent.
+    /// - Une seule source active: Video > Image > Color
+    /// - Corrige les cas où un mp4 est rangé dans BackgroundSpriteName, etc.
+    /// </summary>
+    private static void NormalizeBackgroundMode(SkinData s)
+    {
+        if (s == null) return;
+
+        // Cas où l'UI met tout dans BackgroundSpriteName (dropdown unique) :
+        // si c'est une vidéo, on migre vers BackgroundVideoName.
+        if (!string.IsNullOrEmpty(s.BackgroundSpriteName) && IsVideoFile(s.BackgroundSpriteName))
+        {
+            s.BackgroundVideoName = s.BackgroundSpriteName;
+            s.BackgroundSpriteName = string.Empty;
+        }
+
+        // Cas inverse (rare) : image rangée dans VideoName
+        if (!string.IsNullOrEmpty(s.BackgroundVideoName) && IsImageFile(s.BackgroundVideoName))
+        {
+            s.BackgroundSpriteName = s.BackgroundVideoName;
+            s.BackgroundVideoName = string.Empty;
+        }
+
+        bool hasVideo = !string.IsNullOrEmpty(s.BackgroundVideoName) && IsVideoFile(s.BackgroundVideoName);
+        bool hasImage = !string.IsNullOrEmpty(s.BackgroundSpriteName) && IsImageFile(s.BackgroundSpriteName);
+
+        if (hasVideo)
+        {
+            s.UseBackgroundVideo = true;
+            s.UseBackgroundImage = false;
+            return;
+        }
+
+        if (hasImage)
+        {
+            s.UseBackgroundImage = true;
+            s.UseBackgroundVideo = false;
+            return;
+        }
+
+        // Aucun fichier valide => fond couleur
+        s.UseBackgroundImage = false;
+        s.UseBackgroundVideo = false;
+        s.BackgroundSpriteName = string.Empty;
+        s.BackgroundVideoName = string.Empty;
+    }
+
 
     public static string ImportBackgroundVideoFromGallery(string sourcePath)
     {
@@ -130,22 +193,16 @@ public static class SkinManager
     public static void SaveSkin(string name, SkinData edited)
     {
         if (string.IsNullOrWhiteSpace(name))
-        {
             name = "Custom Skin";
-        }
 
         var clone = edited.Clone();
         clone.Name = name.Trim();
 
+        NormalizeBackgroundMode(clone);
+
         var existingIndex = skins.FindIndex(s => s.Name.Equals(clone.Name, StringComparison.OrdinalIgnoreCase));
-        if (existingIndex >= 0)
-        {
-            skins[existingIndex] = clone;
-        }
-        else
-        {
-            skins.Add(clone);
-        }
+        if (existingIndex >= 0) skins[existingIndex] = clone;
+        else skins.Add(clone);
 
         currentSkin = clone;
         WriteToPrefs();
@@ -157,14 +214,18 @@ public static class SkinManager
         var found = skins.Find(s => s.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
         if (found != null)
         {
-            currentSkin = found.Clone();
+            var clone = found.Clone();
+            NormalizeBackgroundMode(clone);
+            currentSkin = clone;
             OnSkinChanged?.Invoke(currentSkin);
         }
     }
 
     public static void UpdateWorkingCopy(SkinData workingCopy)
     {
-        currentSkin = workingCopy.Clone();
+        var clone = workingCopy.Clone();
+        NormalizeBackgroundMode(clone);
+        currentSkin = clone;
         OnSkinChanged?.Invoke(currentSkin);
     }
 
@@ -226,12 +287,16 @@ public static class SkinManager
         }
 
         if (skins.Count == 0)
-        {
             skins.Add(new SkinData());
-        }
+
+        // Normalise tout ce qui a été chargé
+        for (int i = 0; i < skins.Count; i++)
+            NormalizeBackgroundMode(skins[i]);
 
         currentSkin = skins[0].Clone();
+        NormalizeBackgroundMode(currentSkin);
     }
+
 
     private static void WriteToPrefs()
     {

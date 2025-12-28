@@ -206,21 +206,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1314294743}
-    - target: {fileID: 3388932350859417793, guid: ebb185791a7aad545ad334a8c5c1740b,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: BackHome
-      objectReference: {fileID: 0}
     - target: {fileID: 3721605968188018595, guid: ebb185791a7aad545ad334a8c5c1740b,
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1314294743}
-    - target: {fileID: 3721605968188018595, guid: ebb185791a7aad545ad334a8c5c1740b,
-        type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ToggleOptionsScreen
-      objectReference: {fileID: 0}
     - target: {fileID: 7468023250812118630, guid: ebb185791a7aad545ad334a8c5c1740b,
         type: 3}
       propertyPath: m_Name
@@ -1014,6 +1004,9 @@ MonoBehaviour:
   minResetCooldown: 1
   lastSeenTime: 0
   interstitialAds: {fileID: 0}
+  bgRT: {fileID: 0}
+  forceEditorTestVideo: 0
+  editorTestVideoFileName: test_bg.mp4
 --- !u!4 &1314294744
 Transform:
   m_ObjectHideFlags: 0
@@ -1722,6 +1715,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BG
       objectReference: {fileID: 0}
+    - target: {fileID: 644672731781517523, guid: 9635608b72e564e4f90042661448f900,
+        type: 3}
+      propertyPath: m_TagString
+      value: Background
+      objectReference: {fileID: 0}
     - target: {fileID: 5714870199469644255, guid: 9635608b72e564e4f90042661448f900,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1827,8 +1825,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 963194227}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedComponents:
+    - {fileID: 5822473273748696939, guid: 9635608b72e564e4f90042661448f900, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: 4252164782072134884, guid: 9635608b72e564e4f90042661448f900, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9635608b72e564e4f90042661448f900, type: 3}
