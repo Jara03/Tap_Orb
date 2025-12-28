@@ -61,6 +61,7 @@
     <Compile Include="Assets\Scripts\AnimatedGameItem.cs" />
     <Compile Include="Assets\Scripts\SkinManager.cs" />
     <Compile Include="Assets\Scripts\ObjectiveBoostrap.cs" />
+    <Compile Include="Assets\Scripts\RuntimeMeshImporter.cs" />
     <Compile Include="Assets\Scripts\GlobalVolumeController.cs" />
     <Compile Include="Assets\Scripts\BeamCollisionSweeper.cs" />
     <Compile Include="Assets\level-edition\LevelEditorBootstrap.cs" />
