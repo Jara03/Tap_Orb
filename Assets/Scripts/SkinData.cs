@@ -12,6 +12,7 @@ public class SkinData
     public bool UseBackgroundImage = false;
     public string BackgroundVideoName = string.Empty;
     public bool UseBackgroundVideo = false;
+    public string BallMeshName = string.Empty;
 
     public SkinData Clone()
     {
@@ -24,7 +25,8 @@ public class SkinData
             BackgroundSpriteName = BackgroundSpriteName,
             UseBackgroundImage = UseBackgroundImage,
             BackgroundVideoName = BackgroundVideoName,
-            UseBackgroundVideo = UseBackgroundVideo
+            UseBackgroundVideo = UseBackgroundVideo,
+            BallMeshName = BallMeshName
         };
     }
 }

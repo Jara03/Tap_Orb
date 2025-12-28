@@ -173,6 +173,42 @@ public static class SkinManager
         }
     }
 
+    public static string ImportBallMeshFromGallery(string sourcePath)
+    {
+        if (string.IsNullOrEmpty(sourcePath) || !File.Exists(sourcePath))
+            return string.Empty;
+
+        string targetDir = Path.Combine(Application.persistentDataPath, "BallMeshes");
+
+        if (!Directory.Exists(targetDir))
+            Directory.CreateDirectory(targetDir);
+
+        string extension = Path.GetExtension(sourcePath);
+        if (string.IsNullOrEmpty(extension))
+            extension = ".obj";
+
+        string fileName = "ball_" + DateTime.Now.Ticks + extension;
+        string destPath = Path.Combine(targetDir, fileName);
+
+        File.Copy(sourcePath, destPath, true);
+
+        return fileName;
+    }
+
+    public static bool TryGetBallMesh(string fileName, out Mesh mesh, out Bounds bounds)
+    {
+        mesh = null;
+        bounds = default;
+
+        if (string.IsNullOrEmpty(fileName))
+            return false;
+
+        string dir = Path.Combine(Application.persistentDataPath, "BallMeshes");
+        string fullPath = Path.Combine(dir, fileName);
+
+        return RuntimeMeshImporter.TryLoadMeshFromFile(fullPath, out mesh, out bounds);
+    }
+
 
 
 
