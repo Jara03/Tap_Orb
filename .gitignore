@@ -15,3 +15,8 @@
 /Temp/
 /Build/
 /obj/
+/Packages/
+/Logs/
+/Assets/Plugins/
+/.utmp/
+.idea

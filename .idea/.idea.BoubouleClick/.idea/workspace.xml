@@ -6,7 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="f856c2c3-5d6c-43a8-b00d-43067849984f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BoubouleClick/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BoubouleClick/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Editor/BuildScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Editor/BuildScript.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assembly-CSharp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Assembly-CSharp.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Home.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Home.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ObjectiveManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ObjectiveManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,15 +40,16 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock://C:/UnityProjects/BoubouleClick/Assets/Editor/BuildScript.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/BallFakeTrailer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/BallImpactSFX.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/BeamCollisionSweeper.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GlobalVolumeController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/JumpPad.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/LevelDataManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/LevelMenuGenerator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/LevelTransitionController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/MineItem.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/ObjectiveManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/VacuumAttractor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@23b1a4ff749d/Editor/UGUI/UI/GraphicEditor.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@23b1a4ff749d/Runtime/UGUI/UI/Core/GraphicRaycaster.cs" root0="SKIP_HIGHLIGHTING" />
@@ -167,6 +171,8 @@
       <workItem from="1765734697182" duration="9631000" />
       <workItem from="1766172085588" duration="6619000" />
       <workItem from="1766225032120" duration="4397000" />
+      <workItem from="1766921671706" duration="910000" />
+      <workItem from="1766922675206" duration="11086000" />
     </task>
     <task id="LOCAL-00001" summary="initial Commit">
       <option name="closed" value="true" />
@@ -448,7 +454,23 @@
       <option name="project" value="LOCAL" />
       <updated>1766263061303</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="added volume controller and animated background support">
+      <option name="closed" value="true" />
+      <created>1766930850273</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1766930850273</updated>
+    </task>
+    <task id="LOCAL-00037" summary="global commit update">
+      <option name="closed" value="true" />
+      <created>1766931051634</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1766931051634</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -487,8 +509,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="added physics settings" />
-    <MESSAGE value="added basket end level" />
     <MESSAGE value="Added NextLevel Button" />
     <MESSAGE value="Added NextLevel Button P2" />
     <MESSAGE value="updated project Settings" />
@@ -512,7 +532,9 @@
     <MESSAGE value="update commit" />
     <MESSAGE value="Added BuildScript file" />
     <MESSAGE value="updated BuildScript.cs" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated BuildScript.cs" />
+    <MESSAGE value="added volume controller and animated background support" />
+    <MESSAGE value="global commit update" />
+    <option name="LAST_COMMIT_MESSAGE" value="global commit update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
