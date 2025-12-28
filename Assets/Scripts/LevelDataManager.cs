@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using DefaultNamespace;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -17,6 +19,11 @@ public class LevelDataManager : MonoBehaviour
     
     public GameObject NextLevelButton;
     public GameObject HomeButton;
+
+    [Header("Rewards")]
+    [SerializeField] private GameObject rewardsPanel;
+    [SerializeField] private Text rewardsTitle;
+    [SerializeField] private Text rewardsDescription;
 
     private GameObject player;
 
@@ -527,6 +534,8 @@ public class LevelDataManager : MonoBehaviour
     {
         //afficher l'UI de fin de partie
         FinishedLevelUI.SetActive(true);
+        var unlockedRewards = RewardSystem.RegisterWin();
+        ShowRewards(unlockedRewards);
         if (LevelManager.isLastLevel())
         {
             NextLevelButton.SetActive(false);
@@ -538,6 +547,40 @@ public class LevelDataManager : MonoBehaviour
         void CenterHomeButton()
         {
             HomeButton.transform.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(-350, -25, 0);
+        }
+    }
+
+    private void ShowRewards(IReadOnlyList<RewardDefinition> unlockedRewards)
+    {
+        if (unlockedRewards == null)
+        {
+            return;
+        }
+
+        if (rewardsPanel == null)
+        {
+            if (unlockedRewards.Count > 0)
+            {
+                Debug.Log($"Rewards unlocked: {string.Join(", ", unlockedRewards.Select(r => r.DisplayName))}");
+            }
+            return;
+        }
+
+        if (unlockedRewards == null || unlockedRewards.Count == 0)
+        {
+            rewardsPanel.SetActive(false);
+            return;
+        }
+
+        rewardsPanel.SetActive(true);
+        if (rewardsTitle != null)
+        {
+            rewardsTitle.text = "Récompense débloquée !";
+        }
+
+        if (rewardsDescription != null)
+        {
+            rewardsDescription.text = string.Join("\n", unlockedRewards.Select(r => $"• {r.DisplayName} (palier {r.WinsRequired})"));
         }
     }
 
