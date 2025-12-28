@@ -2177,6 +2177,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: BG
       objectReference: {fileID: 0}
+    - target: {fileID: 3170141409442023831, guid: 9635608b72e564e4f90042661448f900,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 2311.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 3170141409442023831, guid: 9635608b72e564e4f90042661448f900,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 3.11
+      objectReference: {fileID: 0}
     - target: {fileID: 5714870199469644255, guid: 9635608b72e564e4f90042661448f900,
         type: 3}
       propertyPath: m_Pivot.x
@@ -5361,6 +5371,9 @@ MonoBehaviour:
   minResetCooldown: 1
   lastSeenTime: 0
   interstitialAds: {fileID: 0}
+  bgRT: {fileID: 0}
+  forceEditorTestVideo: 1
+  editorTestVideoFileName: test_bg.mp4
 --- !u!4 &1314294744
 Transform:
   m_ObjectHideFlags: 0

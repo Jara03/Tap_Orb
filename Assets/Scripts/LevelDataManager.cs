@@ -82,6 +82,138 @@ public class LevelDataManager : MonoBehaviour
         LoadSkin(SkinManager.CurrentSkin);
 
     }
+    
+    [SerializeField] private RenderTexture bgRT;
+
+    private Coroutine bgCoroutine;
+    
+    [SerializeField] private bool forceEditorTestVideo = false;
+    [SerializeField] private string editorTestVideoFileName = "test_bg.mp4";
+
+
+    private void EnsureBgRT(int w = 1280, int h = 1920)
+    {
+        if (bgRT != null) return;
+
+        bgRT = new RenderTexture(w, h, 0, RenderTextureFormat.ARGB32);
+        bgRT.name = "RT_BG_Runtime";
+        bgRT.Create();
+    }
+    
+    private bool EnsureBackgroundRefs()
+    {
+        GameObject bg = GameObject.FindGameObjectWithTag("Background");
+        if (bg == null)
+        {
+            Debug.LogError("[BG] No GameObject with tag 'Background' found.");
+            return false;
+        }
+
+        if (backgroundRawImage == null)
+            backgroundRawImage = bg.GetComponent<RawImage>();
+
+        if (backgroundVideoPlayer == null)
+            backgroundVideoPlayer = bg.GetComponent<VideoPlayer>();
+
+        // Important : pour la vidéo, il faut RawImage + VideoPlayer
+        if (backgroundRawImage == null)
+            backgroundRawImage = bg.AddComponent<RawImage>();
+
+        if (backgroundVideoPlayer == null)
+            backgroundVideoPlayer = bg.AddComponent<VideoPlayer>();
+
+        // Évite d’avoir Image et RawImage qui se battent : on désactive Image si présent
+        var img = bg.GetComponent<Image>();
+        if (img != null) img.enabled = false;
+
+        return true;
+    }
+
+    private void SetupAndPlayVideo(string rawPath)
+    {
+        EnsureBgRT();
+
+        if (bgRT == null)
+        {
+            Debug.LogError("[BG VIDEO] bgRT (RenderTexture) n'est pas assignée dans l'inspector !");
+            return;
+        }
+
+        if (backgroundVideoPlayer == null || backgroundRawImage == null)
+            return;
+
+        StopBackgroundVideo();
+
+        backgroundVideoPlayer.playOnAwake = false;
+        backgroundVideoPlayer.isLooping = true;
+        backgroundVideoPlayer.waitForFirstFrame = true;
+
+        backgroundVideoPlayer.source = VideoSource.Url;
+        backgroundVideoPlayer.url = ToFileUrl(rawPath);
+
+        backgroundVideoPlayer.renderMode = VideoRenderMode.RenderTexture;
+        backgroundVideoPlayer.targetTexture = bgRT;
+
+        backgroundRawImage.texture = bgRT;
+        backgroundRawImage.color = Color.white;
+        backgroundRawImage.enabled = true;
+
+        backgroundVideoPlayer.errorReceived -= OnVideoError;
+        backgroundVideoPlayer.prepareCompleted -= OnVideoPrepared;
+        backgroundVideoPlayer.errorReceived += OnVideoError;
+        backgroundVideoPlayer.prepareCompleted += OnVideoPrepared;
+        
+        Debug.Log("[BG VIDEO] videoPath=" + rawPath);
+        Debug.Log("[BG VIDEO] url=" + backgroundVideoPlayer.url);
+        
+        backgroundVideoPlayer.audioOutputMode = VideoAudioOutputMode.None;
+
+        // Sécurité : si jamais des pistes sont détectées, on les mute
+        ushort trackCount = backgroundVideoPlayer.audioTrackCount;
+        for (ushort i = 0; i < trackCount; i++)
+            backgroundVideoPlayer.EnableAudioTrack(i, false);
+
+
+        backgroundVideoPlayer.Prepare();
+    }
+
+    private void OnVideoPrepared(VideoPlayer vp)
+    {
+        Debug.Log($"[BG VIDEO] Prepared OK: url={vp.url} w={vp.width} h={vp.height} len={vp.length}");
+        vp.Play();
+    }
+
+    private void OnVideoError(VideoPlayer vp, string msg)
+    {
+        Debug.LogError($"[BG VIDEO] ERROR: {msg} url={vp.url}");
+        StopBackgroundVideo();
+    }
+
+    private string ToFileUrl(string path)
+    {
+        if (string.IsNullOrEmpty(path)) return path;
+        if (path.StartsWith("file://")) return path;
+        return "file://" + path;
+    }
+    
+    private static Texture2D SpriteToTexture(Sprite sprite)
+    {
+        if (sprite == null) return null;
+
+        // Cas simple : sprite = texture entière
+        if (sprite.rect.width == sprite.texture.width && sprite.rect.height == sprite.texture.height)
+            return sprite.texture;
+
+        // Cas atlas : on extrait la portion du sprite
+        var r = sprite.rect;
+        var tex = new Texture2D((int)r.width, (int)r.height, TextureFormat.RGBA32, false);
+        var pixels = sprite.texture.GetPixels((int)r.x, (int)r.y, (int)r.width, (int)r.height);
+        tex.SetPixels(pixels);
+        tex.Apply();
+        return tex;
+    }
+
+
 
     public void LoadSkin(SkinData sk)
     {
@@ -94,72 +226,97 @@ public class LevelDataManager : MonoBehaviour
         PlayerBall.transform.localScale *= 1+sk.BallSize;
         
         //Modif du bg
+        // Modif du bg (toujours d'abord récupérer refs)
+                if (!EnsureBackgroundRefs())
+                    return;
+
+        #if UNITY_EDITOR
+                if (forceEditorTestVideo)
+                {
+                    var testPath = System.IO.Path.Combine(Application.streamingAssetsPath, editorTestVideoFileName);
+                    Debug.Log("[EDITOR TEST VIDEO] trying: " + testPath);
+
+                    SetupAndPlayVideo(testPath);
+                    return;
+                }
+        #endif
+
         GameObject bg = GameObject.FindGameObjectWithTag("Background");
-        if (bg != null)
+        if (bg == null)
         {
-            if (backgroundRawImage == null)
-                backgroundRawImage = bg.GetComponent<RawImage>();
+            Debug.LogError("[BG] No GameObject with tag 'Background' found.");
+            return;
+        }
 
-            if (backgroundVideoPlayer == null)
-                backgroundVideoPlayer = bg.GetComponent<VideoPlayer>();
+        if (backgroundRawImage == null)
+            backgroundRawImage = bg.GetComponent<RawImage>();
 
-            Image backgroundImage = bg.GetComponent<Image>();
+        if (backgroundVideoPlayer == null)
+            backgroundVideoPlayer = bg.GetComponent<VideoPlayer>();
 
-            if (sk.UseBackgroundVideo)
+        if (backgroundRawImage == null)
+        {
+            Debug.LogError("[BG] Background object has no RawImage. Add a RawImage component on the BG prefab.");
+            return;
+        }
+
+        // --- VIDEO BG ---
+        if (sk.UseBackgroundVideo)
+        {
+            Debug.Log("[BG] Using background video");
+            string videoPath = SkinManager.GetBackgroundVideoPath(sk.BackgroundVideoName);
+
+            if (!string.IsNullOrEmpty(videoPath))
             {
-                string videoPath = SkinManager.GetBackgroundVideoPath(sk.BackgroundVideoName);
-                if (!string.IsNullOrEmpty(videoPath))
+                if (backgroundVideoPlayer == null)
                 {
-                    if (backgroundRawImage == null)
-                        backgroundRawImage = bg.AddComponent<RawImage>();
-
-                    if (backgroundVideoPlayer == null)
-                        backgroundVideoPlayer = bg.AddComponent<VideoPlayer>();
-
-                    backgroundVideoPlayer.playOnAwake = false;
-                    backgroundVideoPlayer.isLooping = true;
-                    backgroundVideoPlayer.renderMode = VideoRenderMode.APIOnly;
-                    backgroundVideoPlayer.source = VideoSource.Url;
-                    backgroundVideoPlayer.url = videoPath;
-
-                    StartCoroutine(PlayBackgroundVideo());
-
-                    if (backgroundImage != null)
-                        backgroundImage.enabled = false;
-
-                    backgroundRawImage.color = Color.white;
-                    backgroundRawImage.enabled = true;
-                }
-                else if (backgroundImage != null)
-                {
-                    StopBackgroundVideo();
-                    backgroundImage.enabled = true;
-                    backgroundImage.color = new Color(sk.BackgroundColor.r, sk.BackgroundColor.g, sk.BackgroundColor.b, 1f);
-                }
-            }
-            else if (sk.UseBackgroundImage)
-            {
-                Sprite bgSprite = SkinManager.LoadBackgroundSprite(sk.BackgroundSpriteName);
-                if (backgroundImage != null)
-                {
-                    backgroundImage.enabled = true;
-                    backgroundImage.sprite = bgSprite;
-                    backgroundImage.color = new Color(1f, 1f, 1f, 1f);
+                    Debug.LogError("[BG] Background object has no VideoPlayer. Add a VideoPlayer component on the BG prefab.");
+                    return;
                 }
 
-                StopBackgroundVideo();
+                // Lance la vidéo (SetupAndPlayVideo s’occupe d’assigner la RT au RawImage)
+                SetupAndPlayVideo(videoPath);
+
+                // RawImage doit rester activé
+                backgroundRawImage.enabled = true;
+                backgroundRawImage.color = Color.white;
             }
             else
             {
-                if (backgroundImage != null)
-                {
-                    backgroundImage.enabled = true;
-                    backgroundImage.color = new Color(sk.BackgroundColor.r, sk.BackgroundColor.g, sk.BackgroundColor.b, 1f);
-                }
-
+                // Fallback couleur si path manquant
                 StopBackgroundVideo();
+                backgroundRawImage.enabled = true;
+                backgroundRawImage.texture = null;
+                backgroundRawImage.color = new Color(sk.BackgroundColor.r, sk.BackgroundColor.g, sk.BackgroundColor.b, 1f);
             }
+
+            return;
         }
+
+        // --- FIXED IMAGE BG ---
+        if (sk.UseBackgroundImage)
+        {
+            Debug.Log("[BG] Using background image");
+
+            // IMPORTANT : en full RawImage, il faut une TEXTURE, pas un Sprite.
+            // Si ton SkinManager te retourne un Sprite, convertis-le en Texture2D (voir helper plus bas).
+            Sprite bgSprite = SkinManager.LoadBackgroundSprite(sk.BackgroundSpriteName);
+
+            StopBackgroundVideo(); // stoppe la vidéo + nettoie
+
+            backgroundRawImage.enabled = true;
+            backgroundRawImage.texture = SpriteToTexture(bgSprite);
+            backgroundRawImage.color = Color.white; // laisse la texture visible
+
+            return;
+        }
+
+        // --- COLOR BG ---
+        StopBackgroundVideo();
+        backgroundRawImage.enabled = true;
+        backgroundRawImage.texture = null;
+        backgroundRawImage.color = new Color(sk.BackgroundColor.r, sk.BackgroundColor.g, sk.BackgroundColor.b, 1f);
+
 
 
 
