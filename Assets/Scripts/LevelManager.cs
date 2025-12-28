@@ -21,6 +21,8 @@ public class LevelManager : MonoBehaviour
         {
             Application.targetFrameRate = 60;
             QualitySettings.vSyncCount = 0;
+            ObjectiveManager.AttachTo(gameObject);
+            ObjectiveManager.Instance.RegisterSessionStart();
             if (PlayerPrefs.HasKey(LevelCountKey))
             {
                 lvlCount = PlayerPrefs.GetInt(LevelCountKey, lvlCount);
