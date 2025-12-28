@@ -2,12 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 
 public static class SkinManager
 {
     private const string StorageKey = "skins.v1";
+    private const string MeshStorageDirectory = "BallMeshes";
 
     public static event Action<SkinData> OnSkinChanged;
 
@@ -36,6 +38,16 @@ public static class SkinManager
 
         File.Copy(sourcePath, destPath, true);
     }
+
+    public static string ImportBallMesh(string sourcePath)
+    {
+        if (string.IsNullOrWhiteSpace(sourcePath))
+            throw new ArgumentException("Le chemin d'import de mesh est vide.", nameof(sourcePath));
+
+        if (!File.Exists(sourcePath))
+            throw new FileNotFoundException("Mesh introuvable pour l'import", sourcePath);
+
+        string targetDir = Path.Combine(Application.persistentDataPath, MeshStorageDirectory);
         
         private static bool IsVideoFile(string nameOrPath)
     {
@@ -107,7 +119,8 @@ public static class SkinManager
         if (!Directory.Exists(targetDir))
             Directory.CreateDirectory(targetDir);
 
-        string fileName = "bg_" + DateTime.Now.Ticks + ".mp4";
+        string extension = Path.GetExtension(sourcePath);
+        string fileName = "ball_" + DateTime.Now.Ticks + extension;
         string destPath = Path.Combine(targetDir, fileName);
 
         File.Copy(sourcePath, destPath, true);
@@ -253,6 +266,35 @@ public static class SkinManager
         );
     }
 
+    public static bool TryLoadBallMesh(string fileName, out Mesh mesh, out GameObject prefab)
+    {
+        mesh = null;
+        prefab = null;
+
+        if (string.IsNullOrWhiteSpace(fileName))
+            return false;
+
+        string dir = Path.Combine(Application.persistentDataPath, MeshStorageDirectory);
+        string fullPath = Path.Combine(dir, fileName);
+
+        if (!File.Exists(fullPath))
+            return false;
+
+        var bundle = AssetBundle.LoadFromFile(fullPath);
+        if (bundle == null)
+            return false;
+
+        prefab = bundle.LoadAllAssets<GameObject>().FirstOrDefault();
+        mesh = bundle.LoadAllAssets<Mesh>().FirstOrDefault();
+
+        if (mesh == null && prefab != null)
+        {
+            var filter = prefab.GetComponentInChildren<MeshFilter>();
+            mesh = filter != null ? filter.sharedMesh : null;
+        }
+
+        bundle.Unload(false);
+        return mesh != null;
     public static string GetBackgroundVideoPath(string fileName)
     {
         if (string.IsNullOrEmpty(fileName))

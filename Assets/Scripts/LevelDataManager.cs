@@ -23,6 +23,11 @@ public class LevelDataManager : MonoBehaviour
     private Vector3 playerStartPosition;
     private Quaternion playerStartRotation;
     private Rigidbody playerRigidbody;
+    private MeshFilter playerMeshFilter;
+    private Collider playerCollider;
+    private Mesh defaultBallMesh;
+    private Vector3 defaultBallScale = Vector3.one;
+
     private VideoPlayer backgroundVideoPlayer;
     private RawImage backgroundRawImage;
     
@@ -74,6 +79,17 @@ public class LevelDataManager : MonoBehaviour
             playerStartPosition = player.transform.position;
             playerStartRotation = player.transform.rotation;
             playerRigidbody = player.GetComponent<Rigidbody>();
+            playerMeshFilter = player.GetComponentInChildren<MeshFilter>();
+            playerCollider = player.GetComponentInChildren<Collider>();
+            defaultBallMesh = playerMeshFilter != null ? playerMeshFilter.sharedMesh : null;
+            defaultBallScale = player.transform.localScale;
+        }
+        else if (PlayerBall != null)
+        {
+            playerMeshFilter = PlayerBall.GetComponentInChildren<MeshFilter>();
+            playerCollider = PlayerBall.GetComponentInChildren<Collider>();
+            defaultBallMesh = playerMeshFilter != null ? playerMeshFilter.sharedMesh : null;
+            defaultBallScale = PlayerBall.transform.localScale;
         }
         
         interstitialAds = gameObject.AddComponent<InterstitialAds>();
@@ -218,13 +234,8 @@ public class LevelDataManager : MonoBehaviour
     public void LoadSkin(SkinData sk)
     {
         //Modif de la balle
-        PlayerBall.gameObject.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor",sk.BallColor*1f);
-        PlayerBall.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(sk.BallColor.r, sk.BallColor.g, sk.BallColor.b, 0.03f);
-        PlayerBall.transform.GetChild(1).GetComponent<SpriteRenderer>().color = new Color(sk.BallColor.r, sk.BallColor.g, sk.BallColor.b, 0.15f);
+        ApplyBallAppearance(sk);
 
-
-        PlayerBall.transform.localScale *= 1+sk.BallSize;
-        
         //Modif du bg
         // Modif du bg (toujours d'abord récupérer refs)
                 if (!EnsureBackgroundRefs())
@@ -349,7 +360,80 @@ public class LevelDataManager : MonoBehaviour
             backgroundRawImage.enabled = false;
             backgroundRawImage.texture = null;
         }
+
+
+
     }
+
+    private void ApplyBallAppearance(SkinData skin)
+    {
+        if (PlayerBall == null)
+            return;
+
+        var renderer = PlayerBall.GetComponent<MeshRenderer>();
+        if (renderer != null)
+        {
+            renderer.material.SetColor("_EmissionColor", skin.BallColor * 1f);
+        }
+
+        if (PlayerBall.transform.childCount >= 2)
+        {
+            PlayerBall.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(skin.BallColor.r, skin.BallColor.g, skin.BallColor.b, 0.03f);
+            PlayerBall.transform.GetChild(1).GetComponent<SpriteRenderer>().color = new Color(skin.BallColor.r, skin.BallColor.g, skin.BallColor.b, 0.15f);
+        }
+
+        if (playerMeshFilter != null)
+        {
+            Mesh meshToUse = ResolveMesh(skin);
+            if (meshToUse != null)
+            {
+                playerMeshFilter.sharedMesh = meshToUse;
+            }
+        }
+
+        float sizeFactor = 1 + skin.BallSize;
+        PlayerBall.transform.localScale = defaultBallScale * sizeFactor;
+
+        if (playerMeshFilter != null)
+        {
+            RefreshColliderForMesh(playerMeshFilter.sharedMesh, sizeFactor);
+        }
+    }
+
+    private Mesh ResolveMesh(SkinData skin)
+    {
+        if (!string.IsNullOrEmpty(skin.BallMeshFileName) && SkinManager.TryLoadBallMesh(skin.BallMeshFileName, out var customMesh, out _))
+        {
+            return customMesh;
+        }
+
+        return defaultBallMesh != null ? defaultBallMesh : playerMeshFilter?.sharedMesh;
+    }
+
+    private void RefreshColliderForMesh(Mesh mesh, float sizeFactor)
+    {
+        if (mesh == null || playerCollider == null)
+            return;
+
+        if (playerCollider is MeshCollider meshCollider)
+        {
+            meshCollider.sharedMesh = null;
+            meshCollider.sharedMesh = mesh;
+            meshCollider.convex = true;
+        }
+        else if (playerCollider is SphereCollider sphereCollider)
+        {
+            float maxExtent = Mathf.Max(mesh.bounds.extents.x, mesh.bounds.extents.y, mesh.bounds.extents.z);
+            sphereCollider.radius = maxExtent * sizeFactor;
+            sphereCollider.center = mesh.bounds.center;
+        }
+        else if (playerCollider is BoxCollider boxCollider)
+        {
+            boxCollider.size = mesh.bounds.size * sizeFactor;
+            boxCollider.center = mesh.bounds.center;
+        }
+    }
+
     void FixedUpdate()
     {
         
@@ -369,7 +453,7 @@ public class LevelDataManager : MonoBehaviour
     
     private bool IsPlayerVisible()
     {
-      
+
         //si le joueur est dans la zone de vision
         if (endGameCollider.bounds.Contains(player.transform.position))
         {
