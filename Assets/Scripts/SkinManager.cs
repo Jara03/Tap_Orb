@@ -36,6 +36,21 @@ public static class SkinManager
 
         File.Copy(sourcePath, destPath, true);
     }
+
+    public static string ImportBackgroundVideoFromGallery(string sourcePath)
+    {
+        string targetDir = Path.Combine(Application.persistentDataPath, "Backgrounds");
+
+        if (!Directory.Exists(targetDir))
+            Directory.CreateDirectory(targetDir);
+
+        string fileName = "bg_" + DateTime.Now.Ticks + ".mp4";
+        string destPath = Path.Combine(targetDir, fileName);
+
+        File.Copy(sourcePath, destPath, true);
+
+        return fileName;
+    }
     
     public static IEnumerator ImportImageiOS(string sourcePath)
     {
@@ -64,6 +79,34 @@ public static class SkinManager
             Debug.Log("Image imported via UWR: " + destPath);
 
             // maintenant tu peux charger normalement depuis destPath
+        }
+    }
+
+    public static IEnumerator ImportVideoiOS(string sourcePath, Action<string> onFinished)
+    {
+        string url = "file://" + sourcePath;
+
+        using (UnityWebRequest uwr = UnityWebRequest.Get(url))
+        {
+            yield return uwr.SendWebRequest();
+
+            if (uwr.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError("UWR failed: " + uwr.error);
+                yield break;
+            }
+
+            byte[] data = uwr.downloadHandler.data;
+
+            string dir = Path.Combine(Application.persistentDataPath, "Backgrounds");
+            Directory.CreateDirectory(dir);
+
+            string fileName = "bg_" + DateTime.Now.Ticks + ".mp4";
+            string destPath = Path.Combine(dir, fileName);
+
+            File.WriteAllBytes(destPath, data);
+
+            onFinished?.Invoke(fileName);
         }
     }
 
@@ -147,6 +190,17 @@ public static class SkinManager
             new Rect(0, 0, tex.width, tex.height),
             new Vector2(0.5f, 0.5f)
         );
+    }
+
+    public static string GetBackgroundVideoPath(string fileName)
+    {
+        if (string.IsNullOrEmpty(fileName))
+            return null;
+
+        string dir = Path.Combine(Application.persistentDataPath, "Backgrounds");
+        string fullPath = Path.Combine(dir, fileName);
+
+        return File.Exists(fullPath) ? fullPath : null;
     }
 
 
