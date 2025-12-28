@@ -231,6 +231,9 @@ public class LevelDataManager : MonoBehaviour
 
     private void ApplyBallSkin(SkinData sk)
     {
+        
+        
+        
         if (PlayerBall == null)
             return;
 
@@ -250,6 +253,10 @@ public class LevelDataManager : MonoBehaviour
             }
 
             PlayerBall.transform.localScale = ComputeScaleFromBounds(bounds) * (1 + sk.BallSize);
+            
+            PlayerBall.transform.GetComponent<SphereCollider>().radius = PlayerBall.transform.localScale.x;
+            PlayerBall.transform.GetComponent<SphereCollider>().center = bounds.center;
+            Debug.Log("fixed colliders");
             return;
         }
 
@@ -264,6 +271,7 @@ public class LevelDataManager : MonoBehaviour
         }
 
         PlayerBall.transform.localScale = defaultBallScale * (1 + sk.BallSize);
+
     }
 
     private Vector3 ComputeScaleFromBounds(Bounds bounds)

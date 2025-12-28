@@ -190,7 +190,7 @@ public class SkinEditorUIController : MonoBehaviour
     private void OnBallMeshImportRequested()
     {
 #if UNITY_EDITOR
-        var path = EditorUtility.OpenFilePanel("Choisir un mesh de balle", string.Empty, "obj,fbx,assetbundle,unity3d");
+        var path = EditorUtility.OpenFilePanel("Choisir un mesh de balle", string.Empty, "obj,assetbundle,unity3d");
         if (!string.IsNullOrEmpty(path))
         {
             ApplyImportedBallMesh(path);
