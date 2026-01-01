@@ -57,9 +57,15 @@ jobs:
           $knownHostsPath = Join-Path $sshDir "known_hosts"
           if ($env:KNOWN_HOSTS -and $env:KNOWN_HOSTS.Trim().Length -gt 0) {
             Set-Content -Path $knownHostsPath -Value ($env:KNOWN_HOSTS -replace "`r","") -Encoding ascii
-          } else {
-            ssh-keyscan -p $env:DEPLOY_PORT $env:DEPLOY_HOST | Out-File -FilePath $knownHostsPath -Encoding ascii
+          } 
+          
+          $knownHostsPath = Join-Path $sshDir "known_hosts"
+          if (-not $env:KNOWN_HOSTS -or $env:KNOWN_HOSTS.Trim().Length -eq 0) {
+            Write-Error "KNOWN_HOSTS secret is missing. Add it in GitHub Secrets."
+            exit 1
           }
+          Set-Content -Path $knownHostsPath -Value ($env:KNOWN_HOSTS -replace "`r","") -Encoding ascii
+
 
           Write-Host "SSH ready."
 
