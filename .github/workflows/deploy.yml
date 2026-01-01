@@ -10,52 +10,85 @@ jobs:
     runs-on: [self-hosted]
 
     steps:
-      # ✅ Ici tu gardes ton build Unity iOS habituel (si tu l'as déjà).
-      # L'objectif: produire Build\iOS dans $GITHUB_WORKSPACE
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Verify iOS Xcode project exists
+      # --- OPTIONAL ---
+      # If your Unity build step already runs earlier in this workflow (or on this runner),
+      # keep it. Otherwise add it here before "Find Xcode project".
+      # ----------------
+
+      - name: Find Xcode project folder (auto)
         shell: powershell
         run: |
-          $iosPath = Join-Path $env:GITHUB_WORKSPACE "Build\iOS"
-          Write-Host "Expected iOS build folder: $iosPath"
-          if (!(Test-Path $iosPath)) {
-            Write-Error "Build output not found: $iosPath"
+          $proj = Get-ChildItem -Path $env:GITHUB_WORKSPACE -Recurse -Directory -Filter "*.xcodeproj" -ErrorAction SilentlyContinue | Select-Object -First 1
+          if (-not $proj) {
+            Write-Error "No .xcodeproj found under workspace. Ensure Unity exported an iOS Xcode project in this job."
+            exit 1
+          }
+          $iosFolder = $proj.Parent.FullName
+          Write-Host "Found Xcode project: $($proj.FullName)"
+          Write-Host "IOS_FOLDER: $iosFolder"
+          "IOS_FOLDER=$iosFolder" | Out-File -FilePath $env:GITHUB_ENV -Append
+
+      - name: Verify iOS Xcode project folder exists
+        shell: powershell
+        run: |
+          Write-Host "IOS_FOLDER = $env:IOS_FOLDER"
+          if (-not (Test-Path $env:IOS_FOLDER)) {
+            Write-Error "IOS_FOLDER not found: $env:IOS_FOLDER"
             exit 1
           }
           Write-Host "Top-level content:"
-          Get-ChildItem $iosPath | Select-Object -First 30 | Format-Table Name
+          Get-ChildItem $env:IOS_FOLDER | Select-Object -First 30 | Format-Table Name
 
       - name: Pack Xcode project folder (zip)
         shell: powershell
         run: |
-          $iosPath = Join-Path $env:GITHUB_WORKSPACE "Build\iOS"
           $zipPath = Join-Path $env:GITHUB_WORKSPACE "xcode_project.zip"
           if (Test-Path $zipPath) { Remove-Item $zipPath -Force }
-          Compress-Archive -Path (Join-Path $iosPath "*") -DestinationPath $zipPath
+
+          # Zip the folder itself (keeps a top-level folder in the zip)
+          $parent = Split-Path -Parent $env:IOS_FOLDER
+          $leaf   = Split-Path -Leaf   $env:IOS_FOLDER
+          Push-Location $parent
+          Compress-Archive -Path $leaf -DestinationPath $zipPath -Force
+          Pop-Location
+
           Write-Host "Created zip: $zipPath"
           Get-Item $zipPath | Format-List Name,Length,FullName
-  
-           - name: Setup SSH (fresh)
-          shell: powershell
-          env:
-            SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-            KNOWN_HOSTS: ${{ secrets.KNOWN_HOSTS }}
-          run: |
-            $sshDir = Join-Path $env:RUNNER_TEMP ("ssh_ci_" + $env:GITHUB_RUN_ID)
-            if (Test-Path $sshDir) { Remove-Item $sshDir -Recurse -Force }
-            New-Item -ItemType Directory -Force -Path $sshDir | Out-Null
-        
-            $keyPath = Join-Path $sshDir "id_ed25519"
-            Set-Content -Path $keyPath -Value ($env:SSH_PRIVATE_KEY -replace "`r","") -NoNewline -Encoding ascii
-        
-            $knownHostsPath = Join-Path $sshDir "known_hosts"
-            Set-Content -Path $knownHostsPath -Value ($env:KNOWN_HOSTS -replace "`r","") -Encoding ascii
-        
-            "SSH_KEY=$keyPath" | Out-File -FilePath $env:GITHUB_ENV -Append
-            "SSH_KNOWN_HOSTS=$knownHostsPath" | Out-File -FilePath $env:GITHUB_ENV -Append
 
+      - name: Setup SSH (fresh)
+        shell: powershell
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          KNOWN_HOSTS: ${{ secrets.KNOWN_HOSTS }}
+        run: |
+          if (-not $env:SSH_PRIVATE_KEY -or $env:SSH_PRIVATE_KEY.Trim().Length -eq 0) {
+            Write-Error "SSH_PRIVATE_KEY secret is missing."
+            exit 1
+          }
+          if (-not $env:KNOWN_HOSTS -or $env:KNOWN_HOSTS.Trim().Length -eq 0) {
+            Write-Error "KNOWN_HOSTS secret is missing."
+            exit 1
+          }
 
-      - name: SSH test
+          $sshDir = Join-Path $env:RUNNER_TEMP ("ssh_ci_" + $env:GITHUB_RUN_ID)
+          if (Test-Path $sshDir) { Remove-Item $sshDir -Recurse -Force }
+          New-Item -ItemType Directory -Force -Path $sshDir | Out-Null
+
+          $keyPath = Join-Path $sshDir "id_ed25519"
+          Set-Content -Path $keyPath -Value ($env:SSH_PRIVATE_KEY -replace "`r","") -NoNewline -Encoding ascii
+
+          $knownHostsPath = Join-Path $sshDir "known_hosts"
+          Set-Content -Path $knownHostsPath -Value ($env:KNOWN_HOSTS -replace "`r","") -Encoding ascii
+
+          "SSH_KEY=$keyPath" | Out-File -FilePath $env:GITHUB_ENV -Append
+          "SSH_KNOWN_HOSTS=$knownHostsPath" | Out-File -FilePath $env:GITHUB_ENV -Append
+
+          Write-Host "SSH setup OK in $sshDir"
+
+      - name: SSH test (fast fail)
         shell: powershell
         env:
           DEPLOY_HOST: ${{ vars.DEPLOY_HOST }}
@@ -67,28 +100,58 @@ jobs:
             -o UserKnownHostsFile="$env:SSH_KNOWN_HOSTS" `
             -o StrictHostKeyChecking=yes `
             "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" "echo SSH_OK && sw_vers && whoami"
-      
-      - name: SCP upload
+
+      - name: Upload and unzip on VM
         shell: powershell
         env:
           DEPLOY_HOST: ${{ vars.DEPLOY_HOST }}
           DEPLOY_USER: ${{ vars.DEPLOY_USER }}
           DEPLOY_PORT: ${{ vars.DEPLOY_PORT }}
+          DEPLOY_PATH: ${{ vars.DEPLOY_PATH }}
+          SHA: ${{ github.sha }}
         run: |
-          scp -i "$env:SSH_KEY" -P $env:DEPLOY_PORT `
-            -o UserKnownHostsFile="$env:SSH_KNOWN_HOSTS" `
-            -o StrictHostKeyChecking=yes `
-            "$env:GITHUB_WORKSPACE\xcode_project.tar.gz" `
-            "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST):/Users/hayro/TapOrbBuilds/xcode_project.tar.gz"
+          if (-not $env:DEPLOY_PATH -or $env:DEPLOY_PATH.Trim().Length -eq 0) {
+            Write-Error "DEPLOY_PATH variable is missing (e.g. /Users/hayro/TapOrbBuilds)."
+            exit 1
+          }
 
-          # Unzip dans iOS/ puis symlink current -> iOS
-          ssh -p $env:DEPLOY_PORT "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" @"
+          $short = $env:SHA.Substring(0,7)
+          $releaseDir = "$($env:DEPLOY_PATH)/releases/$short"
+          $zipLocal = Join-Path $env:GITHUB_WORKSPACE "xcode_project.zip"
+
+          if (-not (Test-Path $zipLocal)) {
+            Write-Error "Missing zip: $zipLocal"
+            exit 1
+          }
+
+          # Create release directory on VM
+          ssh -o BatchMode=yes -o ConnectTimeout=10 -o ConnectionAttempts=1 `
+            -i "$env:SSH_KEY" -p $env:DEPLOY_PORT `
+            -o UserKnownHostsFile="$env:SSH_KNOWN_HOSTS" -o StrictHostKeyChecking=yes `
+            "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" "mkdir -p '$releaseDir'"
+
+          # Upload zip
+          scp -o BatchMode=yes -o ConnectTimeout=10 -o ConnectionAttempts=1 `
+            -i "$env:SSH_KEY" -P $env:DEPLOY_PORT `
+            -o UserKnownHostsFile="$env:SSH_KNOWN_HOSTS" -o StrictHostKeyChecking=yes `
+            "$zipLocal" `
+            "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST):$releaseDir/xcode_project.zip"
+
+          # Unzip into iOS/ and update current symlink
+          $remoteCmd = @"
           set -e
           cd '$releaseDir'
           rm -rf iOS
           mkdir -p iOS
           unzip -q xcode_project.zip -d iOS
           rm -f xcode_project.zip
+          mkdir -p '$($env:DEPLOY_PATH)/releases'
           ln -sfn '$releaseDir/iOS' '$($env:DEPLOY_PATH)/current'
-          echo 'DEPLOY OK'
-          echo 'current -> ' \$(readlink '$($env:DEPLOY_PATH)/current')
+          echo DEPLOY_OK
+          echo current -> \$(readlink '$($env:DEPLOY_PATH)/current')
+          "@
+          
+                    ssh -o BatchMode=yes -o ConnectTimeout=10 -o ConnectionAttempts=1 `
+                      -i "$env:SSH_KEY" -p $env:DEPLOY_PORT `
+            -o UserKnownHostsFile="$env:SSH_KNOWN_HOSTS" -o StrictHostKeyChecking=yes `
+            "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" "$remoteCmd"
