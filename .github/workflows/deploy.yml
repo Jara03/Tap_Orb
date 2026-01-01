@@ -70,21 +70,27 @@ jobs:
             Write-Error "KNOWN_HOSTS secret is missing."
             exit 1
           }
-
+      
           $sshDir = Join-Path $env:RUNNER_TEMP ("ssh_ci_" + $env:GITHUB_RUN_ID)
           if (Test-Path $sshDir) { Remove-Item $sshDir -Recurse -Force }
           New-Item -ItemType Directory -Force -Path $sshDir | Out-Null
-
+      
           $keyPath = Join-Path $sshDir "id_ed25519"
           Set-Content -Path $keyPath -Value ($env:SSH_PRIVATE_KEY -replace "`r","") -NoNewline -Encoding ascii
-
+      
+          # OpenSSH on Windows refuses private keys with wide permissions
+          icacls $keyPath /inheritance:r | Out-Null
+          icacls $keyPath /remove "BUILTIN\Users" "BUILTIN\Utilisateurs" "Users" "Utilisateurs" 2>$null | Out-Null
+          icacls $keyPath /grant:r "$($env:USERNAME):(R)" "SYSTEM:(R)" | Out-Null
+      
           $knownHostsPath = Join-Path $sshDir "known_hosts"
           Set-Content -Path $knownHostsPath -Value ($env:KNOWN_HOSTS -replace "`r","") -Encoding ascii
-
+      
           "SSH_KEY=$keyPath" | Out-File -FilePath $env:GITHUB_ENV -Append
           "SSH_KNOWN_HOSTS=$knownHostsPath" | Out-File -FilePath $env:GITHUB_ENV -Append
-
+      
           Write-Host "SSH setup OK in $sshDir"
+      
 
       - name: SSH test (fast fail)
         shell: powershell
