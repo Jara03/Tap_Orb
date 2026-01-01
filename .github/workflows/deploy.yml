@@ -1,0 +1,107 @@
+name: Upload Xcode project to Hackintosh VM
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  upload_xcode_project:
+    runs-on: [self-hosted]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # ✅ Ici tu gardes ton build Unity iOS habituel (si tu l'as déjà).
+      # L'objectif: produire Build\iOS dans $GITHUB_WORKSPACE
+
+      - name: Verify iOS Xcode project exists
+        shell: powershell
+        run: |
+          $iosPath = Join-Path $env:GITHUB_WORKSPACE "Build\iOS"
+          Write-Host "Expected iOS build folder: $iosPath"
+          if (!(Test-Path $iosPath)) {
+            Write-Error "Build output not found: $iosPath"
+            exit 1
+          }
+          Write-Host "Top-level content:"
+          Get-ChildItem $iosPath | Select-Object -First 30 | Format-Table Name
+
+      - name: Pack Xcode project folder (zip)
+        shell: powershell
+        run: |
+          $iosPath = Join-Path $env:GITHUB_WORKSPACE "Build\iOS"
+          $zipPath = Join-Path $env:GITHUB_WORKSPACE "xcode_project.zip"
+          if (Test-Path $zipPath) { Remove-Item $zipPath -Force }
+          Compress-Archive -Path (Join-Path $iosPath "*") -DestinationPath $zipPath
+          Write-Host "Created zip: $zipPath"
+          Get-Item $zipPath | Format-List Name,Length,FullName
+
+      - name: Setup SSH (key + known_hosts)
+        shell: powershell
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          KNOWN_HOSTS: ${{ secrets.KNOWN_HOSTS }}
+          DEPLOY_HOST: ${{ vars.DEPLOY_HOST }}
+          DEPLOY_PORT: ${{ vars.DEPLOY_PORT }}
+        run: |
+          $sshDir = Join-Path $env:USERPROFILE ".ssh"
+          New-Item -ItemType Directory -Force -Path $sshDir | Out-Null
+
+          $keyPath = Join-Path $sshDir "id_ed25519"
+          $key = $env:SSH_PRIVATE_KEY -replace "`r",""
+          Set-Content -Path $keyPath -Value $key -NoNewline -Encoding ascii
+
+          # permissions strictes sinon OpenSSH peut refuser
+          icacls $keyPath /inheritance:r | Out-Null
+          icacls $keyPath /grant:r "$($env:USERNAME):(R)" | Out-Null
+
+          $knownHostsPath = Join-Path $sshDir "known_hosts"
+          if ($env:KNOWN_HOSTS -and $env:KNOWN_HOSTS.Trim().Length -gt 0) {
+            Set-Content -Path $knownHostsPath -Value ($env:KNOWN_HOSTS -replace "`r","") -Encoding ascii
+          } else {
+            ssh-keyscan -p $env:DEPLOY_PORT $env:DEPLOY_HOST | Out-File -FilePath $knownHostsPath -Encoding ascii
+          }
+
+          Write-Host "SSH ready."
+
+      - name: SSH test
+        shell: powershell
+        env:
+          DEPLOY_HOST: ${{ vars.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ vars.DEPLOY_USER }}
+          DEPLOY_PORT: ${{ vars.DEPLOY_PORT }}
+        run: |
+          ssh -p $env:DEPLOY_PORT "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" "echo SSH_OK && sw_vers && whoami"
+
+      - name: Upload zip and unpack on VM (versioned + current)
+        shell: powershell
+        env:
+          DEPLOY_HOST: ${{ vars.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ vars.DEPLOY_USER }}
+          DEPLOY_PORT: ${{ vars.DEPLOY_PORT }}
+          DEPLOY_PATH: ${{ vars.DEPLOY_PATH }}
+          SHA: ${{ github.sha }}
+        run: |
+          $short = $env:SHA.Substring(0,7)
+          $releaseDir = "$($env:DEPLOY_PATH)/releases/$short"
+          $zipLocal = Join-Path $env:GITHUB_WORKSPACE "xcode_project.zip"
+
+          # Crée dossier release côté VM
+          ssh -p $env:DEPLOY_PORT "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" "mkdir -p '$releaseDir'"
+
+          # Upload zip
+          scp -P $env:DEPLOY_PORT $zipLocal "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST):$releaseDir/xcode_project.zip"
+
+          # Unzip dans iOS/ puis symlink current -> iOS
+          ssh -p $env:DEPLOY_PORT "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" @"
+          set -e
+          cd '$releaseDir'
+          rm -rf iOS
+          mkdir -p iOS
+          unzip -q xcode_project.zip -d iOS
+          rm -f xcode_project.zip
+          ln -sfn '$releaseDir/iOS' '$($env:DEPLOY_PATH)/current'
+          echo 'DEPLOY OK'
+          echo 'current -> ' \$(readlink '$($env:DEPLOY_PATH)/current')
