@@ -47,7 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\level-edition\LevelEditorItem.cs" />
-    <Compile Include="Assets\ObjectiveRowView.cs" />
     <Compile Include="Assets\Scripts\BasketTrigger.cs" />
     <Compile Include="Assets\Scripts\LevelButton.cs" />
     <Compile Include="Assets\Scripts\LevelMenuGenerator.cs" />
@@ -59,13 +58,13 @@
     <Compile Include="Assets\Scripts\BouncyBallSettler.cs" />
     <Compile Include="Assets\Scripts\ObjectivesPanel.cs" />
     <Compile Include="Assets\Scripts\AnimatedGameItem.cs" />
+    <Compile Include="Assets\Scripts\ObjectiveRowView.cs" />
     <Compile Include="Assets\Scripts\SkinManager.cs" />
     <Compile Include="Assets\Scripts\ObjectiveBoostrap.cs" />
     <Compile Include="Assets\Scripts\RuntimeMeshImporter.cs" />
     <Compile Include="Assets\Scripts\GlobalVolumeController.cs" />
     <Compile Include="Assets\Scripts\BeamCollisionSweeper.cs" />
     <Compile Include="Assets\level-edition\LevelEditorBootstrap.cs" />
-    <Compile Include="Assets\ObjectivesPanelController.cs" />
     <Compile Include="Assets\Scripts\SkinData.cs" />
     <Compile Include="Assets\level-edition\LevelEditorSession.cs" />
     <Compile Include="Assets\Scripts\JumpPad.cs" />
@@ -83,6 +82,7 @@
     <Compile Include="Assets\Scripts\LevelDataManager.cs" />
     <Compile Include="Assets\Scripts\VacuumAttractor.cs" />
     <Compile Include="Assets\Scripts\InterstitialAds.cs" />
+    <Compile Include="Assets\Scripts\ObjectivesPanelController.cs" />
     <Compile Include="Assets\level-edition\LevelEditorGizmo.cs" />
     <Compile Include="Assets\Scripts\MineItem.cs" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

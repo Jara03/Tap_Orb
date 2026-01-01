@@ -48,9 +48,15 @@ public class LevelDataManager : MonoBehaviour
     {
         //trouver l'objet qui contient le script Level
         level = FindFirstObjectByType<Level>();
-        VacuumAttractor vacuum = FindFirstObjectByType<VacuumAttractor>();
+        //VacuumAttractor vacuum = FindFirstObjectByType<VacuumAttractor>();
         
-        vacuum.OnEndLevel += EndLevel;
+        VacuumAttractor[] vacuums = FindObjectsOfType<VacuumAttractor>();
+
+        foreach (VacuumAttractor vacuum in vacuums)
+        {
+            vacuum.OnEndLevel += EndLevel;
+
+        }
         
         if (level == null)
         {
@@ -516,6 +522,7 @@ public class LevelDataManager : MonoBehaviour
 
     public void EndLevel()
     {
+        
         //afficher l'UI de fin de partie
         FinishedLevelUI.SetActive(true);
         if (LevelManager.isLastLevel())

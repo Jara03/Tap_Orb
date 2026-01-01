@@ -51,12 +51,14 @@ public class VacuumAttractor : MonoBehaviour
         playerRb.MovePosition(newPos);
 
         float dist = Vector3.Distance(newPos, centerGoal.position);
-        Debug.Log(dist);
 
         // ✅ Fin de niveau UNE SEULE FOIS
         if (!endTriggered && dist <= stopDistance)
         {
+            Debug.Log(dist);
+            playerRb.gameObject.SetActive(false);
             endTriggered = true;
+            Debug.Log("End level : " + endTriggered);
             OnEndLevel?.Invoke();
         }
     }
