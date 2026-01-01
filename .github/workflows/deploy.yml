@@ -1,4 +1,4 @@
-name: Build iOS + Upload to VM
+name: Upload Xcode project to Hackintosh VM
 
 on:
   push:
@@ -6,55 +6,54 @@ on:
   workflow_dispatch:
 
 jobs:
-  build_and_deploy:
+  upload_xcode_project:
     runs-on: [self-hosted, Windows, X64]
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # --- (OPTIONNEL) Ton vrai build ici ---
-      # Remplace par ton step Unity/iOS si besoin.
-      # L'important: à la fin, tu dois avoir $GITHUB_WORKSPACE\Build\iOS
+      # ✅ Ici tu gardes ton build Unity iOS habituel (si tu l'as déjà).
+      # L'objectif: produire Build\iOS dans $GITHUB_WORKSPACE
 
-      - name: Verify iOS build output exists
+      - name: Verify iOS Xcode project exists
         shell: pwsh
         run: |
           $iosPath = Join-Path $env:GITHUB_WORKSPACE "Build\iOS"
-          Write-Host "Looking for: $iosPath"
+          Write-Host "Expected iOS build folder: $iosPath"
           if (!(Test-Path $iosPath)) {
             Write-Error "Build output not found: $iosPath"
             exit 1
           }
-          Get-ChildItem $iosPath | Select-Object -First 20 | Format-Table
+          Write-Host "Top-level content:"
+          Get-ChildItem $iosPath | Select-Object -First 30 | Format-Table Name
 
-      - name: Pack iOS build folder as zip
+      - name: Pack Xcode project folder (zip)
         shell: pwsh
         run: |
           $iosPath = Join-Path $env:GITHUB_WORKSPACE "Build\iOS"
-          $outZip  = Join-Path $env:GITHUB_WORKSPACE "ios_build.zip"
-          if (Test-Path $outZip) { Remove-Item $outZip -Force }
-          Compress-Archive -Path (Join-Path $iosPath "*") -DestinationPath $outZip
-          Write-Host "Created: $outZip"
-          Get-Item $outZip | Format-List Name,Length,FullName
+          $zipPath = Join-Path $env:GITHUB_WORKSPACE "xcode_project.zip"
+          if (Test-Path $zipPath) { Remove-Item $zipPath -Force }
+          Compress-Archive -Path (Join-Path $iosPath "*") -DestinationPath $zipPath
+          Write-Host "Created zip: $zipPath"
+          Get-Item $zipPath | Format-List Name,Length,FullName
 
-      - name: Setup SSH key + known_hosts
+      - name: Setup SSH (key + known_hosts)
         shell: pwsh
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          KNOWN_HOSTS: ${{ secrets.KNOWN_HOSTS }}
           DEPLOY_HOST: ${{ vars.DEPLOY_HOST }}
           DEPLOY_PORT: ${{ vars.DEPLOY_PORT }}
-          KNOWN_HOSTS: ${{ secrets.KNOWN_HOSTS }}
         run: |
           $sshDir = Join-Path $env:USERPROFILE ".ssh"
           New-Item -ItemType Directory -Force -Path $sshDir | Out-Null
 
           $keyPath = Join-Path $sshDir "id_ed25519"
-          # Ecrit la clé (en évitant les CRLF parasites)
           $key = $env:SSH_PRIVATE_KEY -replace "`r",""
           Set-Content -Path $keyPath -Value $key -NoNewline -Encoding ascii
 
-          # Permissions Windows (important sinon ssh refuse parfois)
+          # permissions strictes sinon OpenSSH peut refuser
           icacls $keyPath /inheritance:r | Out-Null
           icacls $keyPath /grant:r "$($env:USERNAME):(R)" | Out-Null
 
@@ -62,24 +61,21 @@ jobs:
           if ($env:KNOWN_HOSTS -and $env:KNOWN_HOSTS.Trim().Length -gt 0) {
             Set-Content -Path $knownHostsPath -Value ($env:KNOWN_HOSTS -replace "`r","") -Encoding ascii
           } else {
-            # Fallback: génère known_hosts en CI
             ssh-keyscan -p $env:DEPLOY_PORT $env:DEPLOY_HOST | Out-File -FilePath $knownHostsPath -Encoding ascii
           }
 
-          Write-Host "SSH prepared."
-          Write-Host "known_hosts:"
-          Get-Content $knownHostsPath | Select-Object -First 5
+          Write-Host "SSH ready."
 
-      - name: SSH test (from CI runner)
+      - name: SSH test
         shell: pwsh
         env:
           DEPLOY_HOST: ${{ vars.DEPLOY_HOST }}
           DEPLOY_USER: ${{ vars.DEPLOY_USER }}
           DEPLOY_PORT: ${{ vars.DEPLOY_PORT }}
         run: |
-          ssh -p $env:DEPLOY_PORT "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" "echo SSH_OK && hostname && whoami"
+          ssh -p $env:DEPLOY_PORT "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" "echo SSH_OK && sw_vers && whoami"
 
-      - name: Upload zip to VM + versioned release + atomic current
+      - name: Upload zip and unpack on VM (versioned + current)
         shell: pwsh
         env:
           DEPLOY_HOST: ${{ vars.DEPLOY_HOST }}
@@ -90,22 +86,23 @@ jobs:
         run: |
           $short = $env:SHA.Substring(0,7)
           $releaseDir = "$($env:DEPLOY_PATH)/releases/$short"
-          $zipLocal = Join-Path $env:GITHUB_WORKSPACE "ios_build.zip"
+          $zipLocal = Join-Path $env:GITHUB_WORKSPACE "xcode_project.zip"
 
-          # mkdir remote
-          ssh -p $env:DEPLOY_PORT "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" "mkdir -p '$releaseDir' '$($env:DEPLOY_PATH)/releases'"
+          # Crée dossier release côté VM
+          ssh -p $env:DEPLOY_PORT "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" "mkdir -p '$releaseDir'"
 
-          # upload
-          scp -P $env:DEPLOY_PORT $zipLocal "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST):$releaseDir/ios_build.zip"
+          # Upload zip
+          scp -P $env:DEPLOY_PORT $zipLocal "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST):$releaseDir/xcode_project.zip"
 
-          # unzip + symlink current (Linux VM)
+          # Unzip dans iOS/ puis symlink current -> iOS
           ssh -p $env:DEPLOY_PORT "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" @"
           set -e
           cd '$releaseDir'
           rm -rf iOS
           mkdir -p iOS
-          unzip -q ios_build.zip -d iOS
-          rm -f ios_build.zip
+          unzip -q xcode_project.zip -d iOS
+          rm -f xcode_project.zip
           ln -sfn '$releaseDir/iOS' '$($env:DEPLOY_PATH)/current'
-          echo 'Deployed current ->' && readlink -f '$($env:DEPLOY_PATH)/current'
+          echo 'DEPLOY OK'
+          echo 'current -> ' \$(readlink '$($env:DEPLOY_PATH)/current')
 "@
