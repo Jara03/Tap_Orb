@@ -76,21 +76,31 @@ jobs:
           New-Item -ItemType Directory -Force -Path $sshDir | Out-Null
       
           $keyPath = Join-Path $sshDir "id_ed25519"
-          Set-Content -Path $keyPath -Value ($env:SSH_PRIVATE_KEY -replace "`r","") -NoNewline -Encoding ascii
       
-          # OpenSSH on Windows refuses private keys with wide permissions
+          # Write key as UTF-8 (no BOM), normalize line endings
+          $key = ($env:SSH_PRIVATE_KEY -replace "`r","").Trim() + "`n"
+          [System.IO.File]::WriteAllText($keyPath, $key, (New-Object System.Text.UTF8Encoding($false)))
+      
+          Write-Host "Key first line:"
+          Get-Content $keyPath -TotalCount 1
+      
+          # Lock down perms (OpenSSH requirement)
           icacls $keyPath /inheritance:r | Out-Null
           icacls $keyPath /remove "BUILTIN\Users" "BUILTIN\Utilisateurs" "Users" "Utilisateurs" 2>$null | Out-Null
           icacls $keyPath /grant:r "$($env:USERNAME):(R)" "SYSTEM:(R)" | Out-Null
       
+          # Validate key format
+          ssh-keygen -lf $keyPath
+      
           $knownHostsPath = Join-Path $sshDir "known_hosts"
-          Set-Content -Path $knownHostsPath -Value ($env:KNOWN_HOSTS -replace "`r","") -Encoding ascii
+          $kh = ($env:KNOWN_HOSTS -replace "`r","").Trim() + "`n"
+          [System.IO.File]::WriteAllText($knownHostsPath, $kh, (New-Object System.Text.UTF8Encoding($false)))
       
           "SSH_KEY=$keyPath" | Out-File -FilePath $env:GITHUB_ENV -Append
           "SSH_KNOWN_HOSTS=$knownHostsPath" | Out-File -FilePath $env:GITHUB_ENV -Append
       
           Write-Host "SSH setup OK in $sshDir"
-      
+                
 
       - name: SSH test (fast fail)
         shell: powershell
