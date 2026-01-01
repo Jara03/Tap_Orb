@@ -40,21 +40,22 @@ jobs:
           Write-Host "Top-level content:"
           Get-ChildItem $env:IOS_FOLDER | Select-Object -First 30 | Format-Table Name
 
-      - name: Pack Xcode project folder (zip)
+      - name: Pack Xcode project folder (tar.gz)
         shell: powershell
         run: |
-          $zipPath = Join-Path $env:GITHUB_WORKSPACE "xcode_project.zip"
-          if (Test-Path $zipPath) { Remove-Item $zipPath -Force }
+          $archive = Join-Path $env:GITHUB_WORKSPACE "xcode_project.tar.gz"
+          if (Test-Path $archive) { Remove-Item $archive -Force }
 
-          # Zip the folder itself (keeps a top-level folder in the zip)
           $parent = Split-Path -Parent $env:IOS_FOLDER
           $leaf   = Split-Path -Leaf   $env:IOS_FOLDER
+
           Push-Location $parent
-          Compress-Archive -Path $leaf -DestinationPath $zipPath -Force
+          tar -czf $archive $leaf
           Pop-Location
 
-          Write-Host "Created zip: $zipPath"
-          Get-Item $zipPath | Format-List Name,Length,FullName
+          Write-Host "Created: $archive"
+          Get-Item $archive | Format-List Name,Length,FullName
+
 
       - name: Setup SSH (fresh)
         shell: powershell
@@ -115,7 +116,7 @@ jobs:
             -o StrictHostKeyChecking=yes `
             "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" "echo SSH_OK && sw_vers && whoami"
 
-      - name: Upload and unzip on VM
+      - name: Upload and extract on VM (tar.gz)
         shell: powershell
         env:
           DEPLOY_HOST: ${{ vars.DEPLOY_HOST }}
@@ -129,9 +130,9 @@ jobs:
             exit 1
           }
 
-          $zipLocal = Join-Path $env:GITHUB_WORKSPACE "xcode_project.zip"
-          if (-not (Test-Path $zipLocal)) {
-            Write-Error "Missing zip: $zipLocal"
+          $archiveLocal = Join-Path $env:GITHUB_WORKSPACE "xcode_project.tar.gz"
+          if (-not (Test-Path $archiveLocal)) {
+            Write-Error "Missing archive: $archiveLocal"
             exit 1
           }
 
@@ -145,20 +146,19 @@ jobs:
             -o StrictHostKeyChecking=yes `
             "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" "mkdir -p '$releaseDir'"
 
-          # 2) Upload zip
+          # 2) Upload tar.gz
           scp -o BatchMode=yes -o ConnectTimeout=10 -o ConnectionAttempts=1 `
             -i "$env:SSH_KEY" -P $env:DEPLOY_PORT `
             -o UserKnownHostsFile="$env:SSH_KNOWN_HOSTS" `
             -o StrictHostKeyChecking=yes `
-            "$zipLocal" `
-            "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST):$releaseDir/xcode_project.zip"
+            "$archiveLocal" `
+            "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST):$releaseDir/xcode_project.tar.gz"
 
-          # 3) Unzip + symlink current (ONE-LINER to avoid CRLF/^M)
-          $remoteCmd = "set -e; cd '$releaseDir'; rm -rf iOS; mkdir -p iOS; unzip -q xcode_project.zip -d iOS; rm -f xcode_project.zip; mkdir -p '$($env:DEPLOY_PATH)/releases'; ln -sfn '$releaseDir/iOS' '$($env:DEPLOY_PATH)/current'; echo DEPLOY_OK; ls -l '$($env:DEPLOY_PATH)/current'"
+          # 3) Extract + symlink current (one-liner)
+          $remoteCmd = "set -e; cd '$releaseDir'; rm -rf iOS; mkdir -p iOS; tar -xzf xcode_project.tar.gz -C iOS --strip-components=1; rm -f xcode_project.tar.gz; ln -sfn '$releaseDir/iOS' '$($env:DEPLOY_PATH)/current'; echo DEPLOY_OK; ls -l '$($env:DEPLOY_PATH)/current'"
 
           ssh -o BatchMode=yes -o ConnectTimeout=10 -o ConnectionAttempts=1 `
             -i "$env:SSH_KEY" -p $env:DEPLOY_PORT `
             -o UserKnownHostsFile="$env:SSH_KNOWN_HOSTS" `
             -o StrictHostKeyChecking=yes `
             "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" "$remoteCmd"
-
