@@ -17,7 +17,7 @@ jobs:
       # L'objectif: produire Build\iOS dans $GITHUB_WORKSPACE
 
       - name: Verify iOS Xcode project exists
-        shell: powershell
+        shell: cmd
         run: |
           $iosPath = Join-Path $env:GITHUB_WORKSPACE "Build\iOS"
           Write-Host "Expected iOS build folder: $iosPath"
@@ -29,7 +29,7 @@ jobs:
           Get-ChildItem $iosPath | Select-Object -First 30 | Format-Table Name
 
       - name: Pack Xcode project folder (zip)
-        shell: powershell
+        shell: cmd
         run: |
           $iosPath = Join-Path $env:GITHUB_WORKSPACE "Build\iOS"
           $zipPath = Join-Path $env:GITHUB_WORKSPACE "xcode_project.zip"
@@ -39,7 +39,7 @@ jobs:
           Get-Item $zipPath | Format-List Name,Length,FullName
 
       - name: Setup SSH (key + known_hosts)
-        shell: powershell
+        shell: cmd
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           KNOWN_HOSTS: ${{ secrets.KNOWN_HOSTS }}
@@ -67,7 +67,7 @@ jobs:
           Write-Host "SSH ready."
 
       - name: SSH test
-        shell: powershell
+        shell: cmd
         env:
           DEPLOY_HOST: ${{ vars.DEPLOY_HOST }}
           DEPLOY_USER: ${{ vars.DEPLOY_USER }}
@@ -76,7 +76,7 @@ jobs:
           ssh -p $env:DEPLOY_PORT "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" "echo SSH_OK && sw_vers && whoami"
 
       - name: Upload zip and unpack on VM (versioned + current)
-        shell: powershell
+        shell: cmd
         env:
           DEPLOY_HOST: ${{ vars.DEPLOY_HOST }}
           DEPLOY_USER: ${{ vars.DEPLOY_USER }}
