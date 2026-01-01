@@ -34,7 +34,7 @@ jobs:
           Compress-Archive -Path (Join-Path $iosPath "*") -DestinationPath $zipPath
           Write-Host "Created zip: $zipPath"
           Get-Item $zipPath | Format-List Name,Length,FullName
-
+  
            - name: Setup SSH (fresh)
           shell: powershell
           env:
@@ -55,18 +55,18 @@ jobs:
             "SSH_KNOWN_HOSTS=$knownHostsPath" | Out-File -FilePath $env:GITHUB_ENV -Append
 
 
-          - name: SSH test
-            shell: powershell
-            env:
-              DEPLOY_HOST: ${{ vars.DEPLOY_HOST }}
-              DEPLOY_USER: ${{ vars.DEPLOY_USER }}
-              DEPLOY_PORT: ${{ vars.DEPLOY_PORT }}
-            run: |
-              ssh -o BatchMode=yes -o ConnectTimeout=10 -o ConnectionAttempts=1 `
-                -i "$env:SSH_KEY" -p $env:DEPLOY_PORT `
-                -o UserKnownHostsFile="$env:SSH_KNOWN_HOSTS" `
-                -o StrictHostKeyChecking=yes `
-                "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" "echo SSH_OK && sw_vers && whoami"
+      - name: SSH test
+        shell: powershell
+        env:
+          DEPLOY_HOST: ${{ vars.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ vars.DEPLOY_USER }}
+          DEPLOY_PORT: ${{ vars.DEPLOY_PORT }}
+        run: |
+          ssh -o BatchMode=yes -o ConnectTimeout=10 -o ConnectionAttempts=1 `
+            -i "$env:SSH_KEY" -p $env:DEPLOY_PORT `
+            -o UserKnownHostsFile="$env:SSH_KNOWN_HOSTS" `
+            -o StrictHostKeyChecking=yes `
+            "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" "echo SSH_OK && sw_vers && whoami"
       
       - name: SCP upload
         shell: powershell
