@@ -7,20 +7,10 @@
     <list default="true" id="f856c2c3-5d6c-43a8-b00d-43067849984f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BoubouleClick/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BoubouleClick/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assembly-CSharp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Assembly-CSharp.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ObjectiveRowView.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ObjectiveRowView.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ObjectivesPanelController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ObjectivesPanelController.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Blender_Old/panier.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Blender_Old/panier.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/editable_prefab/panier.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/editable_prefab/panier.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Home.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Home.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 1.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 2.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 2.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/LevelDataManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/LevelDataManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/LevelMenuGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/LevelMenuGenerator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/VacuumAttractor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/VacuumAttractor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/level-edition/LevelEditorBootstrap.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/level-edition/LevelEditorBootstrap.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SkinEditorUIController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SkinEditorUIController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Build/fastlane/Appfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Build/fastlane/Fastfile" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-6000.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-6000.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -185,7 +175,7 @@
       <workItem from="1766225032120" duration="4397000" />
       <workItem from="1766921671706" duration="910000" />
       <workItem from="1766922675206" duration="11086000" />
-      <workItem from="1767261107745" duration="1445000" />
+      <workItem from="1767261107745" duration="4690000" />
     </task>
     <task id="LOCAL-00001" summary="initial Commit">
       <option name="closed" value="true" />
@@ -491,7 +481,15 @@
       <option name="project" value="LOCAL" />
       <updated>1766956102186</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="major bug and features fixes">
+      <option name="closed" value="true" />
+      <created>1767281314658</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1767281314658</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -530,7 +528,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Added NextLevel Button P2" />
     <MESSAGE value="updated project Settings" />
     <MESSAGE value="Debug session" />
     <MESSAGE value="updated UI" />
@@ -555,7 +552,8 @@
     <MESSAGE value="added volume controller and animated background support" />
     <MESSAGE value="global commit update" />
     <MESSAGE value="added ball customization option" />
-    <option name="LAST_COMMIT_MESSAGE" value="added ball customization option" />
+    <MESSAGE value="major bug and features fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="major bug and features fixes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
