@@ -161,7 +161,16 @@ public class SkinEditorUIController : MonoBehaviour
             // iOS : tu avais déjà un flow spécial pour l'image
             if (mediaType == NativeGallery.MediaType.Video)
             {
-                StartCoroutine(SkinManager.ImportVideoiOS(path));
+                StartCoroutine(SkinManager.ImportVideoiOS(path,(fileName) =>
+                    {
+                        // fileName = "bg_....mp4" (juste le nom, pas le path)
+                        // Ici tu branches la suite logique : assigner au skin, sauvegarder, refresh UI, etc.
+
+                        var skin = SkinManager.CurrentSkin; // adapte à ton code
+                        skin.BackgroundVideoName = fileName;
+                        skin.UseBackgroundVideo = true;
+                        skin.UseBackgroundImage = false;
+                    }));
             }
             else
             {
