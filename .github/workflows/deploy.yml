@@ -17,7 +17,7 @@ jobs:
       # L'objectif: produire Build\iOS dans $GITHUB_WORKSPACE
 
       - name: Verify iOS Xcode project exists
-        shell: pwsh
+        shell: powershell
         run: |
           $iosPath = Join-Path $env:GITHUB_WORKSPACE "Build\iOS"
           Write-Host "Expected iOS build folder: $iosPath"
