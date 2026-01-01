@@ -35,39 +35,37 @@ jobs:
           Write-Host "Created zip: $zipPath"
           Get-Item $zipPath | Format-List Name,Length,FullName
 
-      - name: Setup SSH (key + known_hosts)
+      - name: Setup SSH (workspace local)
         shell: powershell
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          KNOWN_HOSTS: ${{ secrets.KNOWN_HOSTS }}
-          DEPLOY_HOST: ${{ vars.DEPLOY_HOST }}
-          DEPLOY_PORT: ${{ vars.DEPLOY_PORT }}
+            SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+            KNOWN_HOSTS: ${{ secrets.KNOWN_HOSTS }}
         run: |
-          $sshDir = Join-Path $env:USERPROFILE ".ssh"
-          New-Item -ItemType Directory -Force -Path $sshDir | Out-Null
-
-          $keyPath = Join-Path $sshDir "id_ed25519"
-          $key = $env:SSH_PRIVATE_KEY -replace "`r",""
-          Set-Content -Path $keyPath -Value $key -NoNewline -Encoding ascii
-
-          # permissions strictes sinon OpenSSH peut refuser
-          icacls $keyPath /inheritance:r | Out-Null
-          icacls $keyPath /grant:r "$($env:USERNAME):(R)" | Out-Null
-
-          $knownHostsPath = Join-Path $sshDir "known_hosts"
-          if ($env:KNOWN_HOSTS -and $env:KNOWN_HOSTS.Trim().Length -gt 0) {
+            $sshDir = Join-Path $env:GITHUB_WORKSPACE ".ssh_ci"
+            New-Item -ItemType Directory -Force -Path $sshDir | Out-Null
+        
+            $keyPath = Join-Path $sshDir "id_ed25519"
+            $key = $env:SSH_PRIVATE_KEY -replace "`r",""
+            Set-Content -Path $keyPath -Value $key -NoNewline -Encoding ascii
+        
+            # permissions: pas obligatoire si on passe -i, mais on sécurise un minimum
+            icacls $keyPath /inheritance:r | Out-Null
+            icacls $keyPath /grant:r "$($env:USERNAME):(R)" | Out-Null
+        
+            $knownHostsPath = Join-Path $sshDir "known_hosts"
+            if (-not $env:KNOWN_HOSTS -or $env:KNOWN_HOSTS.Trim().Length -eq 0) {
+              Write-Error "KNOWN_HOSTS secret is missing."
+              exit 1
+            }
             Set-Content -Path $knownHostsPath -Value ($env:KNOWN_HOSTS -replace "`r","") -Encoding ascii
-          } 
-          
-          $knownHostsPath = Join-Path $sshDir "known_hosts"
-          if (-not $env:KNOWN_HOSTS -or $env:KNOWN_HOSTS.Trim().Length -eq 0) {
-            Write-Error "KNOWN_HOSTS secret is missing. Add it in GitHub Secrets."
-            exit 1
-          }
-          Set-Content -Path $knownHostsPath -Value ($env:KNOWN_HOSTS -replace "`r","") -Encoding ascii
-
-
-          Write-Host "SSH ready."
+        
+            # Export variables for next steps
+            "SSH_DIR=$sshDir" | Out-File -FilePath $env:GITHUB_ENV -Append
+            "SSH_KEY=$keyPath" | Out-File -FilePath $env:GITHUB_ENV -Append
+            "SSH_KNOWN_HOSTS=$knownHostsPath" | Out-File -FilePath $env:GITHUB_ENV -Append
+        
+            Write-Host "SSH setup OK in $sshDir"
+        
 
       - name: SSH test
         shell: powershell
