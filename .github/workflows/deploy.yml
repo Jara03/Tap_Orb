@@ -153,22 +153,12 @@ jobs:
             "$zipLocal" `
             "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST):$releaseDir/xcode_project.zip"
 
-          # 3) Unzip into iOS/ and update current symlink
-          $remoteCmd = @"
-          set -e
-          cd '$releaseDir'
-          rm -rf iOS
-          mkdir -p iOS
-          unzip -q xcode_project.zip -d iOS
-          rm -f xcode_project.zip
-          mkdir -p '$($env:DEPLOY_PATH)/releases'
-          ln -sfn '$releaseDir/iOS' '$($env:DEPLOY_PATH)/current'
-          echo DEPLOY_OK
-          ls -l '$($env:DEPLOY_PATH)/current'
-          "@
-          
-                    ssh -o BatchMode=yes -o ConnectTimeout=10 -o ConnectionAttempts=1 `
-                      -i "$env:SSH_KEY" -p $env:DEPLOY_PORT `
-                      -o UserKnownHostsFile="$env:SSH_KNOWN_HOSTS" `
-                      -o StrictHostKeyChecking=yes `
-                      "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" "$remoteCmd"
+          # 3) Unzip + symlink current (ONE-LINER to avoid CRLF/^M)
+          $remoteCmd = "set -e; cd '$releaseDir'; rm -rf iOS; mkdir -p iOS; unzip -q xcode_project.zip -d iOS; rm -f xcode_project.zip; mkdir -p '$($env:DEPLOY_PATH)/releases'; ln -sfn '$releaseDir/iOS' '$($env:DEPLOY_PATH)/current'; echo DEPLOY_OK; ls -l '$($env:DEPLOY_PATH)/current'"
+
+          ssh -o BatchMode=yes -o ConnectTimeout=10 -o ConnectionAttempts=1 `
+            -i "$env:SSH_KEY" -p $env:DEPLOY_PORT `
+            -o UserKnownHostsFile="$env:SSH_KNOWN_HOSTS" `
+            -o StrictHostKeyChecking=yes `
+            "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" "$remoteCmd"
+
