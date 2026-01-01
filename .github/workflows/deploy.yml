@@ -105,4 +105,3 @@ jobs:
           ln -sfn '$releaseDir/iOS' '$($env:DEPLOY_PATH)/current'
           echo 'DEPLOY OK'
           echo 'current -> ' \$(readlink '$($env:DEPLOY_PATH)/current')
-"@
