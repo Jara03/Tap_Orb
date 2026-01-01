@@ -35,52 +35,38 @@ jobs:
           Write-Host "Created zip: $zipPath"
           Get-Item $zipPath | Format-List Name,Length,FullName
 
-      - name: Setup SSH (fresh in RUNNER_TEMP)
-        shell: powershell
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          KNOWN_HOSTS: ${{ secrets.KNOWN_HOSTS }}
-        run: |
-          $sshDir = Join-Path $env:RUNNER_TEMP ("ssh_ci_" + $env:GITHUB_RUN_ID)
-          if (Test-Path $sshDir) { Remove-Item $sshDir -Recurse -Force }
-          New-Item -ItemType Directory -Force -Path $sshDir | Out-Null
-      
-          $keyPath = Join-Path $sshDir "id_ed25519"
-          $key = $env:SSH_PRIVATE_KEY -replace "`r",""
-          Set-Content -Path $keyPath -Value $key -NoNewline -Encoding ascii
-      
-          $knownHostsPath = Join-Path $sshDir "known_hosts"
-          if (-not $env:KNOWN_HOSTS -or $env:KNOWN_HOSTS.Trim().Length -eq 0) {
-            Write-Error "KNOWN_HOSTS secret is missing."
-            exit 1
-          }
-          Set-Content -Path $knownHostsPath -Value ($env:KNOWN_HOSTS -replace "`r","") -Encoding ascii
-      
-          # Permissions: donner contrôle total au compte courant (pas juste Read)
-          icacls $keyPath /inheritance:r | Out-Null
-          icacls $keyPath /grant:r "$($env:USERNAME):(F)" | Out-Null
-      
-          # Export variables for next steps
-          "SSH_DIR=$sshDir" | Out-File -FilePath $env:GITHUB_ENV -Append
-          "SSH_KEY=$keyPath" | Out-File -FilePath $env:GITHUB_ENV -Append
-          "SSH_KNOWN_HOSTS=$knownHostsPath" | Out-File -FilePath $env:GITHUB_ENV -Append
-      
-          Write-Host "SSH setup OK in $sshDir"
+           - name: Setup SSH (fresh)
+          shell: powershell
+          env:
+            SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+            KNOWN_HOSTS: ${{ secrets.KNOWN_HOSTS }}
+          run: |
+            $sshDir = Join-Path $env:RUNNER_TEMP ("ssh_ci_" + $env:GITHUB_RUN_ID)
+            if (Test-Path $sshDir) { Remove-Item $sshDir -Recurse -Force }
+            New-Item -ItemType Directory -Force -Path $sshDir | Out-Null
+        
+            $keyPath = Join-Path $sshDir "id_ed25519"
+            Set-Content -Path $keyPath -Value ($env:SSH_PRIVATE_KEY -replace "`r","") -NoNewline -Encoding ascii
+        
+            $knownHostsPath = Join-Path $sshDir "known_hosts"
+            Set-Content -Path $knownHostsPath -Value ($env:KNOWN_HOSTS -replace "`r","") -Encoding ascii
+        
+            "SSH_KEY=$keyPath" | Out-File -FilePath $env:GITHUB_ENV -Append
+            "SSH_KNOWN_HOSTS=$knownHostsPath" | Out-File -FilePath $env:GITHUB_ENV -Append
 
-      - name: SSH test (timeout)
-        shell: powershell
-        env:
-          DEPLOY_HOST: ${{ vars.DEPLOY_HOST }}
-          DEPLOY_USER: ${{ vars.DEPLOY_USER }}
-          DEPLOY_PORT: ${{ vars.DEPLOY_PORT }}
-        run: |
-          ssh -o ConnectTimeout=10 -o ConnectionAttempts=1 `
-            -i "$env:SSH_KEY" -p $env:DEPLOY_PORT `
-            -o UserKnownHostsFile="$env:SSH_KNOWN_HOSTS" `
-            -o StrictHostKeyChecking=yes `
-            "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" "echo SSH_OK && sw_vers && whoami"
-      
 
+          - name: SSH test
+            shell: powershell
+            env:
+              DEPLOY_HOST: ${{ vars.DEPLOY_HOST }}
+              DEPLOY_USER: ${{ vars.DEPLOY_USER }}
+              DEPLOY_PORT: ${{ vars.DEPLOY_PORT }}
+            run: |
+              ssh -o BatchMode=yes -o ConnectTimeout=10 -o ConnectionAttempts=1 `
+                -i "$env:SSH_KEY" -p $env:DEPLOY_PORT `
+                -o UserKnownHostsFile="$env:SSH_KNOWN_HOSTS" `
+                -o StrictHostKeyChecking=yes `
+                "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" "echo SSH_OK && sw_vers && whoami"
       
       - name: SCP upload
         shell: powershell
