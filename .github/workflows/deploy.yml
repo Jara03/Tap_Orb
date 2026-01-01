@@ -67,17 +67,19 @@ jobs:
       
           Write-Host "SSH setup OK in $sshDir"
 
-      - name: SSH test
+      - name: SSH test (timeout)
         shell: powershell
         env:
           DEPLOY_HOST: ${{ vars.DEPLOY_HOST }}
           DEPLOY_USER: ${{ vars.DEPLOY_USER }}
           DEPLOY_PORT: ${{ vars.DEPLOY_PORT }}
         run: |
-          ssh -i "$env:SSH_KEY" -p $env:DEPLOY_PORT `
+          ssh -o ConnectTimeout=10 -o ConnectionAttempts=1 `
+            -i "$env:SSH_KEY" -p $env:DEPLOY_PORT `
             -o UserKnownHostsFile="$env:SSH_KNOWN_HOSTS" `
             -o StrictHostKeyChecking=yes `
             "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" "echo SSH_OK && sw_vers && whoami"
+      
 
       
       - name: SCP upload
