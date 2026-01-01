@@ -6,14 +6,19 @@ public class LevelEditorBootstrap : MonoBehaviour
 {
     private const string HomeSceneName = "Home";
     private static LevelEditorBootstrap instance;
+    
+    private static bool isEditorEnabled = false;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     private static void Initialize()
     {
-        if (instance != null) return;
-        GameObject bootstrapObject = new GameObject("LevelEditorBootstrap");
-        instance = bootstrapObject.AddComponent<LevelEditorBootstrap>();
-        DontDestroyOnLoad(bootstrapObject);
+        if (isEditorEnabled)
+        {
+            if (instance != null) return;
+            GameObject bootstrapObject = new GameObject("LevelEditorBootstrap");
+            instance = bootstrapObject.AddComponent<LevelEditorBootstrap>();
+            DontDestroyOnLoad(bootstrapObject);
+        }
     }
 
     private void Awake()

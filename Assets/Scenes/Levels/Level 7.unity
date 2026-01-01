@@ -1269,6 +1269,9 @@ MonoBehaviour:
   minResetCooldown: 1
   lastSeenTime: 0
   interstitialAds: {fileID: 0}
+  bgRT: {fileID: 0}
+  forceEditorTestVideo: 0
+  editorTestVideoFileName: test_bg.mp4
 --- !u!4 &1314294744
 Transform:
   m_ObjectHideFlags: 0
@@ -1346,7 +1349,12 @@ PrefabInstance:
     - target: {fileID: 3490671849378469859, guid: 9769df5d351b84441ad503159edd4e12,
         type: 3}
       propertyPath: suctionRadius
-      value: 3
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449817341455182640, guid: 9769df5d351b84441ad503159edd4e12,
+        type: 3}
+      propertyPath: m_Radius
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4449817341455182640, guid: 9769df5d351b84441ad503159edd4e12,
         type: 3}

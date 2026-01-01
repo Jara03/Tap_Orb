@@ -1176,6 +1176,11 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1226844066}
+    - target: {fileID: 458488288965668979, guid: 9769df5d351b84441ad503159edd4e12,
+        type: 3}
+      propertyPath: m_VersionIndex
+      value: 3451
+      objectReference: {fileID: 0}
     - target: {fileID: 2023101313341710661, guid: 9769df5d351b84441ad503159edd4e12,
         type: 3}
       propertyPath: m_Mesh
@@ -1190,21 +1195,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: panier
-      objectReference: {fileID: 0}
-    - target: {fileID: 6225674412495334323, guid: 9769df5d351b84441ad503159edd4e12,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6225674412495334323, guid: 9769df5d351b84441ad503159edd4e12,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6225674412495334323, guid: 9769df5d351b84441ad503159edd4e12,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6225674412495334323, guid: 9769df5d351b84441ad503159edd4e12,
         type: 3}
