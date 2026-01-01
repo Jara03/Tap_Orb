@@ -1,111 +1,111 @@
-name: Build & Deploy to VM
+name: Build iOS + Upload to VM
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    outputs:
-      artifact-name: build-tar
+  build_and_deploy:
+    runs-on: [self-hosted, Windows, X64]
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # TODO: remplace cette étape par ton vrai build (Unity/Gradle/etc.)
-      - name: Build (example placeholder)
+      # --- (OPTIONNEL) Ton vrai build ici ---
+      # Remplace par ton step Unity/iOS si besoin.
+      # L'important: à la fin, tu dois avoir $GITHUB_WORKSPACE\Build\iOS
+
+      - name: Verify iOS build output exists
+        shell: pwsh
         run: |
-          mkdir -p Build
-          echo "hello from build" > Build/version.txt
+          $iosPath = Join-Path $env:GITHUB_WORKSPACE "Build\iOS"
+          Write-Host "Looking for: $iosPath"
+          if (!(Test-Path $iosPath)) {
+            Write-Error "Build output not found: $iosPath"
+            exit 1
+          }
+          Get-ChildItem $iosPath | Select-Object -First 20 | Format-Table
 
-      - name: Pack build
-        run: tar -czf build.tar.gz Build
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-tar
-          path: build.tar.gz
-          retention-days: 7
-
-  ssh_test:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Setup SSH
+      - name: Pack iOS build folder as zip
+        shell: pwsh
         run: |
-          mkdir -p ~/.ssh
-          chmod 700 ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
-          sed -i 's/\r$//' ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
+          $iosPath = Join-Path $env:GITHUB_WORKSPACE "Build\iOS"
+          $outZip  = Join-Path $env:GITHUB_WORKSPACE "ios_build.zip"
+          if (Test-Path $outZip) { Remove-Item $outZip -Force }
+          Compress-Archive -Path (Join-Path $iosPath "*") -DestinationPath $outZip
+          Write-Host "Created: $outZip"
+          Get-Item $outZip | Format-List Name,Length,FullName
 
-          if [ -n "${{ secrets.KNOWN_HOSTS }}" ]; then
-            echo "${{ secrets.KNOWN_HOSTS }}" > ~/.ssh/known_hosts
-          else
-            ssh-keyscan -p "${{ vars.DEPLOY_PORT }}" "${{ vars.DEPLOY_HOST }}" > ~/.ssh/known_hosts
-          fi
-          chmod 644 ~/.ssh/known_hosts
-
-      - name: SSH ping
-        run: |
-          ssh -p "${{ vars.DEPLOY_PORT }}" -i ~/.ssh/id_ed25519 \
-            "${{ vars.DEPLOY_USER }}@${{ vars.DEPLOY_HOST }}" \
-            "echo 'SSH OK' && hostname && whoami"
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: [build, ssh_test]
-    steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: build-tar
-
-      - name: Setup SSH
-        run: |
-          mkdir -p ~/.ssh
-          chmod 700 ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
-          sed -i 's/\r$//' ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-
-          if [ -n "${{ secrets.KNOWN_HOSTS }}" ]; then
-            echo "${{ secrets.KNOWN_HOSTS }}" > ~/.ssh/known_hosts
-          else
-            ssh-keyscan -p "${{ vars.DEPLOY_PORT }}" "${{ vars.DEPLOY_HOST }}" > ~/.ssh/known_hosts
-          fi
-          chmod 644 ~/.ssh/known_hosts
-
-      - name: Deploy tarball (versioned + atomic current)
+      - name: Setup SSH key + known_hosts
+        shell: pwsh
         env:
-          SHA: ${{ github.sha }}
-          SHORT_SHA: ${{ github.sha }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          DEPLOY_HOST: ${{ vars.DEPLOY_HOST }}
+          DEPLOY_PORT: ${{ vars.DEPLOY_PORT }}
+          KNOWN_HOSTS: ${{ secrets.KNOWN_HOSTS }}
         run: |
-          SHORT_SHA="${SHA:0:7}"
-          RELEASE_DIR="${{ vars.DEPLOY_PATH }}/releases/${SHORT_SHA}"
+          $sshDir = Join-Path $env:USERPROFILE ".ssh"
+          New-Item -ItemType Directory -Force -Path $sshDir | Out-Null
 
-          # Prépare les dossiers
-          ssh -p "${{ vars.DEPLOY_PORT }}" -i ~/.ssh/id_ed25519 \
-            "${{ vars.DEPLOY_USER }}@${{ vars.DEPLOY_HOST }}" \
-            "mkdir -p '${RELEASE_DIR}' '${{ vars.DEPLOY_PATH }}/releases'"
+          $keyPath = Join-Path $sshDir "id_ed25519"
+          # Ecrit la clé (en évitant les CRLF parasites)
+          $key = $env:SSH_PRIVATE_KEY -replace "`r",""
+          Set-Content -Path $keyPath -Value $key -NoNewline -Encoding ascii
 
-          # Upload
-          scp -P "${{ vars.DEPLOY_PORT }}" -i ~/.ssh/id_ed25519 \
-            build.tar.gz \
-            "${{ vars.DEPLOY_USER }}@${{ vars.DEPLOY_HOST }}:${RELEASE_DIR}/build.tar.gz"
+          # Permissions Windows (important sinon ssh refuse parfois)
+          icacls $keyPath /inheritance:r | Out-Null
+          icacls $keyPath /grant:r "$($env:USERNAME):(R)" | Out-Null
 
-          # Unpack + symlink current atomique
-          ssh -p "${{ vars.DEPLOY_PORT }}" -i ~/.ssh/id_ed25519 \
-            "${{ vars.DEPLOY_USER }}@${{ vars.DEPLOY_HOST }}" \
-            "set -e
-             cd '${RELEASE_DIR}'
-             tar -xzf build.tar.gz
-             rm -f build.tar.gz
-             ln -sfn '${RELEASE_DIR}/Build' '${{ vars.DEPLOY_PATH }}/current'
-             echo 'Deployed current ->' && readlink -f '${{ vars.DEPLOY_PATH }}/current'"
+          $knownHostsPath = Join-Path $sshDir "known_hosts"
+          if ($env:KNOWN_HOSTS -and $env:KNOWN_HOSTS.Trim().Length -gt 0) {
+            Set-Content -Path $knownHostsPath -Value ($env:KNOWN_HOSTS -replace "`r","") -Encoding ascii
+          } else {
+            # Fallback: génère known_hosts en CI
+            ssh-keyscan -p $env:DEPLOY_PORT $env:DEPLOY_HOST | Out-File -FilePath $knownHostsPath -Encoding ascii
+          }
 
-          # (Optionnel) redémarrer un service
-          # ssh ... "sudo systemctl restart ton-service"
+          Write-Host "SSH prepared."
+          Write-Host "known_hosts:"
+          Get-Content $knownHostsPath | Select-Object -First 5
+
+      - name: SSH test (from CI runner)
+        shell: pwsh
+        env:
+          DEPLOY_HOST: ${{ vars.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ vars.DEPLOY_USER }}
+          DEPLOY_PORT: ${{ vars.DEPLOY_PORT }}
+        run: |
+          ssh -p $env:DEPLOY_PORT "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" "echo SSH_OK && hostname && whoami"
+
+      - name: Upload zip to VM + versioned release + atomic current
+        shell: pwsh
+        env:
+          DEPLOY_HOST: ${{ vars.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ vars.DEPLOY_USER }}
+          DEPLOY_PORT: ${{ vars.DEPLOY_PORT }}
+          DEPLOY_PATH: ${{ vars.DEPLOY_PATH }}
+          SHA: ${{ github.sha }}
+        run: |
+          $short = $env:SHA.Substring(0,7)
+          $releaseDir = "$($env:DEPLOY_PATH)/releases/$short"
+          $zipLocal = Join-Path $env:GITHUB_WORKSPACE "ios_build.zip"
+
+          # mkdir remote
+          ssh -p $env:DEPLOY_PORT "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" "mkdir -p '$releaseDir' '$($env:DEPLOY_PATH)/releases'"
+
+          # upload
+          scp -P $env:DEPLOY_PORT $zipLocal "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST):$releaseDir/ios_build.zip"
+
+          # unzip + symlink current (Linux VM)
+          ssh -p $env:DEPLOY_PORT "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" @"
+          set -e
+          cd '$releaseDir'
+          rm -rf iOS
+          mkdir -p iOS
+          unzip -q ios_build.zip -d iOS
+          rm -f ios_build.zip
+          ln -sfn '$releaseDir/iOS' '$($env:DEPLOY_PATH)/current'
+          echo 'Deployed current ->' && readlink -f '$($env:DEPLOY_PATH)/current'
+"@
