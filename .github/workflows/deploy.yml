@@ -1,0 +1,111 @@
+name: Build & Deploy to VM
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      artifact-name: build-tar
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # TODO: remplace cette étape par ton vrai build (Unity/Gradle/etc.)
+      - name: Build (example placeholder)
+        run: |
+          mkdir -p Build
+          echo "hello from build" > Build/version.txt
+
+      - name: Pack build
+        run: tar -czf build.tar.gz Build
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-tar
+          path: build.tar.gz
+          retention-days: 7
+
+  ssh_test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          sed -i 's/\r$//' ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+
+          if [ -n "${{ secrets.KNOWN_HOSTS }}" ]; then
+            echo "${{ secrets.KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+          else
+            ssh-keyscan -p "${{ vars.DEPLOY_PORT }}" "${{ vars.DEPLOY_HOST }}" > ~/.ssh/known_hosts
+          fi
+          chmod 644 ~/.ssh/known_hosts
+
+      - name: SSH ping
+        run: |
+          ssh -p "${{ vars.DEPLOY_PORT }}" -i ~/.ssh/id_ed25519 \
+            "${{ vars.DEPLOY_USER }}@${{ vars.DEPLOY_HOST }}" \
+            "echo 'SSH OK' && hostname && whoami"
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [build, ssh_test]
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: build-tar
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          sed -i 's/\r$//' ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+
+          if [ -n "${{ secrets.KNOWN_HOSTS }}" ]; then
+            echo "${{ secrets.KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+          else
+            ssh-keyscan -p "${{ vars.DEPLOY_PORT }}" "${{ vars.DEPLOY_HOST }}" > ~/.ssh/known_hosts
+          fi
+          chmod 644 ~/.ssh/known_hosts
+
+      - name: Deploy tarball (versioned + atomic current)
+        env:
+          SHA: ${{ github.sha }}
+          SHORT_SHA: ${{ github.sha }}
+        run: |
+          SHORT_SHA="${SHA:0:7}"
+          RELEASE_DIR="${{ vars.DEPLOY_PATH }}/releases/${SHORT_SHA}"
+
+          # Prépare les dossiers
+          ssh -p "${{ vars.DEPLOY_PORT }}" -i ~/.ssh/id_ed25519 \
+            "${{ vars.DEPLOY_USER }}@${{ vars.DEPLOY_HOST }}" \
+            "mkdir -p '${RELEASE_DIR}' '${{ vars.DEPLOY_PATH }}/releases'"
+
+          # Upload
+          scp -P "${{ vars.DEPLOY_PORT }}" -i ~/.ssh/id_ed25519 \
+            build.tar.gz \
+            "${{ vars.DEPLOY_USER }}@${{ vars.DEPLOY_HOST }}:${RELEASE_DIR}/build.tar.gz"
+
+          # Unpack + symlink current atomique
+          ssh -p "${{ vars.DEPLOY_PORT }}" -i ~/.ssh/id_ed25519 \
+            "${{ vars.DEPLOY_USER }}@${{ vars.DEPLOY_HOST }}" \
+            "set -e
+             cd '${RELEASE_DIR}'
+             tar -xzf build.tar.gz
+             rm -f build.tar.gz
+             ln -sfn '${RELEASE_DIR}/Build' '${{ vars.DEPLOY_PATH }}/current'
+             echo 'Deployed current ->' && readlink -f '${{ vars.DEPLOY_PATH }}/current'"
+
+          # (Optionnel) redémarrer un service
+          # ssh ... "sudo systemctl restart ton-service"
