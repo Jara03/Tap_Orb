@@ -125,33 +125,35 @@ jobs:
           SHA: ${{ github.sha }}
         run: |
           if (-not $env:DEPLOY_PATH -or $env:DEPLOY_PATH.Trim().Length -eq 0) {
-            Write-Error "DEPLOY_PATH variable is missing (e.g. /Users/hayro/TapOrbBuilds)."
+            Write-Error "DEPLOY_PATH variable is missing (example: /Users/hayro/TapOrbBuilds)"
             exit 1
           }
 
-          $short = $env:SHA.Substring(0,7)
-          $releaseDir = "$($env:DEPLOY_PATH)/releases/$short"
           $zipLocal = Join-Path $env:GITHUB_WORKSPACE "xcode_project.zip"
-
           if (-not (Test-Path $zipLocal)) {
             Write-Error "Missing zip: $zipLocal"
             exit 1
           }
 
-          # Create release directory on VM
+          $short = $env:SHA.Substring(0,7)
+          $releaseDir = "$($env:DEPLOY_PATH)/releases/$short"
+
+          # 1) Create release directory on VM
           ssh -o BatchMode=yes -o ConnectTimeout=10 -o ConnectionAttempts=1 `
             -i "$env:SSH_KEY" -p $env:DEPLOY_PORT `
-            -o UserKnownHostsFile="$env:SSH_KNOWN_HOSTS" -o StrictHostKeyChecking=yes `
+            -o UserKnownHostsFile="$env:SSH_KNOWN_HOSTS" `
+            -o StrictHostKeyChecking=yes `
             "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" "mkdir -p '$releaseDir'"
 
-          # Upload zip
+          # 2) Upload zip
           scp -o BatchMode=yes -o ConnectTimeout=10 -o ConnectionAttempts=1 `
             -i "$env:SSH_KEY" -P $env:DEPLOY_PORT `
-            -o UserKnownHostsFile="$env:SSH_KNOWN_HOSTS" -o StrictHostKeyChecking=yes `
+            -o UserKnownHostsFile="$env:SSH_KNOWN_HOSTS" `
+            -o StrictHostKeyChecking=yes `
             "$zipLocal" `
             "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST):$releaseDir/xcode_project.zip"
 
-          # Unzip into iOS/ and update current symlink
+          # 3) Unzip into iOS/ and update current symlink
           $remoteCmd = @"
           set -e
           cd '$releaseDir'
@@ -162,10 +164,11 @@ jobs:
           mkdir -p '$($env:DEPLOY_PATH)/releases'
           ln -sfn '$releaseDir/iOS' '$($env:DEPLOY_PATH)/current'
           echo DEPLOY_OK
-          echo current -> \$(readlink '$($env:DEPLOY_PATH)/current')
+          ls -l '$($env:DEPLOY_PATH)/current'
           "@
           
                     ssh -o BatchMode=yes -o ConnectTimeout=10 -o ConnectionAttempts=1 `
                       -i "$env:SSH_KEY" -p $env:DEPLOY_PORT `
-            -o UserKnownHostsFile="$env:SSH_KNOWN_HOSTS" -o StrictHostKeyChecking=yes `
-            "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" "$remoteCmd"
+                      -o UserKnownHostsFile="$env:SSH_KNOWN_HOSTS" `
+                      -o StrictHostKeyChecking=yes `
+                      "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" "$remoteCmd"
