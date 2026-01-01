@@ -74,26 +74,24 @@ jobs:
           DEPLOY_USER: ${{ vars.DEPLOY_USER }}
           DEPLOY_PORT: ${{ vars.DEPLOY_PORT }}
         run: |
-          ssh -p $env:DEPLOY_PORT "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" "echo SSH_OK && sw_vers && whoami"
+          ssh -i "$env:SSH_KEY" -p $env:DEPLOY_PORT `
+            -o UserKnownHostsFile="$env:SSH_KNOWN_HOSTS" `
+            -o StrictHostKeyChecking=yes `
+            "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" "echo SSH_OK && sw_vers && whoami"
 
-      - name: Upload zip and unpack on VM (versioned + current)
+      
+      - name: SCP upload
         shell: powershell
         env:
           DEPLOY_HOST: ${{ vars.DEPLOY_HOST }}
           DEPLOY_USER: ${{ vars.DEPLOY_USER }}
           DEPLOY_PORT: ${{ vars.DEPLOY_PORT }}
-          DEPLOY_PATH: ${{ vars.DEPLOY_PATH }}
-          SHA: ${{ github.sha }}
         run: |
-          $short = $env:SHA.Substring(0,7)
-          $releaseDir = "$($env:DEPLOY_PATH)/releases/$short"
-          $zipLocal = Join-Path $env:GITHUB_WORKSPACE "xcode_project.zip"
-
-          # Crée dossier release côté VM
-          ssh -p $env:DEPLOY_PORT "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" "mkdir -p '$releaseDir'"
-
-          # Upload zip
-          scp -P $env:DEPLOY_PORT $zipLocal "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST):$releaseDir/xcode_project.zip"
+          scp -i "$env:SSH_KEY" -P $env:DEPLOY_PORT `
+            -o UserKnownHostsFile="$env:SSH_KNOWN_HOSTS" `
+            -o StrictHostKeyChecking=yes `
+            "$env:GITHUB_WORKSPACE\xcode_project.tar.gz" `
+            "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST):/Users/hayro/TapOrbBuilds/xcode_project.tar.gz"
 
           # Unzip dans iOS/ puis symlink current -> iOS
           ssh -p $env:DEPLOY_PORT "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" @"
