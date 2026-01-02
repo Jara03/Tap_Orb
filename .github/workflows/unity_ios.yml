@@ -5,14 +5,9 @@ on:
   push:
     branches: ["main"]
   workflow_dispatch:
-      inputs:
-        skip_unity_build:
-          description: "Skip Unity build (use last iOS artifact)"
-          required: false
-          default: "false"
+  
 jobs:
   unity-build:
-    if: github.event.inputs.skip_unity_build != 'true'
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
@@ -30,18 +25,3 @@ jobs:
           echo "Listing Build directory"
           dir Build
         shell: cmd
-      
-
-      - name: Copy fastlane config into Xcode build
-        shell: cmd
-        run: |
-          mkdir Build\iOS\fastlane
-          xcopy Build\fastlane Build\iOS\fastlane /E /I /Y
-
-
-      - name: Upload Xcode Project as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: xcode-project
-          path: Build/iOS
-          if-no-files-found: error

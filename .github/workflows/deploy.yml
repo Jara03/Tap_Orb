@@ -10,72 +10,113 @@ jobs:
     runs-on: [self-hosted]
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
 
-      # ✅ Ici tu gardes ton build Unity iOS habituel (si tu l'as déjà).
-      # L'objectif: produire Build\iOS dans $GITHUB_WORKSPACE
+      # --- OPTIONAL ---
+      # If your Unity build step already runs earlier in this workflow (or on this runner),
+      # keep it. Otherwise add it here before "Find Xcode project".
+      # ----------------
 
-      - name: Verify iOS Xcode project exists
+      - name: Find Xcode project folder (auto)
         shell: powershell
         run: |
-          $iosPath = Join-Path $env:GITHUB_WORKSPACE "Build\iOS"
-          Write-Host "Expected iOS build folder: $iosPath"
-          if (!(Test-Path $iosPath)) {
-            Write-Error "Build output not found: $iosPath"
+          $proj = Get-ChildItem -Path $env:GITHUB_WORKSPACE -Recurse -Directory -Filter "*.xcodeproj" -ErrorAction SilentlyContinue | Select-Object -First 1
+          if (-not $proj) {
+            Write-Error "No .xcodeproj found under workspace. Ensure Unity exported an iOS Xcode project in this job."
+            exit 1
+          }
+          $iosFolder = $proj.Parent.FullName
+          Write-Host "Found Xcode project: $($proj.FullName)"
+          Write-Host "IOS_FOLDER: $iosFolder"
+          "IOS_FOLDER=$iosFolder" | Out-File -FilePath $env:GITHUB_ENV -Append
+
+      - name: Verify iOS Xcode project folder exists
+        shell: powershell
+        run: |
+          Write-Host "IOS_FOLDER = $env:IOS_FOLDER"
+          if (-not (Test-Path $env:IOS_FOLDER)) {
+            Write-Error "IOS_FOLDER not found: $env:IOS_FOLDER"
             exit 1
           }
           Write-Host "Top-level content:"
-          Get-ChildItem $iosPath | Select-Object -First 30 | Format-Table Name
+          Get-ChildItem $env:IOS_FOLDER | Select-Object -First 30 | Format-Table Name
 
-      - name: Pack Xcode project folder (zip)
+      - name: Pack Xcode project folder (tar.gz)
         shell: powershell
         run: |
-          $iosPath = Join-Path $env:GITHUB_WORKSPACE "Build\iOS"
-          $zipPath = Join-Path $env:GITHUB_WORKSPACE "xcode_project.zip"
-          if (Test-Path $zipPath) { Remove-Item $zipPath -Force }
-          Compress-Archive -Path (Join-Path $iosPath "*") -DestinationPath $zipPath
-          Write-Host "Created zip: $zipPath"
-          Get-Item $zipPath | Format-List Name,Length,FullName
+          $archive = Join-Path $env:GITHUB_WORKSPACE "xcode_project.tar.gz"
+          if (Test-Path $archive) { Remove-Item $archive -Force }
 
-      - name: Setup SSH (key + known_hosts)
+          $parent = Split-Path -Parent $env:IOS_FOLDER
+          $leaf   = Split-Path -Leaf   $env:IOS_FOLDER
+
+          Push-Location $parent
+          tar -czf $archive $leaf
+          Pop-Location
+
+          Write-Host "Created: $archive"
+          Get-Item $archive | Format-List Name,Length,FullName
+
+
+      - name: Setup SSH (fresh)
         shell: powershell
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           KNOWN_HOSTS: ${{ secrets.KNOWN_HOSTS }}
-          DEPLOY_HOST: ${{ vars.DEPLOY_HOST }}
-          DEPLOY_PORT: ${{ vars.DEPLOY_PORT }}
         run: |
-          $sshDir = Join-Path $env:USERPROFILE ".ssh"
-          New-Item -ItemType Directory -Force -Path $sshDir | Out-Null
-
-          $keyPath = Join-Path $sshDir "id_ed25519"
-          $key = $env:SSH_PRIVATE_KEY -replace "`r",""
-          Set-Content -Path $keyPath -Value $key -NoNewline -Encoding ascii
-
-          # permissions strictes sinon OpenSSH peut refuser
-          icacls $keyPath /inheritance:r | Out-Null
-          icacls $keyPath /grant:r "$($env:USERNAME):(R)" | Out-Null
-
-          $knownHostsPath = Join-Path $sshDir "known_hosts"
-          if ($env:KNOWN_HOSTS -and $env:KNOWN_HOSTS.Trim().Length -gt 0) {
-            Set-Content -Path $knownHostsPath -Value ($env:KNOWN_HOSTS -replace "`r","") -Encoding ascii
-          } else {
-            ssh-keyscan -p $env:DEPLOY_PORT $env:DEPLOY_HOST | Out-File -FilePath $knownHostsPath -Encoding ascii
+          if (-not $env:SSH_PRIVATE_KEY -or $env:SSH_PRIVATE_KEY.Trim().Length -eq 0) {
+            Write-Error "SSH_PRIVATE_KEY secret is missing."
+            exit 1
           }
+          if (-not $env:KNOWN_HOSTS -or $env:KNOWN_HOSTS.Trim().Length -eq 0) {
+            Write-Error "KNOWN_HOSTS secret is missing."
+            exit 1
+          }
+      
+          $sshDir = Join-Path $env:RUNNER_TEMP ("ssh_ci_" + $env:GITHUB_RUN_ID)
+          if (Test-Path $sshDir) { Remove-Item $sshDir -Recurse -Force }
+          New-Item -ItemType Directory -Force -Path $sshDir | Out-Null
+      
+          $keyPath = Join-Path $sshDir "id_ed25519"
+      
+          # Write key as UTF-8 (no BOM), normalize line endings
+          $key = ($env:SSH_PRIVATE_KEY -replace "`r","").Trim() + "`n"
+          [System.IO.File]::WriteAllText($keyPath, $key, (New-Object System.Text.UTF8Encoding($false)))
+      
+          Write-Host "Key first line:"
+          Get-Content $keyPath -TotalCount 1
+      
+          # Lock down perms (OpenSSH requirement)
+          icacls $keyPath /inheritance:r | Out-Null
+          icacls $keyPath /remove "BUILTIN\Users" "BUILTIN\Utilisateurs" "Users" "Utilisateurs" 2>$null | Out-Null
+          icacls $keyPath /grant:r "$($env:USERNAME):(R)" "SYSTEM:(R)" | Out-Null
+      
+          # Validate key format
+          ssh-keygen -lf $keyPath
+      
+          $knownHostsPath = Join-Path $sshDir "known_hosts"
+          $kh = ($env:KNOWN_HOSTS -replace "`r","").Trim() + "`n"
+          [System.IO.File]::WriteAllText($knownHostsPath, $kh, (New-Object System.Text.UTF8Encoding($false)))
+      
+          "SSH_KEY=$keyPath" | Out-File -FilePath $env:GITHUB_ENV -Append
+          "SSH_KNOWN_HOSTS=$knownHostsPath" | Out-File -FilePath $env:GITHUB_ENV -Append
+      
+          Write-Host "SSH setup OK in $sshDir"
+                
 
-          Write-Host "SSH ready."
-
-      - name: SSH test
+      - name: SSH test (fast fail)
         shell: powershell
         env:
           DEPLOY_HOST: ${{ vars.DEPLOY_HOST }}
           DEPLOY_USER: ${{ vars.DEPLOY_USER }}
           DEPLOY_PORT: ${{ vars.DEPLOY_PORT }}
         run: |
-          ssh -p $env:DEPLOY_PORT "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" "echo SSH_OK && sw_vers && whoami"
+          ssh -o BatchMode=yes -o ConnectTimeout=10 -o ConnectionAttempts=1 `
+            -i "$env:SSH_KEY" -p $env:DEPLOY_PORT `
+            -o UserKnownHostsFile="$env:SSH_KNOWN_HOSTS" `
+            -o StrictHostKeyChecking=yes `
+            "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" "echo SSH_OK && sw_vers && whoami"
 
-      - name: Upload zip and unpack on VM (versioned + current)
+      - name: Upload and extract on VM (tar.gz)
         shell: powershell
         env:
           DEPLOY_HOST: ${{ vars.DEPLOY_HOST }}
@@ -84,24 +125,40 @@ jobs:
           DEPLOY_PATH: ${{ vars.DEPLOY_PATH }}
           SHA: ${{ github.sha }}
         run: |
+          if (-not $env:DEPLOY_PATH -or $env:DEPLOY_PATH.Trim().Length -eq 0) {
+            Write-Error "DEPLOY_PATH variable is missing (example: /Users/hayro/TapOrbBuilds)"
+            exit 1
+          }
+
+          $archiveLocal = Join-Path $env:GITHUB_WORKSPACE "xcode_project.tar.gz"
+          if (-not (Test-Path $archiveLocal)) {
+            Write-Error "Missing archive: $archiveLocal"
+            exit 1
+          }
+
           $short = $env:SHA.Substring(0,7)
           $releaseDir = "$($env:DEPLOY_PATH)/releases/$short"
-          $zipLocal = Join-Path $env:GITHUB_WORKSPACE "xcode_project.zip"
 
-          # Crée dossier release côté VM
-          ssh -p $env:DEPLOY_PORT "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" "mkdir -p '$releaseDir'"
+          # 1) Create release directory on VM
+          ssh -o BatchMode=yes -o ConnectTimeout=10 -o ConnectionAttempts=1 `
+            -i "$env:SSH_KEY" -p $env:DEPLOY_PORT `
+            -o UserKnownHostsFile="$env:SSH_KNOWN_HOSTS" `
+            -o StrictHostKeyChecking=yes `
+            "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" "mkdir -p '$releaseDir'"
 
-          # Upload zip
-          scp -P $env:DEPLOY_PORT $zipLocal "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST):$releaseDir/xcode_project.zip"
+          # 2) Upload tar.gz
+          scp -o BatchMode=yes -o ConnectTimeout=10 -o ConnectionAttempts=1 `
+            -i "$env:SSH_KEY" -P $env:DEPLOY_PORT `
+            -o UserKnownHostsFile="$env:SSH_KNOWN_HOSTS" `
+            -o StrictHostKeyChecking=yes `
+            "$archiveLocal" `
+            "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST):$releaseDir/xcode_project.tar.gz"
 
-          # Unzip dans iOS/ puis symlink current -> iOS
-          ssh -p $env:DEPLOY_PORT "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" @"
-          set -e
-          cd '$releaseDir'
-          rm -rf iOS
-          mkdir -p iOS
-          unzip -q xcode_project.zip -d iOS
-          rm -f xcode_project.zip
-          ln -sfn '$releaseDir/iOS' '$($env:DEPLOY_PATH)/current'
-          echo 'DEPLOY OK'
-          echo 'current -> ' \$(readlink '$($env:DEPLOY_PATH)/current')
+          # 3) Extract + symlink current (one-liner)
+          $remoteCmd = "set -e; cd '$releaseDir'; rm -rf iOS; mkdir -p iOS; tar -xzf xcode_project.tar.gz -C iOS --strip-components=1; rm -f xcode_project.tar.gz; ln -sfn '$releaseDir/iOS' '$($env:DEPLOY_PATH)/current'; echo DEPLOY_OK; ls -l '$($env:DEPLOY_PATH)/current'"
+
+          ssh -o BatchMode=yes -o ConnectTimeout=10 -o ConnectionAttempts=1 `
+            -i "$env:SSH_KEY" -p $env:DEPLOY_PORT `
+            -o UserKnownHostsFile="$env:SSH_KNOWN_HOSTS" `
+            -o StrictHostKeyChecking=yes `
+            "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" "$remoteCmd"
