@@ -44,6 +44,9 @@ public class InputController : MonoBehaviour
         if (isPressed)
         {
                 levelItem.SetTransformState(true);
+                levelItem.togglesUsedThisRun++;
+                ObjectiveManager.Instance?.RegisterToggleUsed();
+
         }
         else
         {

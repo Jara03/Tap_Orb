@@ -78,6 +78,13 @@ public static class SkinManager
         bool hasVideo = !string.IsNullOrEmpty(s.BackgroundVideoName) && IsVideoFile(s.BackgroundVideoName);
         bool hasImage = !string.IsNullOrEmpty(s.BackgroundSpriteName) && IsImageFile(s.BackgroundSpriteName);
 
+        if (s.UseColorBackground)
+        {
+            s.UseBackgroundVideo = false;
+            s.UseBackgroundImage = false;
+            return;
+        }
+
         if (hasVideo)
         {
             s.UseBackgroundVideo = true;
@@ -243,6 +250,12 @@ public static class SkinManager
         currentSkin = clone;
         WriteToPrefs();
         OnSkinChanged?.Invoke(currentSkin);
+        Debug.Log(edited.Name);
+        Debug.Log(edited.BackgroundColor);
+        Debug.Log(edited.UseBackgroundImage);
+        Debug.Log(edited.UseBackgroundVideo);
+      
+
     }
 
     public static void ApplySkin(string name)

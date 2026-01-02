@@ -24,6 +24,13 @@ namespace DefaultNamespace
         private Coroutine transitionCoroutine;
         public bool isPaused = false;
         
+        public int togglesUsedThisRun = 0;
+
+        private void Start()
+        {
+            togglesUsedThisRun = 0;
+        }
+        
         public void SetTransformState(bool state)
         {
             if (transitionCoroutine != null)
@@ -33,6 +40,7 @@ namespace DefaultNamespace
 
             if (state && itemToDestroy.Length > 0)
                 destroyOnStateOn();
+            
         }
 
 

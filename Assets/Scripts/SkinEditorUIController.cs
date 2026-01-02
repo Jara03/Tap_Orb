@@ -33,7 +33,10 @@ public class SkinEditorUIController : MonoBehaviour
     private SkinData workingCopy;
 
     public Transform SkinSelectorSection;
-    public Transform SkinEditorSection;
+    public Transform BGEditorSection;
+    public Transform OrbEditorSection;
+
+    public Transform defaultSkinButtonPrefab;
 
     public void Start()
     {
@@ -45,7 +48,7 @@ public class SkinEditorUIController : MonoBehaviour
     {
         workingCopy = SkinManager.CurrentSkin.Clone();
 
-        toggleButton.onClick.AddListener(TogglePanel);
+       // toggleButton.onClick.AddListener(TogglePanel);
         
         BindColorSliders(BallColorSliders, workingCopy.BallColor, OnBallColorChanged);
         BindColorSliders(BackgroundColorSliders, workingCopy.BackgroundColor, OnBackgroundColorChanged);
@@ -72,10 +75,16 @@ public class SkinEditorUIController : MonoBehaviour
         UpdateBallMeshLabel();
     }
 
-    public void TogglePanel()
+    public void ToggleBGPanel()
     {
-        Debug.Log("TogglePanel");
-        SkinEditorSection.gameObject.SetActive(!SkinEditorSection.gameObject.activeSelf);
+        Debug.Log("ToggleBGPanel");
+        BGEditorSection.gameObject.SetActive(!BGEditorSection.gameObject.activeSelf);
+    }
+    
+    public void ToggleOrbEditorPanel()
+    {
+        Debug.Log("ToggleOrbPanel");
+        OrbEditorSection.gameObject.SetActive(!OrbEditorSection.gameObject.activeSelf);
     }
 
     public void ToggleSkinSelector()
@@ -83,6 +92,8 @@ public class SkinEditorUIController : MonoBehaviour
         Debug.Log("ToggleSkinSelector");
         SkinSelectorSection.gameObject.SetActive(!SkinSelectorSection.gameObject.activeSelf);
     }
+    
+    
     private void BindColorSliders(Slider[] sliders, Color initial, Action<Color> onChanged)
     {
         
@@ -117,7 +128,15 @@ public class SkinEditorUIController : MonoBehaviour
 
     private void OnUseImageToggled(bool enabled)
     {
-        workingCopy.UseBackgroundImage = enabled;
+        // workingCopy.UseBackgroundImage = enabled;
+        if (enabled)
+        {
+            workingCopy.UseBackgroundImage = true;
+        }
+        else
+        {
+            workingCopy.UseColorBackground = true;
+        }
         UpdatePreviews();
     }
 
@@ -272,29 +291,39 @@ public class SkinEditorUIController : MonoBehaviour
             }
         }
 
-        var font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+        //var font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
         foreach (var skin in SkinManager.Skins)
         {
-            var btnObj = new GameObject(skin.Name, typeof(RectTransform), typeof(Image), typeof(Button));
-            var rect = btnObj.GetComponent<RectTransform>();
-            rect.SetParent(SkinsListParent, false);
-            rect.sizeDelta = new Vector2(60, 60);
-            btnObj.GetComponent<Image>().color = new Color(1, 1, 1, 0.9f);
-            var textObj = new GameObject("Label", typeof(RectTransform), typeof(Text));
-            var tRect = textObj.GetComponent<RectTransform>();
-            tRect.SetParent(btnObj.transform, false);
-            tRect.anchorMin = Vector2.zero;
-            tRect.anchorMax = Vector2.one;
-            tRect.offsetMin = Vector2.zero;
-            tRect.offsetMax = Vector2.zero;
-            var txt = textObj.GetComponent<Text>();
-            txt.font = font;
-            txt.color = Color.black;
-            txt.alignment = TextAnchor.MiddleLeft;
-            txt.text = skin.Name;
+            // Instancie le prefab
+            var btnGO = Instantiate(defaultSkinButtonPrefab, SkinsListParent, false);
+            btnGO.name = skin.Name;
 
-            var btn = btnObj.GetComponent<Button>();
-            btn.onClick.AddListener(() => { SkinManager.ApplySkin(skin.Name); workingCopy = SkinManager.CurrentSkin.Clone(); SyncFromWorkingCopy(); });
+            // Récupère le label (Text) dans le prefab (enfant)
+            var label = btnGO.GetComponentInChildren<Text>(true);
+            if (label != null)
+            {
+                label.color = Color.black;
+                label.alignment = TextAnchor.MiddleLeft;
+                label.text = skin.Name;
+            }
+
+            // Optionnel : si tu veux garder une légère transparence sur l'image de fond
+            var img = btnGO.GetComponent<Image>();
+            if (img != null)
+                img.color = new Color(1f, 1f, 1f, 0.9f);
+
+            // Hook du bouton
+            var btn = btnGO.GetComponent<Button>();
+            if (btn != null)
+            {
+                string skinName = skin.Name; // capture safe
+                btn.onClick.AddListener(() =>
+                {
+                    SkinManager.ApplySkin(skinName);
+                    workingCopy = SkinManager.CurrentSkin.Clone();
+                    SyncFromWorkingCopy();
+                });
+            }
         }
     }
 
@@ -307,7 +336,7 @@ public class SkinEditorUIController : MonoBehaviour
         BackgroundColorSliders[1].SetValueWithoutNotify(workingCopy.BackgroundColor.g);
         BackgroundColorSliders[2].SetValueWithoutNotify(workingCopy.BackgroundColor.b);
         BallSizeSlider.SetValueWithoutNotify(workingCopy.BallSize);
-        UseImageToggle.SetIsOnWithoutNotify(workingCopy.UseBackgroundImage);
+        UseImageToggle.SetIsOnWithoutNotify(workingCopy.UseColorBackground);
 
         UpdateBallMeshLabel();
 
