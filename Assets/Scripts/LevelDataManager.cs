@@ -431,6 +431,18 @@ public class LevelDataManager : MonoBehaviour
             backgroundRawImage.texture = null;
         }
     }
+    
+    AudioSource sfxSource;
+    AudioClip deathSfx;
+    public float deathSfxVolume = 0.5f;
+    
+    void Awake()
+    {
+        sfxSource = gameObject.AddComponent<AudioSource>();
+        sfxSource.playOnAwake = false;
+        sfxSource.spatialBlend = 0f; // 2D
+        deathSfx = Resources.Load<AudioClip>("SFX/death");
+    }
     void FixedUpdate()
     {
         
@@ -440,6 +452,10 @@ public class LevelDataManager : MonoBehaviour
             
             if (!isVisible)
             {
+                if (sfxSource != null && deathSfx != null)
+                    sfxSource.PlayOneShot(deathSfx, deathSfxVolume);
+                    Debug.Log(deathSfx.name+ " : Played death sound");
+                    Debug.Log(sfxSource);
                     ResetPlayerPosition();
                     level.RestoreDestroyedItems();
             }
@@ -531,6 +547,10 @@ public class LevelDataManager : MonoBehaviour
             CenterHomeButton();
         }
         ObjectiveManager.Instance?.RegisterLevelCompleted(LevelManager.levelSelected);
+        
+        if (level.togglesUsedThisRun <= 3)
+            ObjectiveManager.Instance?.RegisterLevelCompletedClean(LevelManager.levelSelected);
+
         Destroy(PlayerBall);
         
         void CenterHomeButton()

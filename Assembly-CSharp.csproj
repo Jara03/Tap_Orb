@@ -61,6 +61,7 @@
     <Compile Include="Assets\Scripts\ObjectiveRowView.cs" />
     <Compile Include="Assets\Scripts\SkinManager.cs" />
     <Compile Include="Assets\Scripts\ObjectiveBoostrap.cs" />
+    <Compile Include="Assets\Scripts\ScrollTopOnStart.cs" />
     <Compile Include="Assets\Scripts\RuntimeMeshImporter.cs" />
     <Compile Include="Assets\Scripts\GlobalVolumeController.cs" />
     <Compile Include="Assets\Scripts\BeamCollisionSweeper.cs" />
@@ -84,17 +85,20 @@
     <Compile Include="Assets\Scripts\InterstitialAds.cs" />
     <Compile Include="Assets\Scripts\ObjectivesPanelController.cs" />
     <Compile Include="Assets\level-edition\LevelEditorGizmo.cs" />
+    <Compile Include="Assets\PillsController.cs" />
     <Compile Include="Assets\Scripts\MineItem.cs" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile-2-Pass.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
+    <None Include="Assets\TextMesh Pro\Fonts\Fredoka,Gugi\Fredoka\OFL.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\GoogleMobileAds\GoogleMobileAds_version-10.6.0_manifest.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\SDFFunctions.hlsl" />
     <None Include="Assets\GoogleMobileAds\link.xml" />
+    <None Include="Assets\TextMesh Pro\Fonts\Fredoka,Gugi\Gugi\OFL.txt" />
     <None Include="Packages\com.singularitygroup.hotreload\package.json" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
@@ -105,6 +109,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\TextMesh Pro\Fonts\Fredoka,Gugi\Fredoka\README.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />

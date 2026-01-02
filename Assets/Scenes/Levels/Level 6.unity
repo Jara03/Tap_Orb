@@ -790,6 +790,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   isPaused: 0
+  togglesUsedThisRun: 0
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1019,6 +1020,7 @@ MonoBehaviour:
   bgRT: {fileID: 0}
   forceEditorTestVideo: 0
   editorTestVideoFileName: test_bg.mp4
+  deathSfxVolume: 0.5
 --- !u!4 &1314294744
 Transform:
   m_ObjectHideFlags: 0

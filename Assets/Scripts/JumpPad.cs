@@ -72,7 +72,7 @@ public class JumpPad : MonoBehaviour
         Vector3 direction = alignWithPadUp ? transform.up : customLaunchDirection;
         direction.Normalize();
 
-        Vector3 velocity = rb.velocity;
+        Vector3 velocity = rb.linearVelocity;
 
         if (overrideVelocity)
         {
@@ -81,8 +81,8 @@ public class JumpPad : MonoBehaviour
         }
 
         velocity += direction * launchSpeed;
-        rb.velocity = velocity;
+        rb.linearVelocity = velocity;
 
-        Debug.Log($"[JumpPad] Launch OK | Velocity: {rb.velocity}");
+        Debug.Log($"[JumpPad] Launch OK | Velocity: {rb.linearVelocity}");
     }
 }

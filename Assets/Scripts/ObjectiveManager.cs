@@ -8,7 +8,10 @@ public class ObjectiveManager : MonoBehaviour
     public enum ObjectiveTrigger
     {
         SessionStart,
-        LevelCompleted
+        LevelCompleted,
+        ToggleUsed,
+        LevelCompletedClean, // complétion “propre”
+
     }
 
     [Serializable]
@@ -20,6 +23,8 @@ public class ObjectiveManager : MonoBehaviour
         public ObjectiveTrigger Trigger;
         public int Target;
         public bool ResetsDaily;
+        public bool ResetsOnSessionStart;
+
     }
 
     [Serializable]
@@ -69,9 +74,28 @@ public class ObjectiveManager : MonoBehaviour
         {
             Id = "triple_clear",
             Title = "Enchaîne les victoires",
-            Description = "Termine 3 niveaux dans une même session pour décrocher un succès.",
+            Description = "Termine 3 niveaux aujourd'hui pour décrocher un succès.",
             Trigger = ObjectiveTrigger.LevelCompleted,
             Target = 3,
+            ResetsDaily = true
+        },
+        // Nouveau 4
+        new ObjectiveDefinition
+        {
+            Id = "toggle_spree",
+            Title = "Toggle mania",
+            Description = "Active 25 toggles aujourd'hui.",
+            Trigger = ObjectiveTrigger.ToggleUsed,
+            Target = 25,
+            ResetsDaily = true
+        },
+        new ObjectiveDefinition
+        {
+            Id = "clean_run",
+            Title = "Maîtrise",
+            Description = "Termine un niveau en utilisant 3 toggles ou moins.",
+            Trigger = ObjectiveTrigger.LevelCompletedClean,
+            Target = 1,
             ResetsDaily = true
         }
     };
@@ -152,6 +176,18 @@ public class ObjectiveManager : MonoBehaviour
     {
         InitializeIfNeeded();
         UpdateObjectives(ObjectiveTrigger.LevelCompleted, 1);
+    }
+
+    public void RegisterLevelCompletedClean(int levelIndex)
+    {
+        InitializeIfNeeded();
+        UpdateObjectives(ObjectiveTrigger.LevelCompletedClean, 1);
+    }
+
+    public void RegisterToggleUsed()
+    {
+        InitializeIfNeeded();
+        UpdateObjectives(ObjectiveTrigger.ToggleUsed, 1);
     }
 
     private void InitializeIfNeeded()

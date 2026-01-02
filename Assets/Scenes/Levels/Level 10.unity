@@ -821,7 +821,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d72c5f2ab841164bb2c02d5a18a443c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  launchSpeed: 35
+  launchSpeed: 28
   playerTag: Player
   overrideVelocity: 0
   alignWithPadUp: 0
@@ -1116,13 +1116,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 516740819}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.79319924, y: 0.6089622, z: -0, w: 0}
-  m_LocalPosition: {x: 10.83, y: -3.14, z: 20.580606}
+  m_LocalRotation: {x: -0.72826666, y: 0.6852939, z: -0, w: 0}
+  m_LocalPosition: {x: 11.83, y: -3.91, z: 20.580606}
   m_LocalScale: {x: 1.4272567, y: 3.4749, z: 1.4037206}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -180, y: 0, z: 86.517}
 --- !u!1 &635433122
 GameObject:
   m_ObjectHideFlags: 0
@@ -1224,13 +1224,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 635433122}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.8, y: -8.2, z: 20.6}
+  m_LocalRotation: {x: -0, y: -0, z: 0.21819931, w: 0.9759042}
+  m_LocalPosition: {x: -1, y: -8.2, z: 20.6}
   m_LocalScale: {x: 4.4993157, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 25.207}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1480,12 +1480,12 @@ PrefabInstance:
     - target: {fileID: 1464368583898188397, guid: f386059094a90a34ea87adf7eef85d62,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.51
+      value: 2.92
       objectReference: {fileID: 0}
     - target: {fileID: 1464368583898188397, guid: f386059094a90a34ea87adf7eef85d62,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.4
+      value: 6.01
       objectReference: {fileID: 0}
     - target: {fileID: 1464368583898188397, guid: f386059094a90a34ea87adf7eef85d62,
         type: 3}
@@ -1839,13 +1839,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 904519155}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.15274018, y: 0.9882664, z: -0, w: 0}
-  m_LocalPosition: {x: 14.417545, y: -1.9599998, z: 20.896029}
+  m_LocalRotation: {x: -0.22711945, y: 0.97386694, z: -0, w: 0}
+  m_LocalPosition: {x: 15.39, y: -2.74, z: 20.896029}
   m_LocalScale: {x: 4.4993157, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: -17.572}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: -26.255}
 --- !u!1 &918687959
 GameObject:
   m_ObjectHideFlags: 0
@@ -2053,6 +2053,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   isPaused: 0
+  togglesUsedThisRun: 0
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -3441,7 +3442,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d72c5f2ab841164bb2c02d5a18a443c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  launchSpeed: 18
+  launchSpeed: 22
   playerTag: Player
   overrideVelocity: 0
   alignWithPadUp: 0
@@ -3483,7 +3484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d72c5f2ab841164bb2c02d5a18a443c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  launchSpeed: 26
+  launchSpeed: 15
   playerTag: Player
   overrideVelocity: 0
   alignWithPadUp: 0
@@ -3778,13 +3779,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1796111473}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0.7931984, w: 0.6089634}
-  m_LocalPosition: {x: 2.7999997, y: -8.9, z: 20.699999}
+  m_LocalRotation: {x: -0, y: -0, z: -0.667405, w: 0.74469495}
+  m_LocalPosition: {x: 2.5999997, y: -7.16, z: 20.699999}
   m_LocalScale: {x: 1.4272571, y: 3.474901, z: 1.4037206}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -83.734}
 --- !u!43 &1955828018
 Mesh:
   m_ObjectHideFlags: 0

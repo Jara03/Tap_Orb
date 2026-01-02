@@ -27,7 +27,7 @@ public class BallFakeTrail : MonoBehaviour
 
     void LateUpdate()
     {
-        Vector3 velocity = rb.velocity;
+        Vector3 velocity = rb.linearVelocity;
         float speed = velocity.magnitude;
 
         if (speed < minSpeed)

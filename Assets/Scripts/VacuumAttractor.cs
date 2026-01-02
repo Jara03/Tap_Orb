@@ -32,7 +32,7 @@ public class VacuumAttractor : MonoBehaviour
         if (playerRb == null) return;
 
         playerRb.useGravity = false;
-        playerRb.velocity = Vector3.zero;
+        playerRb.linearVelocity = Vector3.zero;
         playerRb.angularVelocity = Vector3.zero;
 
         isAttracting = true;
