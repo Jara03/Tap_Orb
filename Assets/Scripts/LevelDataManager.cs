@@ -300,6 +300,11 @@ public class LevelDataManager : MonoBehaviour
 
     public void LoadSkin(SkinData sk)
     {
+        
+        Debug.Log("BG Props UseColorBackground : " + sk.UseColorBackground );
+        Debug.Log("BG Props UseBackgroundVideo : " + sk.UseBackgroundVideo );
+        Debug.Log("BG Props : UseBackgroundImage : " + sk.UseBackgroundImage );
+
         //Modif de la balle
         ApplyBallSkin(sk);
         PlayerBall.gameObject.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor",sk.BallColor*1f);
