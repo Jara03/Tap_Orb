@@ -21,7 +21,10 @@ public class SkinEditorUIController : MonoBehaviour
     public Button MobilePickerButton;
     public TMP_InputField SkinNameInput;
     public Button SaveButton;
+    public Button SaveBgButton;
+
     public Transform SkinsListParent;
+    public Image bgColorimage;
 
     [Header("Ball Mesh")]
     public Button ImportBallMeshButton;
@@ -37,6 +40,11 @@ public class SkinEditorUIController : MonoBehaviour
     public Transform OrbEditorSection;
 
     public Transform defaultSkinButtonPrefab;
+    
+    [Header("Orb 3D Preview")]
+    public OrbPreviewController OrbPreviewController; // ton rig + caméra + rendertexture
+    public RawImage OrbPreviewRawImage;               // UI RawImage qui affiche la RenderTexture
+
 
     public void Start()
     {
@@ -66,9 +74,14 @@ public class SkinEditorUIController : MonoBehaviour
 
         if (ResetBallMeshButton != null)
             ResetBallMeshButton.onClick.AddListener(OnBallMeshResetRequested);
+        
+        if (OrbPreviewRawImage != null)
+            OrbPreviewRawImage.enabled = false;
+
 
         SkinNameInput.text = workingCopy.Name;
         SaveButton.onClick.AddListener(SaveSkin);
+        SaveBgButton.onClick.AddListener(SaveSkin);
 
         RefreshSavedSkins();
         UpdatePreviews();
@@ -125,28 +138,78 @@ public class SkinEditorUIController : MonoBehaviour
         workingCopy.BackgroundColor = color;
         UpdatePreviews();
     }
-
+    
     private void OnUseImageToggled(bool enabled)
     {
-        // workingCopy.UseBackgroundImage = enabled;
         if (enabled)
         {
             workingCopy.UseBackgroundImage = true;
+            workingCopy.UseColorBackground = false;
+
+            // IMPORTANT: coupe la vidéo
+            workingCopy.UseBackgroundVideo = false;
+            workingCopy.BackgroundVideoName = string.Empty;
         }
         else
         {
             workingCopy.UseColorBackground = true;
+            workingCopy.UseBackgroundImage = false;
+
+            workingCopy.UseBackgroundVideo = false;
+            workingCopy.BackgroundVideoName = string.Empty;
         }
+
         UpdatePreviews();
     }
 
     private void OnBackgroundDropdownChanged(int index)
     {
-        if (index < 0 || index >= BackgroundDropdown.options.Count) return;
-        var option = BackgroundDropdown.options[index];
-        workingCopy.BackgroundSpriteName = option.text == "None" ? string.Empty : option.text;
+        var option = BackgroundDropdown.options[index].text;
+
+        if (option == "None")
+        {
+            workingCopy.BackgroundSpriteName = string.Empty;
+            workingCopy.BackgroundVideoName  = string.Empty;
+            workingCopy.UseBackgroundImage   = false;
+            workingCopy.UseBackgroundVideo   = false;
+            // laisse UseColorBackground tel quel, ou force-le si tu veux un fallback
+            UpdatePreviews();
+            return;
+        }
+
+        string ext = System.IO.Path.GetExtension(option).ToLowerInvariant();
+
+        bool isVideo = ext == ".mp4" || ext == ".mov" || ext == ".webm";
+        bool isImage = ext == ".png" || ext == ".jpg" || ext == ".jpeg";
+
+        if (isVideo)
+        {
+            // Active vidéo
+            workingCopy.UseBackgroundVideo = true;
+            workingCopy.UseBackgroundImage = false;
+            workingCopy.UseColorBackground = false;
+
+            workingCopy.BackgroundVideoName = option;
+            workingCopy.BackgroundSpriteName = string.Empty;
+        }
+        else if (isImage)
+        {
+            // Active image
+            workingCopy.UseBackgroundImage = true;
+            workingCopy.UseBackgroundVideo = false;
+            workingCopy.UseColorBackground = false;
+
+            workingCopy.BackgroundSpriteName = option;
+            workingCopy.BackgroundVideoName = string.Empty;
+        }
+        else
+        {
+            Debug.LogWarning($"Unsupported background file type: {option}");
+        }
+
         UpdatePreviews();
     }
+
     public void OnMobilePickRequested()
     {
         // Évite les appels multiples si le picker est déjà ouvert
@@ -336,7 +399,7 @@ public class SkinEditorUIController : MonoBehaviour
         BackgroundColorSliders[1].SetValueWithoutNotify(workingCopy.BackgroundColor.g);
         BackgroundColorSliders[2].SetValueWithoutNotify(workingCopy.BackgroundColor.b);
         BallSizeSlider.SetValueWithoutNotify(workingCopy.BallSize);
-        UseImageToggle.SetIsOnWithoutNotify(workingCopy.UseColorBackground);
+        UseImageToggle.SetIsOnWithoutNotify(workingCopy.UseBackgroundImage);
 
         UpdateBallMeshLabel();
 
@@ -347,42 +410,134 @@ public class SkinEditorUIController : MonoBehaviour
         SkinNameInput.text = workingCopy.Name;
         UpdatePreviews();
     }
+    
+    [SerializeField] private GameObject DefaultBallPrefab;
 
-    private void UpdatePreviews()
+  private void UpdatePreviews()
+{
+    // Ball preview
+    BallPreview.color = workingCopy.BallColor;
+    BallPreview.transform.localScale = Vector3.one * workingCopy.BallSize;
+    
+    // --- Orb 3D preview (mesh OR prefab) ---
+    bool hasMesh = SkinManager.TryGetBallMesh(workingCopy.BallMeshName, out var mesh, out _);
+
+    GameObject prefab = null;
+    bool hasPrefab = DefaultBallPrefab != null && string.IsNullOrWhiteSpace(workingCopy.BallMeshName);
+    // (ou aussi: hasPrefab = DefaultBallPrefab != null; si tu veux l'utiliser comme fallback global)
+
+    bool canUse3D = OrbPreviewController != null && OrbPreviewRawImage != null;
+
+    if (canUse3D && (hasMesh || hasPrefab))
     {
+        BallPreview.enabled = false;
+        OrbPreviewRawImage.enabled = true;
+
+        if (hasMesh)
+            OrbPreviewController.ShowMesh(mesh, workingCopy.BallColor, workingCopy.BallSize);
+        else
+         //   OrbPreviewController.ShowPrefab(DefaultBallPrefab);
+
+        OrbPreviewController.SetPreviewColor(workingCopy.BallColor);
+        OrbPreviewController.SetPreviewSize(workingCopy.BallSize);
+    }
+    else
+    {
+        OrbPreviewController?.Clear();
+        if (OrbPreviewRawImage != null) OrbPreviewRawImage.enabled = false;
+
+        BallPreview.enabled = true;
         BallPreview.color = workingCopy.BallColor;
         BallPreview.transform.localScale = Vector3.one * workingCopy.BallSize;
+    }
 
-        BackgroundPreview.color = workingCopy.BackgroundColor;
-        BackgroundPreview.sprite = null;
-        BackgroundPreview.enabled = true;
 
-        if (workingCopy.UseBackgroundImage)
+
+
+    // --- Background previews ---
+    // On part du principe que :
+    // - bgColorimage : Image dédiée au fond couleur (plein écran / panel)
+    // - BackgroundPreview : Image dédiée au fond sprite (helper)
+    bool useImage = workingCopy.UseBackgroundImage;
+    bool useColor = workingCopy.UseColorBackground && !useImage; // priorité à l'image
+
+    // 1) Mode "Background Image"
+    if (useImage)
+    {
+        if (bgColorimage != null)
+            bgColorimage.enabled = false;
+
+        if (BackgroundPreview != null)
         {
             var sprite = SkinManager.LoadBackgroundSprite(workingCopy.BackgroundSpriteName);
-            
-            BackgroundPreview.sprite = sprite;
-            BackgroundPreview.color = sprite == null ? workingCopy.BackgroundColor : Color.white;
+
+            BackgroundPreview.enabled = true;
             BackgroundPreview.preserveAspect = true;
-        }
+            BackgroundPreview.sprite = sprite;
 
-        if (sharedBackground != null)
-        {
-            if (workingCopy.UseBackgroundImage)
-            {
-                var sprite = SkinManager.LoadBackgroundSprite(workingCopy.BackgroundSpriteName);
-                
-                sharedBackground.sprite = sprite ?? sharedBackground.sprite;
-                sharedBackground.color = sprite == null ? workingCopy.BackgroundColor : Color.white;
-            }
-            else
-            {
-                sharedBackground.color = workingCopy.BackgroundColor;
-            }
+            // Si sprite introuvable, on fallback sur la couleur stockée
+            BackgroundPreview.color = (sprite != null) ? Color.white : workingCopy.BackgroundColor;
         }
-
-        SkinManager.UpdateWorkingCopy(workingCopy);
     }
+    // 2) Mode "Color Background"
+    else if (useColor)
+    {
+        if (BackgroundPreview != null)
+        {
+            BackgroundPreview.enabled = false;
+            BackgroundPreview.sprite = null;
+        }
+
+        if (bgColorimage != null)
+        {
+            bgColorimage.enabled = true;
+            bgColorimage.color = workingCopy.BackgroundColor;
+        }
+    }
+    // 3) Aucun des deux
+    else
+    {
+        if (BackgroundPreview != null)
+        {
+            BackgroundPreview.enabled = false;
+            BackgroundPreview.sprite = null;
+            BackgroundPreview.color = Color.white;
+        }
+
+        if (bgColorimage != null)
+        {
+            bgColorimage.enabled = false;
+            bgColorimage.color = Color.white;
+        }
+    }
+
+    // --- Shared background (si tu veux refléter le même rendu ailleurs) ---
+    if (sharedBackground != null)
+    {
+        if (useImage)
+        {
+            var sprite = SkinManager.LoadBackgroundSprite(workingCopy.BackgroundSpriteName);
+            sharedBackground.enabled = true;
+            sharedBackground.preserveAspect = true;
+            sharedBackground.sprite = sprite;
+            sharedBackground.color = (sprite != null) ? Color.white : workingCopy.BackgroundColor;
+        }
+        else if (useColor)
+        {
+            // Ici, sharedBackground est une Image: on l'utilise juste en couleur
+            sharedBackground.enabled = true;
+            sharedBackground.sprite = null;
+            sharedBackground.color = workingCopy.BackgroundColor;
+        }
+        else
+        {
+            sharedBackground.enabled = false;
+        }
+    }
+
+    SkinManager.UpdateWorkingCopy(workingCopy);
+}
+
 
     private void PopulateBackgroundDropdown()
     {

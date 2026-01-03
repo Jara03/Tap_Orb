@@ -60,51 +60,52 @@ public static class SkinManager
     {
         if (s == null) return;
 
-        // Cas où l'UI met tout dans BackgroundSpriteName (dropdown unique) :
-        // si c'est une vidéo, on migre vers BackgroundVideoName.
-        if (!string.IsNullOrEmpty(s.BackgroundSpriteName) && IsVideoFile(s.BackgroundSpriteName))
-        {
-            s.BackgroundVideoName = s.BackgroundSpriteName;
-            s.BackgroundSpriteName = string.Empty;
-        }
-
-        // Cas inverse (rare) : image rangée dans VideoName
-        if (!string.IsNullOrEmpty(s.BackgroundVideoName) && IsImageFile(s.BackgroundVideoName))
-        {
-            s.BackgroundSpriteName = s.BackgroundVideoName;
-            s.BackgroundVideoName = string.Empty;
-        }
-
         bool hasVideo = !string.IsNullOrEmpty(s.BackgroundVideoName) && IsVideoFile(s.BackgroundVideoName);
         bool hasImage = !string.IsNullOrEmpty(s.BackgroundSpriteName) && IsImageFile(s.BackgroundSpriteName);
 
+        // Si mode couleur => purge le reste
         if (s.UseColorBackground)
         {
-            s.UseBackgroundVideo = false;
             s.UseBackgroundImage = false;
-            return;
-        }
-
-        if (hasVideo)
-        {
-            s.UseBackgroundVideo = true;
-            s.UseBackgroundImage = false;
-            return;
-        }
-
-        if (hasImage)
-        {
-            s.UseBackgroundImage = true;
             s.UseBackgroundVideo = false;
+            s.BackgroundSpriteName = string.Empty;
+            s.BackgroundVideoName = string.Empty;
             return;
         }
 
-        // Aucun fichier valide => fond couleur
+        // Si l’utilisateur veut une vidéo, il faut une vidéo valide, sinon on coupe
+        if (s.UseBackgroundVideo)
+        {
+            if (!hasVideo)
+            {
+                s.UseBackgroundVideo = false;
+                s.BackgroundVideoName = string.Empty;
+            }
+            s.UseBackgroundImage = false;
+            s.BackgroundSpriteName = string.Empty;
+            return;
+        }
+
+        // Si l’utilisateur veut une image, il faut une image valide, sinon on coupe
+        if (s.UseBackgroundImage)
+        {
+            if (!hasImage)
+            {
+                s.UseBackgroundImage = false;
+                s.BackgroundSpriteName = string.Empty;
+            }
+            s.UseBackgroundVideo = false;
+            s.BackgroundVideoName = string.Empty;
+            return;
+        }
+
+        // Sinon rien => “aucun mode explicite”, on nettoie
         s.UseBackgroundImage = false;
         s.UseBackgroundVideo = false;
         s.BackgroundSpriteName = string.Empty;
         s.BackgroundVideoName = string.Empty;
     }
+
 
 
     public static string ImportBackgroundVideoFromGallery(string sourcePath)

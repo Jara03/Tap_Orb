@@ -59,6 +59,7 @@
     <Compile Include="Assets\Scripts\ObjectivesPanel.cs" />
     <Compile Include="Assets\Scripts\AnimatedGameItem.cs" />
     <Compile Include="Assets\Scripts\ObjectiveRowView.cs" />
+    <Compile Include="Assets\Scripts\OrbPreviewController.cs" />
     <Compile Include="Assets\Scripts\SkinManager.cs" />
     <Compile Include="Assets\Scripts\ObjectiveBoostrap.cs" />
     <Compile Include="Assets\Scripts\ScrollTopOnStart.cs" />
