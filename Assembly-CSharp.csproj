@@ -80,6 +80,7 @@
     <Compile Include="Assets\Scripts\ObjectiveManager.cs" />
     <Compile Include="Assets\Scripts\UIHomeManager.cs" />
     <Compile Include="Assets\Scripts\BallImpactSFX.cs" />
+    <Compile Include="Assets\Scripts\VideoThumbUtil.cs" />
     <Compile Include="Assets\Scripts\SkinEditorUIController.cs" />
     <Compile Include="Assets\Scripts\LevelDataManager.cs" />
     <Compile Include="Assets\Scripts\VacuumAttractor.cs" />
@@ -1037,6 +1038,14 @@
     <ProjectReference Include="NativeGallery.Editor.csproj">
       <Project>{a832fc73-c886-cc31-d8d3-1b86479a208f}</Project>
       <Name>NativeGallery.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="NativeFilePicker.Runtime.csproj">
+      <Project>{2878ab84-5c79-6afd-68a5-af60d60f05d7}</Project>
+      <Name>NativeFilePicker.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="NativeFilePicker.Editor.csproj">
+      <Project>{04703a20-116f-35f6-47cd-96200aabc1b4}</Project>
+      <Name>NativeFilePicker.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="NativeGallery.Runtime.csproj">
       <Project>{fa789b36-06be-8fcb-2a3f-cbeb881d25a5}</Project>

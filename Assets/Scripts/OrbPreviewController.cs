@@ -31,6 +31,9 @@ public class OrbPreviewController : MonoBehaviour
         // Option perf : tu peux désactiver la caméra et rendre manuellement
         if (!renderEveryFrame && previewCamera != null)
             previewCamera.enabled = false;
+        
+        previewCamera.nearClipPlane = 0.1f;//Mathf.Max(0.1f, dist - radius * 3f);
+        previewCamera.farClipPlane = 0.5f;// Mathf.Max(0.5f, dist - radius * 3f);
     }
 
     private void OnEnable()
@@ -48,7 +51,7 @@ public class OrbPreviewController : MonoBehaviour
     /// <summary>
     /// Appelle cette méthode quand l'utilisateur change de modèle d'Orb.
     /// </summary>
-    public void ShowOrbPrefab(GameObject orbPrefab)
+    public void ShowOrbPrefab(GameObject orbPrefab, Color color, float size)
     {
         Clear();
 
@@ -56,9 +59,21 @@ public class OrbPreviewController : MonoBehaviour
             return;
 
         currentInstance = Instantiate(orbPrefab, previewRoot);
+        var rb = currentInstance.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            rb.isKinematic = true;      // stop la simulation
+            rb.detectCollisions = false;
+        }
         currentInstance.transform.localPosition = Vector3.zero;
         currentInstance.transform.localRotation = Quaternion.identity;
-        currentInstance.transform.localScale = Vector3.one;
+        //currentInstance.transform.localScale = Vector3.one;
+        currentInstance.transform.localScale = Vector3.one * Mathf.Max(0.5f, size);
+
+        ApplyColor(currentInstance, color);
+
 
         SetLayerRecursively(currentInstance, previewLayer);
 
@@ -104,9 +119,7 @@ public class OrbPreviewController : MonoBehaviour
             previewCamera.transform.position = previewCamera.transform.position;
         }
         previewCamera.transform.LookAt(center);
-
-        previewCamera.nearClipPlane = Mathf.Max(0.01f, dist - radius * 3f);
-        previewCamera.farClipPlane  = dist + radius * 3f;
+        
     }
 
     private Bounds CalculateBounds(GameObject go)
@@ -171,6 +184,8 @@ public class OrbPreviewController : MonoBehaviour
         if (!renderEveryFrame && previewCamera != null)
             previewCamera.Render();
     }
+    
+    
 
     public void Clear()
     {
@@ -194,7 +209,7 @@ public class OrbPreviewController : MonoBehaviour
         r.SetPropertyBlock(mpb);
     }
     
-    [SerializeField] private Material PreviewMaterial;
+    [SerializeField] public Material PreviewMaterial;
 
     private MeshFilter mf;
     private MeshRenderer mr;
@@ -217,7 +232,7 @@ public class OrbPreviewController : MonoBehaviour
     {
         if (currentInstance == null) return;
 
-        currentInstance.transform.localScale = Vector3.one * Mathf.Max(0.01f, size);
+        currentInstance.transform.localScale = Vector3.one * Mathf.Max(0.5f, size);
 
         // important : sinon la caméra peut clip / cadrage faux
         FrameToObject(currentInstance);
