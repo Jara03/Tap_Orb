@@ -783,21 +783,45 @@ public class SkinEditorUIController : MonoBehaviour
     private void OnBallMeshImportRequested()
     {
 #if UNITY_EDITOR
-        var path = EditorUtility.OpenFilePanel("Choisir un mesh de balle", string.Empty, "obj,assetbundle,unity3d");
+        var path = EditorUtility.OpenFilePanel(
+            "Choisir un mesh de balle",
+            string.Empty,
+            "obj,assetbundle,unity3d"
+        );
+
         if (!string.IsNullOrEmpty(path))
             ApplyImportedBallMesh(path);
+
         return;
 #endif
 
+#if UNITY_IOS
+        // iOS : autoriser tous les fichiers (UTType public.data)
         NativeFilePicker.PickFile(
             (path) =>
             {
-                if (string.IsNullOrEmpty(path)) return;
+                if (string.IsNullOrEmpty(path))
+                    return;
+
                 ApplyImportedBallMesh(path);
             },
-            new[] { "obj", "assetbundle", "unity3d" }
+            null // ⬅️ TRÈS IMPORTANT sur iOS
         );
+#else
+    // Android : extensions OK
+    NativeFilePicker.PickFile(
+        (path) =>
+        {
+            if (string.IsNullOrEmpty(path))
+                return;
+
+            ApplyImportedBallMesh(path);
+        },
+        new[] { "obj", "assetbundle", "unity3d" }
+    );
+#endif
     }
+
 
     private void ApplyImportedBallMesh(string path)
     {
