@@ -5,11 +5,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SingularityGroup.HotReload.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SingularityGroup.HotReload.Editor", "SingularityGroup.HotReload.Editor.csproj", "{81a6f81f-d377-33a3-9c2d-721eb89c27a4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NativeFilePicker.Runtime", "NativeFilePicker.Runtime.csproj", "{2878ab84-5c79-6afd-68a5-af60d60f05d7}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NativeGallery.Editor", "NativeGallery.Editor.csproj", "{a832fc73-c886-cc31-d8d3-1b86479a208f}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{e97de768-2fcb-8d9a-24a4-558e8f1ebf63}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleMobileAds.Editor", "GoogleMobileAds.Editor.csproj", "{e6ef770a-7bce-0eeb-d197-337c9c2a147f}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NativeFilePicker.Editor", "NativeFilePicker.Editor.csproj", "{04703a20-116f-35f6-47cd-96200aabc1b4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NativeGallery.Runtime", "NativeGallery.Runtime.csproj", "{fa789b36-06be-8fcb-2a3f-cbeb881d25a5}"
 EndProject
@@ -28,12 +32,16 @@ Global
 		{d6f1dd59-edf6-8a80-e8ec-7281e04a53a0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81a6f81f-d377-33a3-9c2d-721eb89c27a4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{81a6f81f-d377-33a3-9c2d-721eb89c27a4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2878ab84-5c79-6afd-68a5-af60d60f05d7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2878ab84-5c79-6afd-68a5-af60d60f05d7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{a832fc73-c886-cc31-d8d3-1b86479a208f}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{a832fc73-c886-cc31-d8d3-1b86479a208f}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{e97de768-2fcb-8d9a-24a4-558e8f1ebf63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{e97de768-2fcb-8d9a-24a4-558e8f1ebf63}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{e6ef770a-7bce-0eeb-d197-337c9c2a147f}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{e6ef770a-7bce-0eeb-d197-337c9c2a147f}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04703a20-116f-35f6-47cd-96200aabc1b4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04703a20-116f-35f6-47cd-96200aabc1b4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{fa789b36-06be-8fcb-2a3f-cbeb881d25a5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{fa789b36-06be-8fcb-2a3f-cbeb881d25a5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{613d1d9c-5819-1e4a-d23e-782879ecac6e}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

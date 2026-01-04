@@ -74,6 +74,7 @@ public class LevelDataManager : MonoBehaviour
                 col.isTrigger = true;
 
                 // Ajoute un composant pour gérer la détection de collision
+                
             }
         }
 
@@ -84,6 +85,11 @@ public class LevelDataManager : MonoBehaviour
             playerStartPosition = player.transform.position;
             playerStartRotation = player.transform.rotation;
             playerRigidbody = player.GetComponent<Rigidbody>();
+                      
+            player.GetComponent<InputController>().enabled = true;
+            //DefaultBallPrefab.GetComponent<MeshRenderer>().material = OrbPreviewController.PreviewMaterial;
+            player.GetComponent<BallImpactSFX>().enabled = true;
+            player.GetComponent<AudioSource>().enabled = true;
         }
 
         if (PlayerBall != null)
@@ -308,8 +314,8 @@ public class LevelDataManager : MonoBehaviour
         //Modif de la balle
         ApplyBallSkin(sk);
         PlayerBall.gameObject.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor",sk.BallColor*1f);
-        PlayerBall.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(sk.BallColor.r, sk.BallColor.g, sk.BallColor.b, 0.03f);
-        PlayerBall.transform.GetChild(1).GetComponent<SpriteRenderer>().color = new Color(sk.BallColor.r, sk.BallColor.g, sk.BallColor.b, 0.15f);
+        PlayerBall.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(sk.BallColor.r, sk.BallColor.g, sk.BallColor.b, 0.06f);
+        PlayerBall.transform.GetChild(1).GetComponent<SpriteRenderer>().color = new Color(sk.BallColor.r, sk.BallColor.g, sk.BallColor.b, 0.30f);
 
         //Modif du bg
         // Modif du bg (toujours d'abord récupérer refs)

@@ -1,129 +1,223 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Video;
+
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
 public class SkinEditorUIController : MonoBehaviour
 {
-   
+    [Header("Ball UI")]
     public Slider[] BallColorSliders;
     public Slider BallSizeSlider;
-    public Image BallPreview;
+
+    [Header("Background UI")]
     public Slider[] BackgroundColorSliders;
-    public Image BackgroundPreview;
-    public Toggle UseImageToggle;
+    public Image BackgroundPreview;         // Image de preview (sert aussi pour thumbnail vidéo)
+    public Image bgColorimage;              // Image plein écran couleur (panel)
+    public Toggle UseImageToggle;           // si tu veux garder ce toggle
     public TMP_Dropdown BackgroundDropdown;
     public Button MobilePickerButton;
+
+    [Header("Save UI")]
     public TMP_InputField SkinNameInput;
     public Button SaveButton;
     public Button SaveBgButton;
 
+    [Header("Skins list")]
     public Transform SkinsListParent;
-    public Image bgColorimage;
+    public Transform defaultSkinButtonPrefab;
 
     [Header("Ball Mesh")]
     public Button ImportBallMeshButton;
     public Button ResetBallMeshButton;
     public TMP_Text BallMeshNameLabel;
 
-    public Button toggleButton;
-    private Image sharedBackground;
-    private SkinData workingCopy;
-
+    [Header("Panels")]
     public Transform SkinSelectorSection;
     public Transform BGEditorSection;
     public Transform OrbEditorSection;
 
-    public Transform defaultSkinButtonPrefab;
-    
     [Header("Orb 3D Preview")]
-    public OrbPreviewController OrbPreviewController; // ton rig + caméra + rendertexture
-    public RawImage OrbPreviewRawImage;               // UI RawImage qui affiche la RenderTexture
+    public OrbPreviewController OrbPreviewController;
+    public RawImage OrbPreviewRawImage;
+    [SerializeField] private GameObject DefaultBallPrefab;
 
+    [Header("Optional: Shared background image (fallback = BackgroundPreview)")]
+    [SerializeField] private Image sharedBackground;
 
-    public void Start()
+    [Header("Video Thumbnail Preview")]
+    [SerializeField] private int videoThumbMaxSize = 512;
+    [SerializeField] private double videoThumbCaptureTimeSeconds = 0.2;
+
+    [Tooltip("Optionnel : assigner un VideoPlayer pour générer un thumbnail en Editor ou en fallback si NativeGallery renvoie null.")]
+    [SerializeField] private VideoPlayer thumbVideoPlayer;
+
+    private RenderTexture thumbRT;
+    private Sprite cachedVideoThumbSprite;
+    private string cachedVideoThumbFor;
+    private int videoThumbRequestId;
+
+    private SkinData workingCopy;
+    private bool initialized;
+
+    private void Start()
     {
-        Debug.Log("SkinEditorUIController Start");
         Initialize();
     }
 
     public void Initialize()
     {
+        if (initialized) return;
+        initialized = true;
+
+        if (BackgroundPreview != null && sharedBackground == null)
+            sharedBackground = BackgroundPreview;
+
         workingCopy = SkinManager.CurrentSkin.Clone();
 
-       // toggleButton.onClick.AddListener(TogglePanel);
-        
+        // --- Bind sliders (avoid double listeners) ---
         BindColorSliders(BallColorSliders, workingCopy.BallColor, OnBallColorChanged);
         BindColorSliders(BackgroundColorSliders, workingCopy.BackgroundColor, OnBackgroundColorChanged);
-        BallSizeSlider.value = workingCopy.BallSize;
-        BallSizeSlider.onValueChanged.AddListener(v => { workingCopy.BallSize = v; UpdatePreviews(); });
-        UseImageToggle.isOn = workingCopy.UseBackgroundImage;
-        UseImageToggle.onValueChanged.AddListener(OnUseImageToggled);
+
+        if (BallSizeSlider != null)
+        {
+            BallSizeSlider.onValueChanged.RemoveAllListeners();
+            BallSizeSlider.SetValueWithoutNotify(workingCopy.BallSize);
+            BallSizeSlider.onValueChanged.AddListener(v =>
+            {
+                workingCopy.BallSize = v;
+                UpdatePreviews();
+            });
+        }
+
+        if (UseImageToggle != null)
+        {
+            UseImageToggle.onValueChanged.RemoveAllListeners();
+            UseImageToggle.SetIsOnWithoutNotify(workingCopy.UseBackgroundImage);
+            UseImageToggle.onValueChanged.AddListener(OnUseImageToggled);
+        }
 
         PopulateBackgroundDropdown();
-        BackgroundDropdown.onValueChanged.AddListener(OnBackgroundDropdownChanged);
-        MobilePickerButton.onClick.AddListener(OnMobilePickRequested);
+        if (BackgroundDropdown != null)
+        {
+            BackgroundDropdown.onValueChanged.RemoveAllListeners();
+            BackgroundDropdown.onValueChanged.AddListener(OnBackgroundDropdownChanged);
+        }
+
+        if (MobilePickerButton != null)
+        {
+            MobilePickerButton.onClick.RemoveAllListeners();
+            MobilePickerButton.onClick.AddListener(OnMobilePickRequested);
+        }
 
         if (ImportBallMeshButton != null)
+        {
+            ImportBallMeshButton.onClick.RemoveAllListeners();
             ImportBallMeshButton.onClick.AddListener(OnBallMeshImportRequested);
+        }
 
         if (ResetBallMeshButton != null)
+        {
+            ResetBallMeshButton.onClick.RemoveAllListeners();
             ResetBallMeshButton.onClick.AddListener(OnBallMeshResetRequested);
-        
+        }
+
+        if (SkinNameInput != null)
+            SkinNameInput.text = workingCopy.Name;
+
+        if (SaveButton != null)
+        {
+            SaveButton.onClick.RemoveAllListeners();
+            SaveButton.onClick.AddListener(SaveSkin);
+        }
+
+        if (SaveBgButton != null)
+        {
+            SaveBgButton.onClick.RemoveAllListeners();
+            SaveBgButton.onClick.AddListener(SaveSkin);
+        }
+
+        // Orb preview defaults
         if (OrbPreviewRawImage != null)
             OrbPreviewRawImage.enabled = false;
 
-
-        SkinNameInput.text = workingCopy.Name;
-        SaveButton.onClick.AddListener(SaveSkin);
-        SaveBgButton.onClick.AddListener(SaveSkin);
+        // Désactive composants gênants sur le prefab de preview
+        SetupDefaultBallPrefabForPreview();
 
         RefreshSavedSkins();
-        UpdatePreviews();
         UpdateBallMeshLabel();
+        UpdatePreviews();
     }
 
+    private void SetupDefaultBallPrefabForPreview()
+    {
+        if (DefaultBallPrefab == null) return;
+
+        var input = DefaultBallPrefab.GetComponent<InputController>();
+        if (input != null) input.enabled = false;
+
+        var impact = DefaultBallPrefab.GetComponent<BallImpactSFX>();
+        if (impact != null) impact.enabled = false;
+
+        var audio = DefaultBallPrefab.GetComponent<AudioSource>();
+        if (audio != null) audio.enabled = false;
+
+        var renderer = DefaultBallPrefab.GetComponent<MeshRenderer>();
+        if (renderer != null && OrbPreviewController != null && OrbPreviewController.PreviewMaterial != null)
+            renderer.material = OrbPreviewController.PreviewMaterial;
+    }
+
+    // -------------------------
+    // Panel toggles
+    // -------------------------
     public void ToggleBGPanel()
     {
-        Debug.Log("ToggleBGPanel");
-        BGEditorSection.gameObject.SetActive(!BGEditorSection.gameObject.activeSelf);
+        if (BGEditorSection != null)
+            BGEditorSection.gameObject.SetActive(!BGEditorSection.gameObject.activeSelf);
     }
-    
+
     public void ToggleOrbEditorPanel()
     {
-        Debug.Log("ToggleOrbPanel");
-        OrbEditorSection.gameObject.SetActive(!OrbEditorSection.gameObject.activeSelf);
+        if (OrbEditorSection != null)
+            OrbEditorSection.gameObject.SetActive(!OrbEditorSection.gameObject.activeSelf);
     }
 
     public void ToggleSkinSelector()
     {
-        Debug.Log("ToggleSkinSelector");
-        SkinSelectorSection.gameObject.SetActive(!SkinSelectorSection.gameObject.activeSelf);
+        if (SkinSelectorSection != null)
+            SkinSelectorSection.gameObject.SetActive(!SkinSelectorSection.gameObject.activeSelf);
     }
-    
-    
+
+    // -------------------------
+    // Sliders binding
+    // -------------------------
     private void BindColorSliders(Slider[] sliders, Color initial, Action<Color> onChanged)
     {
-        
-        //Debug.Log("BindColorSliders");
         if (sliders == null || sliders.Length < 3) return;
-        sliders[0].value = initial.r;
-        sliders[1].value = initial.g;
-        sliders[2].value = initial.b;
+
+        sliders[0].onValueChanged.RemoveAllListeners();
+        sliders[1].onValueChanged.RemoveAllListeners();
+        sliders[2].onValueChanged.RemoveAllListeners();
+
+        sliders[0].SetValueWithoutNotify(initial.r);
+        sliders[1].SetValueWithoutNotify(initial.g);
+        sliders[2].SetValueWithoutNotify(initial.b);
 
         sliders[0].onValueChanged.AddListener(_ => onChanged(CollectColor(sliders)));
         sliders[1].onValueChanged.AddListener(_ => onChanged(CollectColor(sliders)));
         sliders[2].onValueChanged.AddListener(_ => onChanged(CollectColor(sliders)));
     }
 
-    private Color CollectColor(Slider[] sliders)
+    private static Color CollectColor(Slider[] sliders)
     {
-        Debug.Log("CollectColor");
         return new Color(sliders[0].value, sliders[1].value, sliders[2].value, 1f);
     }
 
@@ -138,7 +232,10 @@ public class SkinEditorUIController : MonoBehaviour
         workingCopy.BackgroundColor = color;
         UpdatePreviews();
     }
-    
+
+    // -------------------------
+    // Background mode toggles
+    // -------------------------
     private void OnUseImageToggled(bool enabled)
     {
         if (enabled)
@@ -146,7 +243,7 @@ public class SkinEditorUIController : MonoBehaviour
             workingCopy.UseBackgroundImage = true;
             workingCopy.UseColorBackground = false;
 
-            // IMPORTANT: coupe la vidéo
+            // coupe vidéo
             workingCopy.UseBackgroundVideo = false;
             workingCopy.BackgroundVideoName = string.Empty;
         }
@@ -160,10 +257,14 @@ public class SkinEditorUIController : MonoBehaviour
         }
 
         UpdatePreviews();
+        SyncDropdownSelectionFromWorkingCopy();
     }
 
     private void OnBackgroundDropdownChanged(int index)
     {
+        if (BackgroundDropdown == null || index < 0 || index >= BackgroundDropdown.options.Count)
+            return;
+
         var option = BackgroundDropdown.options[index].text;
 
         if (option == "None")
@@ -172,39 +273,47 @@ public class SkinEditorUIController : MonoBehaviour
             workingCopy.BackgroundVideoName  = string.Empty;
             workingCopy.UseBackgroundImage   = false;
             workingCopy.UseBackgroundVideo   = false;
-            // laisse UseColorBackground tel quel, ou force-le si tu veux un fallback
+            // laisse UseColorBackground tel quel si tu veux
             UpdatePreviews();
             return;
         }
 
-        string ext = System.IO.Path.GetExtension(option).ToLowerInvariant();
+        string ext = Path.GetExtension(option).ToLowerInvariant();
 
-        bool isVideo = ext == ".mp4" || ext == ".mov" || ext == ".webm";
+        bool hasExtension = !string.IsNullOrEmpty(ext);
+        bool isVideo = ext == ".mp4" || ext == ".mov" || ext == ".m4v" || ext == ".webm";
         bool isImage = ext == ".png" || ext == ".jpg" || ext == ".jpeg";
 
-        if (isVideo)
+        if (hasExtension && isVideo)
         {
-            // Active vidéo
             workingCopy.UseBackgroundVideo = true;
             workingCopy.UseBackgroundImage = false;
             workingCopy.UseColorBackground = false;
 
             workingCopy.BackgroundVideoName = option;
             workingCopy.BackgroundSpriteName = string.Empty;
+
+            if (UseImageToggle != null)
+                UseImageToggle.SetIsOnWithoutNotify(false);
         }
-        else if (isImage)
+        else
         {
-            // Active image
+            // Soit fichier image (avec extension), soit sprite Resources (sans extension)
+            if (hasExtension && !isImage)
+            {
+                Debug.LogWarning($"Unsupported background file type: {option}");
+                return;
+            }
+
             workingCopy.UseBackgroundImage = true;
             workingCopy.UseBackgroundVideo = false;
             workingCopy.UseColorBackground = false;
 
             workingCopy.BackgroundSpriteName = option;
             workingCopy.BackgroundVideoName = string.Empty;
-        }
-        else
-        {
-            Debug.LogWarning($"Unsupported background file type: {option}");
+
+            if (UseImageToggle != null)
+                UseImageToggle.SetIsOnWithoutNotify(true);
         }
 
         UpdatePreviews();
@@ -212,11 +321,9 @@ public class SkinEditorUIController : MonoBehaviour
 
     public void OnMobilePickRequested()
     {
-        // Évite les appels multiples si le picker est déjà ouvert
         if (NativeGallery.IsMediaPickerBusy())
             return;
 
-        // Pick image OR video
         NativeGallery.GetMixedMediaFromGallery(
             (path) =>
             {
@@ -226,38 +333,34 @@ public class SkinEditorUIController : MonoBehaviour
                     return;
                 }
 
-                Debug.Log("Picked path: " + path);
-
-                // Détection type (méthode NativeGallery si dispo), sinon fallback extension
                 NativeGallery.MediaType mediaType;
-                try
-                {
-                    mediaType = NativeGallery.GetMediaTypeOfFile(path);
-                }
-                catch
-                {
-                    mediaType = IsVideoPath(path) ? NativeGallery.MediaType.Video : NativeGallery.MediaType.Image;
-                }
+                try { mediaType = NativeGallery.GetMediaTypeOfFile(path); }
+                catch { mediaType = IsVideoPath(path) ? NativeGallery.MediaType.Video : NativeGallery.MediaType.Image; }
 
 #if UNITY_IOS && !UNITY_EDITOR
-            // iOS : tu avais déjà un flow spécial pour l'image
-            if (mediaType == NativeGallery.MediaType.Video)
-            {
-                StartCoroutine(SkinManager.ImportVideoiOS(path,(fileName) =>
+                if (mediaType == NativeGallery.MediaType.Video)
+                {
+                    StartCoroutine(SkinManager.ImportVideoiOS(path, (fileName) =>
                     {
-                        // fileName = "bg_....mp4" (juste le nom, pas le path)
-                        // Ici tu branches la suite logique : assigner au skin, sauvegarder, refresh UI, etc.
+                        // branche workingCopy
+                        workingCopy.BackgroundVideoName = fileName;
+                        workingCopy.UseBackgroundVideo = true;
+                        workingCopy.UseBackgroundImage = false;
+                        workingCopy.UseColorBackground = false;
 
-                        var skin = SkinManager.CurrentSkin; // adapte à ton code
-                        skin.BackgroundVideoName = fileName;
-                        skin.UseBackgroundVideo = true;
-                        skin.UseBackgroundImage = false;
+                        PopulateBackgroundDropdown();
+                        SyncDropdownSelectionFromWorkingCopy();
+                        UpdatePreviews();
                     }));
-            }
-            else
-            {
-                StartCoroutine(SkinManager.ImportImageiOS(path));
-            }
+                }
+                else
+                {
+                    StartCoroutine(SkinManager.ImportImageiOS(path));
+                    // si ImportImageiOS met à jour SkinManager.CurrentSkin plutôt que workingCopy,
+                    // tu peux juste refresh après :
+                    PopulateBackgroundDropdown();
+                    UpdatePreviews();
+                }
 #else
                 if (mediaType == NativeGallery.MediaType.Video)
                 {
@@ -267,41 +370,432 @@ public class SkinEditorUIController : MonoBehaviour
                 {
                     SkinManager.ImportBackgroundFromGallery(path);
                 }
-#endif
 
-                // IMPORTANT: refresh UI après le choix + import déclenché
-                UpdatePreviews();
+                // Refresh UI après import
                 PopulateBackgroundDropdown();
+                UpdatePreviews();
+#endif
             },
             NativeGallery.MediaType.Image | NativeGallery.MediaType.Video,
             "Select an image or video"
         );
     }
 
+    // -------------------------
+    // Video thumbnail system
+    // -------------------------
+    private void ApplyVideoThumbToUI(Sprite spriteOrNull)
+    {
+        if (BackgroundPreview != null)
+        {
+            BackgroundPreview.enabled = true;
+            BackgroundPreview.preserveAspect = true;
+            BackgroundPreview.sprite = spriteOrNull;
+            BackgroundPreview.color = (spriteOrNull != null) ? Color.white : workingCopy.BackgroundColor;
+        }
+
+        if (sharedBackground != null)
+        {
+            sharedBackground.enabled = true;
+            sharedBackground.preserveAspect = true;
+            sharedBackground.sprite = spriteOrNull;
+            sharedBackground.color = (spriteOrNull != null) ? Color.white : workingCopy.BackgroundColor;
+        }
+    }
+
+    private void CleanupCachedVideoThumb()
+    {
+        if (cachedVideoThumbSprite != null)
+        {
+            var tex = cachedVideoThumbSprite.texture;
+            Destroy(cachedVideoThumbSprite);
+            if (tex != null) Destroy(tex);
+            cachedVideoThumbSprite = null;
+            cachedVideoThumbFor = null;
+        }
+    }
+
+    private void EnsureVideoThumbnail(string videoFileName)
+    {
+        if (string.IsNullOrEmpty(videoFileName))
+        {
+            ApplyVideoThumbToUI(null);
+            return;
+        }
+
+        if (cachedVideoThumbSprite != null && cachedVideoThumbFor == videoFileName)
+        {
+            ApplyVideoThumbToUI(cachedVideoThumbSprite);
+            return;
+        }
+
+        // placeholder pendant chargement (ça affiche au moins une surface)
+        ApplyVideoThumbToUI(null);
+
+        int reqId = ++videoThumbRequestId;
+        StartCoroutine(CoLoadVideoThumbnail(videoFileName, reqId));
+    }
+
+    private IEnumerator CoLoadVideoThumbnail(string videoFileName, int reqId)
+    {
+        string fullPath = Path.Combine(Application.persistentDataPath, "Backgrounds", videoFileName);
+        if (!File.Exists(fullPath))
+        {
+            Debug.LogWarning("[Thumb] Video file not found: " + fullPath);
+            yield break;
+        }
+
+        Texture2D tex = null;
+
+        // 1) Try NativeGallery on device
+#if (UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR
+        {
+            Task<Texture2D> task = NativeGallery.GetVideoThumbnailAsync(
+                fullPath,
+                maxSize: videoThumbMaxSize,
+                captureTimeInSeconds: videoThumbCaptureTimeSeconds,
+                markTextureNonReadable: false
+            );
+
+            while (!task.IsCompleted) yield return null;
+
+            if (reqId != videoThumbRequestId)
+            {
+                if (task.Result != null) Destroy(task.Result);
+                yield break;
+            }
+
+            tex = task.Result;
+            if (tex == null)
+                Debug.LogWarning("[Thumb] NativeGallery returned null thumbnail, trying VideoPlayer fallback (if assigned).");
+        }
+#endif
+
+        // 2) Fallback: grab one frame via VideoPlayer (Editor + fallback)
+        if (tex == null && thumbVideoPlayer != null)
+        {
+            yield return StartCoroutine(CoThumbViaVideoPlayer(fullPath, reqId, t => tex = t));
+        }
+
+        if (reqId != videoThumbRequestId)
+        {
+            if (tex != null) Destroy(tex);
+            yield break;
+        }
+
+        if (tex == null)
+        {
+            Debug.LogWarning("[Thumb] Thumbnail is null (no fallback or codec/time issue).");
+            yield break;
+        }
+
+        // Still same mode/video?
+        if (!workingCopy.UseBackgroundVideo || workingCopy.BackgroundVideoName != videoFileName)
+        {
+            Destroy(tex);
+            yield break;
+        }
+
+        CleanupCachedVideoThumb();
+
+        cachedVideoThumbFor = videoFileName;
+        cachedVideoThumbSprite = Sprite.Create(
+            tex,
+            new Rect(0, 0, tex.width, tex.height),
+            new Vector2(0.5f, 0.5f),
+            100f
+        );
+
+        ApplyVideoThumbToUI(cachedVideoThumbSprite);
+    }
+
+    private IEnumerator CoThumbViaVideoPlayer(string fullPath, int reqId, Action<Texture2D> onDone)
+    {
+        onDone?.Invoke(null);
+
+        if (thumbVideoPlayer == null)
+            yield break;
+
+        if (thumbRT == null)
+        {
+            int s = Mathf.Max(256, videoThumbMaxSize);
+            thumbRT = new RenderTexture(s, s, 0, RenderTextureFormat.ARGB32);
+            thumbRT.Create();
+        }
+
+        thumbVideoPlayer.Stop();
+        thumbVideoPlayer.playOnAwake = false;
+        thumbVideoPlayer.isLooping = false;
+        thumbVideoPlayer.audioOutputMode = VideoAudioOutputMode.None;
+        thumbVideoPlayer.renderMode = VideoRenderMode.RenderTexture;
+        thumbVideoPlayer.targetTexture = thumbRT;
+        thumbVideoPlayer.waitForFirstFrame = true;
+        thumbVideoPlayer.skipOnDrop = true;
+
+        string url = fullPath;
+#if (UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR
+        url = "file://" + fullPath;
+#endif
+        thumbVideoPlayer.url = url;
+
+        thumbVideoPlayer.Prepare();
+        while (!thumbVideoPlayer.isPrepared)
+        {
+            if (reqId != videoThumbRequestId) yield break;
+            yield return null;
+        }
+
+        // Jouer juste assez pour remplir la RT
+        thumbVideoPlayer.Play();
+        yield return null;
+        yield return null;
+
+        if (reqId != videoThumbRequestId)
+        {
+            thumbVideoPlayer.Stop();
+            yield break;
+        }
+
+        RenderTexture prev = RenderTexture.active;
+        RenderTexture.active = thumbRT;
+
+        Texture2D tex = new Texture2D(thumbRT.width, thumbRT.height, TextureFormat.RGBA32, false);
+        tex.ReadPixels(new Rect(0, 0, thumbRT.width, thumbRT.height), 0, 0);
+        tex.Apply(false, false);
+
+        RenderTexture.active = prev;
+        thumbVideoPlayer.Stop();
+
+        onDone?.Invoke(tex);
+    }
+
+    // -------------------------
+    // Previews
+    // -------------------------
+    private void UpdatePreviews()
+    {
+        // --- Orb 3D preview (mesh OR prefab) ---
+        bool hasMesh = SkinManager.TryGetBallMesh(workingCopy.BallMeshName, out var mesh, out _);
+        bool hasPrefab = DefaultBallPrefab != null && string.IsNullOrWhiteSpace(workingCopy.BallMeshName);
+        bool canUse3D = OrbPreviewController != null && OrbPreviewRawImage != null;
+
+        if (canUse3D && (hasMesh || hasPrefab))
+        {
+            OrbPreviewRawImage.enabled = true;
+
+            if (hasMesh)
+                OrbPreviewController.ShowMesh(mesh, workingCopy.BallColor, workingCopy.BallSize);
+            else
+                OrbPreviewController.ShowOrbPrefab(DefaultBallPrefab, workingCopy.BallColor, workingCopy.BallSize);
+
+            OrbPreviewController.SetPreviewColor(workingCopy.BallColor);
+            OrbPreviewController.SetPreviewSize(workingCopy.BallSize);
+        }
+        else
+        {
+            OrbPreviewController?.Clear();
+            if (OrbPreviewRawImage != null) OrbPreviewRawImage.enabled = false;
+        }
+
+        // --- Background previews (PRIORITÉ: Video > Image > Color) ---
+        bool useVideo = workingCopy.UseBackgroundVideo && !string.IsNullOrEmpty(workingCopy.BackgroundVideoName);
+        bool useImage = workingCopy.UseBackgroundImage && !useVideo;
+        bool useColor = workingCopy.UseColorBackground && !useVideo && !useImage;
+
+        if (useVideo)
+        {
+            if (bgColorimage != null) bgColorimage.enabled = false;
+
+            // Assure au moins que le preview est activé
+            if (BackgroundPreview != null)
+            {
+                BackgroundPreview.enabled = true;
+                BackgroundPreview.preserveAspect = true;
+            }
+
+            EnsureVideoThumbnail(workingCopy.BackgroundVideoName);
+        }
+        else if (useImage)
+        {
+            // invalidate async thumb request
+            videoThumbRequestId++;
+
+            if (bgColorimage != null) bgColorimage.enabled = false;
+
+            var sprite = SkinManager.LoadBackgroundSprite(workingCopy.BackgroundSpriteName);
+
+            if (BackgroundPreview != null)
+            {
+                BackgroundPreview.enabled = true;
+                BackgroundPreview.preserveAspect = true;
+                BackgroundPreview.sprite = sprite;
+                BackgroundPreview.color = (sprite != null) ? Color.white : workingCopy.BackgroundColor;
+            }
+
+            if (sharedBackground != null)
+            {
+                sharedBackground.enabled = true;
+                sharedBackground.preserveAspect = true;
+                sharedBackground.sprite = sprite;
+                sharedBackground.color = (sprite != null) ? Color.white : workingCopy.BackgroundColor;
+            }
+        }
+        else if (useColor)
+        {
+            videoThumbRequestId++;
+
+            if (BackgroundPreview != null)
+            {
+                BackgroundPreview.enabled = false;
+                BackgroundPreview.sprite = null;
+                BackgroundPreview.color = Color.white;
+            }
+
+            if (bgColorimage != null)
+            {
+                bgColorimage.enabled = true;
+                bgColorimage.color = workingCopy.BackgroundColor;
+            }
+
+            if (sharedBackground != null)
+            {
+                sharedBackground.enabled = true;
+                sharedBackground.sprite = null;
+                sharedBackground.color = workingCopy.BackgroundColor;
+            }
+        }
+        else
+        {
+            videoThumbRequestId++;
+
+            if (BackgroundPreview != null)
+            {
+                BackgroundPreview.enabled = false;
+                BackgroundPreview.sprite = null;
+                BackgroundPreview.color = Color.white;
+            }
+
+            if (bgColorimage != null)
+            {
+                bgColorimage.enabled = false;
+                bgColorimage.color = Color.white;
+            }
+
+            if (sharedBackground != null)
+                sharedBackground.enabled = false;
+        }
+
+        SkinManager.UpdateWorkingCopy(workingCopy);
+    }
+
+    // -------------------------
+    // Dropdown population + sync
+    // -------------------------
+    private void PopulateBackgroundDropdown()
+    {
+        if (BackgroundDropdown == null) return;
+
+        BackgroundDropdown.options.Clear();
+        BackgroundDropdown.options.Add(new TMP_Dropdown.OptionData("None"));
+
+        // 1) User backgrounds (persistentDataPath/Backgrounds)
+        string dir = Path.Combine(Application.persistentDataPath, "Backgrounds");
+        if (Directory.Exists(dir))
+        {
+            foreach (var file in Directory.GetFiles(dir, "*.*"))
+            {
+                string ext = Path.GetExtension(file).ToLowerInvariant();
+                bool ok = ext == ".png" || ext == ".jpg" || ext == ".jpeg" ||
+                          ext == ".mp4" || ext == ".mov" || ext == ".m4v" || ext == ".webm";
+                if (!ok) continue;
+
+                string fileName = Path.GetFileName(file);
+                BackgroundDropdown.options.Add(new TMP_Dropdown.OptionData(fileName));
+            }
+        }
+
+        // 2) Default backgrounds (Resources/Backgrounds)
+        Sprite[] defaults = Resources.LoadAll<Sprite>("Backgrounds");
+        foreach (var sprite in defaults)
+        {
+            if (sprite == null) continue;
+            BackgroundDropdown.options.Add(new TMP_Dropdown.OptionData(sprite.name));
+        }
+
+        SyncDropdownSelectionFromWorkingCopy();
+        BackgroundDropdown.RefreshShownValue();
+    }
+
+    private void SyncDropdownSelectionFromWorkingCopy()
+    {
+        if (BackgroundDropdown == null) return;
+
+        string selected =
+            (workingCopy.UseBackgroundVideo && !string.IsNullOrEmpty(workingCopy.BackgroundVideoName))
+                ? workingCopy.BackgroundVideoName
+                : workingCopy.BackgroundSpriteName;
+
+        int index = 0;
+        if (!string.IsNullOrEmpty(selected))
+        {
+            index = BackgroundDropdown.options.FindIndex(o => o.text == selected);
+            if (index < 0) index = 0;
+        }
+
+        BackgroundDropdown.SetValueWithoutNotify(index);
+    }
+
+    private void SyncFromWorkingCopy()
+    {
+        if (BallColorSliders != null && BallColorSliders.Length >= 3)
+        {
+            BallColorSliders[0].SetValueWithoutNotify(workingCopy.BallColor.r);
+            BallColorSliders[1].SetValueWithoutNotify(workingCopy.BallColor.g);
+            BallColorSliders[2].SetValueWithoutNotify(workingCopy.BallColor.b);
+        }
+
+        if (BackgroundColorSliders != null && BackgroundColorSliders.Length >= 3)
+        {
+            BackgroundColorSliders[0].SetValueWithoutNotify(workingCopy.BackgroundColor.r);
+            BackgroundColorSliders[1].SetValueWithoutNotify(workingCopy.BackgroundColor.g);
+            BackgroundColorSliders[2].SetValueWithoutNotify(workingCopy.BackgroundColor.b);
+        }
+
+        if (BallSizeSlider != null)
+            BallSizeSlider.SetValueWithoutNotify(workingCopy.BallSize);
+
+        if (UseImageToggle != null)
+            UseImageToggle.SetIsOnWithoutNotify(workingCopy.UseBackgroundImage);
+
+        UpdateBallMeshLabel();
+
+        SyncDropdownSelectionFromWorkingCopy();
+
+        if (SkinNameInput != null)
+            SkinNameInput.text = workingCopy.Name;
+
+        UpdatePreviews();
+    }
+
+    // -------------------------
+    // Ball mesh import
+    // -------------------------
     private void OnBallMeshImportRequested()
     {
 #if UNITY_EDITOR
         var path = EditorUtility.OpenFilePanel("Choisir un mesh de balle", string.Empty, "obj,assetbundle,unity3d");
         if (!string.IsNullOrEmpty(path))
-        {
             ApplyImportedBallMesh(path);
-        }
         return;
 #endif
 
-        if (NativeGallery.IsMediaPickerBusy())
-            return;
-
-        NativeGallery.GetMixedMediaFromGallery(
+        NativeFilePicker.PickFile(
             (path) =>
             {
-                if (string.IsNullOrEmpty(path))
-                    return;
-
+                if (string.IsNullOrEmpty(path)) return;
                 ApplyImportedBallMesh(path);
             },
-            NativeGallery.MediaType.Image | NativeGallery.MediaType.Video,
-            "Sélectionne un fichier 3D (OBJ ou AssetBundle)"
+            new[] { "obj", "assetbundle", "unity3d" }
         );
     }
 
@@ -325,43 +819,39 @@ public class SkinEditorUIController : MonoBehaviour
 
     private void UpdateBallMeshLabel()
     {
-        if (BallMeshNameLabel == null)
-            return;
+        if (BallMeshNameLabel == null) return;
 
         BallMeshNameLabel.text = string.IsNullOrEmpty(workingCopy.BallMeshName)
             ? "Mesh par défaut"
             : workingCopy.BallMeshName;
     }
 
-    private static bool IsVideoPath(string path)
-    {
-        var ext = Path.GetExtension(path)?.ToLowerInvariant();
-        return ext == ".mp4" || ext == ".mov" || ext == ".m4v" || ext == ".avi" || ext == ".webm";
-    }
+    // -------------------------
+    // Save + list
+    // -------------------------
     public void SaveSkin()
     {
-        SkinManager.SaveSkin(SkinNameInput.text, workingCopy);
+        SkinManager.SaveSkin(SkinNameInput != null ? SkinNameInput.text : workingCopy.Name, workingCopy);
         RefreshSavedSkins();
     }
 
     private void RefreshSavedSkins()
     {
+        if (SkinsListParent == null) return;
+
         foreach (Transform child in SkinsListParent)
         {
             if (child.gameObject.name != "Label")
-            {
                 Destroy(child.gameObject);
-            }
         }
 
-        //var font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
         foreach (var skin in SkinManager.Skins)
         {
-            // Instancie le prefab
+            if (defaultSkinButtonPrefab == null) break;
+
             var btnGO = Instantiate(defaultSkinButtonPrefab, SkinsListParent, false);
             btnGO.name = skin.Name;
 
-            // Récupère le label (Text) dans le prefab (enfant)
             var label = btnGO.GetComponentInChildren<Text>(true);
             if (label != null)
             {
@@ -370,16 +860,14 @@ public class SkinEditorUIController : MonoBehaviour
                 label.text = skin.Name;
             }
 
-            // Optionnel : si tu veux garder une légère transparence sur l'image de fond
             var img = btnGO.GetComponent<Image>();
             if (img != null)
                 img.color = new Color(1f, 1f, 1f, 0.9f);
 
-            // Hook du bouton
             var btn = btnGO.GetComponent<Button>();
             if (btn != null)
             {
-                string skinName = skin.Name; // capture safe
+                string skinName = skin.Name;
                 btn.onClick.AddListener(() =>
                 {
                     SkinManager.ApplySkin(skinName);
@@ -390,198 +878,27 @@ public class SkinEditorUIController : MonoBehaviour
         }
     }
 
-    private void SyncFromWorkingCopy()
+    // -------------------------
+    // Utils
+    // -------------------------
+    private static bool IsVideoPath(string path)
     {
-        BallColorSliders[0].SetValueWithoutNotify(workingCopy.BallColor.r);
-        BallColorSliders[1].SetValueWithoutNotify(workingCopy.BallColor.g);
-        BallColorSliders[2].SetValueWithoutNotify(workingCopy.BallColor.b);
-        BackgroundColorSliders[0].SetValueWithoutNotify(workingCopy.BackgroundColor.r);
-        BackgroundColorSliders[1].SetValueWithoutNotify(workingCopy.BackgroundColor.g);
-        BackgroundColorSliders[2].SetValueWithoutNotify(workingCopy.BackgroundColor.b);
-        BallSizeSlider.SetValueWithoutNotify(workingCopy.BallSize);
-        UseImageToggle.SetIsOnWithoutNotify(workingCopy.UseBackgroundImage);
-
-        UpdateBallMeshLabel();
-
-        var index = BackgroundDropdown.options.FindIndex(o => o.text == workingCopy.BackgroundSpriteName);
-        if (index < 0) index = 0;
-        BackgroundDropdown.SetValueWithoutNotify(index);
-
-        SkinNameInput.text = workingCopy.Name;
-        UpdatePreviews();
-    }
-    
-    [SerializeField] private GameObject DefaultBallPrefab;
-
-  private void UpdatePreviews()
-{
-    // Ball preview
-    BallPreview.color = workingCopy.BallColor;
-    BallPreview.transform.localScale = Vector3.one * workingCopy.BallSize;
-    
-    // --- Orb 3D preview (mesh OR prefab) ---
-    bool hasMesh = SkinManager.TryGetBallMesh(workingCopy.BallMeshName, out var mesh, out _);
-
-    GameObject prefab = null;
-    bool hasPrefab = DefaultBallPrefab != null && string.IsNullOrWhiteSpace(workingCopy.BallMeshName);
-    // (ou aussi: hasPrefab = DefaultBallPrefab != null; si tu veux l'utiliser comme fallback global)
-
-    bool canUse3D = OrbPreviewController != null && OrbPreviewRawImage != null;
-
-    if (canUse3D && (hasMesh || hasPrefab))
-    {
-        BallPreview.enabled = false;
-        OrbPreviewRawImage.enabled = true;
-
-        if (hasMesh)
-            OrbPreviewController.ShowMesh(mesh, workingCopy.BallColor, workingCopy.BallSize);
-        else
-         //   OrbPreviewController.ShowPrefab(DefaultBallPrefab);
-
-        OrbPreviewController.SetPreviewColor(workingCopy.BallColor);
-        OrbPreviewController.SetPreviewSize(workingCopy.BallSize);
-    }
-    else
-    {
-        OrbPreviewController?.Clear();
-        if (OrbPreviewRawImage != null) OrbPreviewRawImage.enabled = false;
-
-        BallPreview.enabled = true;
-        BallPreview.color = workingCopy.BallColor;
-        BallPreview.transform.localScale = Vector3.one * workingCopy.BallSize;
+        var ext = Path.GetExtension(path)?.ToLowerInvariant();
+        return ext == ".mp4" || ext == ".mov" || ext == ".m4v" || ext == ".avi" || ext == ".webm";
     }
 
-
-
-
-    // --- Background previews ---
-    // On part du principe que :
-    // - bgColorimage : Image dédiée au fond couleur (plein écran / panel)
-    // - BackgroundPreview : Image dédiée au fond sprite (helper)
-    bool useImage = workingCopy.UseBackgroundImage;
-    bool useColor = workingCopy.UseColorBackground && !useImage; // priorité à l'image
-
-    // 1) Mode "Background Image"
-    if (useImage)
+    private void OnDestroy()
     {
-        if (bgColorimage != null)
-            bgColorimage.enabled = false;
+        // Invalide requêtes thumb en cours
+        videoThumbRequestId++;
 
-        if (BackgroundPreview != null)
+        CleanupCachedVideoThumb();
+
+        if (thumbRT != null)
         {
-            var sprite = SkinManager.LoadBackgroundSprite(workingCopy.BackgroundSpriteName);
-
-            BackgroundPreview.enabled = true;
-            BackgroundPreview.preserveAspect = true;
-            BackgroundPreview.sprite = sprite;
-
-            // Si sprite introuvable, on fallback sur la couleur stockée
-            BackgroundPreview.color = (sprite != null) ? Color.white : workingCopy.BackgroundColor;
+            thumbRT.Release();
+            Destroy(thumbRT);
+            thumbRT = null;
         }
     }
-    // 2) Mode "Color Background"
-    else if (useColor)
-    {
-        if (BackgroundPreview != null)
-        {
-            BackgroundPreview.enabled = false;
-            BackgroundPreview.sprite = null;
-        }
-
-        if (bgColorimage != null)
-        {
-            bgColorimage.enabled = true;
-            bgColorimage.color = workingCopy.BackgroundColor;
-        }
-    }
-    // 3) Aucun des deux
-    else
-    {
-        if (BackgroundPreview != null)
-        {
-            BackgroundPreview.enabled = false;
-            BackgroundPreview.sprite = null;
-            BackgroundPreview.color = Color.white;
-        }
-
-        if (bgColorimage != null)
-        {
-            bgColorimage.enabled = false;
-            bgColorimage.color = Color.white;
-        }
-    }
-
-    // --- Shared background (si tu veux refléter le même rendu ailleurs) ---
-    if (sharedBackground != null)
-    {
-        if (useImage)
-        {
-            var sprite = SkinManager.LoadBackgroundSprite(workingCopy.BackgroundSpriteName);
-            sharedBackground.enabled = true;
-            sharedBackground.preserveAspect = true;
-            sharedBackground.sprite = sprite;
-            sharedBackground.color = (sprite != null) ? Color.white : workingCopy.BackgroundColor;
-        }
-        else if (useColor)
-        {
-            // Ici, sharedBackground est une Image: on l'utilise juste en couleur
-            sharedBackground.enabled = true;
-            sharedBackground.sprite = null;
-            sharedBackground.color = workingCopy.BackgroundColor;
-        }
-        else
-        {
-            sharedBackground.enabled = false;
-        }
-    }
-
-    SkinManager.UpdateWorkingCopy(workingCopy);
-}
-
-
-    private void PopulateBackgroundDropdown()
-    {
-        BackgroundDropdown.options.Clear();
-        BackgroundDropdown.options.Add(new TMP_Dropdown.OptionData("None"));
-
-        List<string> ids = new List<string>();
-
-        // 1️⃣ Backgrounds utilisateur (persistent)
-        string dir = Path.Combine(Application.persistentDataPath, "Backgrounds");
-        if (Directory.Exists(dir))
-        {
-            foreach (var file in Directory.GetFiles(dir, "*.*"))
-            {
-                string fileName = Path.GetFileName(file);
-                ids.Add(fileName);
-                BackgroundDropdown.options.Add(
-                    new TMP_Dropdown.OptionData(fileName)
-                );
-            }
-        }
-
-        // 2️⃣ Backgrounds par défaut (Resources)
-        Sprite[] defaults = Resources.LoadAll<Sprite>("Backgrounds");
-        foreach (var sprite in defaults)
-        {
-            ids.Add(sprite.name);
-            BackgroundDropdown.options.Add(
-                new TMP_Dropdown.OptionData(sprite.name)
-            );
-        }
-
-        // 3️⃣ Restaurer la sélection
-        int index = 0;
-        if (!string.IsNullOrEmpty(workingCopy.BackgroundSpriteName))
-        {
-            index = BackgroundDropdown.options.FindIndex(
-                o => o.text == workingCopy.BackgroundSpriteName
-            );
-            if (index < 0) index = 0;
-        }
-
-        BackgroundDropdown.value = index;
-        BackgroundDropdown.RefreshShownValue();
-    }
-
 }
