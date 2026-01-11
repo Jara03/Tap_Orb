@@ -32,7 +32,7 @@ public class OrbPreviewController : MonoBehaviour
         if (!renderEveryFrame && previewCamera != null)
             previewCamera.enabled = false;
         
-        previewCamera.nearClipPlane = 0.1f;//Mathf.Max(0.1f, dist - radius * 3f);
+        previewCamera.nearClipPlane = 0.01f;//Mathf.Max(0.1f, dist - radius * 3f);
         previewCamera.farClipPlane = 0.5f;// Mathf.Max(0.5f, dist - radius * 3f);
     }
 
@@ -70,7 +70,7 @@ public class OrbPreviewController : MonoBehaviour
         currentInstance.transform.localPosition = Vector3.zero;
         currentInstance.transform.localRotation = Quaternion.identity;
         //currentInstance.transform.localScale = Vector3.one;
-        currentInstance.transform.localScale = Vector3.one * Mathf.Max(0.5f, size);
+        currentInstance.transform.localScale = Vector3.one * Mathf.Max(0.3f, size);
 
         ApplyColor(currentInstance, color);
 
@@ -97,7 +97,7 @@ public class OrbPreviewController : MonoBehaviour
 
         var bounds = CalculateBounds(go);
         if (bounds.size == Vector3.zero)
-            bounds = new Bounds(go.transform.position, Vector3.one * 0.5f);
+            bounds = new Bounds(go.transform.position, Vector3.one * 0.01f);//go.transform.position Vector3(4.3f,3.2f,-4.3f)
 
         Vector3 center = bounds.center;
         float radius = bounds.extents.magnitude;
@@ -116,7 +116,7 @@ public class OrbPreviewController : MonoBehaviour
         }
         else
         {
-            previewCamera.transform.position = previewCamera.transform.position;
+            previewCamera.transform.localPosition = new Vector3(3f, 2.5f, -3f); //previewCamera.transform.position;
         }
         previewCamera.transform.LookAt(center);
         
@@ -232,7 +232,7 @@ public class OrbPreviewController : MonoBehaviour
     {
         if (currentInstance == null) return;
 
-        currentInstance.transform.localScale = Vector3.one * Mathf.Max(0.5f, size);
+        currentInstance.transform.localScale = Vector3.one * Mathf.Max(0f, size);
 
         // important : sinon la caméra peut clip / cadrage faux
         FrameToObject(currentInstance);

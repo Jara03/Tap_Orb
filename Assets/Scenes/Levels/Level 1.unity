@@ -1179,6 +1179,7 @@ MonoBehaviour:
   bgRT: {fileID: 0}
   forceEditorTestVideo: 0
   editorTestVideoFileName: test_bg.mp4
+  deathSfxVolume: 0.5
 --- !u!4 &1314294744
 Transform:
   m_ObjectHideFlags: 0
@@ -1351,7 +1352,7 @@ PrefabInstance:
     - target: {fileID: 458488288965668979, guid: 9769df5d351b84441ad503159edd4e12,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 3451
+      value: 3466
       objectReference: {fileID: 0}
     - target: {fileID: 2023101313341710661, guid: 9769df5d351b84441ad503159edd4e12,
         type: 3}
