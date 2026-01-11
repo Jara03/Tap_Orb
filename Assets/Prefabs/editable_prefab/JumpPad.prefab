@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3628340791187536521}
   - component: {fileID: 3392321957884114661}
   m_Layer: 0
-  m_Name: Prism
+  m_Name: JumpPad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

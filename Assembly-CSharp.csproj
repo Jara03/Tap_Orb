@@ -50,6 +50,7 @@
     <Compile Include="Assets\Scripts\BasketTrigger.cs" />
     <Compile Include="Assets\Scripts\LevelButton.cs" />
     <Compile Include="Assets\Scripts\LevelMenuGenerator.cs" />
+    <Compile Include="Assets\Scripts\iOSAudioRoute.cs" />
     <Compile Include="Assets\Scripts\InputController.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\Level.cs" />
@@ -58,12 +59,14 @@
     <Compile Include="Assets\Scripts\BouncyBallSettler.cs" />
     <Compile Include="Assets\Scripts\ObjectivesPanel.cs" />
     <Compile Include="Assets\Scripts\AnimatedGameItem.cs" />
+    <Compile Include="Assets\Scripts\iOSAudioRouteFix.cs" />
     <Compile Include="Assets\Scripts\ObjectiveRowView.cs" />
     <Compile Include="Assets\Scripts\OrbPreviewController.cs" />
     <Compile Include="Assets\Scripts\SkinManager.cs" />
     <Compile Include="Assets\Scripts\ObjectiveBoostrap.cs" />
     <Compile Include="Assets\Scripts\ScrollTopOnStart.cs" />
     <Compile Include="Assets\Scripts\RuntimeMeshImporter.cs" />
+    <Compile Include="Assets\Scripts\SkinSelectionPreviewPanel.cs" />
     <Compile Include="Assets\Scripts\GlobalVolumeController.cs" />
     <Compile Include="Assets\Scripts\BeamCollisionSweeper.cs" />
     <Compile Include="Assets\level-edition\LevelEditorBootstrap.cs" />
@@ -92,6 +95,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile-2-Pass.shader" />
+    <None Include="Assets\Sprites_VortexSwirl.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\TextMesh Pro\Fonts\Fredoka,Gugi\Fredoka\OFL.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />

@@ -66,6 +66,7 @@ public class SkinEditorUIController : MonoBehaviour
     private int videoThumbRequestId;
 
     private SkinData workingCopy;
+    private SkinData selectedSkin;
     private bool initialized;
 
     private void Start()
@@ -188,9 +189,25 @@ public class SkinEditorUIController : MonoBehaviour
     {
         if (OrbEditorSection != null)
             OrbEditorSection.gameObject.SetActive(!OrbEditorSection.gameObject.activeSelf);
+        UpdatePreviews();
+
     }
+    
+    
 
     public void ToggleSkinSelector()
+    {
+        if (selectedSkin != null)
+        {
+            SkinManager.ApplySkin(selectedSkin.Name);
+            workingCopy = SkinManager.CurrentSkin.Clone();
+            SyncFromWorkingCopy();
+        }
+        if (SkinSelectorSection != null)
+            SkinSelectorSection.gameObject.SetActive(!SkinSelectorSection.gameObject.activeSelf);
+    }
+    
+    public void ToggleSkinSelectorWithoutSave()
     {
         if (SkinSelectorSection != null)
             SkinSelectorSection.gameObject.SetActive(!SkinSelectorSection.gameObject.activeSelf);
@@ -858,6 +875,9 @@ public class SkinEditorUIController : MonoBehaviour
         SkinManager.SaveSkin(SkinNameInput != null ? SkinNameInput.text : workingCopy.Name, workingCopy);
         RefreshSavedSkins();
     }
+    
+    // Référence à ton panneau preview (drag & drop dans l'inspector)
+    [SerializeField] private SkinSelectionPreviewPanel selectionPreview;
 
     private void RefreshSavedSkins()
     {
@@ -894,9 +914,10 @@ public class SkinEditorUIController : MonoBehaviour
                 string skinName = skin.Name;
                 btn.onClick.AddListener(() =>
                 {
-                    SkinManager.ApplySkin(skinName);
-                    workingCopy = SkinManager.CurrentSkin.Clone();
-                    SyncFromWorkingCopy();
+                    selectedSkin = skin;
+                    // 1) preview
+                    selectionPreview?.ShowSkin(skin);
+                    
                 });
             }
         }
