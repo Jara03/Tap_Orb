@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -43,6 +44,8 @@ public class LevelDataManager : MonoBehaviour
     public InterstitialAds interstitialAds;
     private int gameOverCounter = 0;
     private float lastCallTime = -999f;
+    private float runStartTime;
+    private bool runHasEnded;
 
     void Start()
     {
@@ -105,7 +108,16 @@ public class LevelDataManager : MonoBehaviour
         }
         
         interstitialAds = gameObject.AddComponent<InterstitialAds>();
-        
+        interstitialAds.OnInterstitialShown += HandleInterstitialShown;
+
+        runStartTime = Time.time;
+        runHasEnded = false;
+        Analytics.NotifyRunStarted();
+        Analytics.Track("run_start", new Dictionary<string, object>
+        {
+            { "level", LevelManager.levelSelected }
+        });
+
         //charge le skin de jeu 
         LoadSkin(SkinManager.CurrentSkin);
 
@@ -549,6 +561,17 @@ public class LevelDataManager : MonoBehaviour
 
     public void EndLevel()
     {
+        if (!runHasEnded)
+        {
+            float duration = Mathf.Max(0f, Time.time - runStartTime);
+            Analytics.Track("run_end", new Dictionary<string, object>
+            {
+                { "level", LevelManager.levelSelected },
+                { "duration_s", duration },
+                { "result", "win" }
+            });
+            runHasEnded = true;
+        }
         
         //afficher l'UI de fin de partie
         FinishedLevelUI.SetActive(true);
@@ -582,7 +605,35 @@ public class LevelDataManager : MonoBehaviour
     public void BackHome()
     {
         Debug.Log("Back Home");
+        if (!runHasEnded)
+        {
+            float duration = Mathf.Max(0f, Time.time - runStartTime);
+            Analytics.Track("run_end", new Dictionary<string, object>
+            {
+                { "level", LevelManager.levelSelected },
+                { "duration_s", duration },
+                { "result", "quit" }
+            });
+            runHasEnded = true;
+        }
         LevelManager.goBackHome();        
+    }
+
+    private void HandleInterstitialShown()
+    {
+        Analytics.Track("ad_interstitial_shown", new Dictionary<string, object>
+        {
+            { "placement", "end_run" },
+            { "level", LevelManager.levelSelected }
+        });
+    }
+
+    private void OnDestroy()
+    {
+        if (interstitialAds != null)
+        {
+            interstitialAds.OnInterstitialShown -= HandleInterstitialShown;
+        }
     }
 
 }
