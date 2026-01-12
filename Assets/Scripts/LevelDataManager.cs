@@ -42,7 +42,7 @@ public class LevelDataManager : MonoBehaviour
 
     public InterstitialAds interstitialAds;
     private int gameOverCounter = 0;
-    private float lastCallTime = -999f;
+    private float lastCallTime = -30;
 
     void Start()
     {
@@ -498,7 +498,7 @@ public class LevelDataManager : MonoBehaviour
 
         float deltaTimeAd = now - lastCallTime;
 
-        if (gameOverCounter >= 3 && deltaTimeAd > 15f)
+        if (gameOverCounter >= 3 && deltaTimeAd > 60f)
         {
             interstitialAds.ShowInterstitialAd();
             gameOverCounter = 0;

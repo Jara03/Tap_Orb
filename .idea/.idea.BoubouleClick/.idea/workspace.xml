@@ -4,26 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f856c2c3-5d6c-43a8-b00d-43067849984f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BoubouleClick/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BoubouleClick/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assembly-CSharp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Assembly-CSharp.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/Arriver.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Arriver.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Blender_Old/crescent.blend" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Blender_Old/crescent.blend" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Blender_Old/crescent.blend1" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Blender_Old/crescent.blend1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/SkinEditor/Default.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/SkinEditor/Default.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/editable_prefab/Prism.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/editable_prefab/Prism.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/editable_prefab/crescent.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/editable_prefab/crescent.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/editable_prefab/crescent.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/editable_prefab/crescent.prefab.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/editable_prefab/panier.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/editable_prefab/panier.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Home.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Home.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Tests/Level 1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Tests/Level 1.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/OrbPreviewController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/OrbPreviewController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SkinEditorUIController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SkinEditorUIController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe-0.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe-0.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-6000.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-6000.dwlt" afterDir="false" />
-    </list>
+    <list default="true" id="f856c2c3-5d6c-43a8-b00d-43067849984f" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -196,7 +177,7 @@
       <workItem from="1766922675206" duration="11086000" />
       <workItem from="1767261107745" duration="23455000" />
       <workItem from="1767444965208" duration="39287000" />
-      <workItem from="1768134851730" duration="781000" />
+      <workItem from="1768134851730" duration="1644000" />
     </task>
     <task id="LOCAL-00001" summary="initial Commit">
       <option name="closed" value="true" />
@@ -558,7 +539,15 @@
       <option name="project" value="LOCAL" />
       <updated>1767519943060</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="reworked prefabs + added vortex swirl mat">
+      <option name="closed" value="true" />
+      <created>1768139987494</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1768139987494</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -597,7 +586,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Integrated End Level UI + bug correction" />
     <MESSAGE value="added Jump Pad script" />
     <MESSAGE value="created new game item trampoline" />
     <MESSAGE value="global update of project" />
@@ -622,7 +610,8 @@
     <MESSAGE value="finishing UI rework + Orb preview implementation" />
     <MESSAGE value="added nativeFilePicker &#10;minor bug fixes&#10;video Thumbnail preview supported" />
     <MESSAGE value="fix for mesh import (obj filter)" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix for mesh import (obj filter)" />
+    <MESSAGE value="reworked prefabs + added vortex swirl mat" />
+    <option name="LAST_COMMIT_MESSAGE" value="reworked prefabs + added vortex swirl mat" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

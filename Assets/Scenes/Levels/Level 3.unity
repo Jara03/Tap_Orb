@@ -1980,6 +1980,7 @@ MonoBehaviour:
   bgRT: {fileID: 0}
   forceEditorTestVideo: 0
   editorTestVideoFileName: test_bg.mp4
+  deathSfxVolume: 0.5
 --- !u!4 &1314294744
 Transform:
   m_ObjectHideFlags: 0
