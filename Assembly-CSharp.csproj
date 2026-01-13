@@ -77,6 +77,7 @@
     <Compile Include="Assets\Scripts\bumper.cs" />
     <Compile Include="Assets\Scripts\SafeAreaFitter.cs" />
     <Compile Include="Assets\Scripts\LevelTransitionController.cs" />
+    <Compile Include="Assets\Scripts\PillsController.cs" />
     <Compile Include="Assets\Scripts\resetBallPosition.cs" />
     <Compile Include="Assets\Scripts\FPSDisplay.cs" />
     <Compile Include="Assets\Scripts\LevelManager.cs" />
@@ -90,7 +91,6 @@
     <Compile Include="Assets\Scripts\InterstitialAds.cs" />
     <Compile Include="Assets\Scripts\ObjectivesPanelController.cs" />
     <Compile Include="Assets\level-edition\LevelEditorGizmo.cs" />
-    <Compile Include="Assets\PillsController.cs" />
     <Compile Include="Assets\Scripts\MineItem.cs" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
