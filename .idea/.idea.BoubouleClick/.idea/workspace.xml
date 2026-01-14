@@ -6,11 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f856c2c3-5d6c-43a8-b00d-43067849984f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BoubouleClick/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BoubouleClick/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assembly-CSharp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Assembly-CSharp.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PillsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PillsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PillsController.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PillsController.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Tests/Level 1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Tests/Level 1.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -191,7 +186,7 @@
       <workItem from="1767261107745" duration="23455000" />
       <workItem from="1767444965208" duration="39287000" />
       <workItem from="1768134851730" duration="1644000" />
-      <workItem from="1768243978043" duration="7099000" />
+      <workItem from="1768243978043" duration="12867000" />
     </task>
     <task id="LOCAL-00001" summary="initial Commit">
       <option name="closed" value="true" />
@@ -569,7 +564,15 @@
       <option name="project" value="LOCAL" />
       <updated>1768244536620</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="added app icon">
+      <option name="closed" value="true" />
+      <created>1768337447509</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1768337447509</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -608,7 +611,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="created new game item trampoline" />
     <MESSAGE value="global update of project" />
     <MESSAGE value="intégration lvl d'avance" />
     <MESSAGE value="debugged mine Script" />
@@ -633,7 +635,8 @@
     <MESSAGE value="fix for mesh import (obj filter)" />
     <MESSAGE value="reworked prefabs + added vortex swirl mat" />
     <MESSAGE value="changed intersticial ads frequency" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed intersticial ads frequency" />
+    <MESSAGE value="added app icon" />
+    <option name="LAST_COMMIT_MESSAGE" value="added app icon" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
