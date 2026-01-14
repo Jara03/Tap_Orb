@@ -21,6 +21,11 @@ jobs:
           -logFile unity_build.log
         shell: cmd
 
+      - name: Print last lines of Unity log if failed
+        if: failure()
+        run: powershell -Command "Get-Content unity_build.log -Tail 250"
+
+
       - name: Debug build folder
         run: |
           echo "Listing Builds directory"
