@@ -16,7 +16,7 @@ jobs:
           "C:\Program Files\Unity\Hub\Editor\6000.0.59f2\Editor\Unity.exe" ^
           -batchmode -quit ^
           -projectPath . ^
-          -activeBuildProfile "Assets/Settings/BuildProfiles/iOS_Profile.asset" ^
+          -activeBuildProfile "Assets/Settings/Build Profiles/iOS_Profile.asset" ^
           -executeMethod BuildScript.BuildiOS ^
           -logFile unity_build.log
         shell: cmd
