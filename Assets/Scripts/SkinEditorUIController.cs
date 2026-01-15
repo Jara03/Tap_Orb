@@ -359,43 +359,65 @@ public class SkinEditorUIController : MonoBehaviour
                 {
                     StartCoroutine(SkinManager.ImportVideoiOS(path, (fileName) =>
                     {
-                        // branche workingCopy
-                        workingCopy.BackgroundVideoName = fileName;
-                        workingCopy.UseBackgroundVideo = true;
-                        workingCopy.UseBackgroundImage = false;
-                        workingCopy.UseColorBackground = false;
-
-                        PopulateBackgroundDropdown();
-                        SyncDropdownSelectionFromWorkingCopy();
-                        UpdatePreviews();
+                        ApplyImportedBackgroundSelection(fileName, isVideo: true);
                     }));
                 }
                 else
                 {
-                    StartCoroutine(SkinManager.ImportImageiOS(path));
-                    // si ImportImageiOS met à jour SkinManager.CurrentSkin plutôt que workingCopy,
-                    // tu peux juste refresh après :
-                    PopulateBackgroundDropdown();
-                    UpdatePreviews();
+                    StartCoroutine(SkinManager.ImportImageiOS(path, (fileName) =>
+                    {
+                        ApplyImportedBackgroundSelection(fileName, isVideo: false);
+                    }));
                 }
 #else
                 if (mediaType == NativeGallery.MediaType.Video)
                 {
-                    SkinManager.ImportBackgroundVideoFromGallery(path);
+                    string fileName = SkinManager.ImportBackgroundVideoFromGallery(path);
+                    ApplyImportedBackgroundSelection(fileName, isVideo: true);
                 }
                 else
                 {
-                    SkinManager.ImportBackgroundFromGallery(path);
+                    string fileName = SkinManager.ImportBackgroundFromGallery(path);
+                    ApplyImportedBackgroundSelection(fileName, isVideo: false);
                 }
-
-                // Refresh UI après import
-                PopulateBackgroundDropdown();
-                UpdatePreviews();
 #endif
             },
             NativeGallery.MediaType.Image | NativeGallery.MediaType.Video,
             "Select an image or video"
         );
+    }
+
+    private void ApplyImportedBackgroundSelection(string fileName, bool isVideo)
+    {
+        if (string.IsNullOrEmpty(fileName))
+            return;
+
+        if (isVideo)
+        {
+            workingCopy.BackgroundVideoName = fileName;
+            workingCopy.UseBackgroundVideo = true;
+            workingCopy.UseBackgroundImage = false;
+            workingCopy.UseColorBackground = false;
+            workingCopy.BackgroundSpriteName = string.Empty;
+
+            if (UseImageToggle != null)
+                UseImageToggle.SetIsOnWithoutNotify(false);
+        }
+        else
+        {
+            workingCopy.BackgroundSpriteName = fileName;
+            workingCopy.UseBackgroundImage = true;
+            workingCopy.UseBackgroundVideo = false;
+            workingCopy.UseColorBackground = false;
+            workingCopy.BackgroundVideoName = string.Empty;
+
+            if (UseImageToggle != null)
+                UseImageToggle.SetIsOnWithoutNotify(true);
+        }
+
+        PopulateBackgroundDropdown();
+        SyncDropdownSelectionFromWorkingCopy();
+        UpdatePreviews();
     }
 
     // -------------------------

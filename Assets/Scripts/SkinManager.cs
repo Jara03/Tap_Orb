@@ -22,8 +22,11 @@ public static class SkinManager
         LoadFromPrefs();
     }
      
-    public static void ImportBackgroundFromGallery(string sourcePath)
+    public static string ImportBackgroundFromGallery(string sourcePath)
     {
+        if (string.IsNullOrEmpty(sourcePath) || !File.Exists(sourcePath))
+            return string.Empty;
+
         string targetDir = Path.Combine(Application.persistentDataPath, "Backgrounds");
 
         if (!Directory.Exists(targetDir))
@@ -35,6 +38,8 @@ public static class SkinManager
 
 
         File.Copy(sourcePath, destPath, true);
+
+        return fileName;
     }
         
         private static bool IsVideoFile(string nameOrPath)
@@ -123,7 +128,7 @@ public static class SkinManager
         return fileName;
     }
     
-    public static IEnumerator ImportImageiOS(string sourcePath)
+    public static IEnumerator ImportImageiOS(string sourcePath, Action<string> onFinished)
     {
         string url = "file://" + sourcePath;
 
@@ -150,6 +155,7 @@ public static class SkinManager
             Debug.Log("Image imported via UWR: " + destPath);
 
             // maintenant tu peux charger normalement depuis destPath
+            onFinished?.Invoke(fileName);
         }
     }
 
