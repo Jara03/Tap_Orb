@@ -44,6 +44,8 @@ public class LevelDataManager : MonoBehaviour
     public InterstitialAds interstitialAds;
     private int gameOverCounter = 0;
     private float lastCallTime = -30;
+    private bool runHasEnded = false;
+    private float runStartTime;
 
     void Start()
     {

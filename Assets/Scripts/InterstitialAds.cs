@@ -8,9 +8,9 @@ public class InterstitialAds : MonoBehaviour
     public event Action OnInterstitialShown;
 
 #if UNITY_ANDROID
-    private string adUnitId = "ca-app-pub-1810486296187934/7874409170"; // ID test officiel AdMob
+    private string adUnitId = "ca-app-pub-1810486296187934/7874409170";
 #elif UNITY_IPHONE
-    private string adUnitId = "ca-app-pub-3940256099942544/1033173712";
+    private string adUnitId = "ca-app-pub-1810486296187934/2735942490";
 #else
     private string adUnitId = "unused";
 #endif
