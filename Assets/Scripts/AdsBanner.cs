@@ -3,15 +3,38 @@ using UnityEngine;
 
 public class AdsBanner : MonoBehaviour
 {
-    // Create a 320x50 banner at top of the screen.
+#if UNITY_ANDROID
+    private const string AdUnitId = "ca-app-pub-1810486296187934/7874409170";
+#elif UNITY_IOS
+    private const string AdUnitId = "ca-app-pub-1810486296187934/2867804438";
+#else
+    private const string AdUnitId = "unused";
+#endif
 
+    private BannerView bannerView;
 
-   private void Start()
-   {
-       BannerView bannerView = new BannerView("ca-app-pub-3940256099942544/2934735716", AdSize.Banner, AdPosition.Bottom);
+    private void Start()
+    {
+#if UNITY_EDITOR
+        return; // évite les appels pubs dans l'Editor
+#endif
 
-       // Send a request to load an ad into the banner view.
-       bannerView.LoadAd(new AdRequest());
-   }
-   
+        // (Optionnel mais recommandé) initialise le SDK si ce n'est pas déjà fait ailleurs.
+        // MobileAds.Initialize(_ => { });
+
+        bannerView = new BannerView(AdUnitId, AdSize.Banner, AdPosition.Bottom);
+
+        var request = new AdRequest();
+        bannerView.LoadAd(request);
+    }
+
+    private void OnDestroy()
+    {
+        // Important : libère la bannière quand la scène / l'objet est détruit
+        if (bannerView != null)
+        {
+            bannerView.Destroy();
+            bannerView = null;
+        }
+    }
 }
