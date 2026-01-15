@@ -1759,7 +1759,7 @@ PrefabInstance:
     - target: {fileID: 2100964586198556348, guid: 383dfd2210ab1fa46b4c63276d005f68,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.1403704
+      value: -4.67
       objectReference: {fileID: 0}
     - target: {fileID: 2100964586198556348, guid: 383dfd2210ab1fa46b4c63276d005f68,
         type: 3}
@@ -3422,7 +3422,12 @@ PrefabInstance:
     - target: {fileID: 6673257267101765943, guid: 2062ade952b6168408de40683b6ce2a0,
         type: 3}
       propertyPath: triggerRadius
-      value: 3
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6673257267101765943, guid: 2062ade952b6168408de40683b6ce2a0,
+        type: 3}
+      propertyPath: explosionForce
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 6855039597565173571, guid: 2062ade952b6168408de40683b6ce2a0,
         type: 3}

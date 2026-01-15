@@ -1,27 +1,35 @@
-
 name: Unity iOS CI/CD (Hybrid)
 
 on:
   push:
     branches: ["main"]
   workflow_dispatch:
-  
+
 jobs:
   unity-build:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
 
-      - name: Unity batchmode build (iOS)
+      - name: Unity batchmode build (iOS) with Build Profile
         run: |
           "C:\Program Files\Unity\Hub\Editor\6000.0.59f2\Editor\Unity.exe" ^
-          -batchmode -quit -projectPath . ^
+          -batchmode -quit ^
+          -projectPath . ^
+          -activeBuildProfile "Assets/Settings/Build Profiles/iOS_Profile.asset" ^
           -executeMethod BuildScript.BuildiOS ^
           -logFile unity_build.log
         shell: cmd
 
+      - name: Print last lines of Unity log if failed
+        if: failure()
+        run: powershell -Command "Get-Content unity_build.log -Tail 250"
+
+
       - name: Debug build folder
         run: |
-          echo "Listing Build directory"
-          dir Build
+          echo "Listing Builds directory"
+          dir Builds
+          echo "Listing Builds/iOS directory"
+          dir Builds\iOS
         shell: cmd
