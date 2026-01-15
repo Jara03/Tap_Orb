@@ -156,8 +156,8 @@ jobs:
           SHA: ${{ github.sha }}
         run: |
           $short = $env:SHA.Substring(0,7)
-      
-          # Literal here-string: NO interpolation, no parsing surprises
+
+          # 1) Literal here-string (no interpolation), then inject vars safely
           $script = @'
           set -euo pipefail
           
@@ -171,11 +171,18 @@ jobs:
           echo "== Listing current =="
           ls -la | head -n 80
           
+          echo "== pod check =="
+          which pod || true
+          pod --version || true
+          
           # --- POD INSTALL ---
           if [ -f "Podfile" ]; then
             echo "== Podfile found. Running pod install =="
             if ! command -v pod >/dev/null 2>&1; then
-              echo "ERROR: CocoaPods (pod) not found on VM."
+              echo "ERROR: CocoaPods (pod) not found on VM. Install it once on the VM, e.g.:"
+              echo "  brew install cocoapods"
+              echo "or:"
+              echo "  sudo gem install cocoapods"
               exit 1
             fi
           
@@ -191,7 +198,6 @@ jobs:
           ls -la *.xcworkspace 2>/dev/null || true
           ls -la *.xcodeproj 2>/dev/null || true
           
-          # Avoid "|| true" in command substitutions to keep it simple
           WORKSPACE="$(ls -1 *.xcworkspace 2>/dev/null | head -n 1)"
           PROJECT="$(ls -1 *.xcodeproj 2>/dev/null | head -n 1)"
           
@@ -204,7 +210,7 @@ jobs:
           echo "SCHEME=$SCHEME"
           echo "ARCHIVE_PATH=$ARCHIVE_PATH"
           
-          # Dump list to help debug scheme/workspace
+          # Helpful debug
           xcodebuild -list 2>/dev/null || true
           
           if [ -n "$WORKSPACE" ]; then
@@ -220,18 +226,19 @@ jobs:
           ls -la "$ARCHIVES_DIR" | head -n 80
           '@
           
-              # Inject variables safely
-              $script = $script.Replace("__DEPLOY_PATH__", $env:DEPLOY_PATH).Replace("__SHORT__", $short)
+                    $script = $script.Replace("__DEPLOY_PATH__", $env:DEPLOY_PATH).Replace("__SHORT__", $short)
           
-              $tmp = Join-Path $env:RUNNER_TEMP "remote_build_$short.sh"
-              [System.IO.File]::WriteAllText($tmp, ($script -replace "`r",""), (New-Object System.Text.UTF8Encoding($false)))
+                    # 2) Write remote script bytes as UTF-8 WITHOUT BOM (prevents "﻿set: command not found")
+                    $tmp = Join-Path $env:RUNNER_TEMP "remote_build_$short.sh"
+                    $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+                    [System.IO.File]::WriteAllBytes($tmp, $utf8NoBom.GetBytes(($script -replace "`r","")))
           
-              Write-Host "Wrote remote script: $tmp"
-              Get-Content $tmp -TotalCount 12
+                    Write-Host "Wrote remote script: $tmp"
+                    Get-Content $tmp -TotalCount 12
           
-              # Pipe to ssh stdin => executed by bash on VM
-              Get-Content $tmp -Raw | ssh -o BatchMode=yes -o ConnectTimeout=20 -o ConnectionAttempts=1 `
-                -i "$env:SSH_KEY" -p $env:DEPLOY_PORT `
-                -o UserKnownHostsFile="$env:SSH_KNOWN_HOSTS" `
-                -o StrictHostKeyChecking=yes `
-                "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" "bash -s"
+                    # Pipe to ssh stdin => executed by bash on VM
+                    Get-Content $tmp -Raw | ssh -o BatchMode=yes -o ConnectTimeout=20 -o ConnectionAttempts=1 `
+                      -i "$env:SSH_KEY" -p $env:DEPLOY_PORT `
+                      -o UserKnownHostsFile="$env:SSH_KNOWN_HOSTS" `
+                      -o StrictHostKeyChecking=yes `
+                      "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" "bash -s"
