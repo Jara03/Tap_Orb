@@ -10,12 +10,6 @@ jobs:
     runs-on: [self-hosted]
 
     steps:
-
-      # --- OPTIONAL ---
-      # If your Unity build step already runs earlier in this workflow (or on this runner),
-      # keep it. Otherwise add it here before "Find Xcode project".
-      # ----------------
-
       - name: Find Xcode project folder (auto)
         shell: powershell
         run: |
@@ -56,7 +50,6 @@ jobs:
           Write-Host "Created: $archive"
           Get-Item $archive | Format-List Name,Length,FullName
 
-
       - name: Setup SSH (fresh)
         shell: powershell
         env:
@@ -71,37 +64,30 @@ jobs:
             Write-Error "KNOWN_HOSTS secret is missing."
             exit 1
           }
-      
+
           $sshDir = Join-Path $env:RUNNER_TEMP ("ssh_ci_" + $env:GITHUB_RUN_ID)
           if (Test-Path $sshDir) { Remove-Item $sshDir -Recurse -Force }
           New-Item -ItemType Directory -Force -Path $sshDir | Out-Null
-      
+
           $keyPath = Join-Path $sshDir "id_ed25519"
-      
-          # Write key as UTF-8 (no BOM), normalize line endings
+
           $key = ($env:SSH_PRIVATE_KEY -replace "`r","").Trim() + "`n"
           [System.IO.File]::WriteAllText($keyPath, $key, (New-Object System.Text.UTF8Encoding($false)))
-      
-          Write-Host "Key first line:"
-          Get-Content $keyPath -TotalCount 1
-      
-          # Lock down perms (OpenSSH requirement)
+
           icacls $keyPath /inheritance:r | Out-Null
           icacls $keyPath /remove "BUILTIN\Users" "BUILTIN\Utilisateurs" "Users" "Utilisateurs" 2>$null | Out-Null
           icacls $keyPath /grant:r "$($env:USERNAME):(R)" "SYSTEM:(R)" | Out-Null
-      
-          # Validate key format
+
           ssh-keygen -lf $keyPath
-      
+
           $knownHostsPath = Join-Path $sshDir "known_hosts"
           $kh = ($env:KNOWN_HOSTS -replace "`r","").Trim() + "`n"
           [System.IO.File]::WriteAllText($knownHostsPath, $kh, (New-Object System.Text.UTF8Encoding($false)))
-      
+
           "SSH_KEY=$keyPath" | Out-File -FilePath $env:GITHUB_ENV -Append
           "SSH_KNOWN_HOSTS=$knownHostsPath" | Out-File -FilePath $env:GITHUB_ENV -Append
-      
+
           Write-Host "SSH setup OK in $sshDir"
-                
 
       - name: SSH test (fast fail)
         shell: powershell
@@ -139,14 +125,12 @@ jobs:
           $short = $env:SHA.Substring(0,7)
           $releaseDir = "$($env:DEPLOY_PATH)/releases/$short"
 
-          # 1) Create release directory on VM
           ssh -o BatchMode=yes -o ConnectTimeout=10 -o ConnectionAttempts=1 `
             -i "$env:SSH_KEY" -p $env:DEPLOY_PORT `
             -o UserKnownHostsFile="$env:SSH_KNOWN_HOSTS" `
             -o StrictHostKeyChecking=yes `
             "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" "mkdir -p '$releaseDir'"
 
-          # 2) Upload tar.gz
           scp -o BatchMode=yes -o ConnectTimeout=10 -o ConnectionAttempts=1 `
             -i "$env:SSH_KEY" -P $env:DEPLOY_PORT `
             -o UserKnownHostsFile="$env:SSH_KNOWN_HOSTS" `
@@ -154,10 +138,97 @@ jobs:
             "$archiveLocal" `
             "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST):$releaseDir/xcode_project.tar.gz"
 
-          # 3) Extract + symlink current (one-liner)
-          $remoteCmd = "set -e; cd '$releaseDir'; rm -rf iOS; mkdir -p iOS; tar -xzf xcode_project.tar.gz -C iOS --strip-components=1; rm -f xcode_project.tar.gz; ln -sfn '$releaseDir/iOS' '$($env:DEPLOY_PATH)/current'; echo DEPLOY_OK; ls -l '$($env:DEPLOY_PATH)/current'"
+          $remoteCmd = "set -e; cd '$releaseDir'; rm -rf iOS; mkdir -p iOS; tar -xzf xcode_project.tar.gz -C iOS --strip-components=1; rm -f xcode_project.tar.gz; ln -sfn '$releaseDir/iOS' '$($env:DEPLOY_PATH)/current'; echo DEPLOY_OK; ls -la '$($env:DEPLOY_PATH)/current' | head -n 50"
 
           ssh -o BatchMode=yes -o ConnectTimeout=10 -o ConnectionAttempts=1 `
+            -i "$env:SSH_KEY" -p $env:DEPLOY_PORT `
+            -o UserKnownHostsFile="$env:SSH_KNOWN_HOSTS" `
+            -o StrictHostKeyChecking=yes `
+            "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" "$remoteCmd"
+
+      - name: Pod install + Xcode Archive (remote)
+        shell: powershell
+        env:
+          DEPLOY_HOST: ${{ vars.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ vars.DEPLOY_USER }}
+          DEPLOY_PORT: ${{ vars.DEPLOY_PORT }}
+          DEPLOY_PATH: ${{ vars.DEPLOY_PATH }}
+          SHA: ${{ github.sha }}
+        run: |
+          $short = $env:SHA.Substring(0,7)
+
+          # IMPORTANT:
+          # - Unity export uses scheme "Unity-iPhone" by default.
+          # - After "pod install", you typically build the .xcworkspace, not the .xcodeproj.
+          # - Archive requires valid signing (certs/profiles). This step will fail if the VM isn't configured for signing.
+
+          $bash = @"
+          set -euo pipefail
+
+          CUR="$env:DEPLOY_PATH/current"
+          echo "== Current path: $CUR =="
+          cd "$CUR"
+
+          echo "== Listing current =="
+          ls -la | head -n 80
+
+          # --- POD INSTALL ---
+          if [ -f "Podfile" ]; then
+            echo "== Podfile found. Running pod install =="
+            if ! command -v pod >/dev/null 2>&1; then
+              echo "ERROR: CocoaPods (pod) not found on VM."
+              exit 1
+            fi
+
+            # Avoid encoding issues + make it deterministic
+            export LANG=en_US.UTF-8
+            export LC_ALL=en_US.UTF-8
+
+            pod install --repo-update
+          else
+            echo "== No Podfile in current. Skipping pod install. =="
+          fi
+
+          echo "== After pods, workspaces/projects =="
+          ls -la *.xcworkspace 2>/dev/null || true
+          ls -la *.xcodeproj 2>/dev/null || true
+
+          # --- ARCHIVE (Xcode Product > Archive equivalent) ---
+          # Pick workspace if exists (CocoaPods generates it), otherwise fallback to xcodeproj.
+          WORKSPACE="$(ls -1 *.xcworkspace 2>/dev/null | head -n 1 || true)"
+          PROJECT="$(ls -1 *.xcodeproj 2>/dev/null | head -n 1 || true)"
+          SCHEME="Unity-iPhone"
+
+          ARCHIVES_DIR="$env:DEPLOY_PATH/archives/$short"
+          mkdir -p "$ARCHIVES_DIR"
+          ARCHIVE_PATH="$ARCHIVES_DIR/$SCHEME.xcarchive"
+
+          echo "== Archive target =="
+          echo "WORKSPACE=$WORKSPACE"
+          echo "PROJECT=$PROJECT"
+          echo "SCHEME=$SCHEME"
+          echo "ARCHIVE_PATH=$ARCHIVE_PATH"
+
+          # NOTE:
+          # -allowProvisioningUpdates can help if the VM is logged into Apple ID + has signing configured.
+          # If you use manual signing, this still needs profiles/certs in keychain.
+          if [ -n "$WORKSPACE" ]; then
+            xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" -configuration Release -archivePath "$ARCHIVE_PATH" archive -allowProvisioningUpdates | tee "$ARCHIVES_DIR/xcodebuild_archive.log"
+          elif [ -n "$PROJECT" ]; then
+            xcodebuild -project "$PROJECT" -scheme "$SCHEME" -configuration Release -archivePath "$ARCHIVE_PATH" archive -allowProvisioningUpdates | tee "$ARCHIVES_DIR/xcodebuild_archive.log"
+          else
+            echo "ERROR: No .xcworkspace or .xcodeproj found in current."
+            exit 1
+          fi
+
+          echo "== Archive done. Contents: =="
+          ls -la "$ARCHIVES_DIR" | head -n 50
+          "@
+
+          # Run remote bash login shell (so rbenv/bundler/pods env is loaded if configured)
+          $remoteCmd = "bash -lc " + ('"' + ($bash -replace '"','\"') + '"')
+
+          ssh -o BatchMode=yes -o ConnectTimeout=20 -o ConnectionAttempts=1 `
             -i "$env:SSH_KEY" -p $env:DEPLOY_PORT `
             -o UserKnownHostsFile="$env:SSH_KNOWN_HOSTS" `
             -o StrictHostKeyChecking=yes `
