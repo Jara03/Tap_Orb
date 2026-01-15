@@ -5,6 +5,7 @@ using System;
 public class InterstitialAds : MonoBehaviour
 {
     private InterstitialAd interstitialAd; 
+    public event Action OnInterstitialShown;
 
 #if UNITY_ANDROID
     private string adUnitId = "ca-app-pub-1810486296187934/7874409170"; // ID test officiel AdMob
@@ -41,6 +42,11 @@ public class InterstitialAds : MonoBehaviour
             interstitialAd = ad;
 
             // Abonnement aux événements
+            interstitialAd.OnAdFullScreenContentOpened += () =>
+            {
+                Debug.Log("Interstitial ouvert.");
+                OnInterstitialShown?.Invoke();
+            };
             interstitialAd.OnAdFullScreenContentClosed += () =>
             {
                 Debug.Log("Interstitial fermé. Rechargement...");
