@@ -157,12 +157,13 @@ jobs:
         run: |
           $short = $env:SHA.Substring(0,7)
 
-          $remoteCmd = @"
+          # Build the bash script as a SINGLE string, but do NOT use bash heredocs in PowerShell.
+          # We'll write it to a file and pipe it to ssh stdin.
+          $script = @"
           set -euo pipefail
           
-          CUR="$env:DEPLOY_PATH/current"
-          SHORT="$short"
-          ARCHIVES_DIR="$env:DEPLOY_PATH/archives/$short"
+          CUR="$($env:DEPLOY_PATH)/current"
+          ARCHIVES_DIR="$($env:DEPLOY_PATH)/archives/$short"
           SCHEME="Unity-iPhone"
           
           echo "== Current path: $CUR =="
@@ -203,6 +204,9 @@ jobs:
           echo "SCHEME=$SCHEME"
           echo "ARCHIVE_PATH=$ARCHIVE_PATH"
           
+          # Optional: dump list to help debug scheme name
+          xcodebuild -list 2>/dev/null || true
+          
           if [ -n "$WORKSPACE" ]; then
             xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" -configuration Release -archivePath "$ARCHIVE_PATH" archive -allowProvisioningUpdates | tee "$ARCHIVES_DIR/xcodebuild_archive.log"
           elif [ -n "$PROJECT" ]; then
@@ -216,13 +220,17 @@ jobs:
           ls -la "$ARCHIVES_DIR" | head -n 80
           "@
           
-                    # Send the script to bash on the remote VM via heredoc
-                    ssh -o BatchMode=yes -o ConnectTimeout=20 -o ConnectionAttempts=1 `
+                    $tmp = Join-Path $env:RUNNER_TEMP "remote_build_$short.sh"
+                    # Write UTF-8 no BOM, keep LF
+                    [System.IO.File]::WriteAllText($tmp, ($script -replace "`r",""), (New-Object System.Text.UTF8Encoding($false)))
+          
+                    Write-Host "Wrote remote script: $tmp"
+                    Write-Host "First lines:"
+                    Get-Content $tmp -TotalCount 10
+          
+                    # Pipe the script to ssh STDIN => executed by bash on the VM
+                    Get-Content $tmp -Raw | ssh -o BatchMode=yes -o ConnectTimeout=20 -o ConnectionAttempts=1 `
                       -i "$env:SSH_KEY" -p $env:DEPLOY_PORT `
                       -o UserKnownHostsFile="$env:SSH_KNOWN_HOSTS" `
                       -o StrictHostKeyChecking=yes `
-                      "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" "bash -s" << EOF
-          $remoteCmd
-          EOF
-          
-                      "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" "$remoteCmd"
+                      "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" "bash -s"
