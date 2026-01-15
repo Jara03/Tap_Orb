@@ -157,21 +157,20 @@ jobs:
         run: |
           $short = $env:SHA.Substring(0,7)
 
-          # IMPORTANT:
-          # - Unity export uses scheme "Unity-iPhone" by default.
-          # - After "pod install", you typically build the .xcworkspace, not the .xcodeproj.
-          # - Archive requires valid signing (certs/profiles). This step will fail if the VM isn't configured for signing.
-
-          $bash = @"
+          $remoteCmd = @"
           set -euo pipefail
-
+          
           CUR="$env:DEPLOY_PATH/current"
+          SHORT="$short"
+          ARCHIVES_DIR="$env:DEPLOY_PATH/archives/$short"
+          SCHEME="Unity-iPhone"
+          
           echo "== Current path: $CUR =="
           cd "$CUR"
-
+          
           echo "== Listing current =="
           ls -la | head -n 80
-
+          
           # --- POD INSTALL ---
           if [ -f "Podfile" ]; then
             echo "== Podfile found. Running pod install =="
@@ -179,39 +178,31 @@ jobs:
               echo "ERROR: CocoaPods (pod) not found on VM."
               exit 1
             fi
-
-            # Avoid encoding issues + make it deterministic
+          
             export LANG=en_US.UTF-8
             export LC_ALL=en_US.UTF-8
-
+          
             pod install --repo-update
           else
             echo "== No Podfile in current. Skipping pod install. =="
           fi
-
+          
           echo "== After pods, workspaces/projects =="
           ls -la *.xcworkspace 2>/dev/null || true
           ls -la *.xcodeproj 2>/dev/null || true
-
-          # --- ARCHIVE (Xcode Product > Archive equivalent) ---
-          # Pick workspace if exists (CocoaPods generates it), otherwise fallback to xcodeproj.
+          
           WORKSPACE="$(ls -1 *.xcworkspace 2>/dev/null | head -n 1 || true)"
           PROJECT="$(ls -1 *.xcodeproj 2>/dev/null | head -n 1 || true)"
-          SCHEME="Unity-iPhone"
-
-          ARCHIVES_DIR="$env:DEPLOY_PATH/archives/$short"
+          
           mkdir -p "$ARCHIVES_DIR"
           ARCHIVE_PATH="$ARCHIVES_DIR/$SCHEME.xcarchive"
-
+          
           echo "== Archive target =="
           echo "WORKSPACE=$WORKSPACE"
           echo "PROJECT=$PROJECT"
           echo "SCHEME=$SCHEME"
           echo "ARCHIVE_PATH=$ARCHIVE_PATH"
-
-          # NOTE:
-          # -allowProvisioningUpdates can help if the VM is logged into Apple ID + has signing configured.
-          # If you use manual signing, this still needs profiles/certs in keychain.
+          
           if [ -n "$WORKSPACE" ]; then
             xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" -configuration Release -archivePath "$ARCHIVE_PATH" archive -allowProvisioningUpdates | tee "$ARCHIVES_DIR/xcodebuild_archive.log"
           elif [ -n "$PROJECT" ]; then
@@ -220,16 +211,18 @@ jobs:
             echo "ERROR: No .xcworkspace or .xcodeproj found in current."
             exit 1
           fi
-
+          
           echo "== Archive done. Contents: =="
-          ls -la "$ARCHIVES_DIR" | head -n 50
+          ls -la "$ARCHIVES_DIR" | head -n 80
           "@
-
-          # Run remote bash login shell (so rbenv/bundler/pods env is loaded if configured)
-          $remoteCmd = "bash -lc " + ('"' + ($bash -replace '"','\"') + '"')
-
-          ssh -o BatchMode=yes -o ConnectTimeout=20 -o ConnectionAttempts=1 `
-            -i "$env:SSH_KEY" -p $env:DEPLOY_PORT `
-            -o UserKnownHostsFile="$env:SSH_KNOWN_HOSTS" `
-            -o StrictHostKeyChecking=yes `
-            "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" "$remoteCmd"
+          
+                    # Send the script to bash on the remote VM via heredoc
+                    ssh -o BatchMode=yes -o ConnectTimeout=20 -o ConnectionAttempts=1 `
+                      -i "$env:SSH_KEY" -p $env:DEPLOY_PORT `
+                      -o UserKnownHostsFile="$env:SSH_KNOWN_HOSTS" `
+                      -o StrictHostKeyChecking=yes `
+                      "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" "bash -s" << EOF
+          $remoteCmd
+          EOF
+          
+                      "$($env:DEPLOY_USER)@$($env:DEPLOY_HOST)" "$remoteCmd"
