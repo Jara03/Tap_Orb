@@ -8,17 +8,13 @@ public class AdsBanner : MonoBehaviour
 #elif UNITY_IOS
     private const string AdUnitId = "ca-app-pub-1810486296187934/2867804438";
 #else
-    private const string AdUnitId = "unused";
+    private const string AdUnitId = "ca-app-pub-1810486296187934/2867804438";
 #endif
 
     private BannerView bannerView;
 
     private void Start()
     {
-#if UNITY_EDITOR
-        return; // évite les appels pubs dans l'Editor
-#endif
-
         // (Optionnel mais recommandé) initialise le SDK si ce n'est pas déjà fait ailleurs.
         // MobileAds.Initialize(_ => { });
 
