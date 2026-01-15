@@ -44,6 +44,22 @@ public class LevelManager : MonoBehaviour
 
                 Debug.Log("Google Mobile Ads initialization complete.");
 
+#if UNITY_ANDROID || UNITY_IOS
+                if (Debug.isDebugBuild)
+                {
+                    MobileAds.OpenAdInspector((AdInspectorError error) =>
+                    {
+                        if (error != null)
+                        {
+                            Debug.LogWarning("Ad Inspector n'a pas pu s'ouvrir (mode dev) : " + error);
+                            return;
+                        }
+
+                        Debug.Log("Ad Inspector ouvert (mode dev).");
+                    });
+                }
+#endif
+
                 // Google Mobile Ads events are raised off the Unity Main thread. If you need to
                 // access UnityEngine objects after initialization,
                 // use MobileAdsEventExecutor.ExecuteInUpdate(). For more information, see:
