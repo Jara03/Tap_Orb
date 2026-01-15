@@ -7,7 +7,7 @@ public class LevelMenuGenerator : MonoBehaviour
 
     public void LoadLevel(int level)
     {
-        LevelManager.levelSelected = level;
+        LevelManager.SetSelectedLevel(level);
         // Construire le nom de la scène à charger, par ex : "Monde1/Level 1"
         string scenePath = $"Scenes/Levels/Level {LevelManager.levelSelected}";
 
