@@ -614,11 +614,16 @@ public class SkinEditorUIController : MonoBehaviour
     private void UpdatePreviews()
     {
         // --- Orb 3D preview (mesh OR prefab) ---
-        bool hasMesh = SkinManager.TryGetBallMesh(workingCopy.BallMeshName, out var mesh, out _);
-        bool hasPrefab = DefaultBallPrefab != null && string.IsNullOrWhiteSpace(workingCopy.BallMeshName);
         bool canUse3D = OrbPreviewController != null && OrbPreviewRawImage != null;
+        bool orbPreviewActive = OrbEditorSection == null || OrbEditorSection.gameObject.activeInHierarchy;
+        bool hasMesh = false;
+        Mesh mesh = null;
+        if (canUse3D && orbPreviewActive && !string.IsNullOrWhiteSpace(workingCopy.BallMeshName))
+            hasMesh = SkinManager.TryGetBallMesh(workingCopy.BallMeshName, out mesh, out _);
 
-        if (canUse3D && (hasMesh || hasPrefab))
+        bool hasPrefab = canUse3D && orbPreviewActive && DefaultBallPrefab != null && string.IsNullOrWhiteSpace(workingCopy.BallMeshName);
+
+        if (canUse3D && orbPreviewActive && (hasMesh || hasPrefab))
         {
             OrbPreviewRawImage.enabled = true;
 

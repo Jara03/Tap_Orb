@@ -4,6 +4,13 @@ using System.Collections;
 
 public class OrbPreviewController : MonoBehaviour
 {
+    private enum PreviewMode
+    {
+        None,
+        Mesh,
+        Prefab
+    }
+
     [Header("Scene refs")]
     [SerializeField] private Camera previewCamera;
     [SerializeField] private Transform previewRoot;
@@ -17,8 +24,12 @@ public class OrbPreviewController : MonoBehaviour
     [SerializeField] private float renderInterval = 1f / 30f; // si renderEveryFrame = false
 
     private GameObject currentInstance;
+    private GameObject currentPrefabSource;
+    private Mesh currentMesh;
+    private PreviewMode currentMode = PreviewMode.None;
     private int previewLayer;
     private Coroutine renderLoop;
+    private Renderer[] currentRenderers;
 
     private bool isInitFrame = true;
 
@@ -53,10 +64,23 @@ public class OrbPreviewController : MonoBehaviour
     /// </summary>
     public void ShowOrbPrefab(GameObject orbPrefab, Color color, float size)
     {
-        Clear();
-
         if (orbPrefab == null)
+        {
+            Clear();
             return;
+        }
+
+        if (currentMode == PreviewMode.Prefab && currentPrefabSource == orbPrefab && currentInstance != null)
+        {
+            ApplyColor(color);
+            SetPreviewSize(size);
+            return;
+        }
+
+        Clear();
+        currentMode = PreviewMode.Prefab;
+        currentPrefabSource = orbPrefab;
+        currentMesh = null;
 
         currentInstance = Instantiate(orbPrefab, previewRoot);
         var rb = currentInstance.GetComponent<Rigidbody>();
@@ -72,7 +96,8 @@ public class OrbPreviewController : MonoBehaviour
         //currentInstance.transform.localScale = Vector3.one;
         currentInstance.transform.localScale = Vector3.one * Mathf.Max(0.3f, size);
 
-        ApplyColor(currentInstance, color);
+        CacheRenderers();
+        ApplyColor(color);
 
 
         SetLayerRecursively(currentInstance, previewLayer);
@@ -154,8 +179,19 @@ public class OrbPreviewController : MonoBehaviour
     
     public void ShowMesh(Mesh mesh, Color color, float size)
     {
-        Clear();
         if (mesh == null) return;
+
+        if (currentMode == PreviewMode.Mesh && currentMesh == mesh && currentInstance != null)
+        {
+            ApplyColor(color);
+            SetPreviewSize(size);
+            return;
+        }
+
+        Clear();
+        currentMode = PreviewMode.Mesh;
+        currentMesh = mesh;
+        currentPrefabSource = null;
 
         // Crée un GO simple avec MeshFilter/Renderer
         currentInstance = new GameObject("OrbPreview_Mesh");
@@ -164,11 +200,12 @@ public class OrbPreviewController : MonoBehaviour
         currentInstance.transform.localRotation = Quaternion.identity;
         currentInstance.transform.localScale = Vector3.one * Mathf.Max(0.01f, size);
 
-        var mf = currentInstance.AddComponent<MeshFilter>();
+        mf = currentInstance.AddComponent<MeshFilter>();
         mf.sharedMesh = mesh;
 
-        var mr = currentInstance.AddComponent<MeshRenderer>();
+        mr = currentInstance.AddComponent<MeshRenderer>();
         if (PreviewMaterial != null) mr.sharedMaterial = PreviewMaterial;
+        CacheRenderers();
 
         SetLayerRecursively(currentInstance, previewLayer);
 
@@ -177,7 +214,7 @@ public class OrbPreviewController : MonoBehaviour
         rot.Speed = rotateSpeedDegPerSec;
 
         // Color via MaterialPropertyBlock (safe perf)
-        ApplyColor(currentInstance, color);
+        ApplyColor(color);
 
         FrameToObject(currentInstance);
 
@@ -191,24 +228,30 @@ public class OrbPreviewController : MonoBehaviour
     {
         if (currentInstance != null) Destroy(currentInstance);
         currentInstance = null;
+        currentMode = PreviewMode.None;
+        currentMesh = null;
+        currentPrefabSource = null;
+        currentRenderers = null;
+        isInitFrame = true;
     }
 
     
     private static readonly int BaseColorId = Shader.PropertyToID("_EmissionColor");
     private static readonly int ColorId     = Shader.PropertyToID("_Color");
 
-    private void ApplyColor(GameObject root, Color color)
+    private void CacheRenderers()
     {
-        var r = root.GetComponent<Renderer>();
-        if (r == null) return;
+        if (currentInstance == null)
+        {
+            currentRenderers = null;
+            return;
+        }
 
-        var mpb = new MaterialPropertyBlock();
-        r.GetPropertyBlock(mpb);
-        mpb.SetColor(BaseColorId, color);
-        mpb.SetColor(ColorId, color);
-        r.SetPropertyBlock(mpb);
+        currentRenderers = currentInstance.GetComponentsInChildren<Renderer>(true);
+        if (currentRenderers == null || currentRenderers.Length == 0)
+            currentRenderers = null;
     }
-    
+
     [SerializeField] public Material PreviewMaterial;
 
     private MeshFilter mf;
@@ -216,14 +259,27 @@ public class OrbPreviewController : MonoBehaviour
 
     private MaterialPropertyBlock mpb;
 
+    private void ApplyColor(Color color)
+    {
+        if (currentRenderers == null || currentRenderers.Length == 0) return;
+
+        if (mpb == null)
+            mpb = new MaterialPropertyBlock();
+
+        for (int i = 0; i < currentRenderers.Length; i++)
+        {
+            var renderer = currentRenderers[i];
+            if (renderer == null) continue;
+            renderer.GetPropertyBlock(mpb);
+            mpb.SetColor(BaseColorId, color);
+            mpb.SetColor(ColorId, color);
+            renderer.SetPropertyBlock(mpb);
+        }
+    }
+
     public void SetPreviewColor(Color color)
     {
-        if (mr == null) return;
-
-        mr.GetPropertyBlock(mpb);
-        mpb.SetColor(BaseColorId, color);
-        mpb.SetColor(ColorId, color);
-        mr.SetPropertyBlock(mpb);
+        ApplyColor(color);
 
         if (!renderEveryFrame && previewCamera != null)
             previewCamera.Render();

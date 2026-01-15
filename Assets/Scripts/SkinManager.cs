@@ -12,6 +12,10 @@ public static class SkinManager
     public static event Action<SkinData> OnSkinChanged;
 
     private static readonly List<SkinData> skins = new List<SkinData>();
+    private static readonly Dictionary<string, CachedMeshEntry> cachedBallMeshes =
+        new Dictionary<string, CachedMeshEntry>(StringComparer.OrdinalIgnoreCase);
+    private static readonly Dictionary<string, Sprite> cachedBackgroundSprites =
+        new Dictionary<string, Sprite>(StringComparer.OrdinalIgnoreCase);
     private static SkinData currentSkin;
 
     public static IReadOnlyList<SkinData> Skins => skins;
@@ -217,10 +221,27 @@ public static class SkinManager
         if (string.IsNullOrEmpty(fileName))
             return false;
 
+        if (cachedBallMeshes.TryGetValue(fileName, out var cached) && cached.Mesh != null)
+        {
+            mesh = cached.Mesh;
+            bounds = cached.Bounds;
+            return true;
+        }
+
         string dir = Path.Combine(Application.persistentDataPath, "BallMeshes");
         string fullPath = Path.Combine(dir, fileName);
 
-        return RuntimeMeshImporter.TryLoadMeshFromFile(fullPath, out mesh, out bounds);
+        if (!File.Exists(fullPath))
+        {
+            cachedBallMeshes.Remove(fileName);
+            return false;
+        }
+
+        if (!RuntimeMeshImporter.TryLoadMeshFromFile(fullPath, out mesh, out bounds))
+            return false;
+
+        cachedBallMeshes[fileName] = new CachedMeshEntry(mesh, bounds);
+        return true;
     }
 
 
@@ -290,23 +311,34 @@ public static class SkinManager
         if (string.IsNullOrEmpty(fileName))
             return null;
 
+        if (cachedBackgroundSprites.TryGetValue(fileName, out var cachedSprite) && cachedSprite != null)
+            return cachedSprite;
+
         string dir = Path.Combine(Application.persistentDataPath, "Backgrounds");
         string fullPath = Path.Combine(dir, fileName);
 
         if (!File.Exists(fullPath))
+        {
+            cachedBackgroundSprites.Remove(fileName);
             return null;
+        }
 
         byte[] bytes = File.ReadAllBytes(fullPath);
 
         Texture2D tex = new Texture2D(2, 2, TextureFormat.RGBA32, false);
         if (!tex.LoadImage(bytes))
+        {
+            UnityEngine.Object.Destroy(tex);
             return null;
+        }
 
-        return Sprite.Create(
+        var sprite = Sprite.Create(
             tex,
             new Rect(0, 0, tex.width, tex.height),
             new Vector2(0.5f, 0.5f)
         );
+        cachedBackgroundSprites[fileName] = sprite;
+        return sprite;
     }
 
     public static string GetBackgroundVideoPath(string fileName)
@@ -366,5 +398,17 @@ public static class SkinManager
     private class SkinWrapper
     {
         public SkinData[] Items;
+    }
+
+    private class CachedMeshEntry
+    {
+        public Mesh Mesh { get; }
+        public Bounds Bounds { get; }
+
+        public CachedMeshEntry(Mesh mesh, Bounds bounds)
+        {
+            Mesh = mesh;
+            Bounds = bounds;
+        }
     }
 }
