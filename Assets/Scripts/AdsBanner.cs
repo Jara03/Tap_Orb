@@ -20,6 +20,19 @@ public class AdsBanner : MonoBehaviour
 
         bannerView = new BannerView(AdUnitId, AdSize.Banner, AdPosition.Bottom);
 
+        bannerView.OnAdLoaded += () =>
+        {
+            Debug.Log("Bannière chargée.");
+        };
+        bannerView.OnAdFailedToLoad += (LoadAdError error) =>
+        {
+            Debug.LogError("Erreur lors du chargement de la bannière (impression non enregistrée) : " + error);
+        };
+        bannerView.OnAdImpressionRecorded += () =>
+        {
+            Debug.Log("Impression de la bannière enregistrée.");
+        };
+
         var request = new AdRequest();
         bannerView.LoadAd(request);
     }
