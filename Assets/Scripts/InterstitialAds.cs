@@ -47,6 +47,11 @@ public class InterstitialAds : MonoBehaviour
                 Debug.Log("Interstitial ouvert.");
                 OnInterstitialShown?.Invoke();
             };
+            interstitialAd.OnAdFullScreenContentFailed += (AdError adError) =>
+            {
+                Debug.LogError("Échec d'affichage de l’interstitiel (impression non enregistrée) : " + adError);
+                LoadInterstitialAd();
+            };
             interstitialAd.OnAdFullScreenContentClosed += () =>
             {
                 Debug.Log("Interstitial fermé. Rechargement...");
