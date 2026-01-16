@@ -25,8 +25,6 @@ MonoBehaviour:
   - m_enabled: 1
     m_path: Assets/Scenes/Tests/Monde1.unity
   - m_enabled: 1
-    m_path: Assets/Scenes/Tests/Monde2.unity
-  - m_enabled: 1
     m_path: Assets/Scenes/Levels/Level 1.unity
   - m_enabled: 1
     m_path: Assets/Scenes/Levels/Level 2.unity
@@ -190,7 +188,7 @@ MonoBehaviour:
     - line: '|   loadStoreDebugModeEnabled: 0'
     - line: '|   visionOSBundleVersion: 1.0'
     - line: '|   tvOSBundleVersion: 1.0'
-    - line: '|   bundleVersion: 0.7'
+    - line: '|   bundleVersion: 0.8'
     - line: '|   preloadedAssets: []'
     - line: '|   metroInputSource: 0'
     - line: '|   wsaTransparentSwapchain: 0'
@@ -218,7 +216,7 @@ MonoBehaviour:
     - line: '|   buildNumber:'
     - line: '|     Standalone: 0'
     - line: '|     VisionOS: 0'
-    - line: '|     iPhone: 5'
+    - line: '|     iPhone: 7'
     - line: '|     tvOS: 0'
     - line: '|   overrideDefaultApplicationIdentifier: 1'
     - line: '|   AndroidBundleVersionCode: 17'
@@ -1086,10 +1084,10 @@ MonoBehaviour:
     - rid: 2573795575305601026
       type: {class: iOSPlatformSettings, ns: UnityEditor.iOS, asm: UnityEditor.iOS.Extensions}
       data:
-        m_Development: 0
+        m_Development: 1
         m_ConnectProfiler: 0
         m_BuildWithDeepProfilingSupport: 0
-        m_AllowDebugging: 0
+        m_AllowDebugging: 1
         m_WaitForManagedDebugger: 0
         m_ManagedDebuggerFixedPort: 0
         m_ExplicitNullChecks: 0
