@@ -46,6 +46,14 @@ public class AdsConsentBootstrap : MonoBehaviour
             return;
         }
 
+#if !UNITY_ANDROID && !UNITY_IOS
+        Debug.Log("[AdsConsent] UMP non supporté sur cette plateforme. Initialisation directe.");
+        isRequestInProgress = false;
+        ConsentFlowCompleted = true;
+        InitializeMobileAdsIfAllowed();
+        return;
+#endif
+
         isRequestInProgress = true;
         ConsentFlowCompleted = false;
         hasSignaledReady = false;
@@ -66,37 +74,47 @@ public class AdsConsentBootstrap : MonoBehaviour
         };
 
         Debug.Log("[AdsConsent] Update consent info...");
-        ConsentInformation.Update(requestParameters, (FormError updateError) =>
+        try
         {
-            if (updateError != null)
+            ConsentInformation.Update(requestParameters, (FormError updateError) =>
             {
-                Debug.LogError($"[AdsConsent] Update consent error: {updateError}.");
-                isRequestInProgress = false;
-                ConsentFlowCompleted = true;
-                LogConsentState("Update échoué", null);
-                return;
-            }
-
-            LogConsentState("Update ok", null);
-            bool formRequired = ConsentInformation.ConsentStatus == ConsentStatus.Required;
-            Debug.Log("[AdsConsent] Load/Show consent form si requis...");
-
-            ConsentForm.LoadAndShowConsentFormIfRequired((FormError formError) =>
-            {
-                isRequestInProgress = false;
-                ConsentFlowCompleted = true;
-
-                if (formError != null)
+                if (updateError != null)
                 {
-                    Debug.LogError($"[AdsConsent] Consent form error: {formError}.");
-                    LogConsentState("Formulaire en erreur", formRequired);
+                    Debug.LogError($"[AdsConsent] Update consent error: {updateError}.");
+                    isRequestInProgress = false;
+                    ConsentFlowCompleted = true;
+                    LogConsentState("Update échoué", null);
                     return;
                 }
 
-                LogConsentState("Formulaire terminé", formRequired);
-                InitializeMobileAdsIfAllowed();
+                LogConsentState("Update ok", null);
+                bool formRequired = ConsentInformation.ConsentStatus == ConsentStatus.Required;
+                Debug.Log("[AdsConsent] Load/Show consent form si requis...");
+
+                ConsentForm.LoadAndShowConsentFormIfRequired((FormError formError) =>
+                {
+                    isRequestInProgress = false;
+                    ConsentFlowCompleted = true;
+
+                    if (formError != null)
+                    {
+                        Debug.LogError($"[AdsConsent] Consent form error: {formError}.");
+                        LogConsentState("Formulaire en erreur", formRequired);
+                        return;
+                    }
+
+                    LogConsentState("Formulaire terminé", formRequired);
+                    InitializeMobileAdsIfAllowed();
+                });
             });
-        });
+        }
+        catch (NullReferenceException exception)
+        {
+            Debug.LogError($"[AdsConsent] UMP a échoué (NullReference): {exception}");
+            isRequestInProgress = false;
+            ConsentFlowCompleted = true;
+            LogConsentState("Update exception", null);
+        }
     }
 
     public void ResetConsentButton()
