@@ -55,6 +55,7 @@
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\Level.cs" />
     <Compile Include="Assets\Scripts\Analytics\Analytics.cs" />
+    <Compile Include="Assets\Scripts\AdsConsentBootstrap.cs" />
     <Compile Include="Assets\Scripts\AdsBanner.cs" />
     <Compile Include="Assets\level-edition\LevelEditorManager.cs" />
     <Compile Include="Assets\Scripts\BouncyBallSettler.cs" />

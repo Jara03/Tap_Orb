@@ -63,7 +63,7 @@ public class AdsConsentBootstrap : MonoBehaviour
         {
             debugSettings = new ConsentDebugSettings
             {
-                DebugGeography = DebugGeography.Eea
+                DebugGeography = DebugGeography.EEA
             };
         }
 

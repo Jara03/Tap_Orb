@@ -27,8 +27,6 @@ public class UIHomeManager : MonoBehaviour
         OnSplashScreenFinished += () => { Debug.Log("Splash finished! " + DateTime.Now.ToLongTimeString()); };
         StartCoroutine("SplashCoroutine");
 
-        levelSelector.SetActive(false);
-
         if (homeCanvas == null)
         {
             homeCanvas = GetComponentInChildren<Canvas>(true);
