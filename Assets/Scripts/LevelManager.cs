@@ -8,6 +8,7 @@ public class LevelManager : MonoBehaviour
 {
    
     public static int levelSelected = 0;
+    public static int levelDifficulty = 1;
     public static LevelManager Instance;
     public static int lvlCount = 10;
     private const string LevelCountKey = "LevelCount";
@@ -56,6 +57,18 @@ public class LevelManager : MonoBehaviour
         InitializeLevelOrder();
     }
 
+    public static int GetDifficultyForLevel(int level)
+    {
+        if (lvlCount <= 1)
+        {
+            return 1;
+        }
+
+        int tierSize = Mathf.CeilToInt(lvlCount / 3f);
+        int difficulty = Mathf.Clamp(((level - 1) / tierSize) + 1, 1, 3);
+        return difficulty;
+    }
+
     public void LoadSkin(SkinData sk)
     {
         
@@ -91,6 +104,7 @@ public class LevelManager : MonoBehaviour
         {
             sessionLevelIndex++;
             levelSelected = sessionLevelOrder[sessionLevelIndex];
+            levelDifficulty = GetDifficultyForLevel(levelSelected);
             scenePath = $"Scenes/Levels/Level {levelSelected}";
         }
 
@@ -118,6 +132,7 @@ public class LevelManager : MonoBehaviour
     {
         EnsureLevelOrder();
         levelSelected = level;
+        levelDifficulty = GetDifficultyForLevel(levelSelected);
         if (sessionLevelOrder != null && sessionLevelOrder.Count > 0)
         {
             int index = sessionLevelOrder.IndexOf(level);
@@ -158,11 +173,38 @@ public class LevelManager : MonoBehaviour
             sessionLevelOrder[swapIndex] = temp;
         }
 
+        List<int> easyLevels = new List<int>();
+        List<int> mediumLevels = new List<int>();
+        List<int> hardLevels = new List<int>();
+
+        foreach (int level in sessionLevelOrder)
+        {
+            int difficulty = GetDifficultyForLevel(level);
+            if (difficulty == 1)
+            {
+                easyLevels.Add(level);
+            }
+            else if (difficulty == 2)
+            {
+                mediumLevels.Add(level);
+            }
+            else
+            {
+                hardLevels.Add(level);
+            }
+        }
+
+        sessionLevelOrder = new List<int>(easyLevels.Count + mediumLevels.Count + hardLevels.Count);
+        sessionLevelOrder.AddRange(easyLevels);
+        sessionLevelOrder.AddRange(mediumLevels);
+        sessionLevelOrder.AddRange(hardLevels);
+
         sessionLevelIndex = 0;
         if (levelSelected <= 0 || !sessionLevelOrder.Contains(levelSelected))
         {
             levelSelected = sessionLevelOrder[0];
         }
+        levelDifficulty = GetDifficultyForLevel(levelSelected);
     }
     private static bool SceneExists(string sceneName)
     {
