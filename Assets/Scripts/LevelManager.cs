@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using GoogleMobileAds.Api;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -34,37 +33,10 @@ public class LevelManager : MonoBehaviour
 
             Instance = this;
             DontDestroyOnLoad(gameObject); // reste entre les scènes
-            MobileAds.Initialize((InitializationStatus initstatus) =>
+            if (AdsConsentBootstrap.Instance == null)
             {
-                if (initstatus == null)
-                {
-                    Debug.LogError("Google Mobile Ads initialization failed.");
-                    return;
-                }
-
-                Debug.Log("Google Mobile Ads initialization complete.");
-
-#if UNITY_ANDROID || UNITY_IOS
-                if (Debug.isDebugBuild)
-                {
-                    MobileAds.OpenAdInspector((AdInspectorError error) =>
-                    {
-                        if (error != null)
-                        {
-                            Debug.LogWarning("Ad Inspector n'a pas pu s'ouvrir (mode dev) : " + error);
-                            return;
-                        }
-
-                        Debug.Log("Ad Inspector ouvert (mode dev).");
-                    });
-                }
-#endif
-
-                // Google Mobile Ads events are raised off the Unity Main thread. If you need to
-                // access UnityEngine objects after initialization,
-                // use MobileAdsEventExecutor.ExecuteInUpdate(). For more information, see:
-                // https://developers.google.com/admob/unity/global-settings#raise_ad_events_on_the_unity_main_thread
-            });
+                Debug.LogWarning("[AdsConsent] Aucun AdsConsentBootstrap dans la scène. Les pubs ne seront pas chargées.");
+            }
             
             //abonner la fct loadSkin a l'event de SkinManager OnChangedSkin
            // SkinManager.OnSkinChanged += LoadSkin;
