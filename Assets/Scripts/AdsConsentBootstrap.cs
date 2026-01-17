@@ -85,7 +85,7 @@ public class AdsConsentBootstrap : MonoBehaviour
             {
                 if (updateError != null)
                 {
-                    Debug.LogError($"[AdsConsent] Update consent error: {updateError}.");
+                    Debug.LogError($"[AdsConsent] Update consent error: code={updateError.ErrorCode} msg={updateError.Message}");
                     isRequestInProgress = false;
                     ConsentFlowCompleted = true;
                     LogConsentState("Update échoué", null);
@@ -103,7 +103,7 @@ public class AdsConsentBootstrap : MonoBehaviour
 
                     if (formError != null)
                     {
-                        Debug.LogError($"[AdsConsent] Consent form error: {formError}.");
+                        Debug.LogError($"[AdsConsent] Consent form error: code={formError.ErrorCode} msg={formError.Message}");
                         LogConsentState("Formulaire en erreur", formRequired);
                         return;
                     }
