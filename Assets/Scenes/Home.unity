@@ -3030,7 +3030,7 @@ MonoBehaviour:
   tagForUnderAgeOfConsent: 0
   forceDebugGeographyEea: 1
   enableTestMode: 0
-  openAdInspectorInDebug: 1
+  openAdInspectorInDebug: 0
   testDeviceHashedIds: []
 --- !u!4 &339064313
 Transform:

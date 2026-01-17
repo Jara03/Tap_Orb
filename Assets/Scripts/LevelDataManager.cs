@@ -585,8 +585,10 @@ public class LevelDataManager : MonoBehaviour
         FinishedLevelUI.SetActive(true);
         if (LevelManager.isLastLevel())
         {
+            Debug.LogWarning($"it's the last scene {LevelManager.isLastLevel()}. Loading Home instead.");
+
             NextLevelButton.SetActive(false);
-            CenterHomeButton();
+            //CenterHomeButton();
         }
         ObjectiveManager.Instance?.RegisterLevelCompleted(LevelManager.levelSelected);
         
