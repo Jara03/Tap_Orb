@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f856c2c3-5d6c-43a8-b00d-43067849984f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BoubouleClick/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BoubouleClick/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BoubouleClick.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/BoubouleClick.sln.DotSettings.user" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,6 +57,9 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/iOSAudioRouteFix.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@23b1a4ff749d/Editor/UGUI/UI/GraphicEditor.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@23b1a4ff749d/Runtime/UGUI/UI/Core/GraphicRaycaster.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e90d9cf76bb0465a864c8e6fc10a87f52600/a4/29b0df3f/ConsentInformation.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e90d9cf76bb0465a864c8e6fc10a87f52600/c6/0c5731c6/ConsentRequestParameters.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e90d9cf76bb0465a864c8e6fc10a87f52600/d5/99b68624/IUmpClientFactory.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://E:/seven-bot/src/index.js" root0="SKIP_INSPECTION" />
   </component>
   <component name="KubernetesApiPersistence">{}</component>
@@ -192,15 +196,7 @@
       <workItem from="1768499302271" duration="3000" />
       <workItem from="1768499364258" duration="2574000" />
       <workItem from="1768508199403" duration="1094000" />
-      <workItem from="1768582974566" duration="7500000" />
-    </task>
-    <task id="LOCAL-00007" summary="moved gitignore">
-      <option name="closed" value="true" />
-      <created>1760267144885</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1760267144885</updated>
+      <workItem from="1768582974566" duration="9225000" />
     </task>
     <task id="LOCAL-00008" summary="updated gitignore">
       <option name="closed" value="true" />
@@ -586,7 +582,15 @@
       <option name="project" value="LOCAL" />
       <updated>1768639766361</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="added adconsent form details error">
+      <option name="closed" value="true" />
+      <created>1768650029049</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1768650029051</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -625,7 +629,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="fixed 6 firsts levels for closed tests" />
     <MESSAGE value="major physics bug fix + added levels" />
     <MESSAGE value="fixed poutre prefab" />
     <MESSAGE value="update commit" />
@@ -650,7 +653,8 @@
     <MESSAGE value="retest ads banner" />
     <MESSAGE value="new AdsConsent fixes" />
     <MESSAGE value="adapted AdsConsentBootstrap.cs" />
-    <option name="LAST_COMMIT_MESSAGE" value="adapted AdsConsentBootstrap.cs" />
+    <MESSAGE value="added adconsent form details error" />
+    <option name="LAST_COMMIT_MESSAGE" value="added adconsent form details error" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
