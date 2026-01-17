@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TapOrb.Ads;
 
 public class LevelManager : MonoBehaviour
 {
@@ -33,9 +34,9 @@ public class LevelManager : MonoBehaviour
 
             Instance = this;
             DontDestroyOnLoad(gameObject); // reste entre les scènes
-            if (AdsConsentBootstrap.Instance == null)
+            if (AdsManager.Instance == null)
             {
-                Debug.LogWarning("[AdsConsent] Aucun AdsConsentBootstrap dans la scène. Les pubs ne seront pas chargées.");
+                Debug.LogWarning("[AdsManager] Aucun AdsManager dans la scène. Les pubs ne seront pas chargées.");
             }
             
             //abonner la fct loadSkin a l'event de SkinManager OnChangedSkin
