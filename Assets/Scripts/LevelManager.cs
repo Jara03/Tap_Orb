@@ -73,10 +73,15 @@ public class LevelManager : MonoBehaviour
     public static bool isLastLevel()
     {
         EnsureLevelOrder();
+
         if (sessionLevelOrder == null || sessionLevelOrder.Count == 0)
         {
+
             return levelSelected == lvlCount;
         }
+        
+        Debug.LogWarning("Session level Index? :" + sessionLevelOrder.Count + "SessionLevelIndex : " + sessionLevelIndex);
+        //Debug.LogWarning("Session index equal levelcount order :" + (sessionLevelIndex >= sessionLevelOrder.Count - 1));
 
         return sessionLevelIndex >= sessionLevelOrder.Count - 1;
     }
@@ -122,7 +127,8 @@ public class LevelManager : MonoBehaviour
         if (sessionLevelOrder != null && sessionLevelOrder.Count > 0)
         {
             int index = sessionLevelOrder.IndexOf(level);
-            sessionLevelIndex = index >= 0 ? index : 0;
+            sessionLevelIndex = 0;
+            Debug.LogWarning("Session Level Selected Index : " + sessionLevelIndex);
         }
     }
 
@@ -133,6 +139,7 @@ public class LevelManager : MonoBehaviour
             InitializeLevelOrder();
         }
     }
+
 
     private static void InitializeLevelOrder()
     {
@@ -151,8 +158,13 @@ public class LevelManager : MonoBehaviour
             return;
         }
 
-        for (int i = sessionLevelOrder.Count - 1; i > 0; i--)
+        for (int i = sessionLevelOrder.Count - 1; i > 1; i--)
         {
+            //Random.InitState(seed); // seed
+            int seed = Random.Range(int.MinValue, int.MaxValue);
+            Debug.Log($"[SEED USED] {seed}");
+            Random.InitState(seed);
+            
             int swapIndex = Random.Range(0, i + 1);
             int temp = sessionLevelOrder[i];
             sessionLevelOrder[i] = sessionLevelOrder[swapIndex];
