@@ -2,6 +2,7 @@ using GoogleMobileAds.Api;
 using GoogleMobileAds.Ump.Api;
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 public class AdsConsentBootstrap : MonoBehaviour
 {
@@ -30,12 +31,11 @@ public class AdsConsentBootstrap : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    private void Start()
+    private System.Collections.IEnumerator Start() 
     {
-        if (initializeOnStart)
-        {
-            RequestConsentAndInitialize();
-        }
+                if (!initializeOnStart) yield break;
+                yield return null;
+                RequestConsentAndInitialize();
     }
 
     public void RequestConsentAndInitialize()
@@ -63,15 +63,20 @@ public class AdsConsentBootstrap : MonoBehaviour
         {
             debugSettings = new ConsentDebugSettings
             {
-                DebugGeography = DebugGeography.EEA
+                DebugGeography = DebugGeography.EEA,
+                TestDeviceHashedIds = new List<string>() // IMPORTANT: jamais null
             };
         }
 
+        // IMPORTANT: ne pas assigner ConsentDebugSettings si null (bug wrapper iOS possible)
         var requestParameters = new ConsentRequestParameters
-        {
-            TagForUnderAgeOfConsent = false,
-            ConsentDebugSettings = debugSettings
+                                                     {
+                        TagForUnderAgeOfConsent = false
         };
+                if (debugSettings != null) 
+                {
+                        requestParameters.ConsentDebugSettings = debugSettings;
+                }
 
         Debug.Log("[AdsConsent] Update consent info...");
         try

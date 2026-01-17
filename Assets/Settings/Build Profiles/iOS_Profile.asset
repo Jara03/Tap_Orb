@@ -216,7 +216,7 @@ MonoBehaviour:
     - line: '|   buildNumber:'
     - line: '|     Standalone: 0'
     - line: '|     VisionOS: 0'
-    - line: '|     iPhone: 7'
+    - line: '|     iPhone: 9'
     - line: '|     tvOS: 0'
     - line: '|   overrideDefaultApplicationIdentifier: 1'
     - line: '|   AndroidBundleVersionCode: 17'
