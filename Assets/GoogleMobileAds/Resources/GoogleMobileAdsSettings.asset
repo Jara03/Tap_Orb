@@ -18,5 +18,6 @@ MonoBehaviour:
   enableGradleBuildPreProcessor: 1
   disableOptimizeInitialization: 0
   disableOptimizeAdLoading: 0
-  userTrackingUsageDescription: 
+  userTrackingUsageDescription: "Tap Orb souhaite savoir s'il est possible d'utiliser
+    les donn\xE9es personnelles pour les annonces"
   userLanguage: en
