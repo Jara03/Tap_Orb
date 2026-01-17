@@ -3139,7 +3139,7 @@ GameObject:
   - component: {fileID: 339064313}
   - component: {fileID: 339064312}
   m_Layer: 0
-  m_Name: AdsConsentBootstrap
+  m_Name: AdsManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3154,10 +3154,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 339064311}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b3a35d3b7b141c9a36f3ff6f1c1e8b2, type: 3}
+  m_Script: {fileID: 11500000, guid: 51d8cb1d81454bafbcd47f6959d620f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   initializeOnStart: 1
+  enableAds: 1
+  enableBanner: 1
+  enableInterstitial: 1
+  androidBannerAdUnitId: ca-app-pub-1810486296187934/7874409170
+  iosBannerAdUnitId: ca-app-pub-1810486296187934/2867804438
+  androidInterstitialAdUnitId: ca-app-pub-1810486296187934/7874409170
+  iosInterstitialAdUnitId: ca-app-pub-1810486296187934/2735942490
+  tagForUnderAgeOfConsent: 0
+  forceDebugGeographyEea: 0
+  enableTestMode: 0
+  openAdInspectorInDebug: 0
+  testDeviceHashedIds: []
 --- !u!4 &339064313
 Transform:
   m_ObjectHideFlags: 0
@@ -5378,8 +5390,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 339064312}
-        m_TargetAssemblyTypeName: AdsConsentBootstrap, Assembly-CSharp
-        m_MethodName: ResetConsentButton
+        m_TargetAssemblyTypeName: TapOrb.Ads.AdsManager, Assembly-CSharp
+        m_MethodName: ResetConsent
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
