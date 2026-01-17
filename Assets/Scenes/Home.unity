@@ -3161,15 +3161,16 @@ MonoBehaviour:
   enableAds: 1
   enableBanner: 1
   enableInterstitial: 1
-  androidBannerAdUnitId: ca-app-pub-1810486296187934/7874409170
+  androidBannerAdUnitId: ca-app-pub-1810486296187934/1500572514
   iosBannerAdUnitId: ca-app-pub-1810486296187934/2867804438
   androidInterstitialAdUnitId: ca-app-pub-1810486296187934/7874409170
   iosInterstitialAdUnitId: ca-app-pub-1810486296187934/2735942490
   tagForUnderAgeOfConsent: 0
-  forceDebugGeographyEea: 0
+  forceDebugGeographyEea: 1
   enableTestMode: 0
-  openAdInspectorInDebug: 0
-  testDeviceHashedIds: []
+  openAdInspectorInDebug: 1
+  testDeviceHashedIds:
+  - 
 --- !u!4 &339064313
 Transform:
   m_ObjectHideFlags: 0
