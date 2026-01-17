@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Video;
+using TapOrb.Ads;
 
 public class LevelDataManager : MonoBehaviour
 {
@@ -41,7 +42,7 @@ public class LevelDataManager : MonoBehaviour
     
     public float lastSeenTime = 0f;
 
-    public InterstitialAds interstitialAds;
+    private AdsManager adsManager;
     private int gameOverCounter = 0;
     private float lastCallTime = -30;
     private bool runHasEnded = false;
@@ -107,8 +108,15 @@ public class LevelDataManager : MonoBehaviour
             defaultBallScale = PlayerBall.transform.localScale;
         }
         
-        interstitialAds = gameObject.AddComponent<InterstitialAds>();
-        interstitialAds.OnInterstitialShown += HandleInterstitialShown;
+        adsManager = AdsManager.Instance;
+        if (adsManager == null)
+        {
+            Debug.LogWarning("[AdsManager] Aucun AdsManager disponible. Les interstitiels seront ignorés.");
+        }
+        else
+        {
+            adsManager.InterstitialShown += HandleInterstitialShown;
+        }
 
         runStartTime = Time.time;
         runHasEnded = false;
@@ -512,7 +520,7 @@ public class LevelDataManager : MonoBehaviour
 
         if (gameOverCounter >= 3 && deltaTimeAd > 60f)
         {
-            interstitialAds.ShowInterstitialAd();
+            adsManager?.ShowInterstitial("game_over");
             gameOverCounter = 0;
             lastCallTime = now;
         }
@@ -630,9 +638,9 @@ public class LevelDataManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (interstitialAds != null)
+        if (adsManager != null)
         {
-            interstitialAds.OnInterstitialShown -= HandleInterstitialShown;
+            adsManager.InterstitialShown -= HandleInterstitialShown;
         }
     }
 
