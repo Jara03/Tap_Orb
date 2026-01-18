@@ -251,11 +251,12 @@ public static class SkinManager
     {
         if (currentSkin == null)
         {
-            currentSkin = new SkinData();
             if (skins.Count == 0)
             {
-                skins.Add(currentSkin.Clone());
+                skins.AddRange(CreateDefaultSkins());
             }
+
+            currentSkin = skins.Count > 0 ? skins[0].Clone() : new SkinData();
         }
 
         return currentSkin;
@@ -313,6 +314,14 @@ public static class SkinManager
 
         if (cachedBackgroundSprites.TryGetValue(fileName, out var cachedSprite) && cachedSprite != null)
             return cachedSprite;
+
+        string resourceName = Path.GetFileNameWithoutExtension(fileName);
+        var resourceSprite = Resources.Load<Sprite>($"Backgrounds/{resourceName}");
+        if (resourceSprite != null)
+        {
+            cachedBackgroundSprites[fileName] = resourceSprite;
+            return resourceSprite;
+        }
 
         string dir = Path.Combine(Application.persistentDataPath, "Backgrounds");
         string fullPath = Path.Combine(dir, fileName);
@@ -375,7 +384,7 @@ public static class SkinManager
         }
 
         if (skins.Count == 0)
-            skins.Add(new SkinData());
+            skins.AddRange(CreateDefaultSkins());
 
         // Normalise tout ce qui a été chargé
         for (int i = 0; i < skins.Count; i++)
@@ -410,5 +419,52 @@ public static class SkinManager
             Mesh = mesh;
             Bounds = bounds;
         }
+    }
+
+    private static List<SkinData> CreateDefaultSkins()
+    {
+        var skins = new List<SkinData>
+        {
+            new SkinData
+            {
+                Name = "Classic",
+                BallColor = new Color(1f, 0.9f, 0.2f),
+                BallSize = 1f,
+                BackgroundColor = new Color(0.12f, 0.38f, 0.9f),
+                UseColorBackground = true
+            },
+            new SkinData
+            {
+                Name = "Sakura Blossom",
+                BallColor = new Color(0.85f, 0.35f, 0.45f),
+                BallSize = 1f,
+                BackgroundColor = new Color(0.96f, 0.75f, 0.75f),
+                BackgroundSpriteName = "sakura_blossom",
+                UseBackgroundImage = true
+            },
+            new SkinData
+            {
+                Name = "Cosy Plush",
+                BallColor = new Color(0.87f, 0.78f, 0.64f),
+                BallSize = 1f,
+                BackgroundColor = new Color(0.24f, 0.14f, 0.08f),
+                BackgroundSpriteName = "cosy_plush",
+                UseBackgroundImage = true
+            },
+            new SkinData
+            {
+                Name = "Acid Funk",
+                BallColor = new Color(0.99f, 0.2f, 0.62f),
+                BallSize = 1f,
+                BackgroundColor = new Color(0.83f, 0.9f, 0.35f),
+                BackgroundSpriteName = "acid_funk",
+                UseBackgroundImage = true
+            }
+        };
+
+        for (int i = 0; i < skins.Count; i++)
+            NormalizeBackgroundMode(skins[i]);
+
+        return skins;
     }
 }
