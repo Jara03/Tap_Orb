@@ -7,6 +7,8 @@ public class AnimatedGameItem : MonoBehaviour
     public Transform stateOnTransform;
     public Transform stateOffTransform;
     public float animationSpeed = 1f;
+    public float waitingTime = 1f;
+
     bool isPlaying = true;
 
     private bool currentState = false;
@@ -32,7 +34,7 @@ public class AnimatedGameItem : MonoBehaviour
             }
 
             // Attend avant de relancer selon la vitesse d’animation
-            yield return new WaitForSeconds(animationSpeed);
+            yield return new WaitForSeconds(waitingTime);
         }
     }
 
