@@ -6,29 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f856c2c3-5d6c-43a8-b00d-43067849984f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BoubouleClick/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BoubouleClick/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 10.unity.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 10.unity.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 2.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 2.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/lvl d'avance.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/lvl d'avance/Level 10.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/lvl d'avance/Level 10.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/lvl d'avance/Level 11.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/lvl d'avance/Level 11.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/lvl d'avance/Level 12.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/lvl d'avance/Level 12.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/lvl d'avance/Level 7.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/lvl d'avance/Level 7.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/lvl d'avance/Level 8.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/lvl d'avance/Level 8.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/lvl d'avance/mine test.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/lvl d'avance/mine test.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AnimatedGameItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AnimatedGameItem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/JumpPad.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/JumpPad.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/LevelManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/LevelManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Settings/Build Profiles/iOS_Profile.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/Build Profiles/iOS_Profile.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/SingularityGroup.HotReload.Editor.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/SingularityGroup.HotReload.Editor.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/SingularityGroup.HotReload.Runtime.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/SingularityGroup.HotReload.Runtime.csproj.AssemblyReference.cache" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,9 +37,8 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock://C:/UnityProjects/BoubouleClick/Assets/GoogleMobileAds/Editor/Resources/PlaceholderAds/Interstitials/768x1024.prefab" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Ads/AdsConsentService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/UnityProjects/BoubouleClick/Assets/Scripts/AdsBanner.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/UnityProjects/BoubouleClick/Assets/Scripts/AnimatedGameItem.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/BallFakeTrailer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/BallImpactSFX.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/BeamCollisionSweeper.cs" root0="FORCE_HIGHLIGHTING" />
@@ -80,7 +57,6 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/iOSAudioRouteFix.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@23b1a4ff749d/Editor/UGUI/UI/GraphicEditor.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@23b1a4ff749d/Runtime/UGUI/UI/Core/GraphicRaycaster.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/UnityProjects/BoubouleClick/UserSettings/EditorUserSettings.asset" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e90d9cf76bb0465a864c8e6fc10a87f52600/a4/29b0df3f/ConsentInformation.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e90d9cf76bb0465a864c8e6fc10a87f52600/c6/0c5731c6/ConsentRequestParameters.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e90d9cf76bb0465a864c8e6fc10a87f52600/d5/99b68624/IUmpClientFactory.cs" root0="FORCE_HIGHLIGHTING" />
@@ -221,15 +197,7 @@
       <workItem from="1768499364258" duration="2574000" />
       <workItem from="1768508199403" duration="1094000" />
       <workItem from="1768582974566" duration="20550000" />
-      <workItem from="1768728703856" duration="3263000" />
-    </task>
-    <task id="LOCAL-00012" summary="added basket end level">
-      <option name="closed" value="true" />
-      <created>1760285743935</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1760285743935</updated>
+      <workItem from="1768728703856" duration="6725000" />
     </task>
     <task id="LOCAL-00013" summary="Added NextLevel Button">
       <option name="closed" value="true" />
@@ -615,7 +583,15 @@
       <option name="project" value="LOCAL" />
       <updated>1768686408638</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="added 8 levels &#10;major bugfixes">
+      <option name="closed" value="true" />
+      <created>1768750731359</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1768750731360</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -654,7 +630,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="added volume controller and animated background support" />
     <MESSAGE value="global commit update" />
     <MESSAGE value="added ball customization option" />
     <MESSAGE value="major bug and features fixes" />
@@ -679,7 +654,8 @@
     <MESSAGE value="integrated ad manager" />
     <MESSAGE value="added new UI design + bugfixes" />
     <MESSAGE value="fixed random level generation" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed random level generation" />
+    <MESSAGE value="added 8 levels &#10;major bugfixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="added 8 levels &#10;major bugfixes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
