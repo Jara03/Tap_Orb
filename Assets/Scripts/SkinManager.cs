@@ -429,7 +429,7 @@ public static class SkinManager
             {
                 Name = "Classic",
                 BallColor = new Color(1f, 0.9f, 0.2f),
-                BallSize = 1f,
+                BallSize = 0.4f,
                 BackgroundColor = new Color(0.12f, 0.38f, 0.9f),
                 UseColorBackground = true
             },
