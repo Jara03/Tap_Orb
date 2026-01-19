@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -120,11 +119,7 @@ public class LevelDataManager : MonoBehaviour
 
         runStartTime = Time.time;
         runHasEnded = false;
-        Analytics.NotifyRunStarted();
-        Analytics.Track("run_start", new Dictionary<string, object>
-        {
-            { "level", LevelManager.levelSelected }
-        });
+        Track.LevelStart(LevelManager.levelSelected);
 
         //charge le skin de jeu 
         LoadSkin(SkinManager.CurrentSkin);
@@ -572,12 +567,7 @@ public class LevelDataManager : MonoBehaviour
         if (!runHasEnded)
         {
             float duration = Mathf.Max(0f, Time.time - runStartTime);
-            Analytics.Track("run_end", new Dictionary<string, object>
-            {
-                { "level", LevelManager.levelSelected },
-                { "duration_s", duration },
-                { "result", "win" }
-            });
+            Track.LevelComplete(LevelManager.levelSelected, duration);
             runHasEnded = true;
         }
         
@@ -618,24 +608,15 @@ public class LevelDataManager : MonoBehaviour
         if (!runHasEnded)
         {
             float duration = Mathf.Max(0f, Time.time - runStartTime);
-            Analytics.Track("run_end", new Dictionary<string, object>
-            {
-                { "level", LevelManager.levelSelected },
-                { "duration_s", duration },
-                { "result", "quit" }
-            });
+            Track.LevelFail(LevelManager.levelSelected, "quit", duration);
             runHasEnded = true;
         }
         LevelManager.goBackHome();        
     }
 
-    private void HandleInterstitialShown()
+    private void HandleInterstitialShown(string placement)
     {
-        Analytics.Track("ad_interstitial_shown", new Dictionary<string, object>
-        {
-            { "placement", "end_run" },
-            { "level", LevelManager.levelSelected }
-        });
+        Track.AdImpression("interstitial", placement, LevelManager.levelSelected);
     }
 
     private void OnDestroy()
