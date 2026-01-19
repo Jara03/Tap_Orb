@@ -70,7 +70,8 @@ public static class SkinManager
         if (s == null) return;
 
         bool hasVideo = !string.IsNullOrEmpty(s.BackgroundVideoName) && IsVideoFile(s.BackgroundVideoName);
-        bool hasImage = !string.IsNullOrEmpty(s.BackgroundSpriteName) && IsImageFile(s.BackgroundSpriteName);
+        bool hasImage = !string.IsNullOrEmpty(s.BackgroundSpriteName)
+            && (IsImageFile(s.BackgroundSpriteName) || !Path.HasExtension(s.BackgroundSpriteName));
 
         // Si mode couleur => purge le reste
         if (s.UseColorBackground)
