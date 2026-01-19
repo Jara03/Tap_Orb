@@ -8,6 +8,7 @@ using UnityEngine.Networking;
 public static class SkinManager
 {
     private const string StorageKey = "skins.v1";
+    private const string CurrentSkinKey = "skins.current";
 
     public static event Action<SkinData> OnSkinChanged;
 
@@ -296,6 +297,7 @@ public static class SkinManager
             var clone = found.Clone();
             NormalizeBackgroundMode(clone);
             currentSkin = clone;
+            SaveCurrentSkinSelection(saveNow: true);
             OnSkinChanged?.Invoke(currentSkin);
         }
     }
@@ -391,7 +393,9 @@ public static class SkinManager
         for (int i = 0; i < skins.Count; i++)
             NormalizeBackgroundMode(skins[i]);
 
-        currentSkin = skins[0].Clone();
+        var preferredName = PlayerPrefs.GetString(CurrentSkinKey, string.Empty);
+        var preferredSkin = skins.Find(s => s.Name.Equals(preferredName, StringComparison.OrdinalIgnoreCase));
+        currentSkin = (preferredSkin ?? skins[0]).Clone();
         NormalizeBackgroundMode(currentSkin);
     }
 
@@ -401,7 +405,18 @@ public static class SkinManager
         var wrapper = new SkinWrapper { Items = skins.ToArray() };
         var raw = JsonUtility.ToJson(wrapper);
         PlayerPrefs.SetString(StorageKey, raw);
+        SaveCurrentSkinSelection(saveNow: false);
         PlayerPrefs.Save();
+    }
+
+    private static void SaveCurrentSkinSelection(bool saveNow)
+    {
+        if (currentSkin == null || string.IsNullOrWhiteSpace(currentSkin.Name))
+            return;
+
+        PlayerPrefs.SetString(CurrentSkinKey, currentSkin.Name);
+        if (saveNow)
+            PlayerPrefs.Save();
     }
 
     [Serializable]
