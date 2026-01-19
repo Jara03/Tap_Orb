@@ -11,7 +11,7 @@ namespace TapOrb.Ads
         public static AdsManager Instance { get; private set; }
 
         public event Action AdsReady;
-        public event Action InterstitialShown;
+        public event Action<string> InterstitialShown;
 
         [Header("Initialization")]
         [SerializeField] private bool initializeOnStart = true;
@@ -144,7 +144,7 @@ namespace TapOrb.Ads
             return interstitialService.Show(() =>
             {
                 Debug.Log($"[AdsManager] Interstitiel affiché ({placement ?? "unknown"}).");
-                InterstitialShown?.Invoke();
+                InterstitialShown?.Invoke(placement);
             });
         }
 
