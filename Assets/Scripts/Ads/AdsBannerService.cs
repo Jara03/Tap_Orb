@@ -44,8 +44,8 @@ namespace TapOrb.Ads
 
             if (bannerView == null)
             {
-                var adaptiveSize = AdSize.GetCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(AdSize.FullWidth);
-                bannerView = new BannerView(adUnitId, adaptiveSize, AdPosition.Bottom);
+               // var adaptiveSize = AdSize.GetCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(AdSize.FullWidth);
+                bannerView = new BannerView(adUnitId, AdSize.Banner, AdPosition.Bottom);
 
                 bannerView.OnBannerAdLoaded += () =>
                 {

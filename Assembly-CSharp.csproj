@@ -86,6 +86,7 @@
     <Compile Include="Assets\Scripts\FPSDisplay.cs" />
     <Compile Include="Assets\Scripts\LevelManager.cs" />
     <Compile Include="Assets\Scripts\ObjectiveManager.cs" />
+    <Compile Include="Assets\Scripts\Analytics\Track.cs" />
     <Compile Include="Assets\Scripts\UIHomeManager.cs" />
     <Compile Include="Assets\Scripts\BallImpactSFX.cs" />
     <Compile Include="Assets\Scripts\VideoThumbUtil.cs" />
@@ -105,6 +106,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\GoogleMobileAds\GoogleMobileAds_version-10.7.0_manifest.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
+    <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-app-unity\maven-metadata.xml" />
     <None Include="Assets\TextMesh Pro\Shaders\SDFFunctions.hlsl" />
     <None Include="Assets\GoogleMobileAds\link.xml" />
     <None Include="Assets\TextMesh Pro\Fonts\Fredoka,Gugi\Gugi\OFL.txt" />
@@ -115,11 +117,14 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+    <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-analytics-unity\maven-metadata.xml" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\google-services.json" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\TextMesh Pro\Fonts\Fredoka,Gugi\Fredoka\README.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
+    <None Include="Assets\StreamingAssets\google-services-desktop.json" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
@@ -497,6 +502,21 @@
     </Reference>
     <Reference Include="Mono.Cecil">
       <HintPath>C:\UnityProjects\BoubouleClick\Library\PackageCache\com.unity.nuget.mono-cecil@d6f9955a5d5f\Mono.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.Analytics">
+      <HintPath>C:\UnityProjects\BoubouleClick\Assets\Firebase\Plugins\Firebase.Analytics.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.App">
+      <HintPath>C:\UnityProjects\BoubouleClick\Assets\Firebase\Plugins\Firebase.App.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.TaskExtension">
+      <HintPath>C:\UnityProjects\BoubouleClick\Assets\Firebase\Plugins\Firebase.TaskExtension.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.MiniJson">
+      <HintPath>C:\UnityProjects\BoubouleClick\Assets\Firebase\Plugins\Google.MiniJson.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.Platform">
+      <HintPath>C:\UnityProjects\BoubouleClick\Assets\Firebase\Plugins\Firebase.Platform.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.59f2\Editor\Data\PlaybackEngines\iOSSupport\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>

@@ -53,7 +53,7 @@ public class MineItem : MonoBehaviour
             Explode();
         }
     }
-
+   
     private void Explode()
     {
         hasExploded = true;
