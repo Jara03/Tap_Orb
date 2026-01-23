@@ -1,3 +1,4 @@
+using DefaultNamespace;
 using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider))]
@@ -35,12 +36,34 @@ public class MineItem : MonoBehaviour
 
     private bool hasExploded;
     private SphereCollider detectionCollider;
+    private Level level;
 
     private void Awake()
     {
         detectionCollider = GetComponent<SphereCollider>();
         detectionCollider.isTrigger = true;
         detectionCollider.radius = triggerRadius;
+    }
+
+    private void Start()
+    {
+        level = FindFirstObjectByType<Level>();
+        if (level != null)
+        {
+            level.onRestore += ResetMine;
+        }
+        else
+        {
+            Debug.LogWarning("Aucun objet 'Level' trouvé pour réinitialiser la mine.");
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (level != null)
+        {
+            level.onRestore -= ResetMine;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -88,8 +111,7 @@ public class MineItem : MonoBehaviour
         foreach (var renderer in GetComponentsInChildren<Renderer>())
             renderer.enabled = false;
 
-        // (Optionnel) détruire la mine après un délai
-        Destroy(gameObject, 1f);
+        // La mine reste en scène pour pouvoir être réinitialisée après une défaite
     }
 
     private void SpawnEffect(Vector3 explosionPosition)
@@ -104,6 +126,20 @@ public class MineItem : MonoBehaviour
 
         if (effectLifetime > 0f)
             Destroy(effectInstance, effectLifetime);
+    }
+
+    private void ResetMine()
+    {
+        hasExploded = false;
+
+        if (detectionCollider != null)
+        {
+            detectionCollider.enabled = true;
+            detectionCollider.radius = triggerRadius;
+        }
+
+        foreach (var renderer in GetComponentsInChildren<Renderer>())
+            renderer.enabled = true;
     }
 
 #if UNITY_EDITOR
