@@ -4,50 +4,48 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f856c2c3-5d6c-43a8-b00d-43067849984f" name="Changes" comment="">
+    <list default="true" id="f856c2c3-5d6c-43a8-b00d-43067849984f" name="Changes" comment="bugfix for prod release">
+      <change afterPath="$PROJECT_DIR$/Assets/Scenes/Tests/Level 11.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scenes/Tests/Level 11.unity.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BoubouleClick/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BoubouleClick/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assembly-CSharp-Editor.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Assembly-CSharp-Editor.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assembly-CSharp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Assembly-CSharp.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/1.2.186/Google.IOSResolver.dll.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/1.2.186/Google.IOSResolver.dll.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/1.2.186/Google.IOSResolver.pdb.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/1.2.186/Google.IOSResolver.pdb.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/1.2.186/Google.JarResolver.dll.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/1.2.186/Google.JarResolver.dll.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/1.2.186/Google.JarResolver.pdb.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/1.2.186/Google.JarResolver.pdb.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/1.2.186/Google.PackageManagerResolver.dll.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/1.2.186/Google.PackageManagerResolver.dll.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/1.2.186/Google.PackageManagerResolver.pdb.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/1.2.186/Google.PackageManagerResolver.pdb.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/1.2.186/Google.VersionHandlerImpl.dll.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/1.2.186/Google.VersionHandlerImpl.dll.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/1.2.186/Google.VersionHandlerImpl.pdb.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/1.2.186/Google.VersionHandlerImpl.pdb.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/CHANGELOG.md.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/CHANGELOG.md.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/Google.VersionHandler.dll.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/Google.VersionHandler.dll.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/Google.VersionHandler.pdb.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/Google.VersionHandler.pdb.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/LICENSE.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/LICENSE.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/README.md.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/README.md.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Home.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Home.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 1.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 10.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 10.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 11.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 11.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 11.unity.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 11.unity.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 12.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 12.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 13.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 13.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 14.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 14.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 15.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 15.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 16.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 16.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 17.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 17.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 18.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 18.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Ads/AdsBannerService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Ads/AdsBannerService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 18.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 18.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 2.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 2.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 3.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 3.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 4.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 4.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 5.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 5.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 6.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 6.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 7.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 7.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 8.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 8.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 9.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 9.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/LevelDataManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/LevelDataManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Settings/Build Profiles/iOS_Profile.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/Build Profiles/iOS_Profile.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BoubouleClick.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/BoubouleClick.sln.DotSettings.user" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GoogleMobileAds.Editor.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/GoogleMobileAds.Editor.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NativeFilePicker.Editor.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/NativeFilePicker.Editor.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NativeFilePicker.Runtime.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/NativeFilePicker.Runtime.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NativeGallery.Editor.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/NativeGallery.Editor.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NativeGallery.Runtime.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/NativeGallery.Runtime.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/GvhProjectSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/GvhProjectSettings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SingularityGroup.HotReload.Runtime.Public.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/SingularityGroup.HotReload.Runtime.Public.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-6000.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-6000.dwlt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/Assembly-CSharp-Editor.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/Assembly-CSharp-Editor.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/Assembly-CSharp.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/Assembly-CSharp.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/GoogleMobileAds.Editor.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/GoogleMobileAds.Editor.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/SingularityGroup.HotReload.Runtime.Public.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/SingularityGroup.HotReload.Runtime.Public.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/SingularityGroup.HotReload.Editor.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/SingularityGroup.HotReload.Editor.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/SingularityGroup.HotReload.Runtime.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/SingularityGroup.HotReload.Runtime.csproj.AssemblyReference.cache" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,11 +77,11 @@
 }</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Ads/AdsConsentService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/UnityProjects/BoubouleClick/Assets/Scripts/AnimatedGameItem.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/BallFakeTrailer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/BallImpactSFX.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/BeamCollisionSweeper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GlobalVolumeController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/InputController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/JumpPad.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/LevelDataManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/LevelMenuGenerator.cs" root0="FORCE_HIGHLIGHTING" />
@@ -98,7 +96,6 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/iOSAudioRouteFix.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@23b1a4ff749d/Editor/UGUI/UI/GraphicEditor.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@23b1a4ff749d/Runtime/UGUI/UI/Core/GraphicRaycaster.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/UnityProjects/BoubouleClick/UserSettings/EditorUserSettings.asset" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e90d9cf76bb0465a864c8e6fc10a87f52600/a4/29b0df3f/ConsentInformation.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e90d9cf76bb0465a864c8e6fc10a87f52600/c6/0c5731c6/ConsentRequestParameters.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e90d9cf76bb0465a864c8e6fc10a87f52600/d5/99b68624/IUmpClientFactory.cs" root0="FORCE_HIGHLIGHTING" />
@@ -240,6 +237,10 @@
       <workItem from="1768508199403" duration="1094000" />
       <workItem from="1768582974566" duration="20550000" />
       <workItem from="1768728703856" duration="10215000" />
+      <workItem from="1769544173485" duration="602000" />
+      <workItem from="1769545005986" duration="56000" />
+      <workItem from="1769545076509" duration="380000" />
+      <workItem from="1769627200091" duration="617000" />
     </task>
     <task id="LOCAL-00014" summary="Added NextLevel Button P2">
       <option name="closed" value="true" />
@@ -672,7 +673,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="added ball customization option" />
     <MESSAGE value="major bug and features fixes" />
     <MESSAGE value="fixed iOS method for uploading videos" />
     <MESSAGE value="added Native Gallery to repo" />
@@ -697,7 +697,8 @@
     <MESSAGE value="fixed random level generation" />
     <MESSAGE value="added 8 levels &#10;major bugfixes" />
     <MESSAGE value="added skins default images" />
-    <option name="LAST_COMMIT_MESSAGE" value="added skins default images" />
+    <MESSAGE value="bugfix for prod release" />
+    <option name="LAST_COMMIT_MESSAGE" value="bugfix for prod release" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

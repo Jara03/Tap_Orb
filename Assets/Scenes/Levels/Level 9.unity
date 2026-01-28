@@ -999,6 +999,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   isPaused: 0
+  togglesUsedThisRun: 0
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1276,13 +1277,48 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3721605968188018595, guid: ebb185791a7aad545ad334a8c5c1740b,
         type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3721605968188018595, guid: ebb185791a7aad545ad334a8c5c1740b,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3721605968188018595, guid: ebb185791a7aad545ad334a8c5c1740b,
+        type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1314294743}
     - target: {fileID: 3721605968188018595, guid: ebb185791a7aad545ad334a8c5c1740b,
         type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1314294743}
+    - target: {fileID: 3721605968188018595, guid: ebb185791a7aad545ad334a8c5c1740b,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3721605968188018595, guid: ebb185791a7aad545ad334a8c5c1740b,
+        type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ToggleOptionsScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 3721605968188018595, guid: ebb185791a7aad545ad334a8c5c1740b,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: toggleEndLevelUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 3721605968188018595, guid: ebb185791a7aad545ad334a8c5c1740b,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: LevelDataManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3721605968188018595, guid: ebb185791a7aad545ad334a8c5c1740b,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4391408178794737573, guid: ebb185791a7aad545ad334a8c5c1740b,
         type: 3}
@@ -1425,10 +1461,10 @@ MonoBehaviour:
   resetDelay: 0.5
   minResetCooldown: 1
   lastSeenTime: 0
-  interstitialAds: {fileID: 0}
   bgRT: {fileID: 0}
   forceEditorTestVideo: 0
   editorTestVideoFileName: test_bg.mp4
+  deathSfxVolume: 0.5
 --- !u!4 &1314294744
 Transform:
   m_ObjectHideFlags: 0

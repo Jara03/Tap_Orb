@@ -564,15 +564,32 @@ public class LevelDataManager : MonoBehaviour
 
     public void EndLevel()
     {
-        if (!runHasEnded)
+
+		 if (!runHasEnded)
         {
-            float duration = Mathf.Max(0f, Time.time - runStartTime);
+			float duration = Mathf.Max(0f, Time.time - runStartTime);
             Track.LevelComplete(LevelManager.levelSelected, duration);
-            runHasEnded = true;
+            runHasEnded = true;       
+		 }
+        else
+        {
+            StartCoroutine(UnlockInputAfterDelay());
         }
-        
+
+        Debug.Log("level Ended : " + runHasEnded);
         //afficher l'UI de fin de partie
         FinishedLevelUI.SetActive(true);
+        Time.timeScale = runHasEnded ? 0f : 1f;
+
+		Debug.Log("timescale : " + Time.timeScale);
+        
+        IEnumerator UnlockInputAfterDelay()
+        {
+            yield return null; // bloque 1 frame → suffisant la plupart du temps
+            yield return new WaitForSeconds(1f); // sécurité mobile
+            level.isPaused = OptionsScreen.activeSelf;
+        }
+        
         if (LevelManager.isLastLevel())
         {
             Debug.LogWarning($"it's the last scene {LevelManager.isLastLevel()}. Loading Home instead.");
@@ -591,6 +608,13 @@ public class LevelDataManager : MonoBehaviour
         {
             HomeButton.transform.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(-350, -25, 0);
         }
+    }
+    
+    public void toggleEndLevelUI()
+    {
+        if(runHasEnded)
+            FinishedLevelUI.SetActive(!FinishedLevelUI.activeSelf);
+            
     }
 
     public void LoadNextLevel()

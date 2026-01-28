@@ -476,6 +476,9 @@
     <Reference Include="UnityEditor.XRModule">
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.59f2\Editor\Data\Managed\UnityEngine\UnityEditor.XRModule.dll</HintPath>
     </Reference>
+    <Reference Include="Firebase.Analytics">
+      <HintPath>C:\UnityProjects\BoubouleClick\Assets\Firebase\Plugins\Firebase.Analytics.dll</HintPath>
+    </Reference>
     <Reference Include="GoogleMobileAds.Common">
       <HintPath>C:\UnityProjects\BoubouleClick\Assets\GoogleMobileAds\GoogleMobileAds.Common.dll</HintPath>
     </Reference>
@@ -487,6 +490,12 @@
     </Reference>
     <Reference Include="GoogleMobileAds">
       <HintPath>C:\UnityProjects\BoubouleClick\Assets\GoogleMobileAds\GoogleMobileAds.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.App">
+      <HintPath>C:\UnityProjects\BoubouleClick\Assets\Firebase\Plugins\Firebase.App.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.TaskExtension">
+      <HintPath>C:\UnityProjects\BoubouleClick\Assets\Firebase\Plugins\Firebase.TaskExtension.dll</HintPath>
     </Reference>
     <Reference Include="GoogleMobileAds.Core">
       <HintPath>C:\UnityProjects\BoubouleClick\Assets\GoogleMobileAds\GoogleMobileAds.Core.dll</HintPath>
@@ -503,20 +512,11 @@
     <Reference Include="Mono.Cecil">
       <HintPath>C:\UnityProjects\BoubouleClick\Library\PackageCache\com.unity.nuget.mono-cecil@d6f9955a5d5f\Mono.Cecil.dll</HintPath>
     </Reference>
-    <Reference Include="Firebase.Analytics">
-      <HintPath>C:\UnityProjects\BoubouleClick\Assets\Firebase\Plugins\Firebase.Analytics.dll</HintPath>
-    </Reference>
-    <Reference Include="Firebase.App">
-      <HintPath>C:\UnityProjects\BoubouleClick\Assets\Firebase\Plugins\Firebase.App.dll</HintPath>
-    </Reference>
-    <Reference Include="Firebase.TaskExtension">
-      <HintPath>C:\UnityProjects\BoubouleClick\Assets\Firebase\Plugins\Firebase.TaskExtension.dll</HintPath>
+    <Reference Include="Firebase.Platform">
+      <HintPath>C:\UnityProjects\BoubouleClick\Assets\Firebase\Plugins\Firebase.Platform.dll</HintPath>
     </Reference>
     <Reference Include="Google.MiniJson">
       <HintPath>C:\UnityProjects\BoubouleClick\Assets\Firebase\Plugins\Google.MiniJson.dll</HintPath>
-    </Reference>
-    <Reference Include="Firebase.Platform">
-      <HintPath>C:\UnityProjects\BoubouleClick\Assets\Firebase\Plugins\Firebase.Platform.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.59f2\Editor\Data\PlaybackEngines\iOSSupport\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>

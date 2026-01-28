@@ -412,6 +412,9 @@
     <Reference Include="UnityEditor.iOS.Extensions">
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.59f2\Editor\Data\PlaybackEngines\iOSSupport\UnityEditor.iOS.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="Firebase.Analytics">
+      <HintPath>C:\UnityProjects\BoubouleClick\Assets\Firebase\Plugins\Firebase.Analytics.dll</HintPath>
+    </Reference>
     <Reference Include="GoogleMobileAds.Common">
       <HintPath>C:\UnityProjects\BoubouleClick\Assets\GoogleMobileAds\GoogleMobileAds.Common.dll</HintPath>
     </Reference>
@@ -430,11 +433,17 @@
     <Reference Include="Google.IOSResolver">
       <HintPath>C:\UnityProjects\BoubouleClick\Assets\ExternalDependencyManager\Editor\1.2.186\Google.IOSResolver.dll</HintPath>
     </Reference>
+    <Reference Include="Firebase.App">
+      <HintPath>C:\UnityProjects\BoubouleClick\Assets\Firebase\Plugins\Firebase.App.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Plastic.Antlr3.Runtime">
       <HintPath>C:\UnityProjects\BoubouleClick\Library\PackageCache\com.unity.collab-proxy@ab839cc7d2ad\Lib\Editor\Unity.Plastic.Antlr3.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Plastic.Newtonsoft.Json">
       <HintPath>C:\UnityProjects\BoubouleClick\Library\PackageCache\com.unity.collab-proxy@ab839cc7d2ad\Lib\Editor\Unity.Plastic.Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.TaskExtension">
+      <HintPath>C:\UnityProjects\BoubouleClick\Assets\Firebase\Plugins\Firebase.TaskExtension.dll</HintPath>
     </Reference>
     <Reference Include="GoogleMobileAds.Core">
       <HintPath>C:\UnityProjects\BoubouleClick\Assets\GoogleMobileAds\GoogleMobileAds.Core.dll</HintPath>
@@ -469,23 +478,14 @@
     <Reference Include="Mono.Cecil">
       <HintPath>C:\UnityProjects\BoubouleClick\Library\PackageCache\com.unity.nuget.mono-cecil@d6f9955a5d5f\Mono.Cecil.dll</HintPath>
     </Reference>
-    <Reference Include="Firebase.Analytics">
-      <HintPath>C:\UnityProjects\BoubouleClick\Assets\Firebase\Plugins\Firebase.Analytics.dll</HintPath>
-    </Reference>
-    <Reference Include="Firebase.App">
-      <HintPath>C:\UnityProjects\BoubouleClick\Assets\Firebase\Plugins\Firebase.App.dll</HintPath>
-    </Reference>
-    <Reference Include="Firebase.Editor">
-      <HintPath>C:\UnityProjects\BoubouleClick\Assets\Firebase\Editor\Firebase.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Firebase.TaskExtension">
-      <HintPath>C:\UnityProjects\BoubouleClick\Assets\Firebase\Plugins\Firebase.TaskExtension.dll</HintPath>
+    <Reference Include="Firebase.Platform">
+      <HintPath>C:\UnityProjects\BoubouleClick\Assets\Firebase\Plugins\Firebase.Platform.dll</HintPath>
     </Reference>
     <Reference Include="Google.MiniJson">
       <HintPath>C:\UnityProjects\BoubouleClick\Assets\Firebase\Plugins\Google.MiniJson.dll</HintPath>
     </Reference>
-    <Reference Include="Firebase.Platform">
-      <HintPath>C:\UnityProjects\BoubouleClick\Assets\Firebase\Plugins\Firebase.Platform.dll</HintPath>
+    <Reference Include="Firebase.Editor">
+      <HintPath>C:\UnityProjects\BoubouleClick\Assets\Firebase\Editor\Firebase.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.59f2\Editor\Data\PlaybackEngines\iOSSupport\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
