@@ -452,9 +452,9 @@ public static class SkinManager
             new SkinData
             {
                 Name = "Sakura Blossom",
-                BallColor = new Color(0.85f, 0.35f, 0.45f),
-                BallSize = 1f,
-                BackgroundColor = new Color(0.96f, 0.75f, 0.75f),
+                BallColor = new Color(1f, 1f, 1f),
+                BallSize = 0.4f,
+                //BackgroundColor = new Color(0.96f, 0.75f, 0.75f),
                 BackgroundSpriteName = "sakura_blossom",
                 UseBackgroundImage = true
             },
@@ -462,8 +462,8 @@ public static class SkinManager
             {
                 Name = "Cosy Plush",
                 BallColor = new Color(0.87f, 0.78f, 0.64f),
-                BallSize = 1f,
-                BackgroundColor = new Color(0.24f, 0.14f, 0.08f),
+                BallSize = 0.4f,
+                //BackgroundColor = new Color(0.24f, 0.14f, 0.08f),
                 BackgroundSpriteName = "cosy_plush",
                 UseBackgroundImage = true
             },
@@ -471,8 +471,8 @@ public static class SkinManager
             {
                 Name = "Acid Funk",
                 BallColor = new Color(0.99f, 0.2f, 0.62f),
-                BallSize = 1f,
-                BackgroundColor = new Color(0.83f, 0.9f, 0.35f),
+                BallSize = 0.4f,
+               // BackgroundColor = new Color(0.83f, 0.9f, 0.35f),
                 BackgroundSpriteName = "acid_funk",
                 UseBackgroundImage = true
             }

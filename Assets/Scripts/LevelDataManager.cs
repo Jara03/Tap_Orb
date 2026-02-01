@@ -123,6 +123,7 @@ public class LevelDataManager : MonoBehaviour
 
         //charge le skin de jeu 
         LoadSkin(SkinManager.CurrentSkin);
+        Time.timeScale = 1;
 
     }
     
