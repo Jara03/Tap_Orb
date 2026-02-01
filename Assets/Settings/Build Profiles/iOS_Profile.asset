@@ -55,7 +55,7 @@ MonoBehaviour:
     - line: '|   AndroidFilterTouchesWhenObscured: 0'
     - line: '|   AndroidEnableSustainedPerformanceMode: 0'
     - line: '|   defaultScreenOrientation: 4'
-    - line: '|   targetDevice: 2'
+    - line: '|   targetDevice: 0'
     - line: '|   useOnDemandResources: 0'
     - line: '|   accelerometerFrequency: 60'
     - line: '|   companyName: Allium Studio'

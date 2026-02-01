@@ -6,24 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="f856c2c3-5d6c-43a8-b00d-43067849984f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BoubouleClick/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BoubouleClick/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Backgrounds/acid_funk.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Backgrounds/acid_funk.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Backgrounds/acid_funk.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Backgrounds/acid_funk.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Backgrounds/cosy_plush.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Backgrounds/cosy_plush.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Backgrounds/cosy_plush.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Backgrounds/cosy_plush.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Backgrounds/sakura_blossom.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Backgrounds/sakura_blossom.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Backgrounds/sakura_blossom.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Backgrounds/sakura_blossom.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 14.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 14.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 15.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 15.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 16.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 16.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 17.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 17.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/LevelDataManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/LevelDataManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SkinManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SkinManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 13.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level 13.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Settings/Build Profiles/iOS_Profile.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/Build Profiles/iOS_Profile.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-6000.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-6000.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -220,23 +205,7 @@
       <workItem from="1769545076509" duration="380000" />
       <workItem from="1769627200091" duration="1283000" />
       <workItem from="1769952285829" duration="1728000" />
-      <workItem from="1769954139400" duration="617000" />
-    </task>
-    <task id="LOCAL-00015" summary="updated project Settings">
-      <option name="closed" value="true" />
-      <created>1760394468421</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1760394468421</updated>
-    </task>
-    <task id="LOCAL-00016" summary="Debug session">
-      <option name="closed" value="true" />
-      <created>1760648927087</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1760648927087</updated>
+      <workItem from="1769954139400" duration="2458000" />
     </task>
     <task id="LOCAL-00017" summary="updated UI">
       <option name="closed" value="true" />
@@ -614,7 +583,23 @@
       <option name="project" value="LOCAL" />
       <updated>1769628305843</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="starter skins fix + levels minor correction">
+      <option name="closed" value="true" />
+      <created>1769955126557</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1769955126557</updated>
+    </task>
+    <task id="LOCAL-00065" summary="removed level 14">
+      <option name="closed" value="true" />
+      <created>1769955146525</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1769955146525</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -653,8 +638,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="major bug and features fixes" />
-    <MESSAGE value="fixed iOS method for uploading videos" />
     <MESSAGE value="added Native Gallery to repo" />
     <MESSAGE value="UI rework integration" />
     <MESSAGE value="finishing UI rework + Orb preview implementation" />
@@ -678,7 +661,9 @@
     <MESSAGE value="added 8 levels &#10;major bugfixes" />
     <MESSAGE value="added skins default images" />
     <MESSAGE value="bugfix for prod release" />
-    <option name="LAST_COMMIT_MESSAGE" value="bugfix for prod release" />
+    <MESSAGE value="starter skins fix + levels minor correction" />
+    <MESSAGE value="removed level 14" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed level 14" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
